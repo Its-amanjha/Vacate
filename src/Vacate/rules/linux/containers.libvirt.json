@@ -1,6 +1,8 @@
 {
   "id": "containers.libvirt",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "containers-vms",
   "title": "libvirt virtual machine disks",
   "whyItMatters": "Virtual machines run by libvirt keep their disk images here, each a complete guest system with its own files. They are large and are not removed when the machine definition is deleted.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": true,
   "verifiedOn": [],
@@ -24,9 +31,9 @@
     "exportFirst": "Copy any needed virtual machine disk images or exported guest files to an external drive before deleting them.",
     "signOut": null,
     "steps": [
-      "Open Virtual Machine Manager and shut down all running virtual machines.",
-      "Right-click each unwanted virtual machine and select Delete.",
-      "Confirm deletion of the storage volumes there; the full reset clears anything left in the system folder named in the plan."
+      "Open your virtual machine app (Virtual Machine Manager or GNOME Boxes) and shut down the guests.",
+      "Delete each unwanted guest and its storage in the app; an administrator password may be required.",
+      "The root-owned images folder named in the plan is left to the full reset."
     ],
     "risk": "Permanently deletes all selected virtual machine disk images and guest operating system contents.",
     "closeApps": [

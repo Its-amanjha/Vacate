@@ -1,6 +1,8 @@
 {
   "id": "dev.docker.config",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "developer-secrets",
   "title": "Docker CLI credentials",
   "whyItMatters": "The Docker CLI folder holds registry logins, sometimes in plain text, plus context files for remote and cloud engines. Those logins push and pull private images.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -24,7 +31,7 @@
     "exportFirst": null,
     "signOut": "Log out of Docker Hub and any private container registries in Docker Desktop or your terminal session.",
     "steps": [
-      "Sign out of connected container registries in Docker Desktop or terminal settings.",
+      "Quit Docker Desktop so the folder is not in use.",
       "Delete the folder named in the plan using your file manager."
     ],
     "risk": "Removes Docker registry authentication tokens, context endpoints, and client configuration.",

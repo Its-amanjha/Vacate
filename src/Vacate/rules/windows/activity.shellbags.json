@@ -35,9 +35,7 @@
       "Delete the BagMRU subkey, and the Bags subkey beside it, then close Registry Editor."
     ],
     "risk": "Removes the stored folder views for this account, including paths of folders that are no longer attached. Windows rebuilds the record for folders browsed later.",
-    "closeApps": [
-      "File Explorer"
-    ],
+    "closeApps": [],
     "resetCovers": true,
     "reason": null,
     "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"

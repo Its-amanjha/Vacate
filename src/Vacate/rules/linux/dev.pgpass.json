@@ -1,6 +1,8 @@
 {
   "id": "dev.pgpass",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "developer-secrets",
   "title": "PostgreSQL password file",
   "whyItMatters": "The .pgpass file holds PostgreSQL database passwords in plain text, one line per host and user. A stranger with the file can log in to those databases, which often hold customer records.",
@@ -11,7 +13,11 @@
     "path": ".pgpass",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -19,11 +25,10 @@
   "source": "PostgreSQL documentation, the password file: ~/.pgpass with host:port:database:user:password lines: https://www.postgresql.org/docs/current/libpq-pgpass.html",
   "notes": "libpq ignores the file unless it is mode 0600 on Linux. PGPASSFILE can point at another path, and psql's interactive history may also contain queries. Servers are usually reached over the network, so the file is a direct way in.",
   "cleanup": {
-    "action": "remove",
+    "action": "sign-out-then-remove",
     "exportFirst": null,
-    "signOut": null,
+    "signOut": "Change the passwords of the PostgreSQL roles listed in the file, so the saved ones stop working.",
     "steps": [
-      "Change passwords on any remote PostgreSQL databases if the credentials should no longer be used.",
       "Delete the file named in the plan using your file manager."
     ],
     "risk": "Removes stored plain text database credentials. You must type passwords manually when connecting to PostgreSQL.",

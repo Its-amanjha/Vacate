@@ -1,6 +1,8 @@
 {
   "id": "programs.desktop-entries.user",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "installed-programs",
   "title": "Installed applications (this user)",
   "whyItMatters": "Launchers a person adds for themselves show the apps they installed without the package manager, and often the work or hobby they set up the machine for.",
@@ -11,7 +13,10 @@
     "path": "applications/*.desktop",
     "match": "files"
   },
-  "measure": ["exists", "itemCount"],
+  "measure": [
+    "exists",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -23,8 +28,9 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [
-      "Review custom desktop launcher files located in the folder named in the plan.",
-      "Delete unwanted desktop launcher files using your file manager, or delete the app directory it launches."
+      "Review the launcher files in the folder named in the plan.",
+      "Delete the launcher files you no longer want.",
+      "If an app was unpacked by hand into your home folder, remove that folder only after checking what else it holds."
     ],
     "risk": "Removes per-user custom application launchers from your desktop application menu.",
     "closeApps": [],

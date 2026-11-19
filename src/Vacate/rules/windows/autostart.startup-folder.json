@@ -1,6 +1,8 @@
 {
   "id": "autostart.startup-folder",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "autostart",
   "title": "User Startup folder",
   "whyItMatters": "Shortcuts in this folder start programs at sign-in. Their names reveal tools that may still run and hold sessions on the machine.",
@@ -11,28 +13,29 @@
     "path": "Microsoft/Windows/Start Menu/Programs/Startup",
     "match": "files"
   },
-  "measure": ["exists", "itemCount"],
+  "measure": [
+    "exists",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
   "source": "Microsoft Learn: per-user Startup folder at %APPDATA%/Microsoft/Windows/Start Menu/Programs/Startup",
   "notes": "Names only: no recursion and no shortcut target is resolved. The machine-wide Startup folder under ProgramData is not covered.",
-    "cleanup": {
-        "action": "remove",
-        "exportFirst": null,
-        "signOut": null,
-        "steps": [
-            "Open the Startup folder path named in the plan in File Explorer.",
-            "Note which program each shortcut starts before you delete it.",
-            "Delete the shortcuts you no longer need and empty the Recycle Bin."
-        ],
-        "risk": "Removes those shortcuts, so the programs stop starting at sign-in. The programs themselves stay installed and keep their data.",
-        "closeApps": [
-            "File Explorer"
-        ],
-        "resetCovers": true,
-        "reason": null,
-        "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
-    }
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open the Startup folder path named in the plan in File Explorer.",
+      "Note which program each shortcut starts before you delete it.",
+      "Delete the shortcuts you no longer need and empty the Recycle Bin."
+    ],
+    "risk": "Removes those shortcuts, so the programs stop starting at sign-in. The programs themselves stay installed and keep their data.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

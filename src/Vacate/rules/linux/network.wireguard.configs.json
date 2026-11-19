@@ -1,6 +1,8 @@
 {
   "id": "network.wireguard.configs",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "network",
   "title": "WireGuard tunnel configs",
   "whyItMatters": "Each WireGuard config file holds the private key of a VPN tunnel and the peers it connects to. A copy of the file is enough to join the person's private network or to impersonate their machine.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": true,
   "verifiedOn": [],
@@ -20,14 +27,14 @@
   "source": "wg-quick(8) reads <interface>.conf files from /etc/wireguard and creates the folder mode 0700: https://man.archlinux.org/man/wg-quick.8",
   "notes": "Root-only by design, hence requiresElevation. Configs can live elsewhere when a custom path is passed to wg-quick or the tunnel is managed by a desktop app, which keeps its own copy under the user's home; this rule only covers the system folder.",
   "cleanup": {
-    "action": "remove",
+    "action": "sign-out-then-remove",
     "exportFirst": null,
-    "signOut": null,
+    "signOut": "Retire this machine's public keys on the WireGuard peers or gateways, so the tunnels no longer accept it.",
     "steps": [
-      "Revoke corresponding public keys on your WireGuard VPN peers or gateways if access should be retired.",
-      "Remove the VPN connection in Settings > Network; leave the system files named in the plan to the full reset."
+      "Remove the VPN connection in Settings > Network.",
+      "Leave the root-owned key files named in the plan to the full reset at the end of this plan."
     ],
-    "risk": "Removes private WireGuard tunnel configuration keys and peer endpoints from the system.",
+    "risk": "The connection leaves Settings; the root-owned key files stay in the system folder until the full reset at the end of the plan.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

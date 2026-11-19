@@ -1,6 +1,8 @@
 {
   "id": "encryption.crypttab",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "disk-encryption",
   "title": "Encrypted volume table",
   "whyItMatters": "crypttab names the encrypted volumes unlocked at boot and how they are keyed. It tells a buyer which disks are protected and whether a key file on the disk was used.",
@@ -11,7 +13,11 @@
     "path": "crypttab",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -23,7 +29,7 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [],
-    "risk": "Modifying or deleting crypttab can prevent the operating system from unlocking encrypted disks and booting.",
+    "risk": "The file stays until a reinstall; editing or deleting it by hand can stop the machine booting, so leave it alone.",
     "closeApps": [],
     "resetCovers": true,
     "reason": "This system configuration file maps encrypted block devices at boot time and will be cleared upon OS reinstallation.",

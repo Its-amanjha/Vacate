@@ -28,7 +28,7 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [],
-    "risk": "Disk layout and volume encryption status are hardware configuration reports and cannot be manually deleted.",
+    "risk": "This is a report of the disk layout and encryption state; nothing personal is stored in it.",
     "closeApps": [],
     "resetCovers": false,
     "reason": "This is an operating system query showing disk partition layout and encryption state. No cleanup is required.",

@@ -1,6 +1,8 @@
 {
   "id": "network.networkmanager.connections",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "network",
   "title": "Saved network connections",
   "whyItMatters": "NetworkManager stores every saved Wi-Fi, VPN and mobile connection here, including Wi-Fi passwords and often VPN credentials in plain text. It maps the networks the person used and can give a stranger access to them.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": true,
   "verifiedOn": [],
@@ -24,10 +31,10 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [
-      "Open Settings > Wi-Fi or Settings > Network from your desktop application menu.",
-      "Select Saved Networks, choose each saved network or VPN profile, and click Forget Connection."
+      "Open Settings > Wi-Fi and use the menu next to each saved network to forget it.",
+      "For VPN profiles use Settings > Network > VPN. An administrator password may be required."
     ],
-    "risk": "Removes saved Wi-Fi network passphrases and VPN connection profiles. You will need to enter network passwords again.",
+    "risk": "Removes saved Wi-Fi network passphrases and VPN connection profiles. You will need to enter network passwords again. Connections saved for other users on this machine are removed too.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

@@ -1,6 +1,8 @@
 {
   "id": "network.cups.printers",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "network",
   "title": "Configured printers",
   "whyItMatters": "CUPS lists every printer the machine can reach, with its queue name and often a network address or a saved SMB/Windows login. It tells a stranger which office, home or print shop the person used, and how to reach those devices.",
@@ -11,7 +13,11 @@
     "path": "cups/printers.conf",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": true,
   "verifiedOn": [],
@@ -24,9 +30,10 @@
     "signOut": null,
     "steps": [
       "Open Settings > Printers from your desktop environment.",
-      "Click the options menu next to each configured printer and select Remove Printer."
+      "Click the options menu next to each configured printer and select Remove Printer.",
+      "An administrator password may be required."
     ],
-    "risk": "Removes all configured local and network printers. You will need to reconfigure printer drivers and queues to print again.",
+    "risk": "Removes all configured local and network printers. You will need to reconfigure printer drivers and queues to print again. Printers added by other users on this machine go too.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

@@ -35,9 +35,10 @@
     "steps": [
       "Open the folder named in the plan in your file manager.",
       "Move any downloaded documents, tickets, or installers you want to keep to another location.",
-      "Delete the remaining files and folders in Downloads."
+      "Delete the remaining files and folders in Downloads.",
+      "Empty the Trash, because deleted files wait there until you do."
     ],
-    "risk": "Permanently deletes all downloaded files, installers, documents, and media stored in Downloads.",
+    "risk": "The files leave the folder; until the Trash is emptied they can still be restored, and after that only copies made elsewhere survive.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

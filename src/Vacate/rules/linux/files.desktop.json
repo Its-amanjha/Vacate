@@ -35,9 +35,10 @@
     "steps": [
       "Open the folder named in the plan in your file manager.",
       "Copy any personal documents, images or shortcuts you want to keep to an external drive.",
-      "Delete the remaining files and subfolders from the Desktop."
+      "Delete the remaining files and subfolders from the Desktop.",
+      "Empty the Trash, because deleted files wait there until you do."
     ],
-    "risk": "Permanently deletes any unsaved documents, files, or shortcuts stored on your Desktop.",
+    "risk": "The files leave the folder; until the Trash is emptied they can still be restored, and after that only copies made elsewhere survive.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

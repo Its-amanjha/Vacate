@@ -1,6 +1,8 @@
 {
   "id": "network.bluetooth.devices",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "network",
   "title": "Paired Bluetooth devices",
   "whyItMatters": "BlueZ keeps one folder per paired device with its name, MAC address and pairing keys. The names alone show which phone, headset, car or keyboard the person paired, and the keys allow reconnecting to those devices.",
@@ -11,7 +13,10 @@
     "path": "lib/bluetooth",
     "match": "directories"
   },
-  "measure": ["exists", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": true,
   "verifiedOn": [],
@@ -23,8 +28,8 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [
-      "Open Settings > Bluetooth from your desktop application menu.",
-      "Select each paired device in turn and click Forget Device or Remove Device."
+      "Open Settings > Bluetooth.",
+      "Select each device you no longer use and choose Remove Device; an administrator password may be requested."
     ],
     "risk": "Removes pairings for all Bluetooth devices. You will need to pair headphones, keyboards, and mice again.",
     "closeApps": [],

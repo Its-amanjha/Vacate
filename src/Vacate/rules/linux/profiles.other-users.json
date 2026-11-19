@@ -1,6 +1,8 @@
 {
   "id": "profiles.other-users",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "user-profiles",
   "title": "Other user accounts on this computer",
   "whyItMatters": "Every account on the machine can hold its own personal data. Listing the names shows whether someone else used this computer and may have left files behind.",
@@ -12,7 +14,10 @@
     "match": "directories",
     "excludeHome": true
   },
-  "measure": ["exists", "itemCount"],
+  "measure": [
+    "exists",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -21,12 +26,12 @@
   "notes": "Names only and never inside another profile. excludeHome keeps the scanning user out. Accounts without a home folder, or with homes elsewhere (LDAP, /var/home on immutable distros), are not listed.",
   "cleanup": {
     "action": "review",
-    "exportFirst": null,
+    "exportFirst": "Have each other person copy their files off first, to an external drive or their own new computer.",
     "signOut": null,
     "steps": [
-      "Open Settings > Users from the desktop system settings.",
-      "Unlock administrative privileges and select each unwanted user account.",
-      "Click Remove User and choose Delete Files, so their data does not stay on the disk."
+      "Look at the account names in the plan and decide which people still need theirs.",
+      "Ask each other person to take their files before anything is removed.",
+      "In Settings > System > Users, unlock, select the account, choose Remove User, then Delete Files. An administrator password is needed."
     ],
     "risk": "Deleting user accounts permanently removes their login access, personal files, and user configurations.",
     "closeApps": [],

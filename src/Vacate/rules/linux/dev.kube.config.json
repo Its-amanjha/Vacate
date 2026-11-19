@@ -30,10 +30,9 @@
   "notes": "config is the default kubeconfig; cache holds discovery and http caches. KUBECONFIG can point somewhere else and some tools write several files into this folder.",
   "cleanup": {
     "action": "export-then-remove",
-    "exportFirst": "Copy any cluster certificates or configuration files you need to keep to a secure location before deletion.",
-    "signOut": null,
+    "exportFirst": "Copy any cluster configuration you still need to a secure place before removal; the copy still grants cluster access, so keep it on an encrypted drive.",
+    "signOut": "Have the cluster administrator revoke the client certificates or tokens used from this machine.",
     "steps": [
-      "Revoke client certificates or access tokens with your Kubernetes cluster administrator if needed.",
       "Delete the folder named in the plan using your file manager."
     ],
     "risk": "Removes access credentials, cluster endpoints, and client certificates for all configured Kubernetes clusters.",

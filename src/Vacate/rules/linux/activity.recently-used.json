@@ -1,6 +1,8 @@
 {
   "id": "activity.recently-used",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "activity",
   "title": "Recently used files list",
   "whyItMatters": "Desktop applications record the documents, images and folders they opened, with paths and timestamps. It is a ready-made list of what the person worked on and when.",
@@ -11,7 +13,11 @@
     "path": "recently-used.xbel",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -23,8 +29,8 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [
-      "Open Settings > Privacy & Security > File History & Trash.",
-      "Click Clear History, or delete the file named in the plan."
+      "Open the desktop Privacy settings and clear the recent files history there.",
+      "If the file named in the plan is still there, delete it with your file manager."
     ],
     "risk": "Clears the list of recent files shown in file pickers and the desktop file manager. Files on disk are not deleted.",
     "closeApps": [],

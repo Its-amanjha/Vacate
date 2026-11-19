@@ -1,6 +1,8 @@
 {
   "id": "autostart.systemd-user",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "autostart",
   "title": "systemd user services",
   "whyItMatters": "User units started with the session include sync clients, VPN and remote access helpers. The unit names show what keeps running in the background for this account.",
@@ -11,7 +13,10 @@
     "path": "systemd/user/*",
     "match": "any"
   },
-  "measure": ["exists", "itemCount"],
+  "measure": [
+    "exists",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -23,8 +28,9 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [
-      "Review the user service unit files located in the folder named in the plan.",
-      "Delete any unwanted custom user service files or target symlinks using your file manager."
+      "Turn the user service off first in the app or service manager that installed it.",
+      "Then review the files in the folder named in the plan.",
+      "Delete the unit file and its enabled link with your file manager."
     ],
     "risk": "Background services configured for your user session will no longer start automatically.",
     "closeApps": [],

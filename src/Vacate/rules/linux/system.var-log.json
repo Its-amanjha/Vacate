@@ -36,7 +36,7 @@
     "risk": "Deleting active system log files directly can break log file descriptors for running system daemons.",
     "closeApps": [],
     "resetCovers": true,
-    "reason": "System logs in var-log are managed by system daemons and log rotation services, and will be cleared when the OS is reinstalled.",
+    "reason": "System logs are written and rotated by system daemons, so they are not yours to clear by hand; a reinstall removes them.",
     "source": "Ubuntu Documentation, System Logs: https://help.ubuntu.com/community/LinuxLogFiles"
   }
 }

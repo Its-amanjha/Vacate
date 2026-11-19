@@ -190,9 +190,9 @@ How the plan works:
   reinstall over the whole disk. vacate does not erase.
 
 How the guidance was checked: written from vendor help pages per platform, then reviewed rule by
-rule by the integrator and once more by an independent reviewer (47 findings: 3 high, 9 medium,
-35 low). All high and medium findings and the lows that changed behaviour were fixed; 20 weak
-sources were replaced with exact vendor articles.
+rule by the integrator and once more by an independent reviewer, in two passes (72 findings in all:
+5 high, 22 medium, 45 low). All high and medium findings and the lows that changed behaviour or
+misled were fixed; 20 weak sources were replaced with exact vendor articles.
 
 Not verified:
 - **No step was followed by hand on a real machine.** Menu paths come from vendor documentation

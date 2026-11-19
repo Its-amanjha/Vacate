@@ -35,9 +35,10 @@
     "steps": [
       "Open the folder named in the plan in your file manager.",
       "Copy any personal videos or screen recordings you wish to keep to external storage.",
-      "Delete the remaining video files and folders in Videos."
+      "Delete the remaining video files and folders in Videos.",
+      "Empty the Trash, because deleted files wait there until you do."
     ],
-    "risk": "Permanently deletes all personal videos, recorded screencasts, and movie clips in the folder.",
+    "risk": "The files leave the folder; until the Trash is emptied they can still be restored, and after that only copies made elsewhere survive.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

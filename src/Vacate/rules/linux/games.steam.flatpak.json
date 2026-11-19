@@ -1,6 +1,8 @@
 {
   "id": "games.steam.flatpak",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "games-licenses",
   "title": "Steam account data and game saves (Flatpak)",
   "whyItMatters": "The Flatpak build keeps its own copy of Steam account data, saves and screenshots inside the sandbox, so a native-only check will miss it.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -20,8 +27,8 @@
   "source": "Flatpak sandbox permissions: per-app data lives in ~/.var/app/<app-id>/data; Steam's Flathub id is com.valvesoftware.Steam: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
   "notes": "Same numeric per-account layout as the native install. Some Flatpak setups also place a Steam tree in ~/.var/app/com.valvesoftware.Steam/.steam.",
   "cleanup": {
-    "action": "sign-out-then-remove",
-    "exportFirst": null,
+    "action": "export-then-remove",
+    "exportFirst": "Check that each game's saves are in Steam Cloud, and copy any save or screenshot folder you want to keep from the Flatpak userdata folder first.",
     "signOut": "In Steam, click your account name in the top right and select Sign out of account.",
     "steps": [
       "Launch Steam and sign out of your account to disconnect cloud sync and active sessions.",

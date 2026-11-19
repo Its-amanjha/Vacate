@@ -30,11 +30,10 @@
   "notes": "id_* files without a .pub suffix are private keys. known_hosts reveals which servers were used even when the keys are gone. authorized_keys shows which other keys may log in as this user.",
   "cleanup": {
     "action": "export-then-remove",
-    "exportFirst": "Back up any SSH private keys and configuration files you need onto an encrypted external drive.",
-    "signOut": null,
+    "exportFirst": "Back up any SSH private keys you still need onto an encrypted external drive. The backup still logs in as you, so keep it encrypted.",
+    "signOut": "Remove this machine's public key from the authorized keys of your servers, and from any cloud or Git account that holds it.",
     "steps": [
       "Copy any needed SSH keys or config files to a secure offline location.",
-      "Remove corresponding public keys from remote servers and cloud accounts if access is being retired.",
       "Delete the folder named in the plan using your file manager."
     ],
     "risk": "Permanently deletes all private SSH authentication keys, server known host records, and client configuration.",

@@ -30,9 +30,9 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [
-      "Open the App Center or Ubuntu Software from the desktop application menu.",
-      "Select the Manage or Installed tab to view installed software.",
-      "Click Uninstall or the trash icon next to each application you wish to remove."
+      "Open App Center from the desktop application menu.",
+      "Go to its list of installed applications.",
+      "Choose Uninstall for each app you no longer need; an administrator password is required."
     ],
     "risk": "Removes selected system applications and their desktop launchers from the operating system.",
     "closeApps": [],

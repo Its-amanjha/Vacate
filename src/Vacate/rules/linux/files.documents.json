@@ -35,9 +35,10 @@
     "steps": [
       "Open the folder named in the plan in your file manager.",
       "Copy any personal documents, tax files, or records you wish to keep to external storage.",
-      "Delete the remaining files and subfolders in Documents."
+      "Delete the remaining files and subfolders in Documents.",
+      "Empty the Trash, because deleted files wait there until you do."
     ],
-    "risk": "Permanently deletes all personal files, spreadsheets, PDFs, and text documents stored in the folder.",
+    "risk": "The files leave the folder; until the Trash is emptied they can still be restored, and after that only copies made elsewhere survive.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

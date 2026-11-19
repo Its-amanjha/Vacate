@@ -29,8 +29,8 @@
   "source": "containers-storage.conf(5): the rootless graph root defaults to ~/.local/share/containers/storage: https://man.archlinux.org/man/containers-storage.conf.5",
   "notes": "volumes/ holds named volumes, overlay/ the container layers. Run as root, Podman uses /var/lib/containers/storage, which this rule does not cover. Docker with a rootless setup uses ~/.local/share/docker instead.",
   "cleanup": {
-    "action": "remove",
-    "exportFirst": null,
+    "action": "export-then-remove",
+    "exportFirst": "Copy out any data you keep inside named volumes or containers before the storage folder is removed.",
     "signOut": null,
     "steps": [
       "Stop all running Podman containers and pods.",

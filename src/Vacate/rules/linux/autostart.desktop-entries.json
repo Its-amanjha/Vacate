@@ -1,6 +1,8 @@
 {
   "id": "autostart.desktop-entries",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "autostart",
   "title": "Programs started at login",
   "whyItMatters": "These entries show what runs by itself every time the user logs in: sync clients, chat apps, remote access tools. The names are a short list of what the person relies on.",
@@ -11,7 +13,10 @@
     "path": "autostart/*.desktop",
     "match": "files"
   },
-  "measure": ["exists", "itemCount"],
+  "measure": [
+    "exists",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -23,8 +28,8 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [
-      "Open Startup Applications Preferences from the desktop application menu.",
-      "Select each unwanted startup entry and click Remove, or delete the file named in the plan."
+      "Open your desktop's startup applications tool if it has one; otherwise use your file manager.",
+      "Remove each unwanted startup entry, or delete its file named in the plan."
     ],
     "risk": "Selected applications will no longer start automatically when you log into the desktop.",
     "closeApps": [],

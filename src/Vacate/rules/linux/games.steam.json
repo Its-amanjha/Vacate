@@ -1,6 +1,8 @@
 {
   "id": "games.steam",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "games-licenses",
   "title": "Steam account data and game saves",
   "whyItMatters": "Steam keeps one folder per account that has signed in, with save games, screenshots, chat history and the cached credentials that keep the account logged in.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -20,8 +27,8 @@
   "source": "Arch Wiki, Steam: the default install is ~/.local/share/Steam and userdata holds per-account saves: https://wiki.archlinux.org/title/Steam",
   "notes": "Each numeric folder is a Steam account id with per-game saves and screenshots inside. Account names and SteamIDs are in config/loginusers.vdf, which this rule does not count. ~/.steam/steam is normally a symlink to this tree. The Flatpak uses ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/userdata.",
   "cleanup": {
-    "action": "sign-out-then-remove",
-    "exportFirst": null,
+    "action": "export-then-remove",
+    "exportFirst": "Check that each game's saves are in Steam Cloud, and copy any save or screenshot folder you want to keep from the folder named in the plan first.",
     "signOut": "In Steam, click your profile name in the upper-right corner and select Sign out of account.",
     "steps": [
       "Launch Steam and sign out of your account to clear saved login credentials.",

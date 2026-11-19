@@ -35,9 +35,10 @@
     "steps": [
       "Open the folder named in the plan in your file manager.",
       "Copy any personal photos, scans, and screenshots you want to keep to an external drive.",
-      "Delete the remaining photos and folders in Pictures."
+      "Delete the remaining photos and folders in Pictures.",
+      "Empty the Trash, because deleted files wait there until you do."
     ],
-    "risk": "Permanently deletes all photos, screenshots, and graphics files stored in Pictures.",
+    "risk": "The files leave the folder; until the Trash is emptied they can still be restored, and after that only copies made elsewhere survive.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

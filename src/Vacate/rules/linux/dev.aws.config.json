@@ -1,0 +1,22 @@
+{
+  "id": "dev.aws.config",
+  "platforms": ["linux"],
+  "category": "developer-secrets",
+  "title": "AWS CLI credentials",
+  "whyItMatters": "The AWS folder holds access keys and session tokens for cloud accounts. Anyone who copies it can use the accounts, and the profiles also name the organisation and the roles it uses.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".aws",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "AWS CLI docs, where configuration and credentials are stored: ~/.aws/credentials and ~/.aws/config: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html",
+  "notes": "credentials holds access key ids and secret keys in plain text; config holds profiles, regions and role settings; sso/cache holds cached SSO tokens. AWS_CONFIG_FILE and AWS_SHARED_CREDENTIALS_FILE can move the files."
+}

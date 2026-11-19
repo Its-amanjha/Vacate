@@ -1,0 +1,22 @@
+{
+  "id": "games.steam",
+  "platforms": ["windows"],
+  "category": "games-licenses",
+  "title": "Steam local client data",
+  "whyItMatters": "Steam keeps cached client state and a DPAPI key under LocalAppData. It shows the account was signed in and games were installed.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Steam",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Steam DPAPI key at %LOCALAPPDATA%/Steam/htmlcache/LocalProfs.json - https://www.forensicxlab.com/blog/steam",
+  "notes": "The main account files (loginusers.vdf, userdata) sit in the Steam install directory under Program Files, which has no root token; this rule covers only reachable LocalAppData state. Unconfirmed: custom install directories are not matched."
+}

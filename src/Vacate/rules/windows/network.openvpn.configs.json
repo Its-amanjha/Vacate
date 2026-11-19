@@ -1,0 +1,22 @@
+{
+  "id": "network.openvpn.configs",
+  "platforms": ["windows"],
+  "category": "network",
+  "title": "OpenVPN client configurations",
+  "whyItMatters": "OpenVPN profiles can inline certificates and keys and name remote networks. They show which private networks this PC could reach.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "OpenVPN/config",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "OpenVPN GUI docs: per-user config directory C:/Users/<user>/OpenVPN/config - https://github.com/OpenVPN/openvpn-gui/blob/master/README.rst",
+  "notes": "Per-user profiles only; the system-wide C:/Program Files/OpenVPN/config tree is not covered. .ovpn files, certificates and keys are never opened."
+}

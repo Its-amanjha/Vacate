@@ -1,0 +1,20 @@
+{
+  "id": "autostart.run-key-machine",
+  "platforms": ["windows"],
+  "category": "autostart",
+  "title": "Machine Run key autostarts",
+  "whyItMatters": "Programs in this key start for every user. It reveals machine-wide agents that may keep data in sync on the handed-over PC.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKLM",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+  },
+  "measure": ["exists", "valueCount", "subkeyCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Microsoft Learn, Run and RunOnce registry keys: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
+  "notes": "Machine-wide autostart list. Value data is never read and registry last-write time is unavailable (D3). The 32-bit view is not queried."
+}

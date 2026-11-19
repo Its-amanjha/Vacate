@@ -1,0 +1,22 @@
+{
+  "id": "email.outlook.new",
+  "platforms": ["windows"],
+  "category": "email",
+  "title": "New Outlook for Windows app data",
+  "whyItMatters": "The Store version of Outlook keeps local configuration, cached web data and attachments. It shows that the account was signed into this PC.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Packages/Microsoft.OutlookForWindows_8wekyb3d8bbwe",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Microsoft Learn, new Outlook profile and cache locations: https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/get-started/virtualized-desktop-infrastructure",
+  "notes": "Microsoft also documents %LOCALAPPDATA%/Microsoft/olk for cache and attachments; that is a separate folder. Mail stays on the server; no content is parsed."
+}

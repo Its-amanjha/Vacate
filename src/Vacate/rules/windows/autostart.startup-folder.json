@@ -1,0 +1,21 @@
+{
+  "id": "autostart.startup-folder",
+  "platforms": ["windows"],
+  "category": "autostart",
+  "title": "User Startup folder",
+  "whyItMatters": "Shortcuts in this folder start programs at sign-in. Their names reveal tools that may still run and hold sessions on the machine.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Microsoft/Windows/Start Menu/Programs/Startup",
+    "match": "files"
+  },
+  "measure": ["exists", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Microsoft Learn: per-user Startup folder at %APPDATA%/Microsoft/Windows/Start Menu/Programs/Startup",
+  "notes": "Names only: no recursion and no shortcut target is resolved. The machine-wide Startup folder under ProgramData is not covered."
+}

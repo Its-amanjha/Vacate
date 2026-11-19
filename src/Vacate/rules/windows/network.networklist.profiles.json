@@ -1,0 +1,20 @@
+{
+  "id": "network.networklist.profiles",
+  "platforms": ["windows"],
+  "category": "network",
+  "title": "Known network list profiles",
+  "whyItMatters": "This key records every network the machine has joined, including SSIDs and gateways. It reveals where the computer has been connected.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKLM",
+    "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList\\Profiles"
+  },
+  "measure": ["exists", "valueCount", "subkeyCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Windows Network List service registry: https://learn.microsoft.com/en-us/windows/win32/api/netlistapi (NetworkList\\Profiles subkeys, well-known forensic artifact)",
+  "notes": "HKLM machine-wide key; individual per-network GUID subkeys are counted but their values are not read. Registry last-write time is unavailable."
+}

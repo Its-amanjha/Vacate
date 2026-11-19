@@ -1,0 +1,20 @@
+{
+  "id": "activity.featureusage",
+  "platforms": ["windows"],
+  "category": "activity",
+  "title": "Explorer FeatureUsage",
+  "whyItMatters": "FeatureUsage tracks use of Windows Explorer features such as search and library views, adding detail about how the machine was used.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FeatureUsage"
+  },
+  "measure": ["exists", "valueCount", "subkeyCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FeatureUsage",
+  "notes": "Subkeys such as ShowedUI and AppLaunch are counted but not parsed. Present from Windows 10 onward."
+}

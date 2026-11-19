@@ -1,0 +1,21 @@
+{
+  "id": "activity.recent-items",
+  "platforms": ["windows"],
+  "category": "activity",
+  "title": "Recently opened item shortcuts",
+  "whyItMatters": ".lnk shortcuts in the Recent folder list files and folders the user opened, including names from drives now removed.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Microsoft/Windows/Recent/*.lnk",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SANS Windows forensic poster: %APPDATA%/Microsoft/Windows/Recent (.lnk shortcut files)",
+  "notes": "Counts shortcut files only, not the AutomaticDestinations and CustomDestinations jump-list folders, which have their own rule."
+}

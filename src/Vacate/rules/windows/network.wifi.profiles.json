@@ -1,0 +1,22 @@
+{
+  "id": "network.wifi.profiles",
+  "platforms": ["windows"],
+  "category": "network",
+  "title": "Saved Wi-Fi network profiles",
+  "whyItMatters": "Each XML profile holds a network name and its saved key. A new owner could reconnect to old networks or recover the shared password.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "PROGRAMDATA",
+    "path": "Microsoft/Wlansvc/Profiles/Interfaces",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "WLAN profile XMLs live under %PROGRAMDATA%/Microsoft/Wlansvc/Profiles/Interfaces; see https://passcape.com/windows_password_recovery_dpapi_decoder",
+  "notes": "Keys inside the XML are DPAPI-protected. Needs elevation because the store is machine-wide. Counts profile files only; none are parsed."
+}

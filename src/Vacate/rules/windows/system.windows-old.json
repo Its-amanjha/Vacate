@@ -1,0 +1,22 @@
+{
+  "id": "system.windows-old",
+  "platforms": ["windows"],
+  "category": "system-traces",
+  "title": "Previous Windows installation (Windows.old)",
+  "whyItMatters": "An in-place upgrade can leave the previous Windows installation and its user files at the drive root, including the old profile data.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "SYSTEMDRIVE",
+    "path": "Windows.old",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Microsoft Learn: Windows.old folder is created at the system drive root during an in-place Windows upgrade",
+  "notes": "Large tree with a 20000-entry cap; truncation is reported if exceeded. The path jail still applies inside the old tree, and no file is opened."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "dev.kube.config",
+  "platforms": ["windows"],
+  "category": "developer-secrets",
+  "title": "Kubernetes client credentials",
+  "whyItMatters": "Kubeconfig files and cached client certificates identify clusters and can carry bearer tokens that grant cluster access.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".kube",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Kubernetes client configuration in ~/.kube: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/",
+  "notes": "Includes config and any cached plugin or token files. Cluster endpoints and certificates are not parsed."
+}

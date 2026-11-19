@@ -1,0 +1,21 @@
+{
+  "id": "encryption.tpm.presence",
+  "platforms": ["windows"],
+  "category": "disk-encryption",
+  "title": "TPM presence and state",
+  "whyItMatters": "A TPM changes how BitLocker keys are protected and what must be considered before the machine leaves the owner's control.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "wmi",
+    "namespace": "root/CIMV2/Security/MicrosoftTpm",
+    "className": "Win32_Tpm",
+    "properties": ["IsEnabled_InitialValue", "IsActivated_InitialValue"]
+  },
+  "measure": ["exists", "properties"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Microsoft Learn Win32_Tpm class: https://learn.microsoft.com/en-us/windows/win32/secprov/win32-tpm",
+  "notes": "Read-only CIM query of the two initial-state properties. No TPM method is invoked and no ownership is changed. Absent on machines without a TPM."
+}

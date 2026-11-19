@@ -1,0 +1,20 @@
+{
+  "id": "activity.typedpaths",
+  "platforms": ["windows"],
+  "category": "activity",
+  "title": "Typed Explorer paths",
+  "whyItMatters": "This key holds paths typed into Explorer's address bar, revealing locations the user navigated to directly.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths"
+  },
+  "measure": ["exists", "valueCount", "subkeyCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths",
+  "notes": "Only value and subkey counts are reported; the typed URLs and paths themselves are never read."
+}

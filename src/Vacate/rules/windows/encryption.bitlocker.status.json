@@ -1,0 +1,21 @@
+{
+  "id": "encryption.bitlocker.status",
+  "platforms": ["windows"],
+  "category": "disk-encryption",
+  "title": "BitLocker protection status",
+  "whyItMatters": "Whether each drive is protected determines how much data someone can read from the disk after handover, and whether a recovery key must be recorded.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "wmi",
+    "namespace": "root/CIMV2/Security/MicrosoftVolumeEncryption",
+    "className": "Win32_EncryptableVolume",
+    "properties": ["DriveLetter", "ProtectionStatus"]
+  },
+  "measure": ["exists", "properties"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Microsoft Learn Win32_EncryptableVolume class: https://learn.microsoft.com/en-us/windows/win32/secprov/win32-encryptablevolume",
+  "notes": "Read-only CIM query. ProtectionStatus 1 means protected, 0 means off. Recovery keys are not retrieved; only the two named properties are requested."
+}

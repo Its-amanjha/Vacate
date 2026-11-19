@@ -1,0 +1,22 @@
+{
+  "id": "msg.imessage",
+  "platforms": ["macos"],
+  "category": "messaging",
+  "title": "Messages (iMessage) data",
+  "whyItMatters": "Messages stores conversations, attachments and contact details. Who the user spoke to and what was shared is visible from this folder alone.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Messages",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macOS artifact reference: ~/Library/Messages/chat.db and Attachments - https://www.macforensics.app/en/artifacts/cheat-sheet",
+  "notes": "TCC-protected (Messages data): a live scan needs Full Disk Access; root alone is not enough. chat.db and attachments are never opened."
+}

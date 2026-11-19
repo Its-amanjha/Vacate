@@ -1,0 +1,22 @@
+{
+  "id": "wallet.monero-gui",
+  "platforms": ["linux"],
+  "category": "wallets",
+  "title": "Monero GUI wallet files",
+  "whyItMatters": "Monero wallet files hold the encrypted keys and transaction history. The keys in a wallet file plus its password are the funds.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Monero",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Monero Docs, monero-wallet-gui reference: the wallet is created in $HOME/Monero/wallets by default: https://docs.getmonero.org/interacting/monero-wallet-gui-reference",
+  "notes": "The GUI wizard can put wallets in ~/.bitmonero/wallets instead, and this rule does not check there. The wallet list, config and log are in ~/.config/monero-project and the blockchain data in ~/.bitmonero, neither of which is counted here."
+}

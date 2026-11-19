@@ -1,0 +1,22 @@
+{
+  "id": "profiles.other-users",
+  "platforms": ["linux"],
+  "category": "user-profiles",
+  "title": "Other user accounts on this computer",
+  "whyItMatters": "Every account on the machine can hold its own personal data. Listing the names shows whether someone else used this computer and may have left files behind.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "USERS",
+    "path": "*",
+    "match": "directories",
+    "excludeHome": true
+  },
+  "measure": ["exists", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "FHS 3.0, /home: user home directories live under /home on Linux: https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s08.html",
+  "notes": "Names only and never inside another profile. excludeHome keeps the scanning user out. Accounts without a home folder, or with homes elsewhere (LDAP, /var/home on immutable distros), are not listed."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "files.movies",
+  "platforms": ["macos"],
+  "category": "personal-files",
+  "title": "Movies folder",
+  "whyItMatters": "The Movies folder holds downloaded films, TV episodes and video projects that stay on the machine after sign-out.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Movies",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple macOS user guide: ~/Movies is the default home folder for video content and TV app downloads",
+  "notes": "Counts sizes and timestamps only; no video file is opened. iMovie and other app libraries elsewhere are out of scope."
+}

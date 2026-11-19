@@ -1,0 +1,22 @@
+{
+  "id": "files.music",
+  "platforms": ["macos"],
+  "category": "personal-files",
+  "title": "Music folder",
+  "whyItMatters": "The Music folder holds the local music library and downloaded tracks, including purchases tied to the person's Apple account.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Music",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple macOS user guide: ~/Music is the default home folder for the Music app library",
+  "notes": "Counts files and total size only; no track or playlist is opened. A library stored on an external drive is not covered."
+}

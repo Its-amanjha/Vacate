@@ -245,7 +245,7 @@ function Resolve-VacateRuleTargets {
     $arr = $targets.ToArray()
     if ($arr.Length -gt 1) {
         $keys = [string[]]@($arr | ForEach-Object { $_.FullName })
-        [Array]::Sort($keys, $arr, [StringComparer]::Ordinal)
+        [Array]::Sort([Array]$keys, [Array]$arr, [Collections.IComparer][StringComparer]::Ordinal)
     }
     $targets.Clear()
     foreach ($a in $arr) { $targets.Add($a) }

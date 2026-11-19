@@ -356,7 +356,7 @@ function Import-VacateRuleSet {
     # Ordinal sort by id (Sort-Object is culture-aware, which is not deterministic across machines).
     $arr = [object[]]$valid.ToArray()
     $keys = [string[]]@($arr | ForEach-Object { [string]$_.id })
-    [Array]::Sort($keys, $arr, [StringComparer]::Ordinal)
+    [Array]::Sort([Array]$keys, [Array]$arr, [Collections.IComparer][StringComparer]::Ordinal)
 
     $rules = New-Object System.Collections.Generic.List[object]
     $na = New-Object System.Collections.Generic.List[object]

@@ -31,7 +31,7 @@ BeforeAll {
                 $items = @((New-Object IO.DirectoryInfo $Path).EnumerateFileSystemInfos())
                 $keys = [string[]]@($items | ForEach-Object { $_.Name })
                 $arr = [object[]]$items
-                if ($arr.Length -gt 1) { [Array]::Sort($keys, $arr, [StringComparer]::Ordinal) }
+                if ($arr.Length -gt 1) { [Array]::Sort([Array]$keys, [Array]$arr, [Collections.IComparer][StringComparer]::Ordinal) }
                 return @{ Items = $arr; Denied = $false }
             }
             catch { return @{ Items = @(); Denied = $true } }

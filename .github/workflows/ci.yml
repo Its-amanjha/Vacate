@@ -41,6 +41,11 @@ jobs:
         shell: ${{ matrix.shell }}
         run: ./tests/Run-Tests.ps1
 
+      - name: Run performance tests
+        if: matrix.shell == 'pwsh'
+        shell: pwsh
+        run: ./tests/Run-Tests.ps1 -Path tests/perf
+
       - name: Run lint
         if: matrix.name == 'ubuntu-pwsh'
         shell: ${{ matrix.shell }}

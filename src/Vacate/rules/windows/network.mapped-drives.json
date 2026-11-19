@@ -1,0 +1,20 @@
+{
+  "id": "network.mapped-drives",
+  "platforms": ["windows"],
+  "category": "network",
+  "title": "Mapped network drives",
+  "whyItMatters": "Saved drive mappings disclose server and share names, and may indicate stored credentials for those shares.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Network"
+  },
+  "measure": ["exists", "valueCount", "subkeyCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Per-user mapped drives are stored under HKCU\\Network (Microsoft Learn: net use / Windows network connections registry)",
+  "notes": "One subkey per mapped drive letter. Only key and value counts are reported; connection strings and any saved credentials are not read."
+}

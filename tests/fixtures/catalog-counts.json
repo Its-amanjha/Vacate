@@ -1,0 +1,9 @@
+{
+  "note": "Rule catalog floor for the sabotage harness (SPEC Harness self-test). Deleting a rule file or dropping one from the loader must fail the suite, so these counts are asserted as minimums, never as exact values.",
+  "files": 195,
+  "platforms": {
+    "windows": 87,
+    "macos": 50,
+    "linux": 58
+  }
+}

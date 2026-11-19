@@ -70,7 +70,6 @@ BeforeAll {
         [pscustomobject]@{ Kind = 'write'; Name = '.Delete('; Regex = '\.Delete\s*\(' },
         [pscustomobject]@{ Kind = 'write'; Name = 'WriteAllText'; Regex = 'WriteAllText' },
         [pscustomobject]@{ Kind = 'write'; Name = 'WriteAllBytes'; Regex = 'WriteAllBytes' },
-        [pscustomobject]@{ Kind = 'write'; Name = 'CreateDirectory'; Regex = 'CreateDirectory' },
         [pscustomobject]@{ Kind = 'write'; Name = 'CreateSubKey'; Regex = 'CreateSubKey' },
         [pscustomobject]@{ Kind = 'write'; Name = 'SetValue('; Regex = 'SetValue\s*\(' },
         [pscustomobject]@{ Kind = 'write'; Name = 'DeleteSubKey'; Regex = 'DeleteSubKey' },

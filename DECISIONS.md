@@ -18,3 +18,6 @@ Owner: Claude. Partners propose entries in their hand-off.
 | D11 | 2026-11-19 | Report gains top-level `skipped[]` (`ruleId`, `reason`, `detail`) and categories are a fixed enum of 18. | The spec's report section 7 needs skip reasons, but the sample JSON had nowhere to put them. |
 | D12 | 2026-11-19 | `Glob`, reparse and cloud-placeholder checks live in `Private/Primitives.ps1`. | PathJail and Providers both need them; one copy avoids drift between parallel authors. |
 | D13 | 2026-11-19 | Unix root detection uses `[Environment]::UserName -eq 'root'`. | .NET resolves it from the effective uid; no external `id` binary and no P/Invoke needed. |
+| D14 | 2026-11-19 | Rule paths are checked twice: syntax at load time (`RuleLoader`), and again by the path jail at scan time. | Defence in depth: a bad rule is rejected before any scan, and the jail still refuses anything that slips through. |
+| D15 | 2026-11-19 | An invalid rule file never loads; the rest of the catalog still loads and the errors are listed. `rules validate` exits 1 on any error. | One bad file must not hide the other 70 rules; `rules validate` is the gate in CI. |
+| D16 | 2026-11-19 | Rule loader is `Import-VacateRuleSet` (singular noun). | PSScriptAnalyzer `PSUseSingularNouns`; the spec requires a clean lint. |

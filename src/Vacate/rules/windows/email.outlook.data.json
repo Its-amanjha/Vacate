@@ -17,6 +17,6 @@
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "Classic Outlook default OST location %LOCALAPPDATA%/Microsoft/Outlook - https://filepathgeek.com/posts/outlook-pst-ost-location",
+  "source": "Microsoft Support, Create an Outlook Data File: offline .ost files are saved under drive:/Users/user/AppData/Local/Microsoft/Outlook - https://support.microsoft.com/en-us/outlook/create-an-outlook-data-file-pst-to-save-your-information",
   "notes": "OST files are server caches; PST archives are usually under Documents/Outlook Files and are not matched here. No mail file is opened or indexed."
 }

@@ -7,7 +7,7 @@
   "sensitivity": "medium",
   "locator": {
     "kind": "path",
-    "root": "APPDATA",
+    "root": "PROGRAMDATA",
     "path": "Battle.net",
     "match": "directories",
     "recurse": true
@@ -17,6 +17,6 @@
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "Battle.net.config in %APPDATA%/Battle.net (Windows Report) and Blizzard Support article 34719 for the machine-wide ProgramData copy",
-  "notes": "Only the per-user roaming folder is matched. The machine-wide C:/ProgramData/Battle.net copy is not covered. Config files are never parsed."
+  "source": "Blizzard Support, Deleting Battle.net Files (article 34719): machine-wide data in C:/ProgramData/Battle.net - https://us.battle.net/support/en/article/34719",
+  "notes": "Machine-wide launcher cache and agent data. The per-user %APPDATA%/Battle.net config folder is not covered. Files are counted, never opened or parsed."
 }

@@ -1,6 +1,8 @@
 {
   "id": "files.videos",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "personal-files",
   "title": "Videos folder",
   "whyItMatters": "Phone videos, screen recordings and clips of private moments sit here. The files are large and easy to forget before handing a machine over.",
@@ -12,11 +14,18 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Ubuntu 24.04 (WSL)"
+  ],
+  "verified": true,
   "source": "XDG user directories defaults (xdg-user-dirs creates Videos under the home directory): https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
   "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Screen recorders often default to this folder or to the home directory."
 }

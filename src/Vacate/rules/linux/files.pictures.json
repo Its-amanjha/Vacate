@@ -1,6 +1,8 @@
 {
   "id": "files.pictures",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "personal-files",
   "title": "Pictures folder",
   "whyItMatters": "Photos of family, ID documents and screenshots live here. Images often still carry GPS tags and camera details that the file listing itself does not show.",
@@ -12,11 +14,18 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Ubuntu 24.04 (WSL)"
+  ],
+  "verified": true,
   "source": "XDG user directories defaults (xdg-user-dirs creates Pictures under the home directory): https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
   "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Many desktops save screenshots to Pictures/Screenshots."
 }

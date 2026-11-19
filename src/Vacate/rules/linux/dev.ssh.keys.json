@@ -1,6 +1,8 @@
 {
   "id": "dev.ssh.keys",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "developer-secrets",
   "title": "SSH keys and known hosts",
   "whyItMatters": "The .ssh folder holds private keys that log into servers, git hosts and cloud machines, plus known_hosts listing every host connected to. A copied key with no passphrase is immediate access.",
@@ -12,11 +14,18 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Ubuntu 24.04 (WSL)"
+  ],
+  "verified": true,
   "source": "OpenSSH manual pages: user keys default to ~/.ssh/id_* with known_hosts, config and authorized_keys in the same folder: https://www.openssh.com/manual.html",
   "notes": "id_* files without a .pub suffix are private keys. known_hosts reveals which servers were used even when the keys are gone. authorized_keys shows which other keys may log in as this user."
 }

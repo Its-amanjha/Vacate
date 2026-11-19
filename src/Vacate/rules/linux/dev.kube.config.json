@@ -1,6 +1,8 @@
 {
   "id": "dev.kube.config",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "developer-secrets",
   "title": "kubectl cluster access",
   "whyItMatters": "The kube folder holds cluster addresses and embedded client certificates or tokens. With it a stranger can talk to the clusters the person administered, and the names show which company systems they touched.",
@@ -12,11 +14,18 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Ubuntu 24.04 (WSL)"
+  ],
+  "verified": true,
   "source": "Kubernetes docs, organizing cluster access: kubeconfig defaults to $HOME/.kube/config: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/",
   "notes": "config is the default kubeconfig; cache holds discovery and http caches. KUBECONFIG can point somewhere else and some tools write several files into this folder."
 }

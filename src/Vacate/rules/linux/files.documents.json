@@ -1,6 +1,8 @@
 {
   "id": "files.documents",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "personal-files",
   "title": "Documents folder",
   "whyItMatters": "Contracts, tax papers, medical letters and scans live here. File names and dates alone can expose a lot about the person's life.",
@@ -12,11 +14,18 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Ubuntu 24.04 (WSL)"
+  ],
+  "verified": true,
   "source": "XDG user directories defaults (xdg-user-dirs creates Documents under the home directory): https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
   "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Some applications save wallet files and exports here too."
 }

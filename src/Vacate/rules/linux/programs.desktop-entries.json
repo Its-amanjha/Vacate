@@ -1,28 +1,28 @@
 {
-    "id":  "programs.desktop-entries",
-    "platforms":  [
-                      "linux"
-                  ],
-    "category":  "installed-programs",
-    "title":  "Installed applications (system-wide)",
-    "whyItMatters":  "The launcher entries list what is installed on the machine. On its own that is a profile of the person\u0027s tools and interests, and it shows what a new owner will find in the menu.",
-    "sensitivity":  "low",
-    "locator":  {
-                    "kind":  "path",
-                    "root":  "APPLICATIONS",
-                    "path":  "*.desktop",
-                    "match":  "files"
-                },
-    "measure":  [
-                    "exists",
-                    "itemCount"
-                ],
-    "maxEntries":  5000,
-    "requiresElevation":  false,
-    "verifiedOn":  [
-                       "Ubuntu 24.04 (WSL)"
-                   ],
-    "verified":  true,
-    "source":  "freedesktop.org Desktop Entry spec plus the FHS location /usr/share/applications for system-wide entries: https://specifications.freedesktop.org/desktop-entry-spec/latest/",
-    "notes":  "Names only. Packages without a launcher entry, snap and Flatpak exports installed elsewhere, and console-only tools do not appear here."
+  "id": "programs.desktop-entries",
+  "platforms": [
+    "linux"
+  ],
+  "category": "installed-programs",
+  "title": "Installed applications (system-wide)",
+  "whyItMatters": "The launcher entries list what is installed on the machine. On its own that is a profile of the person's tools and interests, and it shows what a new owner will find in the menu.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "APPLICATIONS",
+    "path": "*.desktop",
+    "match": "files"
+  },
+  "measure": [
+    "exists",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Ubuntu 24.04 (WSL)"
+  ],
+  "verified": true,
+  "source": "freedesktop.org Desktop Entry spec plus the FHS location /usr/share/applications for system-wide entries: https://specifications.freedesktop.org/desktop-entry-spec/latest/",
+  "notes": "Names only. Packages without a launcher entry, snap and Flatpak exports installed elsewhere, and console-only tools do not appear here."
 }

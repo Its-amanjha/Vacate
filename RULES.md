@@ -151,7 +151,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `wallet.ledger-live` | wallets | critical | `LIBRARY/Application Support/Ledger*` | no | no |
 | `wallet.monero-gui` | wallets | critical | `LIBRARY/Application Support/monero-wallet-gui` | no | no |
 
-## Linux (58 rules, 4 verified)
+## Linux (74 rules, 20 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -159,40 +159,50 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `activity.shell-history.bash` | activity | high | `HOME/.bash_history` | no | yes (Ubuntu 24.04 (WSL)) |
 | `activity.shell-history.fish` | activity | high | `XDG_DATA/fish/fish_history` | no | no |
 | `activity.shell-history.zsh` | activity | high | `HOME/.zsh_history` | no | no |
+| `activity.thumbnails` | activity | low | `HOME/.cache/thumbnails` | no | no |
 | `autostart.desktop-entries` | autostart | low | `XDG_CONFIG/autostart/*.desktop` | no | no |
 | `autostart.systemd-user` | autostart | low | `XDG_CONFIG/systemd/user/*` | no | no |
 | `browser.brave.profiles` | browsers | medium | `XDG_CONFIG/BraveSoftware/Brave-Browser/*/Preferences` | no | no |
 | `browser.chrome.cache` | browsers | low | `HOME/.cache/google-chrome` | no | no |
 | `browser.chrome.profiles` | browsers | medium | `XDG_CONFIG/google-chrome/*/Preferences` | no | no |
 | `browser.chromium.profiles` | browsers | medium | `XDG_CONFIG/chromium/*/Preferences` | no | no |
+| `browser.chromium.profiles.snap` | browsers | medium | `HOME/snap/chromium/common/chromium/*/Preferences` | no | no |
 | `browser.firefox.cache` | browsers | low | `HOME/.cache/mozilla/firefox` | no | no |
+| `browser.firefox.cache.snap` | browsers | medium | `HOME/snap/firefox/common/.cache/mozilla/firefox` | no | yes (Ubuntu 24.04 (WSL)) |
 | `browser.firefox.profiles` | browsers | medium | `HOME/.mozilla/firefox/*/prefs.js` | no | no |
 | `browser.firefox.profiles.flatpak` | browsers | medium | `HOME/.var/app/org.mozilla.firefox/.mozilla/firefox/*/prefs.js` | no | no |
-| `browser.firefox.profiles.snap` | browsers | medium | `HOME/snap/firefox/common/.mozilla/firefox/*/prefs.js` | no | no |
+| `browser.firefox.profiles.snap` | browsers | medium | `HOME/snap/firefox/common/.mozilla/firefox/*/prefs.js` | no | yes (Ubuntu 24.04 (WSL)) |
+| `browser.firefox.profiles.xdg` | browsers | medium | `XDG_CONFIG/mozilla/firefox/*/prefs.js` | no | no |
 | `browser.opera.profiles` | browsers | medium | `XDG_CONFIG/opera/*/Preferences` | no | no |
 | `browser.vivaldi.profiles` | browsers | medium | `XDG_CONFIG/vivaldi/*/Preferences` | no | no |
 | `cloud.dropbox` | cloud-sync | medium | `HOME/Dropbox` | no | no |
 | `cloud.nextcloud` | cloud-sync | medium | `XDG_CONFIG/Nextcloud` | no | no |
 | `containers.libvirt` | containers-vms | medium | `VAR/lib/libvirt/images` | yes | no |
-| `containers.podman` | containers-vms | medium | `XDG_DATA/containers/storage` | no | no |
+| `containers.podman` | containers-vms | medium | `XDG_DATA/containers/storage` | no | yes (Ubuntu 24.04 (WSL)) |
 | `containers.virtualbox` | containers-vms | medium | `HOME/VirtualBox VMs` | no | no |
-| `credentials.gnupg` | credentials | critical | `HOME/.gnupg` | no | no |
+| `credentials.gnupg` | credentials | critical | `HOME/.gnupg` | no | yes (Ubuntu 24.04 (WSL)) |
 | `credentials.keyrings` | credentials | critical | `XDG_DATA/keyrings` | no | no |
-| `dev.aws.config` | developer-secrets | critical | `HOME/.aws` | no | no |
+| `credentials.password-store` | credentials | critical | `HOME/.password-store` | no | no |
+| `dev.aws.config` | developer-secrets | critical | `HOME/.aws` | no | yes (Ubuntu 24.04 (WSL)) |
 | `dev.azure.config` | developer-secrets | critical | `HOME/.azure` | no | no |
 | `dev.docker.config` | developer-secrets | critical | `HOME/.docker` | no | no |
-| `dev.git-credentials` | developer-secrets | critical | `HOME/.git-credentials` | no | no |
-| `dev.kube.config` | developer-secrets | critical | `HOME/.kube` | no | no |
-| `dev.npmrc` | developer-secrets | critical | `HOME/.npmrc` | no | no |
-| `dev.ssh.keys` | developer-secrets | critical | `HOME/.ssh` | no | no |
+| `dev.gh-cli` | developer-secrets | critical | `XDG_CONFIG/gh/hosts.yml` | no | no |
+| `dev.git-credentials` | developer-secrets | critical | `HOME/.git-credentials` | no | yes (Ubuntu 24.04 (WSL)) |
+| `dev.kube.config` | developer-secrets | critical | `HOME/.kube` | no | yes (Ubuntu 24.04 (WSL)) |
+| `dev.netrc` | developer-secrets | critical | `HOME/.netrc` | no | no |
+| `dev.npmrc` | developer-secrets | critical | `HOME/.npmrc` | no | yes (Ubuntu 24.04 (WSL)) |
+| `dev.pgpass` | developer-secrets | critical | `HOME/.pgpass` | no | no |
+| `dev.ssh.keys` | developer-secrets | critical | `HOME/.ssh` | no | yes (Ubuntu 24.04 (WSL)) |
+| `email.thunderbird.profiles` | email | high | `HOME/.thunderbird/*` | no | no |
+| `email.thunderbird.profiles.snap` | email | high | `HOME/snap/thunderbird/common/.thunderbird/*` | no | no |
 | `encryption.block-devices` | disk-encryption | medium | system query `block-devices` | no | yes (Ubuntu 24.04 (WSL)) |
 | `encryption.crypttab` | disk-encryption | medium | `ETC/crypttab` | no | no |
-| `files.desktop` | personal-files | medium | `HOME/Desktop` | no | no |
-| `files.documents` | personal-files | medium | `HOME/Documents` | no | no |
-| `files.downloads` | personal-files | medium | `HOME/Downloads` | no | no |
-| `files.pictures` | personal-files | medium | `HOME/Pictures` | no | no |
-| `files.trash` | personal-files | medium | `XDG_DATA/Trash` | no | no |
-| `files.videos` | personal-files | medium | `HOME/Videos` | no | no |
+| `files.desktop` | personal-files | medium | `HOME/Desktop` | no | yes (Ubuntu 24.04 (WSL)) |
+| `files.documents` | personal-files | medium | `HOME/Documents` | no | yes (Ubuntu 24.04 (WSL)) |
+| `files.downloads` | personal-files | medium | `HOME/Downloads` | no | yes (Ubuntu 24.04 (WSL)) |
+| `files.pictures` | personal-files | medium | `HOME/Pictures` | no | yes (Ubuntu 24.04 (WSL)) |
+| `files.trash` | personal-files | medium | `XDG_DATA/Trash` | no | yes (Ubuntu 24.04 (WSL)) |
+| `files.videos` | personal-files | medium | `HOME/Videos` | no | yes (Ubuntu 24.04 (WSL)) |
 | `games.steam` | games-licenses | medium | `XDG_DATA/Steam/userdata` | no | no |
 | `games.steam.flatpak` | games-licenses | medium | `HOME/.var/app/com.valvesoftware.Steam/.local/share/Steam/userdata` | no | no |
 | `msg.discord` | messaging | high | `XDG_CONFIG/discord` | no | no |
@@ -202,12 +212,18 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `msg.signal` | messaging | high | `XDG_CONFIG/Signal` | no | no |
 | `msg.signal.flatpak` | messaging | high | `HOME/.var/app/org.signal.Signal/config/Signal` | no | no |
 | `msg.slack` | messaging | high | `XDG_CONFIG/Slack` | no | no |
+| `msg.slack.snap` | messaging | high | `HOME/snap/slack/*/.config/Slack` | no | no |
 | `msg.telegram` | messaging | high | `XDG_DATA/TelegramDesktop/tdata` | no | no |
 | `msg.telegram.flatpak` | messaging | high | `HOME/.var/app/org.telegram.desktop/data/TelegramDesktop/tdata` | no | no |
 | `msg.telegram.snap` | messaging | high | `HOME/snap/telegram-desktop/common/.local/share/TelegramDesktop/tdata` | no | no |
+| `network.bluetooth.devices` | network | medium | `VAR/lib/bluetooth` | yes | no |
+| `network.cups.printers` | network | medium | `ETC/cups/printers.conf` | yes | no |
+| `network.networkmanager.connections` | network | critical | `ETC/NetworkManager/system-connections` | yes | no |
+| `network.wireguard.configs` | network | critical | `ETC/wireguard` | yes | no |
 | `profiles.other-users` | user-profiles | low | `USERS/*` | no | no |
 | `programs.desktop-entries` | installed-programs | low | `APPLICATIONS/*.desktop` | no | yes (Ubuntu 24.04 (WSL)) |
 | `programs.desktop-entries.user` | installed-programs | low | `XDG_DATA/applications/*.desktop` | no | no |
+| `system.journal.user` | system-traces | low | `VAR/log/journal` | no | yes (Ubuntu 24.04 (WSL)) |
 | `system.var-log` | system-traces | low | `VAR/log` | no | yes (Ubuntu 24.04 (WSL)) |
 | `wallet.electrum` | wallets | critical | `HOME/.electrum/wallets` | no | no |
 | `wallet.exodus` | wallets | critical | `XDG_CONFIG/Exodus` | no | no |

@@ -1,6 +1,8 @@
 {
   "id": "dev.npmrc",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "developer-secrets",
   "title": "npm user config with registry tokens",
   "whyItMatters": "The per-user npmrc often holds registry auth tokens for private packages. A copied token lets someone publish or download private packages under the person's account.",
@@ -11,11 +13,17 @@
     "path": ".npmrc",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Ubuntu 24.04 (WSL)"
+  ],
+  "verified": true,
   "source": "npm docs, npmrc: the per-user config file is $HOME/.npmrc: https://docs.npmjs.com/cli/v10/configuring-npm/npmrc",
   "notes": "Lines like //registry.npmjs.org/:_authToken=... are normally stored in plain text. npm also reads project .npmrc files, which this rule does not touch, and NPM_CONFIG_USERCONFIG can move this file."
 }

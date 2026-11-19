@@ -1,6 +1,8 @@
 {
   "id": "containers.podman",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "containers-vms",
   "title": "Podman container storage",
   "whyItMatters": "Containers keep their whole filesystem on disk, and named volumes hold database files and uploaded data. Removed containers do not always remove their volumes.",
@@ -12,11 +14,18 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Ubuntu 24.04 (WSL)"
+  ],
+  "verified": true,
   "source": "containers-storage.conf(5): the rootless graph root defaults to ~/.local/share/containers/storage: https://man.archlinux.org/man/containers-storage.conf.5",
   "notes": "volumes/ holds named volumes, overlay/ the container layers. Run as root, Podman uses /var/lib/containers/storage, which this rule does not cover. Docker with a rootless setup uses ~/.local/share/docker instead."
 }

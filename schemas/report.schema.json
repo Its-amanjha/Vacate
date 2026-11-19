@@ -61,12 +61,29 @@
     "catalog": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["version", "rulesLoaded", "unverified", "invalidFiles"],
+      "required": ["version", "rulesLoaded", "unverified", "invalidFiles", "rules"],
       "properties": {
         "version": { "type": "string" },
         "rulesLoaded": { "type": "integer", "minimum": 0 },
         "unverified": { "type": "array", "items": { "type": "string" } },
-        "invalidFiles": { "type": "integer", "minimum": 0 }
+        "invalidFiles": { "type": "integer", "minimum": 0 },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "category", "title", "whyItMatters", "sensitivity", "source", "verified"],
+            "properties": {
+              "id": { "type": "string" },
+              "category": { "type": "string" },
+              "title": { "type": "string" },
+              "whyItMatters": { "type": "string" },
+              "sensitivity": { "$ref": "#/definitions/sensitivity" },
+              "source": { "type": "string" },
+              "verified": { "type": "boolean" }
+            }
+          }
+        }
       }
     },
     "summary": {

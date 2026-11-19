@@ -1,0 +1,22 @@
+{
+  "id": "dev.azure.config",
+  "platforms": ["macos"],
+  "category": "developer-secrets",
+  "title": "Azure CLI sign-in state",
+  "whyItMatters": "Cached Azure sign-in tokens and subscription settings let someone use the account's cloud access from this machine.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".azure",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Azure CLI configuration and cached credentials in ~/.azure: https://learn.microsoft.com/en-us/cli/azure/azure-cli-configuration",
+  "notes": "Older CLI versions use accessTokens.json; newer ones use an MSAL cache. On macOS tokens may be backed by the Keychain, which is not accessed."
+}

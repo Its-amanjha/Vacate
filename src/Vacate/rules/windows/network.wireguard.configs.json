@@ -1,0 +1,22 @@
+{
+  "id": "network.wireguard.configs",
+  "platforms": ["windows"],
+  "category": "network",
+  "title": "WireGuard tunnel configurations",
+  "whyItMatters": "WireGuard tunnel files hold private keys and peer endpoints. They reveal the networks this machine was set up to reach.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "SYSTEMDRIVE",
+    "path": "Program Files/WireGuard/Data/Configurations",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "WireGuard official docs: manager service stores tunnels in %ProgramFiles%/WireGuard/Data/Configurations - https://github.com/WireGuard/wireguard-windows/blob/master/docs/enterprise.md",
+  "notes": "No root token exists for Program Files, so SYSTEMDRIVE is used. Needs elevation: .conf.dpapi files are readable only by Local System and administrators. Unconfirmed: non-default install paths are not matched."
+}

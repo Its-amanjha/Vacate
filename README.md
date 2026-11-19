@@ -21,9 +21,9 @@ result.
 ## Status
 
 Phase 1 is still being built. Today only `vacate.ps1 version` works. `scan`, `rules`, `report`
-and `checklist` are **(planned)** and do not run yet. The rule catalog has the Windows pack; the
-Linux and macOS packs are (planned). Tests run on Windows 11 with PowerShell 5.1 and 7, and on
-Ubuntu 24.04 in WSL with PowerShell 7. macOS is **not yet verified on a real Mac**.
+and `checklist` are **(planned)** and do not run yet. The rule catalog is still being filled in;
+the Linux pack is (planned). Tests run on Windows 11 with PowerShell 5.1 and 7, and on Ubuntu
+24.04 in WSL with PowerShell 7. macOS is **not yet verified on a real Mac**.
 
 Do not use this for a real handover until the quickstart below works end to end.
 

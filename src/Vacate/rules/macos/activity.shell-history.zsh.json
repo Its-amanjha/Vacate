@@ -1,6 +1,8 @@
 {
   "id": "activity.shell-history.zsh",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "activity",
   "title": "zsh command history",
   "whyItMatters": "zsh is the default shell on modern macOS. Its history file can contain typed commands, paths and sometimes tokens or passwords.",
@@ -11,11 +13,16 @@
     "path": ".zsh_history",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "macOS shell history forensics: ~/.zsh_history is the default zsh history file (Apple default shell since Catalina)",
-  "notes": "Only existence, size and timestamps are recorded. Commands are never read. An extended history file under a custom HISTFILE is out of scope."
+  "source": "zsh manual, HISTFILE (macOS default shell since Catalina writes ~/.zsh_history); macforensics.app cheat sheet (Shell History)",
+  "notes": "Only existence, size and timestamps are recorded. Commands are never read. An extended history file under a custom HISTFILE is out of scope. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

@@ -1,0 +1,28 @@
+{
+  "id": "network.wifi.known-networks",
+  "platforms": [
+    "macos"
+  ],
+  "category": "network",
+  "title": "Known Wi-Fi networks",
+  "whyItMatters": "Every Wi-Fi network the Mac joined, with first and last join times.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "SYSTEM",
+    "path": "Library/Preferences/com.apple.wifi.known-networks.plist",
+    "match": "files"
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macforensics.app artifact cheat sheet (Wi-Fi Known Networks)",
+  "notes": "Root-only (0600); skipped without elevation. Never parsed. Proposed in W3-D2 review."
+}

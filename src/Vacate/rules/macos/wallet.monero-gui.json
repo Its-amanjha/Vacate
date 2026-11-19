@@ -1,8 +1,10 @@
 {
   "id": "wallet.monero-gui",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "wallets",
-  "title": "Monero GUI wallet data",
+  "title": "Monero GUI settings",
   "whyItMatters": "The Monero GUI folder holds wallet cache and configuration. Wallet files reveal that Monero was used and may point to keys stored elsewhere.",
   "sensitivity": "critical",
   "locator": {
@@ -12,11 +14,16 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
   "source": "Elastic detection-rules macOS wallet paths reference ~/Library/Application Support/monero-wallet-gui - https://github.com/elastic/detection-rules/issues/6616",
-  "notes": "Wallet files can be stored outside this folder by the user. No wallet file, key image or cache is opened or parsed."
+  "notes": "Settings folder only; wallets default to ~/Monero/wallets (see wallet.monero-gui.wallets). Unconfirmed for current GUI builds. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

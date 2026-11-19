@@ -1,6 +1,8 @@
 {
   "id": "profiles.other-users",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "user-profiles",
   "title": "Other user profiles on this Mac",
   "whyItMatters": "Other accounts have their own home folders under /Users. The machine may hold data belonging to people other than the person handing it over.",
@@ -12,7 +14,10 @@
     "match": "directories",
     "excludeHome": true
   },
-  "measure": ["exists", "itemCount"],
+  "measure": [
+    "exists",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

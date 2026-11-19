@@ -1,6 +1,8 @@
 {
   "id": "dev.npmrc",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "developer-secrets",
   "title": "npm user config with registry tokens",
   "whyItMatters": "The user npmrc can hold auth tokens for package registries, which allow publishing or private downloads as this user.",
@@ -11,7 +13,12 @@
     "path": ".npmrc",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

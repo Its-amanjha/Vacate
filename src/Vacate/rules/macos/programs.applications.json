@@ -1,6 +1,8 @@
 {
   "id": "programs.applications",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "installed-programs",
   "title": "Installed applications",
   "whyItMatters": "The list of installed apps shows which services and cloud clients may still hold sign-ins or licenses that need attention.",
@@ -11,7 +13,10 @@
     "path": "*.app",
     "match": "directories"
   },
-  "measure": ["exists", "itemCount"],
+  "measure": [
+    "exists",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

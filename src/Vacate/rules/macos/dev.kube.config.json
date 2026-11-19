@@ -1,6 +1,8 @@
 {
   "id": "dev.kube.config",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "developer-secrets",
   "title": "Kubernetes client credentials",
   "whyItMatters": "Kubeconfig files and cached client certificates identify clusters and can carry bearer tokens that grant cluster access.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

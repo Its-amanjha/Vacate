@@ -1,0 +1,29 @@
+{
+  "id": "cloud.icloud-clouddocs",
+  "platforms": [
+    "macos"
+  ],
+  "category": "cloud-sync",
+  "title": "iCloud Drive metadata",
+  "whyItMatters": "Which files were in iCloud Drive and when.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/CloudDocs",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macforensics.app artifact cheat sheet (CloudDocs)",
+  "notes": "Complements cloud.icloud-drive. Proposed in W3-D2 review."
+}

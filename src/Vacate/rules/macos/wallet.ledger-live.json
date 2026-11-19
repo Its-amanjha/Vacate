@@ -1,6 +1,8 @@
 {
   "id": "wallet.ledger-live",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "wallets",
   "title": "Ledger wallet app data",
   "whyItMatters": "Ledger's desktop app stores account names, settings and caches in app.json. It shows which accounts were tracked, though keys stay on the device.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

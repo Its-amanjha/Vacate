@@ -1,22 +1,29 @@
 {
   "id": "wallet.electrum",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "wallets",
   "title": "Electrum wallet data",
   "whyItMatters": "Electrum keeps wallet files holding keys and transaction history. Losing them can make the coins unrecoverable without the seed phrase.",
   "sensitivity": "critical",
   "locator": {
     "kind": "path",
-    "root": "LIBRARY",
-    "path": "Application Support/Electrum",
+    "root": "HOME",
+    "path": ".electrum",
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "Elastic detection-rules macOS wallet paths reference ~/Library/Application Support/Electrum - https://github.com/elastic/detection-rules/issues/6616",
-  "notes": "Config and wallet files are counted only. Wallets kept at a custom path outside Application Support are not covered."
+  "source": "Electrum documentation, FAQ \"Where is my wallet file located?\": the data directory on macOS is ~/.electrum (wallets in ~/.electrum/wallets)",
+  "notes": "Earlier draft used ~/Library/Application Support/Electrum, which is not where Electrum keeps wallets. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

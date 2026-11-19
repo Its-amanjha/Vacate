@@ -1,6 +1,8 @@
 {
   "id": "browser.safari.container",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "browsers",
   "title": "Safari sandbox container",
   "whyItMatters": "Modern Safari keeps cookies, preferences, tab state and extra profiles in its container. Missing it would leave out signed-in session data.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

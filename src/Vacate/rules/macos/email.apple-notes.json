@@ -1,0 +1,29 @@
+{
+  "id": "email.apple-notes",
+  "platforms": [
+    "macos"
+  ],
+  "category": "email",
+  "title": "Apple Notes",
+  "whyItMatters": "NoteStore.sqlite holds every note, folder and attachment.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Group Containers/group.com.apple.notes",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macforensics.app artifact cheat sheet (Apple Notes)",
+  "notes": "TCC-protected; needs Full Disk Access. Proposed in W3-D2 review."
+}

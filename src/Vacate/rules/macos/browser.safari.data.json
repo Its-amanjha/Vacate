@@ -1,6 +1,8 @@
 {
   "id": "browser.safari.data",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "browsers",
   "title": "Safari browser data",
   "whyItMatters": "Safari's History.db, bookmarks and download list show where the user went online and what they brought onto the Mac.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

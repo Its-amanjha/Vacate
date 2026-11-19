@@ -1,6 +1,8 @@
 {
   "id": "autostart.launch-agents",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "autostart",
   "title": "User launch agents",
   "whyItMatters": "Launch agents start programs at login. Their names reveal background tools that may keep sessions or sync data running.",
@@ -11,7 +13,10 @@
     "path": "LaunchAgents/*.plist",
     "match": "files"
   },
-  "measure": ["exists", "itemCount"],
+  "measure": [
+    "exists",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

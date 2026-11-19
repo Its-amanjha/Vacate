@@ -1,6 +1,8 @@
 {
   "id": "browser.chrome.history",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "browsers",
   "title": "Chrome browsing history",
   "whyItMatters": "Lists every page visited, when, how often and what was typed into the address bar. It reveals health, money, relationship and work interests in detail.",
@@ -11,7 +13,11 @@
     "path": "Application Support/Google/Chrome/*/History",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

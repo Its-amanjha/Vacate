@@ -1,0 +1,30 @@
+{
+  "id": "activity.ds-store.desktop",
+  "platforms": [
+    "macos"
+  ],
+  "category": "activity",
+  "title": ".DS_Store files in Desktop",
+  "whyItMatters": "Finder writes .DS_Store files into folders you opened; they record folder view settings and reveal which folders were browsed.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Desktop",
+    "match": "directories",
+    "recurse": true,
+    "include": ".DS_Store"
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SWGDE technical notes on macOS artifacts (13-F-002) list .DS_Store as a Finder activity artifact",
+  "notes": "Narrow replacement for a whole-home walk, which hit maxEntries before finding anything (the walker counts every visited entry). Desktop is TCC-protected without Full Disk Access. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+}

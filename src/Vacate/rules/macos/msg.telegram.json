@@ -1,6 +1,8 @@
 {
   "id": "msg.telegram",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "messaging",
   "title": "Telegram Desktop data",
   "whyItMatters": "Telegram keeps cached messages and downloaded media locally. It shows which account was signed in and how much chat data is on disk.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

@@ -1,6 +1,8 @@
 {
   "id": "browser.firefox.profiles",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "browsers",
   "title": "Firefox browser profiles",
   "whyItMatters": "Firefox profiles keep separate histories and saved logins. The number and names of profiles show how the browser was divided up.",
@@ -11,7 +13,11 @@
     "path": "Application Support/Firefox/Profiles/*/prefs.js",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

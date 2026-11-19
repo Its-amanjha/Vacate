@@ -1,6 +1,8 @@
 {
   "id": "encryption.filevault.status",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "disk-encryption",
   "title": "FileVault status",
   "whyItMatters": "Whether FileVault is on determines how much data someone can read from the disk after handover and whether recovery keys matter.",
@@ -9,7 +11,10 @@
     "kind": "system-query",
     "name": "filevault-status"
   },
-  "measure": ["exists", "properties"],
+  "measure": [
+    "exists",
+    "properties"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

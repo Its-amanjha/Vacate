@@ -1,6 +1,8 @@
 {
   "id": "dev.docker.config",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "developer-secrets",
   "title": "Docker registry sign-in config",
   "whyItMatters": "Saved registry auth entries in this file can let someone pull or push container images as the account owner.",
@@ -11,7 +13,12 @@
     "path": ".docker/config.json",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

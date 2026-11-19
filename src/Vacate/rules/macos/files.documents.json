@@ -1,6 +1,8 @@
 {
   "id": "files.documents",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "personal-files",
   "title": "Documents folder",
   "whyItMatters": "The Documents folder holds personal and work files that a new owner could read straight from the disk.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 20000,
   "requiresElevation": false,
   "verifiedOn": [],

@@ -1,6 +1,8 @@
 {
   "id": "wallet.exodus",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "wallets",
   "title": "Exodus wallet vault",
   "whyItMatters": "Exodus stores an encrypted vault with the private keys for the person's coins. With the password it is the money; without it, it still proves what they owned.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

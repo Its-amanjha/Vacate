@@ -1,0 +1,28 @@
+{
+  "id": "network.bluetooth.devices",
+  "platforms": [
+    "macos"
+  ],
+  "category": "network",
+  "title": "Paired Bluetooth devices",
+  "whyItMatters": "Which phones, headsets and cars were paired and when last seen.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "SYSTEM",
+    "path": "Library/Bluetooth/Library/Preferences/com.apple.MobileBluetooth.devices.plist",
+    "match": "files"
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macforensics.app artifact cheat sheet (Bluetooth Devices)",
+  "notes": "Root-only; skipped without elevation. Never parsed. Proposed in W3-D2 review."
+}

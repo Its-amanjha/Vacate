@@ -1,0 +1,28 @@
+{
+  "id": "activity.download-quarantine",
+  "platforms": [
+    "macos"
+  ],
+  "category": "activity",
+  "title": "Download history (quarantine events)",
+  "whyItMatters": "Records which files were downloaded, from which site, with which app and when.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Preferences/com.apple.LaunchServices.QuarantineEventsV2",
+    "match": "files"
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macforensics.app artifact cheat sheet (QuarantineEventsV2)",
+  "notes": "SQLite file; size and date only, never opened. Proposed in W3-D2 review."
+}

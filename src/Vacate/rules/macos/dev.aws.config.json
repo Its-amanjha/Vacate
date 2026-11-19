@@ -1,6 +1,8 @@
 {
   "id": "dev.aws.config",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "developer-secrets",
   "title": "AWS CLI credentials and config",
   "whyItMatters": "AWS access keys and session settings in this folder can be used to act as the account owner against cloud resources.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

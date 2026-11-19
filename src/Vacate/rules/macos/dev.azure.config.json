@@ -1,6 +1,8 @@
 {
   "id": "dev.azure.config",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "developer-secrets",
   "title": "Azure CLI sign-in state",
   "whyItMatters": "Cached Azure sign-in tokens and subscription settings let someone use the account's cloud access from this machine.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

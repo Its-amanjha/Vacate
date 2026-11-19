@@ -96,12 +96,19 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `wallet.metamask.edge` | wallets | critical | `LOCALAPPDATA/Microsoft/Edge/User Data/*/Local Extension Settings/ejbalbakoplchlghecdalmeeeajnimhm` | no | no |
 | `wallet.monero-gui` | wallets | critical | `HOME/Documents/Monero/wallets` | no | no |
 
-## macOS (50 rules, 0 verified)
+## macOS (62 rules, 0 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
-| `activity.ds-store` | activity | low | `HOME/` | no | no |
+| `activity.calendars` | activity | high | `LIBRARY/Calendars` | no | no |
+| `activity.contacts` | activity | high | `LIBRARY/Application Support/AddressBook` | no | no |
+| `activity.download-quarantine` | activity | high | `LIBRARY/Preferences/com.apple.LaunchServices.QuarantineEventsV2` | no | no |
+| `activity.ds-store.desktop` | activity | low | `HOME/Desktop` | no | no |
+| `activity.ds-store.documents` | activity | low | `HOME/Documents` | no | no |
+| `activity.ds-store.downloads` | activity | low | `HOME/Downloads` | no | no |
 | `activity.recent-items` | activity | medium | `LIBRARY/Application Support/com.apple.sharedfilelist` | no | no |
+| `activity.reminders` | activity | medium | `LIBRARY/Group Containers/group.com.apple.reminders` | no | no |
+| `activity.saved-app-state` | activity | medium | `LIBRARY/Saved Application State` | no | no |
 | `activity.shell-history.bash` | activity | medium | `HOME/.bash_history` | no | no |
 | `activity.shell-history.zsh` | activity | medium | `HOME/.zsh_history` | no | no |
 | `autostart.launch-agents` | autostart | low | `LIBRARY/LaunchAgents/*.plist` | no | no |
@@ -117,6 +124,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `browser.vivaldi.profiles` | browsers | medium | `LIBRARY/Application Support/Vivaldi/*/Preferences` | no | no |
 | `cloud.dropbox` | cloud-sync | medium | `LIBRARY/CloudStorage/Dropbox*` | no | no |
 | `cloud.google-drive` | cloud-sync | medium | `LIBRARY/CloudStorage/GoogleDrive-*` | no | no |
+| `cloud.icloud-clouddocs` | cloud-sync | medium | `LIBRARY/Application Support/CloudDocs` | no | no |
 | `cloud.icloud-drive` | cloud-sync | medium | `LIBRARY/Mobile Documents` | no | no |
 | `cloud.onedrive` | cloud-sync | medium | `LIBRARY/CloudStorage/OneDrive-*` | no | no |
 | `credentials.keychains` | credentials | critical | `LIBRARY/Keychains` | no | no |
@@ -128,6 +136,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `dev.npmrc` | developer-secrets | critical | `HOME/.npmrc` | no | no |
 | `dev.ssh.keys` | developer-secrets | critical | `HOME/.ssh` | no | no |
 | `email.apple-mail` | email | high | `LIBRARY/Mail` | no | no |
+| `email.apple-notes` | email | high | `LIBRARY/Group Containers/group.com.apple.notes` | no | no |
 | `encryption.filevault.status` | disk-encryption | low | system query `filevault-status` | no | no |
 | `files.desktop` | personal-files | medium | `HOME/Desktop` | no | no |
 | `files.documents` | personal-files | medium | `HOME/Documents` | no | no |
@@ -141,15 +150,18 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `msg.signal` | messaging | high | `LIBRARY/Application Support/Signal` | no | no |
 | `msg.slack` | messaging | high | `LIBRARY/Application Support/Slack` | no | no |
 | `msg.telegram` | messaging | high | `LIBRARY/Application Support/Telegram Desktop` | no | no |
-| `msg.whatsapp` | messaging | high | `LIBRARY/Application Support/WhatsApp` | no | no |
+| `msg.whatsapp` | messaging | high | `LIBRARY/Group Containers/group.net.whatsapp.WhatsApp.shared` | no | no |
+| `network.bluetooth.devices` | network | medium | `SYSTEM/Library/Bluetooth/Library/Preferences/com.apple.MobileBluetooth.devices.plist` | yes | no |
+| `network.wifi.known-networks` | network | high | `SYSTEM/Library/Preferences/com.apple.wifi.known-networks.plist` | yes | no |
 | `profiles.other-users` | user-profiles | low | `USERS/*` | no | no |
 | `programs.applications` | installed-programs | low | `APPLICATIONS/*.app` | no | no |
 | `system.caches` | system-traces | low | `LIBRARY/Caches` | no | no |
 | `system.time-machine.prefs` | system-traces | low | `SYSTEM/Library/Preferences/com.apple.TimeMachine.plist` | no | no |
-| `wallet.electrum` | wallets | critical | `LIBRARY/Application Support/Electrum` | no | no |
+| `wallet.electrum` | wallets | critical | `HOME/.electrum` | no | no |
 | `wallet.exodus` | wallets | critical | `LIBRARY/Application Support/Exodus` | no | no |
 | `wallet.ledger-live` | wallets | critical | `LIBRARY/Application Support/Ledger*` | no | no |
 | `wallet.monero-gui` | wallets | critical | `LIBRARY/Application Support/monero-wallet-gui` | no | no |
+| `wallet.monero-gui.wallets` | wallets | critical | `HOME/Monero/wallets` | no | no |
 
 ## Linux (74 rules, 20 verified)
 

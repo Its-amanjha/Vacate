@@ -1,6 +1,8 @@
 {
   "id": "browser.vivaldi.profiles",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "browsers",
   "title": "Vivaldi browser profiles",
   "whyItMatters": "Vivaldi profiles are separate browsing identities with their own history and sign-ins, which matter before a handover.",
@@ -11,7 +13,11 @@
     "path": "Application Support/Vivaldi/*/Preferences",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

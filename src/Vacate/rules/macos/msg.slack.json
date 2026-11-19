@@ -1,6 +1,8 @@
 {
   "id": "msg.slack",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "messaging",
   "title": "Slack Desktop data",
   "whyItMatters": "Slack caches workspace messages, tokens and uploads. It reveals which teams the user belonged to and what was shared there.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

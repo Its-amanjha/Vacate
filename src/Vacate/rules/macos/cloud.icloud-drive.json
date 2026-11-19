@@ -1,6 +1,8 @@
 {
   "id": "cloud.icloud-drive",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "cloud-sync",
   "title": "iCloud Drive files",
   "whyItMatters": "iCloud Drive holds the user's documents and app data, including Desktop and Documents when syncing is on. Signing out does not delete local copies.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 20000,
   "requiresElevation": false,
   "verifiedOn": [],

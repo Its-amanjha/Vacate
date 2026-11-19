@@ -1,0 +1,29 @@
+{
+  "id": "activity.saved-app-state",
+  "platforms": [
+    "macos"
+  ],
+  "category": "activity",
+  "title": "Saved window state",
+  "whyItMatters": "Which apps had which windows and document titles open; Terminal state can include visible text.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Saved Application State",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macforensics.app artifact cheat sheet (Saved Application State)",
+  "notes": "Folder sizes only. Proposed in W3-D2 review."
+}

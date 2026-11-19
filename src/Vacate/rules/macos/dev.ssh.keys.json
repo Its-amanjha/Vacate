@@ -1,6 +1,8 @@
 {
   "id": "dev.ssh.keys",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "developer-secrets",
   "title": "SSH private keys",
   "whyItMatters": "Private keys in this folder grant access to servers and Git hosts without a password. They must be rotated if the machine changes hands.",
@@ -12,11 +14,16 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "OpenSSH user key location ~/.ssh: https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement",
-  "notes": "macOS uses the same ~/.ssh layout as Linux. Key material is never opened; known_hosts and config are included in the count only."
+  "source": "OpenSSH ssh(1) manual, FILES: ~/.ssh holds per-user keys and configuration; macforensics.app cheat sheet (SSH)",
+  "notes": "macOS uses the same ~/.ssh layout as Linux. Key material is never opened; known_hosts and config are included in the count only. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

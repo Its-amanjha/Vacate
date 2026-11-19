@@ -1,0 +1,29 @@
+{
+  "id": "activity.contacts",
+  "platforms": [
+    "macos"
+  ],
+  "category": "activity",
+  "title": "Contacts",
+  "whyItMatters": "Who you know, with phone numbers, emails and photos.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/AddressBook",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macforensics.app artifact cheat sheet (Calendar/Contacts/Reminders)",
+  "notes": "TCC-protected; needs Full Disk Access. Proposed in W3-D2 review."
+}

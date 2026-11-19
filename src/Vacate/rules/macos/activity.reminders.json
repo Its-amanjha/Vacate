@@ -1,0 +1,29 @@
+{
+  "id": "activity.reminders",
+  "platforms": [
+    "macos"
+  ],
+  "category": "activity",
+  "title": "Reminders",
+  "whyItMatters": "Tasks and lists, including personal plans.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Group Containers/group.com.apple.reminders",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macforensics.app artifact cheat sheet (Calendar/Contacts/Reminders)",
+  "notes": "TCC-protected; needs Full Disk Access. Proposed in W3-D2 review."
+}

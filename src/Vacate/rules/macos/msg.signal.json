@@ -1,6 +1,8 @@
 {
   "id": "msg.signal",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "messaging",
   "title": "Signal Desktop data",
   "whyItMatters": "Signal keeps encrypted conversations, contacts and attachments locally. The folder size shows how much private messaging was retained.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

@@ -1,6 +1,8 @@
 {
   "id": "cloud.google-drive",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "cloud-sync",
   "title": "Google Drive synced folder",
   "whyItMatters": "Drive for desktop keeps streamed and mirrored files on the Mac. A handover should account for both cached copies and account sign-out.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 20000,
   "requiresElevation": false,
   "verifiedOn": [],

@@ -1,6 +1,8 @@
 {
   "id": "msg.whatsapp",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "messaging",
   "title": "WhatsApp Desktop data",
   "whyItMatters": "WhatsApp stores local chat caches, media and session state. The folder reveals that the account was used on this Mac.",
@@ -8,15 +10,20 @@
   "locator": {
     "kind": "path",
     "root": "LIBRARY",
-    "path": "Application Support/WhatsApp",
+    "path": "Group Containers/group.net.whatsapp.WhatsApp.shared",
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "WhatsApp Desktop macOS artifacts under Library/Application Support - https://www.group-ib.com/blog/whatsapp-forensic-artifacts/",
-  "notes": "Newer sandboxed builds use ~/Library/Containers/desktop.WhatsApp/Data/Library/Application Support/WhatsApp instead; that variant is not matched here. No content read."
+  "source": "macfor knowledge base, WhatsApp Desktop on macOS: the Catalyst app keeps ChatStorage.sqlite in ~/Library/Group Containers/group.net.whatsapp.WhatsApp.shared",
+  "notes": "Current Catalyst app. The deprecated Electron build used ~/Library/Application Support/WhatsApp (not covered). Group Containers may need Full Disk Access. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

@@ -1,6 +1,8 @@
 {
   "id": "msg.imessage",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "messaging",
   "title": "Messages (iMessage) data",
   "whyItMatters": "Messages stores conversations, attachments and contact details. Who the user spoke to and what was shared is visible from this folder alone.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

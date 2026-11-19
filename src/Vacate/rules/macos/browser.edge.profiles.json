@@ -1,6 +1,8 @@
 {
   "id": "browser.edge.profiles",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "browsers",
   "title": "Microsoft Edge browser profiles",
   "whyItMatters": "Edge profiles can be signed into work or personal accounts, so they reveal which identities were used on this Mac.",
@@ -11,7 +13,11 @@
     "path": "Application Support/Microsoft Edge/*/Preferences",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

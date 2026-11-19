@@ -1,6 +1,8 @@
 {
   "id": "activity.recent-items",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "activity",
   "title": "Recently opened items",
   "whyItMatters": "Shared File Lists record recently opened documents, applications and network servers. They show what the user worked on and where they connected.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],

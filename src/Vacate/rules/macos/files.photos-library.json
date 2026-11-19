@@ -1,6 +1,8 @@
 {
   "id": "files.photos-library",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "personal-files",
   "title": "Photos libraries",
   "whyItMatters": "A Photos library can hold years of personal photographs and videos. Its size and location show how much visual history stays on the Mac.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 20000,
   "requiresElevation": false,
   "verifiedOn": [],

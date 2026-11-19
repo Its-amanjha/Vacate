@@ -1,6 +1,8 @@
 {
   "id": "cloud.onedrive",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "cloud-sync",
   "title": "OneDrive synced folder",
   "whyItMatters": "OneDrive mirrors personal and work files onto the Mac. The local copies remain after sign-out and can include whole Desktop and Documents trees.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 20000,
   "requiresElevation": false,
   "verifiedOn": [],

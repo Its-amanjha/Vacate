@@ -1,6 +1,8 @@
 {
   "id": "browser.chrome.login-data",
-  "platforms": ["macos"],
+  "platforms": [
+    "macos"
+  ],
   "category": "browsers",
   "title": "Chrome saved passwords",
   "whyItMatters": "This database holds saved website logins. Protected by the Keychain, but still a store of credentials that should be signed out before handover.",
@@ -11,11 +13,15 @@
     "path": "Application Support/Google/Chrome/*/Login Data",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "Chromium profile artifacts, Login Data file in each user-data profile - https://www.browserforensics.app/en/blog/brave-opera-vivaldi-profile-locations",
-  "notes": "One Login Data file per profile on macOS. Entries are encrypted with a Keychain-held key; no database or value is read by vacate."
+  "source": "Chromium docs, User Data Directory (profile folders); macforensics.app Chrome/Firefox page names Login Data as the saved-password store",
+  "notes": "One Login Data file per profile on macOS. Entries are encrypted with a Keychain-held key; no database or value is read by vacate. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

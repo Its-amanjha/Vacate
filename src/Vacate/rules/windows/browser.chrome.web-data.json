@@ -1,21 +1,29 @@
 {
-  "id": "browser.chrome.web-data",
-  "platforms": ["windows"],
-  "category": "browsers",
-  "title": "Chrome autofill and card data",
-  "whyItMatters": "Stores names, addresses, phone numbers, email addresses and saved payment cards typed into web forms. It is a ready-made profile of the person behind the browser.",
-  "sensitivity": "high",
-  "locator": {
-    "kind": "path",
-    "root": "LOCALAPPDATA",
-    "path": "Google/Chrome/User Data/*/Web Data",
-    "match": "files"
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Chromium user data directory docs, profile files include Web Data: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "One Web Data file per profile. Card numbers are encrypted with the Windows account; addresses and autofill values are stored as readable text."
+    "id":  "browser.chrome.web-data",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "browsers",
+    "title":  "Chrome autofill and card data",
+    "whyItMatters":  "Stores names, addresses, phone numbers, email addresses and saved payment cards typed into web forms. It is a ready-made profile of the person behind the browser.",
+    "sensitivity":  "high",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "LOCALAPPDATA",
+                    "path":  "Google/Chrome/User Data/*/Web Data",
+                    "match":  "files"
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Chromium user data directory docs, profile files include Web Data: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+    "notes":  "One Web Data file per profile. Card numbers are encrypted with the Windows account; addresses and autofill values are stored as readable text."
 }

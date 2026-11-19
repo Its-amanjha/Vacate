@@ -1,21 +1,32 @@
 {
-  "id": "activity.jumplists.automatic",
-  "platforms": ["windows"],
-  "category": "activity",
-  "title": "Automatic jump lists",
-  "whyItMatters": "Automatic jump lists record files and folders opened through each application, even after the original files are gone.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "path",
-    "root": "APPDATA",
-    "path": "Microsoft/Windows/Recent/AutomaticDestinations/*.automaticDestinations-ms",
-    "match": "files"
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "SANS Windows forensic poster: %APPDATA%/Microsoft/Windows/Recent/AutomaticDestinations/*.automaticDestinations-ms",
-  "notes": "Custom jump lists (*.customDestinations-ms) are a separate artifact and are not counted here. Files are not parsed."
+    "id":  "activity.jumplists.automatic",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "activity",
+    "title":  "Automatic jump lists",
+    "whyItMatters":  "Automatic jump lists record files and folders opened through each application, even after the original files are gone.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "APPDATA",
+                    "path":  "Microsoft/Windows/Recent/AutomaticDestinations",
+                    "match":  "directories",
+                    "recurse":  true,
+                    "include":  "*.automaticDestinations-ms"
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime",
+                    "itemCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "SANS Windows forensic poster: %APPDATA%/Microsoft/Windows/Recent/AutomaticDestinations/*.automaticDestinations-ms",
+    "notes":  "Custom jump lists (*.customDestinations-ms) are a separate artifact and are not counted here. Files are not parsed. One trace per folder (count, size, 3 sample names) instead of one per file, so the report does not list every recently opened file name."
 }

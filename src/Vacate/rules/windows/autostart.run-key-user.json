@@ -1,20 +1,28 @@
 {
-  "id": "autostart.run-key-user",
-  "platforms": ["windows"],
-  "category": "autostart",
-  "title": "User Run key autostarts",
-  "whyItMatters": "Programs listed here start automatically for this account. Their value names show background tools that keep running after sign-in.",
-  "sensitivity": "low",
-  "locator": {
-    "kind": "registry",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
-  },
-  "measure": ["exists", "valueCount", "subkeyCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Microsoft Learn, Run and RunOnce registry keys: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
-  "notes": "Per-user autostart list. Command strings are not read; only value counts are reported. Registry last-write time is unavailable (D3)."
+    "id":  "autostart.run-key-user",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "autostart",
+    "title":  "User Run key autostarts",
+    "whyItMatters":  "Programs listed here start automatically for this account. Their value names show background tools that keep running after sign-in.",
+    "sensitivity":  "low",
+    "locator":  {
+                    "kind":  "registry",
+                    "hive":  "HKCU",
+                    "key":  "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+                },
+    "measure":  [
+                    "exists",
+                    "valueCount",
+                    "subkeyCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Microsoft Learn, Run and RunOnce registry keys: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
+    "notes":  "Per-user autostart list. Command strings are not read; only value counts are reported. Registry last-write time is unavailable (D3)."
 }

@@ -1,22 +1,31 @@
 {
-  "id": "cloud.onedrive",
-  "platforms": ["windows"],
-  "category": "cloud-sync",
-  "title": "OneDrive synced folder",
-  "whyItMatters": "The synced folder mirrors work and private files to the cloud, and may hold Desktop, Documents and Pictures too. Signing out of OneDrive does not remove the local copies.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "path",
-    "root": "HOME",
-    "path": "OneDrive*",
-    "match": "directories",
-    "recurse": true
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
-  "maxEntries": 20000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Microsoft Learn, OneDrive Known Folder Move and default sync folder under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
-  "notes": "Personal accounts use OneDrive; work or school accounts use OneDrive - <Organization> next to it; the OneDrive* glob matches both (one trace per folder). With Known Folder Move, Desktop, Documents and Pictures live inside this folder. File placeholders may be cloud-only."
+    "id":  "cloud.onedrive",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "cloud-sync",
+    "title":  "OneDrive synced folder",
+    "whyItMatters":  "The synced folder mirrors work and private files to the cloud, and may hold Desktop, Documents and Pictures too. Signing out of OneDrive does not remove the local copies.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "HOME",
+                    "path":  "OneDrive*",
+                    "match":  "directories",
+                    "recurse":  true
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime",
+                    "itemCount"
+                ],
+    "maxEntries":  20000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Microsoft Learn, OneDrive Known Folder Move and default sync folder under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
+    "notes":  "Personal accounts use OneDrive; work or school accounts use OneDrive - \u003cOrganization\u003e next to it; the OneDrive* glob matches both (one trace per folder). With Known Folder Move, Desktop, Documents and Pictures live inside this folder. File placeholders may be cloud-only."
 }

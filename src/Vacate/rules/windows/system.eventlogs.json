@@ -1,23 +1,32 @@
 {
-  "id": "system.eventlogs",
-  "platforms": ["windows"],
-  "category": "system-traces",
-  "title": "Windows Event Logs",
-  "whyItMatters": "Event logs can record sign-ins and service activity. Their size and age show how much activity remains available for review.",
-  "sensitivity": "low",
-  "locator": {
-    "kind": "path",
-    "root": "SYSTEMDRIVE",
-    "path": "Windows/System32/winevt/Logs",
-    "match": "directories",
-    "recurse": true,
-    "include": "*.evtx"
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Microsoft Learn Windows Event Log: logs stored as %SystemDrive%/Windows/System32/winevt/Logs/*.evtx",
-  "notes": "Counts and sizes only; no event is read. The Security log may be unreadable without elevation and would then be a permission skip."
+    "id":  "system.eventlogs",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "system-traces",
+    "title":  "Windows Event Logs",
+    "whyItMatters":  "Event logs can record sign-ins and service activity. Their size and age show how much activity remains available for review.",
+    "sensitivity":  "low",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "SYSTEMDRIVE",
+                    "path":  "Windows/System32/winevt/Logs",
+                    "match":  "directories",
+                    "recurse":  true,
+                    "include":  "*.evtx"
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime",
+                    "itemCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Microsoft Learn Windows Event Log: logs stored as %SystemDrive%/Windows/System32/winevt/Logs/*.evtx",
+    "notes":  "Counts and sizes only; no event is read. The Security log may be unreadable without elevation and would then be a permission skip."
 }

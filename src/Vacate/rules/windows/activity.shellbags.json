@@ -1,20 +1,28 @@
 {
-  "id": "activity.shellbags",
-  "platforms": ["windows"],
-  "category": "activity",
-  "title": "Explorer ShellBags",
-  "whyItMatters": "ShellBags remember folder views and paths the user browsed, including folders on drives that are no longer attached.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "registry",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\Shell\\BagMRU"
-  },
-  "measure": ["exists", "valueCount", "subkeyCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\Shell\\BagMRU (with companion Bags key)",
-  "notes": "BagMRU is the path tree; the parallel Bags key holds view settings. Only this key is counted; binary values are not decoded."
+    "id":  "activity.shellbags",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "activity",
+    "title":  "Explorer ShellBags",
+    "whyItMatters":  "ShellBags remember folder views and paths the user browsed, including folders on drives that are no longer attached.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "registry",
+                    "hive":  "HKCU",
+                    "key":  "Software\\Microsoft\\Windows\\Shell\\BagMRU"
+                },
+    "measure":  [
+                    "exists",
+                    "valueCount",
+                    "subkeyCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\Shell\\BagMRU (with companion Bags key)",
+    "notes":  "BagMRU is the path tree; the parallel Bags key holds view settings. Only this key is counted; binary values are not decoded."
 }

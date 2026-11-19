@@ -1,21 +1,29 @@
 {
-  "id": "browser.chrome.profiles",
-  "platforms": ["windows"],
-  "category": "browsers",
-  "title": "Chrome browser profiles",
-  "whyItMatters": "Each profile is a separate browsing identity. Profile names and the accounts signed into Chrome show who used this computer and how many separated identities they kept.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "path",
-    "root": "LOCALAPPDATA",
-    "path": "Google/Chrome/User Data/*/Preferences",
-    "match": "files"
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Chromium user data directory docs, User Data/<profile>/Preferences: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "Matches the Preferences file that every profile has, so sibling non-profile folders (Crash Reports, ShaderCache, GrShaderCache) are not matched. A profile folder is Default, Profile 1, Profile 2, ..."
+    "id":  "browser.chrome.profiles",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "browsers",
+    "title":  "Chrome browser profiles",
+    "whyItMatters":  "Each profile is a separate browsing identity. Profile names and the accounts signed into Chrome show who used this computer and how many separated identities they kept.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "LOCALAPPDATA",
+                    "path":  "Google/Chrome/User Data/*/Preferences",
+                    "match":  "files"
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Chromium user data directory docs, User Data/\u003cprofile\u003e/Preferences: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+    "notes":  "Matches the Preferences file that every profile has, so sibling non-profile folders (Crash Reports, ShaderCache, GrShaderCache) are not matched. A profile folder is Default, Profile 1, Profile 2, ..."
 }

@@ -1,21 +1,29 @@
 {
-  "id": "browser.edge.login-data",
-  "platforms": ["windows"],
-  "category": "browsers",
-  "title": "Edge saved passwords",
-  "whyItMatters": "Holds every username and password saved in Edge. The values are encrypted with the Windows account, but scripts that can run as that user can decrypt them.",
-  "sensitivity": "critical",
-  "locator": {
-    "kind": "path",
-    "root": "LOCALAPPDATA",
-    "path": "Microsoft/Edge/User Data/*/Login Data",
-    "match": "files"
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Chromium user data directory docs, profile files include Login Data (Edge uses this layout): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "One Login Data file per profile. Work profiles may also sync these passwords to a Microsoft 365 account."
+    "id":  "browser.edge.login-data",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "browsers",
+    "title":  "Edge saved passwords",
+    "whyItMatters":  "Holds every username and password saved in Edge. The values are encrypted with the Windows account, but scripts that can run as that user can decrypt them.",
+    "sensitivity":  "critical",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "LOCALAPPDATA",
+                    "path":  "Microsoft/Edge/User Data/*/Login Data",
+                    "match":  "files"
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Chromium user data directory docs, profile files include Login Data (Edge uses this layout): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+    "notes":  "One Login Data file per profile. Work profiles may also sync these passwords to a Microsoft 365 account."
 }

@@ -1,22 +1,31 @@
 {
-  "id": "files.pictures",
-  "platforms": ["windows"],
-  "category": "personal-files",
-  "title": "Pictures folder",
-  "whyItMatters": "Personal photos and screenshots, often with locations and dates in the file names and metadata. Photos of documents and screens are common here too.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "path",
-    "root": "HOME",
-    "path": "Pictures",
-    "match": "directories",
-    "recurse": true
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
-  "maxEntries": 20000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Windows known folder Pictures, default path under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
-  "notes": "If OneDrive Known Folder Move is on, the real Pictures folder is under %USERPROFILE% OneDrive. Camera Roll and Screenshots may sit inside rather than beside it."
+    "id":  "files.pictures",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "personal-files",
+    "title":  "Pictures folder",
+    "whyItMatters":  "Personal photos and screenshots, often with locations and dates in the file names and metadata. Photos of documents and screens are common here too.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "HOME",
+                    "path":  "Pictures",
+                    "match":  "directories",
+                    "recurse":  true
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime",
+                    "itemCount"
+                ],
+    "maxEntries":  20000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Windows known folder Pictures, default path under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
+    "notes":  "If OneDrive Known Folder Move is on, the real Pictures folder is under %USERPROFILE% OneDrive. Camera Roll and Screenshots may sit inside rather than beside it."
 }

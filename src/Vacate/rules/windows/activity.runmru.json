@@ -1,20 +1,28 @@
 {
-  "id": "activity.runmru",
-  "platforms": ["windows"],
-  "category": "activity",
-  "title": "Run dialog command history",
-  "whyItMatters": "The RunMRU key lists commands typed into the Run dialog, which can expose programs, paths and URLs the user launched.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "registry",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU"
-  },
-  "measure": ["exists", "valueCount", "subkeyCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU",
-  "notes": "MRU value data is not read, only counted. Registry last-write time is unavailable per project decision D3."
+    "id":  "activity.runmru",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "activity",
+    "title":  "Run dialog command history",
+    "whyItMatters":  "The RunMRU key lists commands typed into the Run dialog, which can expose programs, paths and URLs the user launched.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "registry",
+                    "hive":  "HKCU",
+                    "key":  "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU"
+                },
+    "measure":  [
+                    "exists",
+                    "valueCount",
+                    "subkeyCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU",
+    "notes":  "MRU value data is not read, only counted. Registry last-write time is unavailable per project decision D3."
 }

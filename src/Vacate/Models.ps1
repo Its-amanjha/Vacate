@@ -38,6 +38,14 @@ $script:VacateSystemQueryPlatforms = @{
     'mounts'           = 'linux'
 }
 
+# Built-in profile folders that are not other people (DECISIONS D31). Dropped from
+# "other user profiles" results so the report does not claim strangers' accounts exist.
+$script:VacateSystemProfileNames = @{
+    windows = @('Public', 'Default', 'Default User', 'All Users', 'defaultuser0', 'WDAGUtilityAccount')
+    macos   = @('Shared', 'Guest', '.localized')
+    linux   = @('lost+found')
+}
+
 # Root tokens defined per platform (SPEC "Platform roots").
 $script:VacateRootTokens = @{
     windows = @('HOME', 'USERS', 'APPDATA', 'LOCALAPPDATA', 'PROGRAMDATA', 'SYSTEMDRIVE')

@@ -1,22 +1,31 @@
 {
-  "id": "system.var-log",
-  "platforms": ["linux"],
-  "category": "system-traces",
-  "title": "System logs",
-  "whyItMatters": "System logs record logins with usernames and IP addresses, commands run as root, USB devices plugged in and services started. They build a timeline of how the machine was used.",
-  "sensitivity": "low",
-  "locator": {
-    "kind": "path",
-    "root": "VAR",
-    "path": "log",
-    "match": "directories",
-    "recurse": true
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "FHS 3.0, /var/log: variable log data for the system lives in /var/log: https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch05s15.html",
-  "notes": "auth.log, syslog and the journal directory hold the useful history, including rotated and compressed copies. Many files are root-only, so the engine records them as permission skips rather than reading them."
+    "id":  "system.var-log",
+    "platforms":  [
+                      "linux"
+                  ],
+    "category":  "system-traces",
+    "title":  "System logs",
+    "whyItMatters":  "System logs record logins with usernames and IP addresses, commands run as root, USB devices plugged in and services started. They build a timeline of how the machine was used.",
+    "sensitivity":  "low",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "VAR",
+                    "path":  "log",
+                    "match":  "directories",
+                    "recurse":  true
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime",
+                    "itemCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Ubuntu 24.04 (WSL)"
+                   ],
+    "verified":  true,
+    "source":  "FHS 3.0, /var/log: variable log data for the system lives in /var/log: https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch05s15.html",
+    "notes":  "auth.log, syslog and the journal directory hold the useful history, including rotated and compressed copies. Many files are root-only, so the engine records them as permission skips rather than reading them."
 }

@@ -1,20 +1,28 @@
 {
-  "id": "containers.wsl-distros",
-  "platforms": ["windows"],
-  "category": "containers-vms",
-  "title": "WSL distributions",
-  "whyItMatters": "Each registered WSL distro holds a Linux filesystem with its own files and shell history. Missing it would leave a whole user environment unaccounted for.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "registry",
-    "hive": "HKCU",
-    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Lxss"
-  },
-  "measure": ["exists", "valueCount", "subkeyCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Microsoft Learn: WSL distribution list under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss - https://learn.microsoft.com/en-us/windows/wsl/disk-space",
-  "notes": "One GUID subkey per installed distribution. Names, BasePath values and VHD files are not read; only key, value and subkey counts are reported."
+    "id":  "containers.wsl-distros",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "containers-vms",
+    "title":  "WSL distributions",
+    "whyItMatters":  "Each registered WSL distro holds a Linux filesystem with its own files and shell history. Missing it would leave a whole user environment unaccounted for.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "registry",
+                    "hive":  "HKCU",
+                    "key":  "Software\\Microsoft\\Windows\\CurrentVersion\\Lxss"
+                },
+    "measure":  [
+                    "exists",
+                    "valueCount",
+                    "subkeyCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Microsoft Learn: WSL distribution list under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss - https://learn.microsoft.com/en-us/windows/wsl/disk-space",
+    "notes":  "One GUID subkey per installed distribution. Names, BasePath values and VHD files are not read; only key, value and subkey counts are reported."
 }

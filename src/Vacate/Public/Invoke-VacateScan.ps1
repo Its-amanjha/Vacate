@@ -18,7 +18,9 @@ function New-VacateScanContext {
         $registry = New-VacateRegistryProvider -RegistryBase @{ HKCU = @{ Hive = 'HKCU'; Prefix = '' }; HKLM = @{ Hive = 'HKLM'; Prefix = '' } }
         $cim = New-VacateCimRunner
     }
-    $sq = { param([string]$QueryName) Invoke-VacateSystemQuery -Name $QueryName -Platform $Platform }.GetNewClosure()
+    # Bound to this module so it can call module-private functions. GetNewClosure() would lose the
+    # module scope (it broke the first Linux scan). The platform name comes from the fixed detector.
+    $sq = $ExecutionContext.SessionState.Module.NewBoundScriptBlock({ param([string]$QueryName) Invoke-VacateSystemQuery -Name $QueryName -Platform (Get-VacatePlatform) })
     $mounts = @()
     if ($name -ceq 'linux') {
         $m = & $sq 'mounts'

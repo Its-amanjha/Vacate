@@ -1,21 +1,29 @@
 {
-  "id": "browser.edge.history",
-  "platforms": ["windows"],
-  "category": "browsers",
-  "title": "Edge browsing history",
-  "whyItMatters": "Lists every page visited, when and what was searched. For a work or school PC it also exposes employer and internal site names.",
-  "sensitivity": "high",
-  "locator": {
-    "kind": "path",
-    "root": "LOCALAPPDATA",
-    "path": "Microsoft/Edge/User Data/*/History",
-    "match": "files"
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Chromium user data directory docs, profile files include History (Edge uses this layout): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "One History file per profile. Looked for on this PC: exists."
+    "id":  "browser.edge.history",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "browsers",
+    "title":  "Edge browsing history",
+    "whyItMatters":  "Lists every page visited, when and what was searched. For a work or school PC it also exposes employer and internal site names.",
+    "sensitivity":  "high",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "LOCALAPPDATA",
+                    "path":  "Microsoft/Edge/User Data/*/History",
+                    "match":  "files"
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Chromium user data directory docs, profile files include History (Edge uses this layout): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+    "notes":  "One History file per profile. Looked for on this PC: exists."
 }

@@ -1,22 +1,31 @@
 {
-  "id": "containers.docker-desktop",
-  "platforms": ["windows"],
-  "category": "containers-vms",
-  "title": "Docker Desktop data",
-  "whyItMatters": "Docker Desktop keeps its WSL2 disk and settings under LocalAppData. Containers can hold databases and application data not visible elsewhere.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "path",
-    "root": "LOCALAPPDATA",
-    "path": "Docker",
-    "match": "directories",
-    "recurse": true
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Docker Desktop on Windows stores WSL2 VM data under %LOCALAPPDATA%/Docker/wsl (Docker Desktop documentation)",
-  "notes": "Counts the docker_data.vhdx and settings by metadata; VHD contents are never opened. Unconfirmed: custom disk image locations configured in Docker Desktop are not matched."
+    "id":  "containers.docker-desktop",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "containers-vms",
+    "title":  "Docker Desktop data",
+    "whyItMatters":  "Docker Desktop keeps its WSL2 disk and settings under LocalAppData. Containers can hold databases and application data not visible elsewhere.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "LOCALAPPDATA",
+                    "path":  "Docker",
+                    "match":  "directories",
+                    "recurse":  true
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime",
+                    "itemCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Docker Desktop on Windows stores WSL2 VM data under %LOCALAPPDATA%/Docker/wsl (Docker Desktop documentation)",
+    "notes":  "Counts the docker_data.vhdx and settings by metadata; VHD contents are never opened. Unconfirmed: custom disk image locations configured in Docker Desktop are not matched."
 }

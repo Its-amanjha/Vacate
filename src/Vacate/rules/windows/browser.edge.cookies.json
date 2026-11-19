@@ -1,21 +1,29 @@
 {
-  "id": "browser.edge.cookies",
-  "platforms": ["windows"],
-  "category": "browsers",
-  "title": "Edge cookies and site sessions",
-  "whyItMatters": "Cookie values can still open sites the person stayed signed into, including Microsoft, work and shopping accounts, without needing the password.",
-  "sensitivity": "high",
-  "locator": {
-    "kind": "path",
-    "root": "LOCALAPPDATA",
-    "path": "Microsoft/Edge/User Data/*/Network/Cookies",
-    "match": "files"
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Chromium cookie store layout under User Data/<profile>/Network (Edge follows Chromium): https://chromium.googlesource.com/chromium/src/",
-  "notes": "Older Edge builds stored User Data/*/Cookies directly; check both. Looked for on this PC: exists."
+    "id":  "browser.edge.cookies",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "browsers",
+    "title":  "Edge cookies and site sessions",
+    "whyItMatters":  "Cookie values can still open sites the person stayed signed into, including Microsoft, work and shopping accounts, without needing the password.",
+    "sensitivity":  "high",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "LOCALAPPDATA",
+                    "path":  "Microsoft/Edge/User Data/*/Network/Cookies",
+                    "match":  "files"
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Chromium cookie store layout under User Data/\u003cprofile\u003e/Network (Edge follows Chromium): https://chromium.googlesource.com/chromium/src/",
+    "notes":  "Older Edge builds stored User Data/*/Cookies directly; check both. Looked for on this PC: exists."
 }

@@ -1,22 +1,31 @@
 {
-  "id": "system.temp.user",
-  "platforms": ["windows"],
-  "category": "system-traces",
-  "title": "User temporary files",
-  "whyItMatters": "The per-user temp folder often holds leftovers from documents and installers that can include private data.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "path",
-    "root": "LOCALAPPDATA",
-    "path": "Temp",
-    "match": "directories",
-    "recurse": true
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
-  "maxEntries": 20000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Per-user temporary directory %LOCALAPPDATA%/Temp; standard Windows application temp location",
-  "notes": "Higher cap because the folder can be large. File names and sizes only; contents are never opened."
+    "id":  "system.temp.user",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "system-traces",
+    "title":  "User temporary files",
+    "whyItMatters":  "The per-user temp folder often holds leftovers from documents and installers that can include private data.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "LOCALAPPDATA",
+                    "path":  "Temp",
+                    "match":  "directories",
+                    "recurse":  true
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime",
+                    "itemCount"
+                ],
+    "maxEntries":  20000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Per-user temporary directory %LOCALAPPDATA%/Temp; standard Windows application temp location",
+    "notes":  "Higher cap because the folder can be large. File names and sizes only; contents are never opened."
 }

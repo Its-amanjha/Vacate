@@ -1,21 +1,29 @@
 {
-  "id": "browser.edge.profiles",
-  "platforms": ["windows"],
-  "category": "browsers",
-  "title": "Edge browser profiles",
-  "whyItMatters": "Each profile is a separate browsing identity. Profile names and the accounts signed into Edge show who used this computer and which work or personal accounts were linked.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "path",
-    "root": "LOCALAPPDATA",
-    "path": "Microsoft/Edge/User Data/*/Preferences",
-    "match": "files"
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Chromium user data directory docs (Edge uses the Chromium layout): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "Matches the Preferences marker file so non-profile folders (Crash Reports, ShaderCache) are skipped. Looked for on this PC: exists."
+    "id":  "browser.edge.profiles",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "browsers",
+    "title":  "Edge browser profiles",
+    "whyItMatters":  "Each profile is a separate browsing identity. Profile names and the accounts signed into Edge show who used this computer and which work or personal accounts were linked.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "LOCALAPPDATA",
+                    "path":  "Microsoft/Edge/User Data/*/Preferences",
+                    "match":  "files"
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Chromium user data directory docs (Edge uses the Chromium layout): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+    "notes":  "Matches the Preferences marker file so non-profile folders (Crash Reports, ShaderCache) are skipped. Looked for on this PC: exists."
 }

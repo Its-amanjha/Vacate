@@ -1,20 +1,28 @@
 {
-  "id": "network.bluetooth.devices",
-  "platforms": ["windows"],
-  "category": "network",
-  "title": "Paired Bluetooth devices",
-  "whyItMatters": "The Bluetooth port key has one subkey per paired device. It shows headsets, phones and other hardware that belonged to this machine.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "registry",
-    "hive": "HKLM",
-    "key": "SYSTEM\\CurrentControlSet\\Services\\BTHPORT\\Parameters\\Devices"
-  },
-  "measure": ["exists", "valueCount", "subkeyCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Well-known Windows Bluetooth forensics artifact: HKLM\\SYSTEM\\CurrentControlSet\\Services\\BTHPORT\\Parameters\\Devices",
-  "notes": "Machine-wide pairing records. Only subkey and value counts are reported; device addresses and link keys are never read."
+    "id":  "network.bluetooth.devices",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "network",
+    "title":  "Paired Bluetooth devices",
+    "whyItMatters":  "The Bluetooth port key has one subkey per paired device. It shows headsets, phones and other hardware that belonged to this machine.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "registry",
+                    "hive":  "HKLM",
+                    "key":  "SYSTEM\\CurrentControlSet\\Services\\BTHPORT\\Parameters\\Devices"
+                },
+    "measure":  [
+                    "exists",
+                    "valueCount",
+                    "subkeyCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Well-known Windows Bluetooth forensics artifact: HKLM\\SYSTEM\\CurrentControlSet\\Services\\BTHPORT\\Parameters\\Devices",
+    "notes":  "Machine-wide pairing records. Only subkey and value counts are reported; device addresses and link keys are never read."
 }

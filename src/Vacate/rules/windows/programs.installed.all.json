@@ -1,19 +1,26 @@
 {
-  "id": "programs.installed.all",
-  "platforms": ["windows"],
-  "category": "installed-programs",
-  "title": "Installed programs",
-  "whyItMatters": "The installed program list reveals software that may still hold accounts or licenses and needs a separate sign-out or transfer step.",
-  "sensitivity": "low",
-  "locator": {
-    "kind": "installed-program",
-    "scope": "all"
-  },
-  "measure": ["exists", "itemCount"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Windows uninstall registry keys in HKLM and HKCU Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall, both 32- and 64-bit views",
-  "notes": "Provider reads both registry views and both hives. Install date, publisher and scope come from uninstall entries; no program files are opened."
+    "id":  "programs.installed.all",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "installed-programs",
+    "title":  "Installed programs",
+    "whyItMatters":  "The installed program list reveals software that may still hold accounts or licenses and needs a separate sign-out or transfer step.",
+    "sensitivity":  "low",
+    "locator":  {
+                    "kind":  "installed-program",
+                    "scope":  "all"
+                },
+    "measure":  [
+                    "exists",
+                    "itemCount"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Windows uninstall registry keys in HKLM and HKCU Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall, both 32- and 64-bit views",
+    "notes":  "Provider reads both registry views and both hives. Install date, publisher and scope come from uninstall entries; no program files are opened."
 }

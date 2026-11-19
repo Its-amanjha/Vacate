@@ -1,21 +1,29 @@
 {
-  "id": "browser.chrome.history",
-  "platforms": ["windows"],
-  "category": "browsers",
-  "title": "Chrome browsing history",
-  "whyItMatters": "Lists every page visited, when, how often and what was typed into the address bar. It shows health, money, relationship and work interests in detail.",
-  "sensitivity": "high",
-  "locator": {
-    "kind": "path",
-    "root": "LOCALAPPDATA",
-    "path": "Google/Chrome/User Data/*/History",
-    "match": "files"
-  },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "Chromium user data directory docs, profile files include History: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "One History file per profile. Chrome may also leave History-journal and History-wal next to it. Looked for on this PC: exists (Default profile)."
+    "id":  "browser.chrome.history",
+    "platforms":  [
+                      "windows"
+                  ],
+    "category":  "browsers",
+    "title":  "Chrome browsing history",
+    "whyItMatters":  "Lists every page visited, when, how often and what was typed into the address bar. It shows health, money, relationship and work interests in detail.",
+    "sensitivity":  "high",
+    "locator":  {
+                    "kind":  "path",
+                    "root":  "LOCALAPPDATA",
+                    "path":  "Google/Chrome/User Data/*/History",
+                    "match":  "files"
+                },
+    "measure":  [
+                    "exists",
+                    "sizeBytes",
+                    "lastWriteTime"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Windows 11 Pro 26300"
+                   ],
+    "verified":  true,
+    "source":  "Chromium user data directory docs, profile files include History: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+    "notes":  "One History file per profile. Chrome may also leave History-journal and History-wal next to it. Looked for on this PC: exists (Default profile)."
 }

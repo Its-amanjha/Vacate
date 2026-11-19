@@ -20,14 +20,13 @@ result.
 
 ## Status
 
-Phase 1 is still being built. Today only `vacate.ps1 version` works. `scan`, `rules`, `report`
-and `checklist` are **(planned)** and do not run yet. The rule catalog is still being filled in;
-the Linux pack is (planned). Tests run on Windows 11 with PowerShell 5.1 and 7, and on Ubuntu
-24.04 in WSL with PowerShell 7. macOS is **not yet verified on a real Mac**.
+Phase 1 works end to end on Windows 11 (PowerShell 5.1 and 7) and on Ubuntu 24.04 (tested in
+WSL, PowerShell 7): `scan`, `rules`, `report`, `checklist` and `version` all run. The catalog has
+195 rules (87 Windows, 58 Linux, 50 macOS). Rules confirmed on a real machine are marked
+`verified` in [RULES.md](RULES.md); the rest still run and are listed as unverified in every
+report. macOS is **not yet verified on a real Mac**.
 
-Do not use this for a real handover until the quickstart below works end to end.
-
-## Quickstart (planned)
+## Quickstart
 
 Run it as your normal user. Do not open an administrator or root shell: vacate will not ask for
 admin rights, and it never elevates itself.

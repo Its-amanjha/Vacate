@@ -1,19 +1,26 @@
 {
-  "id": "encryption.block-devices",
-  "platforms": ["linux"],
-  "category": "disk-encryption",
-  "title": "Block devices and encrypted volumes",
-  "whyItMatters": "The disk layout shows which volumes are LUKS-encrypted and which are plain. It is the only reliable way to tell a buyer whether the data on the machine is actually protected.",
-  "sensitivity": "medium",
-  "locator": {
-    "kind": "system-query",
-    "name": "block-devices"
-  },
-  "measure": ["exists", "properties"],
-  "maxEntries": 5000,
-  "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
-  "source": "lsblk(8) from util-linux reports device name, type, filesystem type and mountpoint as JSON; the engine parses that output: https://man.archlinux.org/man/lsblk.8",
-  "notes": "A LUKS volume shows fstype crypto_LUKS; an opened mapper device shows up separately. Names, types and mountpoints only, no key material. On systems without lsblk the engine records the query as unavailable."
+    "id":  "encryption.block-devices",
+    "platforms":  [
+                      "linux"
+                  ],
+    "category":  "disk-encryption",
+    "title":  "Block devices and encrypted volumes",
+    "whyItMatters":  "The disk layout shows which volumes are LUKS-encrypted and which are plain. It is the only reliable way to tell a buyer whether the data on the machine is actually protected.",
+    "sensitivity":  "medium",
+    "locator":  {
+                    "kind":  "system-query",
+                    "name":  "block-devices"
+                },
+    "measure":  [
+                    "exists",
+                    "properties"
+                ],
+    "maxEntries":  5000,
+    "requiresElevation":  false,
+    "verifiedOn":  [
+                       "Ubuntu 24.04 (WSL)"
+                   ],
+    "verified":  true,
+    "source":  "lsblk(8) from util-linux reports device name, type, filesystem type and mountpoint as JSON; the engine parses that output: https://man.archlinux.org/man/lsblk.8",
+    "notes":  "A LUKS volume shows fstype crypto_LUKS; an opened mapper device shows up separately. Names, types and mountpoints only, no key material. On systems without lsblk the engine records the query as unavailable."
 }

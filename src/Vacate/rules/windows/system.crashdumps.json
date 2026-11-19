@@ -1,0 +1,23 @@
+{
+  "id": "system.crashdumps",
+  "platforms": ["windows"],
+  "category": "system-traces",
+  "title": "User crash dumps",
+  "whyItMatters": "Crash dumps can capture process memory, which may include personal data or secrets at the moment an application failed.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "CrashDumps",
+    "match": "directories",
+    "recurse": true,
+    "include": "*.dmp"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Microsoft Learn Windows Error Reporting: per-user crash dumps stored in %LOCALAPPDATA%/CrashDumps",
+  "notes": "Only .dmp files are counted. The machine-wide C:/Windows/MEMORY.DMP needs elevation and is deliberately out of scope. No dump is opened."
+}

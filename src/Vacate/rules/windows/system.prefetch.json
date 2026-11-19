@@ -1,0 +1,23 @@
+{
+  "id": "system.prefetch",
+  "platforms": ["windows"],
+  "category": "system-traces",
+  "title": "Application prefetch files",
+  "whyItMatters": "Prefetch files record which executables ran and when. They give a timeline of application use even after the programs are removed.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "SYSTEMDRIVE",
+    "path": "Windows/Prefetch",
+    "match": "directories",
+    "recurse": true,
+    "include": "*.pf"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SANS Windows forensic poster: %SystemDrive%/Windows/Prefetch (*.pf execution files)",
+  "notes": "Machine-wide folder, so elevation is required. Only .pf files are counted; their embedded path and run-count data is never parsed."
+}

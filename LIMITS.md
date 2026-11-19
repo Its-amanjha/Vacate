@@ -3,11 +3,11 @@
 vacate only reports what it can see. This page lists what it cannot see, so you can decide what to
 check by hand. A short report, or a report with nothing in it, does not mean the machine is clean.
 
-The report prints these same limits in its "What this does not see" section. This page says the
-same things and adds one sentence on what to do about each one.
+The report's "What this does not see" section prints the design limits below. This page says the
+same things and adds one sentence on what to do about each one. The last section lists limits seen
+in real scans; the report shows those in its skip list and completeness flag instead.
 
-Status: the scan engine and CLI are still being built (see [README.md](README.md)). The limits
-below describe the finished Phase 1 design.
+Status: Phase 1 works end to end on Windows 11 and Ubuntu 24.04 (WSL). See [README.md](README.md).
 
 ## All platforms
 
@@ -123,6 +123,21 @@ below describe the finished Phase 1 design.
 
 - **Other mounted file systems.** Other mounts are not scanned. What to do: unmount each one and
   check or wipe it separately.
+
+## Limits seen in real scans
+
+- **Time limits on a huge folder.** Each rule stops after 10 seconds, and the whole scan has a
+  budget (120 seconds by default). A folder such as Temp can be so large that a rule stops before
+  it has counted everything. The rule is then recorded with reason `timeout` in the skip list
+  (with a partial trace, if it produced one), or the remaining rules are skipped with reason
+  `budget`, and the report says the scan did not finish.
+  What to do: read the "Skipped and failed" section, run again, or check that folder by hand. A
+  partial count is not a clean result.
+
+- **WSL is not a desktop Linux.** In WSL, Windows drives mounted under `/mnt/*` are outside the
+  scanned roots, and a fresh WSL install usually has no desktop browser, mail or chat apps. A scan
+  there finds far less than the same scan on a desktop Linux install. What to do: scan the Windows
+  side separately, and check any app you installed inside WSL by hand.
 
 ## What a clean report means
 

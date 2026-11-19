@@ -16,10 +16,14 @@ the tool entirely.
 
 ## Status
 
-The scan engine, providers and CLI are still being built. Built and tested today: the rule
-loader, the path jail, platform detection, report rendering, the checklist generator and report
-redaction. Everything that would actually run a scan is (planned). Where a control exists as a
-tested component but is not yet wired into a scan, this page says so. `(planned)` marks
+Phase 1 works end to end on Windows 11 (PowerShell 5.1 and 7) and on Ubuntu 24.04 in WSL
+(PowerShell 7). The scan engine, path locator, filesystem walker, providers, CLI, report rendering,
+checklist and redaction all run, and real scans wrote all five output files on both systems.
+
+Still `(planned)`: macOS verification on a real Mac (D5), the sabotage self-test harness (W3-C),
+the full integration and performance suites (W3-B, W3-H), report signing and reproducible builds
+(Phase 5). CI is configured and the public repository exists, but the first CI run is still pending
+(M7). Where a control exists but is not proven in a scan, this page says so. `(planned)` marks
 behaviour that no code performs yet.
 
 ## False positives
@@ -35,13 +39,15 @@ trace per matched target, so the report shows the exact path that exists (D10). 
 size, count, last-modified time, the rule id, the rule source and its verified status (D18). The
 report prints the fixed line that file contents are never opened, so a trace is a place to look,
 not a claim that the file holds anything. Rules not verified on a real machine are listed in the
-report instead of being presented as certain.
+report instead of being presented as certain. A real scan found one false-positive class: built-in
+profile folders (`Public`, `Default`, `Default User`) were reported as other people; the rule now
+drops them (D31).
 
 **What remains.** vacate cannot tell whether an app is used, a file is empty, or a session is
 still live; that judgement belongs to the reader. A rule verified on one OS version can drift on
-another, and `verifiedOn` names the version but never expires. The false-positive rate is not
+another, and `verifiedOn` names the version but never expires (D32). The false-positive rate is not
 measured yet. A badly written but valid rule can still produce noise inside the allowed roots.
-The scan engine that would create these traces is (planned).
+Scan output exists today, so these risks apply to a report you can read now.
 
 ## False negatives
 
@@ -60,11 +66,11 @@ are checked and that a clean report is not proof.
 **What remains.** The catalog is finite: an app with no rule is invisible. File contents are never
 read, so vacate cannot tell a full folder from an empty one. Other operating systems, other disks,
 encrypted containers, swap, snapshots, TCC-protected folders, root-only files and admin-only
-locations are outside the scan, as listed in [LIMITS.md](LIMITS.md). Budget exhaustion and
-per-rule timeouts will cut a scan short; the report says so, but the missing part stays missing.
-The catalog is still being filled in: the Linux pack is (planned), and no rule is presented as
-verified until someone has seen its path on a real machine. The engine that records skips and
-incomplete scans is (planned).
+locations are outside the scan, as listed in [LIMITS.md](LIMITS.md). A single rule stops at its
+10-second limit, and the whole scan stops at its budget; the report marks the scan incomplete and
+lists the rule as skipped, but the missing part stays missing (D2, D27). The catalog is still being
+filled in: Windows has the most verified rules, Linux is tested in WSL only, and no macOS rule is
+verified. No rule is presented as verified until a real scan has seen its path (D32).
 
 ## Report leakage
 
@@ -74,21 +80,23 @@ names, sizes, timestamps and installed programs. Sending an unredacted report to
 repair shop or a chat group hands over that map.
 
 **What vacate does.** The HTML header prints a sensitivity warning whenever the report is not
-redacted, and [README.md](README.md) prints the same warning. `-Redact` is built (`Redaction.ps1`)
-and tested: names, user and host names, volume names, path segments, samples and string properties
-become `h-` plus 10 hex characters from HMAC-SHA256 under a fresh random key per call. The key is
-never stored, so hashes cannot be reversed or matched across two reports. Drive letters, registry
-hives, WMI namespaces, rule ids, counts, sizes and times are kept, so the report stays readable.
-Free text is scrubbed for paths first and then for known names; a real leak found by a test (a
-drive letter replaced before the path detector ran) is fixed (D25). The report contains no
-network references, and the tool makes no network calls.
+redacted, and [README.md](README.md) prints the same warning. `-Redact` is built into `scan`
+(`Redaction.ps1`) and tested: names, user and host names, volume names, path segments, samples and
+string properties become `h-` plus 10 hex characters from HMAC-SHA256 under a fresh random key per
+call. The key is never stored, so hashes cannot be reversed or matched across two reports. Drive
+letters, registry hives, WMI namespaces, rule ids, counts, sizes and times are kept, so the report
+stays readable. Free text is scrubbed for paths first and then for known names; a real leak found
+by a test (a drive letter replaced before the path detector ran) is fixed (D25). Under `-Redact`,
+`scan.log` keeps only its first summary line and a note that the details were omitted, so it does
+not undo the redaction. The report contains no network references, and the tool makes no network
+calls.
 
 **What remains.** An unredacted report is plain text. Anyone who can read the `runs` folder, or a
 backup or sync copy of it, can read everything. Redaction is not encryption: sizes, times,
 structure and drive letters remain, and someone who knows the machine may still infer things.
 Hashes are stable within one report, so repeated names stand out, and a 40-bit hash can collide
-in theory. How `scan.log` is handled under `-Redact` is not defined yet (planned). A report you
-have already shared cannot be recalled. The report has no password protection.
+in theory. A report you have already shared cannot be recalled. The report has no password
+protection.
 
 ## Path traversal
 
@@ -108,10 +116,10 @@ refuses a path that crosses a mount point, and the jail tests cover these cases.
 
 **What remains.** Rules are data shipped with the tool, and the loader checks their form, not
 their intent. A bug in normalization or glob expansion could still let a path through; there is no
-fuzzing yet. The scan engine that calls the jail is (planned), so the jail's checks are tested in
-isolation but not yet proven in a real scan. Path handling is tested for the forms listed above;
-other platform quirks are not covered. A rule that is valid but points at a harmless allowed
-folder is a false positive, not an escape.
+fuzzing yet. The jail now runs in every real scan; it was exercised on Windows 11 and Ubuntu 24.04
+(WSL), but path handling is tested for the forms listed above, and other platform quirks are not
+covered. A rule that is valid but points at a harmless allowed folder is a false positive, not an
+escape.
 
 ## Symlink and junction escapes
 
@@ -120,18 +128,18 @@ volume or the whole disk. Following it escapes the path jail. A cloud placeholde
 the tool download a file, which would both use the network and change the disk.
 
 **What vacate does.** Every resolved target is checked for the reparse-point attribute at every
-level, and a link is rejected with reason `link`; it is never followed (`PathJail.ps1`). The real
-junction and symlink tests pass. The walker contract refuses to descend into a reparse point,
-counts it in `SkippedLinks`, and treats cloud placeholders by metadata only, never opening them
-(`docs/CONTRACTS.md`). macOS path normalization treats `/var` and `/private/var` as the same place.
+level, and a link is rejected with reason `link`; it is never followed (`PathJail.ps1`). Real
+junction and symlink tests pass on Windows and Ubuntu. The walker refuses to descend into a
+reparse point, counts it in `SkippedLinks`, and treats cloud placeholders by metadata only, never
+opening them (`docs/CONTRACTS.md`). macOS path normalization treats `/var` and `/private/var` as
+the same place.
 
-**What remains.** The filesystem provider and walker are not in this tree yet (planned, W1-B), so
-the walker half of this control is unproven. There is a time-of-check to time-of-use gap: a link
-can be created or swapped between the jail check and the read; the audit is local and short, but
-the tool does not lock the tree. Placeholder detection is attribute-based, and cloud clients do
-not all mark files the same way. A hard link looks like an ordinary file to metadata, so vacate
-could report the name and size of a file whose data lives at another path; it still does not read
-the contents.
+**What remains.** The walker half now runs in real scans, but there is a time-of-check to
+time-of-use gap: a link can be created or swapped between the jail check and the read; the audit
+is local and short, but the tool does not lock the tree. Placeholder detection is attribute-based,
+and cloud clients do not all mark files the same way. A hard link looks like an ordinary file to
+metadata, so vacate could report the name and size of a file whose data lives at another path; it
+still does not read the contents.
 
 ## Permission gaps
 
@@ -147,10 +155,10 @@ failed" section listing every skip with its rule id, reason and detail (D11). Th
 names the platform-specific gaps in plain words.
 
 **What remains.** A reader can ignore the skip list. A skip says that something was not read; it
-cannot say what is behind it. The engine that produces the skips is (planned). A partial walk that
-stops inside an unreadable subfolder is a contract detail for the walker (planned, W1-B). Some
-platform APIs may return an empty result without raising access denied; that case is not audited.
-There is no retry and no way to grant the missing permission from inside the tool.
+cannot say what is behind it. Skips are produced by the engine today, and the walker records a
+denied subfolder and continues with the rest of the tree. Some platform APIs may return an empty
+result without raising access denied; that case is not audited. There is no retry and no way to
+grant the missing permission from inside the tool.
 
 ## Elevation and root
 
@@ -160,19 +168,19 @@ people's data into a report made for one person.
 
 **What vacate does.** It never elevates itself, never calls `sudo`, and never prompts for
 credentials (CLAUDE.md rule 7, SPEC non-negotiable 9). Elevation is detected once. A rule that
-needs it is skipped and listed when the session is not elevated. On macOS and Linux, a root
-session is refused unless `-AllowRoot` is passed (planned CLI). `-Elevated` only asserts that the
-session is already elevated; it does not change it (planned CLI). Root detection uses the effective
-user name without an external `id` binary (D13). Independently of elevation, the path jail refuses
-the contents of other user profiles, so elevation does not unlock them. The report header records
-whether the scan was elevated.
+needs it is skipped and listed when the session is not elevated. On macOS and Linux, `scan`
+refuses a root session unless `-AllowRoot` is passed. `-Elevated` only asserts that the session is
+already elevated; `scan` fails if it is not, and neither flag changes the session. Root detection
+uses the effective user name without an external `id` binary (D13). Independently of elevation,
+the path jail refuses the contents of other user profiles, so elevation does not unlock them. The
+report header records whether the scan was elevated.
 
 **What remains.** `-AllowRoot` exists for a reason: a person who owns the machine may need it to
 see root-only files. Passing it widens the scan, and the report does not warn more loudly than the
 header field. Windows administrators often work from an elevated shell without thinking about it;
 the tool cannot stop that. A refusal is policy, not a security boundary: the person running the
-tool owns the machine and can change the environment. The CLI that enforces the refusal is
-(planned).
+tool owns the machine and can change the environment. `scan` enforces the refusal today; it does
+not ask for confirmation.
 
 ## Malicious rule files
 
@@ -186,15 +194,15 @@ only external binaries are the three named system queries in `SystemQueries.ps1`
 absolute path, fixed arguments and no shell. The loader validates each rule against the schema and
 its own checks; an invalid file never loads, the rest of the catalog still loads, and the errors
 are listed (D15). One rule per file and the file name must equal the id (D7). Root tokens must be
-defined for every declared platform. `maxEntries` is capped by the loader, and the engine is
-designed to give every rule a deadline. At scan time the path jail checks the path again (D14).
+defined for every declared platform. `maxEntries` is capped by the loader, and the engine gives
+every rule a 10-second deadline (D2). At scan time the path jail checks the path again (D14).
 
 **What remains.** A well-formed rule inside an allowed root can still produce false positives or a
 slow, capped scan; it cannot execute code. Rule files are not signed (Phase 5 packaging is
 planned). If an attacker can edit rule files, they can usually edit the PowerShell as well, so the
 real control is repository review and file permissions. Schema validation runs under PowerShell 7
 only (D4); Windows PowerShell 5.1 relies on the loader's own structural checks. `rules validate`
-is meant to be the CI gate, and its CLI command is (planned).
+runs today, and CI runs `tests/Test-RuleFiles.ps1` for each platform (`.github/workflows/ci.yml`).
 
 ## Output written inside scanned roots
 
@@ -202,18 +210,20 @@ is meant to be the CI gate, and its CLI command is (planned).
 report into the next scan, and can copy the report into a backup or cloud sync. A scan that writes
 where it reads also weakens the "writes nothing" promise.
 
-**What vacate does.** The design has one write target: `runs/<timestamp>/`, which must sit outside
-every scanned root (SPEC non-negotiable 1). The engine context carries an `Exclude` list of
-absolute paths that are never scanned: the tool folder, `runs/`, and the output folder
-(`docs/CONTRACTS.md` section 9). Report files are specified as UTF-8 without a BOM. `report -Run`
-and `checklist -Run` (planned) read an existing run folder and rewrite only its reports.
+**What vacate does.** `Output.ps1` is the only writer. It writes one run folder,
+`runs/<timestamp>/`, and refuses any path outside it, including a path whose parent is a link
+(D28). The scan context carries an `Exclude` list of absolute paths that are never scanned: the
+tool folder and `runs/`, so the tool may live inside a scanned root without auditing its own
+files (`docs/CONTRACTS.md` section 9, D28). A static safety test forbids write calls outside
+`Output.ps1` and was checked by planting a write in another file (D30). Report files are UTF-8
+without a BOM. `report -Run` and `checklist -Run` read an existing run folder and rewrite only
+`report.html`, `summary.md` and `checklist.md` inside that folder.
 
-**What remains.** The engine and CLI that write the run folder are (planned), so no code enforces
-this yet. If the tool is unpacked inside the user's home folder or inside the repository, the
-output folder is inside a scanned root unless the exclusion works and is tested. Exclusion depends
-on absolute path comparison and the platform's case rules. A user can point `-Run <dir>` at a
-folder inside a scanned root. The write-spy test from the specification is (planned). A crash
-during a write can leave a partial report, but only inside `runs/`.
+**What remains.** The exclusion depends on absolute path comparison and the platform's case rules;
+it is covered by unit tests, not by a full scan that plants a file in the tool folder. A user can
+point `-Run <dir>` at any folder, but writes stay inside that folder. The full write-spy scan test
+from the specification is still (planned, W3-B). A crash during a write can leave a partial
+report, but only inside `runs/`.
 
 ## HTML injection via file names
 
@@ -250,9 +260,9 @@ fresh key per call, so two redacted reports cannot be matched by their hashes (D
 **What remains.** There is no signature, checksum or append-only log. Anyone who can write the run
 folder can edit the report; the tool cannot detect it. The redaction key is not stored, so hashes
 cannot be re-derived or checked later. Timestamps and durations legitimately differ between runs.
-Engine determinism is (planned): the sort and key-order rules exist on paper and in the renderers,
-but the scan that produces traces is not built. There is no proof that a report came from a
-particular machine. Report signing and reproducible builds are Phase 5 (planned).
+The engine sorts traces and serializes ordered objects today, but a test that runs the same scan
+twice and compares the reports is still (planned, W3-B). There is no proof that a report came from
+a particular machine. Report signing and reproducible builds are Phase 5 (planned).
 
 ## Outside this model
 

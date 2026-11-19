@@ -8,10 +8,10 @@ checklist of what to sign out of and remove. It never deletes, moves, or changes
 
 > **Warning: the report is as sensitive as the data it describes.**
 >
-> `report.json` and `report.html` list where your private data lives, including file and folder
-> names. Treat them like a password. Do not email them, upload them, or paste them into a chat.
-> To share a report, run `scan -Redact` and share that copy instead. Delete the `runs` folder when
-> you no longer need it.
+> `report.json`, `report.html` and `scan.log` list where your private data lives, including file
+> and folder names. Treat the run folder like a password. Do not email it, upload it, or paste it
+> into a chat. To share a report, run `scan -Redact` and share that copy instead. Delete the `runs`
+> folder when you no longer need it.
 
 A trace in the report means "this known location exists on this machine". It does not mean the
 file is full, current, or still signed in, because vacate cannot see inside it. A short or empty
@@ -22,7 +22,7 @@ result.
 
 Phase 1 works end to end on Windows 11 (PowerShell 5.1 and 7) and on Ubuntu 24.04 (tested in
 WSL, PowerShell 7): `scan`, `rules`, `report`, `checklist` and `version` all run. The catalog has
-195 rules (87 Windows, 58 Linux, 50 macOS). Rules confirmed on a real machine are marked
+about 200 rules across Windows, Linux and macOS. Rules confirmed on a real machine are marked
 `verified` in [RULES.md](RULES.md); the rest still run and are listed as unverified in every
 report. macOS is **not yet verified on a real Mac**.
 
@@ -71,6 +71,25 @@ Open `runs/<timestamp>/report.html` in your browser.
 blocks the script with an execution-policy message, run
 `powershell -NoProfile -ExecutionPolicy Bypass -File .\vacate.ps1 scan` instead.
 
+## Example output
+
+A scan prints a summary and the path to the HTML report. The wording is fixed; the counts and the
+folder name depend on the machine, and angle brackets mark the values `scan` fills in. This
+example is from Windows:
+
+```
+> .\vacate.ps1 scan
+Scan finished: <traces> traces, <rules> rules ran, <skipped> skipped, <failed> failed, <not applicable> not applicable.
+Report: C:\path\to\vacate\runs\<timestamp>\report.html
+The report lists where your private data is. Treat it like a password; use -Redact to share.
+```
+
+If the time budget runs out, or a rule reaches its 10-second limit, `scan` adds this line:
+
+```
+WARNING: the scan did not finish (time budget). The report is incomplete.
+```
+
 ## What it does
 
 - Checks the known locations where personal data is kept: browser history, cookies and
@@ -94,7 +113,7 @@ blocks the script with an execution-policy message, run
 - Erases, resets or cleans the disk. Phase 1 is an audit only; the checklist points to the
   operating system's own erase steps.
 
-## Commands (planned)
+## Commands
 
 On Windows use `.\vacate.ps1 <command>`. On macOS and Linux use `pwsh ./vacate.ps1 <command>`.
 
@@ -103,16 +122,16 @@ On Windows use `.\vacate.ps1 <command>`. On macOS and Linux use `pwsh ./vacate.p
 | `scan` | Detects the platform, runs that platform's rules, and writes a run folder. |
 | `scan -Redact` | Same scan, but names and path segments in the report are hashed. |
 | `scan -BudgetSeconds n` | Whole-scan time limit in seconds. Default 120. On timeout the report is marked incomplete. |
-| `scan -Elevated` | Says the session is already elevated. vacate never elevates itself. |
+| `scan -Elevated` | Tells vacate the session is already elevated. It fails if the session is not elevated; vacate never elevates itself. |
 | `scan -AllowRoot` | On macOS and Linux, allows a root session. Without it, vacate refuses to run as root. |
-| `rules list` | Lists rule ids and titles. |
+| `rules list` | Lists each rule's id, platform, category and verified status. |
 | `rules show <id>` | Shows one rule: location, why it matters, source, verified status. |
 | `rules validate` | Checks every rule file. Exits 1 if any file is invalid. |
-| `report -Run <dir>` | Rebuilds `report.html` and `summary.md` from an existing `report.json`. |
+| `report -Run <dir>` | Rebuilds `report.html`, `summary.md` and `checklist.md` from an existing `report.json`. |
 | `checklist -Run <dir>` | Rebuilds `checklist.md` from an existing `report.json`. |
-| `version` | Prints the version. This is the only command that works today. |
+| `version` | Prints the version. |
 
-## Output files (planned)
+## Output files
 
 Each scan writes one folder, `runs/<timestamp>/`:
 
@@ -123,6 +142,9 @@ Each scan writes one folder, `runs/<timestamp>/`:
 | `summary.md` | A short summary for a handover note. No file paths, but it does name the machine and the user. |
 | `checklist.md` | The de-link checklist on its own. |
 | `scan.log` | What ran, what was skipped, and any errors. Can contain names and paths, so treat it as sensitive. |
+
+With `-Redact`, the four report files are rewritten with hashed names, and `scan.log` keeps only
+its summary line plus a note that the details were omitted.
 
 Read the HTML report in this order: Summary, By category, Details, De-link checklist, What this
 does not see. The last section is the one that tells you what the scan missed.

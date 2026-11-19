@@ -25,7 +25,7 @@
   "source": "Vivaldi profile locations: macOS ~/Library/Application Support/Vivaldi - https://www.browserforensics.app/en/blog/brave-opera-vivaldi-profile-locations",
   "notes": "Chromium-style profile folders (Default, Profile 1, ...), each identified by its Preferences file. No file content is read.",
   "cleanup": {
-    "action": "sign-out-then-remove",
+    "action": "export-then-remove",
     "exportFirst": "In Vivaldi export bookmarks with the import and export tool, and save any passwords you keep in the browser.",
     "signOut": "In Vivaldi open the sync settings and sign out, so the sync account no longer holds this profile's data.",
     "steps": [

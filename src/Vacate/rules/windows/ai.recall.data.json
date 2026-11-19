@@ -1,6 +1,8 @@
 {
   "id": "ai.recall.data",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "ai-assistants",
   "title": "Windows Recall snapshot store",
   "whyItMatters": "Recall saves periodic screenshots and extracted text from the screen. This folder shows how much of the user's on-screen activity was captured.",
@@ -12,26 +14,31 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
   "source": "Microsoft Learn manage-recall: https://learn.microsoft.com/en-us/windows/client-management/manage-recall ; path CoreAIPlatform.00/UKP documented by Ars Technica 2025-04-21",
   "notes": "Build: Windows 11 24H2, GA on Copilot+ PCs April 2025. Snapshot store is encrypted with Hello ESS keys from the September 2024 redesign. Folder metadata only; images and ukg.db are never opened.",
-    "cleanup": {
-        "action": "remove",
-        "exportFirst": null,
-        "signOut": null,
-        "steps": [
-            "Open Settings > Privacy & security > Recall & snapshots and confirm it is you with Windows Hello.",
-            "Under Delete snapshots choose Delete all.",
-            "Set Save snapshots to Off and pause snapshot saving from the Recall icon in the system tray."
-        ],
-        "risk": "Deletes every saved Recall snapshot on this PC. Snapshots cannot be recovered afterwards.",
-        "closeApps": [],
-        "resetCovers": true,
-        "reason": null,
-        "source": "Microsoft Support, Manage your Recall snapshots and disk space: https://support.microsoft.com/en-us/windows/ai/ai-features/manage-your-recall-snapshots-and-disk-space"
-    }
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open Settings > Privacy & security > Recall & snapshots and confirm it is you with Windows Hello.",
+      "Under Delete snapshots choose Delete all.",
+      "Set Save snapshots to Off and pause snapshot saving from the Recall icon in the system tray."
+    ],
+    "risk": "All saved Recall snapshots are deleted, and snapshot saving is paused so nothing new is captured before the PC changes hands.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Support, Manage your Recall snapshots and disk space: https://support.microsoft.com/en-us/windows/ai/ai-features/manage-your-recall-snapshots-and-disk-space"
+  }
 }

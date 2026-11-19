@@ -1,6 +1,8 @@
 {
   "id": "browser.opera.profiles",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "browsers",
   "title": "Opera browser profile",
   "whyItMatters": "The Opera profile holds history, sessions, bookmarks and saved logins. Anyone who takes the disk can see what was browsed and which sites kept the user signed in.",
@@ -11,7 +13,11 @@
     "path": "opera/*/Preferences",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -20,7 +26,7 @@
   "notes": "Opera One builds put the profile in a Default subfolder; older builds wrote Preferences directly into ~/.config/opera, which this glob does not match. Opera GX uses ~/.config/opera-gx; Beta and Developer builds have their own folders.",
   "cleanup": {
     "action": "export-then-remove",
-    "exportFirst": "In Opera, save your bookmarks with the bookmark manager's export option and copy the Login Data file from the folder named in the plan.",
+    "exportFirst": "In Opera, export your saved passwords from the password manager in Settings and save bookmarks as HTML, then keep both files off this computer.",
     "signOut": "In Opera, sign out of your Opera account in the browser settings, so the account keeps the synced data and this computer stops using it.",
     "steps": [
       "Close every Opera window.",
@@ -28,7 +34,9 @@
       "Move the folder named in the plan to the Trash and empty the Trash."
     ],
     "risk": "Removes every Opera profile on this computer: history, bookmarks, saved passwords, cookies, extensions and open tabs.",
-    "closeApps": ["Opera"],
+    "closeApps": [
+      "Opera"
+    ],
     "resetCovers": true,
     "reason": null,
     "source": "Opera Help, Crashes and issues - back up your Opera files: https://help.opera.com/en/latest/crashes-and-issues/"

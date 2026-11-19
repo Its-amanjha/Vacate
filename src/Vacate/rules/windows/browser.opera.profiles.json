@@ -1,6 +1,8 @@
 {
   "id": "browser.opera.profiles",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "browsers",
   "title": "Opera browser profile",
   "whyItMatters": "The Opera profile holds history, sessions, bookmarks and saved logins. Anyone who takes the disk can see what was browsed and which sites kept the user signed in.",
@@ -11,7 +13,11 @@
     "path": "Opera Software/Opera Stable/Default/Preferences",
     "match": "files"
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -21,7 +27,7 @@
   "cleanup": {
     "action": "export-then-remove",
     "exportFirst": "In Opera, open the password manager in Settings and export your saved passwords to a file you keep; export bookmarks as HTML too.",
-    "signOut": "In Opera, open Settings > Synchronization and sign out, so the browser stops syncing with your Opera account.",
+    "signOut": "Sign out of your Opera account in the browser settings, so the account keeps the synced data and this PC stops using it.",
     "steps": [
       "Close every Opera window.",
       "Uninstall Opera from Settings > Apps > Installed apps.",

@@ -25,7 +25,7 @@
   "source": "Chromium user data directory docs, macOS profile layout: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
   "notes": "Matches Preferences, which every real profile has, so sibling folders such as Crash Reports are not matched. Profile folders are Default, Profile 1, ...",
   "cleanup": {
-    "action": "sign-out-then-remove",
+    "action": "export-then-remove",
     "exportFirst": "In Chrome save bookmarks with the bookmark manager export, and export any saved passwords you need.",
     "signOut": "In Chrome open Settings > You and Google and choose Turn off, so the Google account keeps its data but stops trusting this Mac.",
     "steps": [

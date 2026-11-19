@@ -1,6 +1,8 @@
 {
   "id": "msg.signal",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "messaging",
   "title": "Signal Desktop conversations",
   "whyItMatters": "Signal keeps a local copy of every conversation, attachment and draft. The database is encrypted, but the folder shows the account existed and how much was kept.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -22,15 +29,17 @@
   "cleanup": {
     "action": "sign-out-then-remove",
     "exportFirst": "Save any photos or files you want to keep from the conversations: Signal keeps no copy of them on a server.",
-    "signOut": "In Signal Desktop, open Settings > General and choose Delete Data, which unlinks this computer and wipes its message history.",
+    "signOut": "On your phone, open Signal > Settings > Linked devices and unlink this computer, so the account no longer trusts it.",
     "steps": [
-      "On your phone, open Signal, then Settings > Linked devices, and unlink this computer.",
+      "In Signal Desktop, open Settings and choose Delete Data to clear the local message store.",
       "Quit Signal Desktop from its tray icon.",
       "Uninstall Signal from the App Center if you are removing the app itself.",
       "Move the folder named in the plan to the Trash and empty the Trash."
     ],
     "risk": "Removes the local copy of every conversation, attachment and draft on this computer. The messages stay on the linked phone only.",
-    "closeApps": ["Signal"],
+    "closeApps": [
+      "Signal"
+    ],
     "resetCovers": true,
     "reason": null,
     "source": "Signal Support, Unlinking devices: https://support.signal.org/hc/en-us/articles/360007321111-Unlinking-devices"

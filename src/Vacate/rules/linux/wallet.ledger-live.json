@@ -1,6 +1,8 @@
 {
   "id": "wallet.ledger-live",
-  "platforms": ["linux"],
+  "platforms": [
+    "linux"
+  ],
   "category": "wallets",
   "title": "Ledger Live account data",
   "whyItMatters": "app.json lists every crypto account, its addresses and balance history. The keys stay on the hardware device, but the file shows what the person owns and how much.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -20,7 +27,7 @@
   "source": "Ledger Support, how to access the Ledger Wallet (formerly Ledger Live) user data file: app.json sits in the app's user data folder: https://support.ledger.com/article/8490479490333-zd",
   "notes": "source uncertain: Ledger documents the Windows and macOS folders but not the Linux one; ~/.config/Ledger Live is reported by Ledger support and users, and the app was later renamed to Ledger Wallet, so a current install may use ~/.config/Ledger Wallet instead. app.json holds accounts, settings and caches, never keys.",
   "cleanup": {
-    "action": "export-then-remove",
+    "action": "remove",
     "exportFirst": "Note the accounts shown in Ledger Live and keep the recovery phrase of the hardware wallet safe: only the account list lives on this computer.",
     "signOut": null,
     "steps": [
@@ -30,7 +37,9 @@
       "Move the folder named in the plan to the Trash and empty the Trash."
     ],
     "risk": "Deletes the account list, balance history and settings on this computer. The keys and funds stay on the hardware wallet.",
-    "closeApps": ["Ledger Live"],
+    "closeApps": [
+      "Ledger Live"
+    ],
     "resetCovers": true,
     "reason": null,
     "source": "Ledger Support, Ledger Live user data file: https://support.ledger.com/article/8490479490333-zd"

@@ -35,7 +35,7 @@
       "Open System Settings > General > Time Machine and check which backup disks this Mac used.",
       "Remove the backup disk with Forget Destination if backups are no longer wanted.",
       "Leave the system file named in the plan alone; the full reset at the end of this plan clears it.",
-      "Delete the old backups on any external disk you still have, as they hold full copies."
+      "Only if those backup disks leave with you, delete the old backups on them first: they hold full copies of this Mac."
     ],
     "risk": "Backups stop and local snapshots may still hold copies of files; an erase of the Mac removes them.",
     "closeApps": [],

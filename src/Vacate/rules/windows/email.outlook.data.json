@@ -1,6 +1,8 @@
 {
   "id": "email.outlook.data",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "email",
   "title": "Classic Outlook data files",
   "whyItMatters": "Outlook keeps offline copies of mail, calendar and contacts in OST files. A new owner could read correspondence the person thought was only online.",
@@ -12,7 +14,12 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
@@ -25,7 +32,7 @@
     "signOut": "In Outlook, remove the account in Account Settings so the profile no longer signs in on this PC.",
     "steps": [
       "Close Outlook.",
-      "Remove the email account or profile the way the vendor page describes.",
+      "In Outlook, open File > Account Settings > Account Settings, select the account and choose Remove.",
       "Delete the Outlook folder named in the plan if it is still there."
     ],
     "risk": "Removes the offline copy of mail, calendar and contacts for this profile; anything not exported and not on the server is gone.",

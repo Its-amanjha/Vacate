@@ -31,9 +31,9 @@
     "steps": [
       "Close every Chrome window so the history database is not in use.",
       "In Chrome open the history page and clear browsing data for all time.",
-      "Delete the Chrome folder named in the plan if the history file is still there."
+      "Delete the History file named in the plan if it is still there; leave the rest of the Chrome folder alone."
     ],
-    "risk": "The list of sites visited on this Mac is gone. History already synced to a Google account stays in that account.",
+    "risk": "The list of sites visited on this Mac is gone. Saved passwords and bookmarks in the same profile are not touched.",
     "closeApps": [
       "Google Chrome"
     ],

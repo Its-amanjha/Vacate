@@ -29,7 +29,7 @@
   "cleanup": {
     "action": "sign-out-then-remove",
     "exportFirst": "Save any file or image you downloaded through Discord that you still need, because the local cache goes with it.",
-    "signOut": "In Discord open the user settings and log out, then change the account password so old sessions end.",
+    "signOut": "In Discord open User Settings and choose Log Out, so the session on this Mac ends.",
     "steps": [
       "Quit Discord so its cached files are not in use.",
       "Move Discord to the Trash from Applications and empty the Trash.",

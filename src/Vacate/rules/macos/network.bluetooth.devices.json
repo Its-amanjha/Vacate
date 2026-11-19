@@ -30,7 +30,7 @@
     "exportFirst": null,
     "signOut": null,
     "steps": [
-      "In System Settings > Bluetooth, hold the pointer over a device that is not yours, then Control-click it.",
+      "In System Settings > Bluetooth, point at each device, Control-click it and choose Forget.",
       "Choose Forget, and repeat for every paired device you no longer use.",
       "Leave the system file named in the plan alone; the full reset at the end of this plan clears it."
     ],

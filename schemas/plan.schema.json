@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/vacate/vacate/schemas/plan.schema.json",
+  "title": "vacate cleanup plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "tool", "generatedAt", "report", "summary", "beforeYouStart", "steps", "fullReset", "limitations"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "vacate" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+      }
+    },
+    "generatedAt": { "$ref": "#/definitions/isoTime" },
+    "report": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["platform", "finishedAt", "complete", "redacted", "traces", "tool"],
+      "properties": {
+        "platform": { "$ref": "#/definitions/platform" },
+        "finishedAt": { "type": "string" },
+        "complete": { "type": "boolean" },
+        "redacted": { "type": "boolean" },
+        "traces": { "type": "integer", "minimum": 0 },
+        "tool": { "type": "string" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["steps", "traces", "tracesCovered", "withGuidance", "noGuidance", "ruleMissing", "resetCovers", "byStage"],
+      "properties": {
+        "steps": { "type": "integer", "minimum": 0 },
+        "traces": { "type": "integer", "minimum": 0 },
+        "tracesCovered": { "type": "integer", "minimum": 0 },
+        "withGuidance": { "type": "integer", "minimum": 0 },
+        "noGuidance": { "type": "integer", "minimum": 0 },
+        "ruleMissing": { "type": "integer", "minimum": 0 },
+        "resetCovers": { "type": "integer", "minimum": 0 },
+        "byStage": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["stage", "title", "steps"],
+            "properties": {
+              "stage": { "$ref": "#/definitions/stage" },
+              "title": { "type": "string", "minLength": 1 },
+              "steps": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "beforeYouStart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["closeApps", "notes"],
+      "properties": {
+        "closeApps": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "notes": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "steps": { "type": "array", "items": { "$ref": "#/definitions/step" } },
+    "fullReset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "when", "steps", "source"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "when": { "type": "string", "minLength": 1 },
+        "steps": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "source": { "type": "string", "minLength": 10 }
+      }
+    },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 10 } }
+  },
+  "definitions": {
+    "isoTime": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$" },
+    "platform": { "enum": ["windows", "macos", "linux"] },
+    "sensitivity": { "enum": ["low", "medium", "high", "critical"] },
+    "stage": { "enum": ["export", "sign-out", "uninstall", "remove", "review", "manual", "no-action"] },
+    "guidance": { "enum": ["guided", "no-guidance", "rule-missing"] },
+    "action": { "enum": ["export-then-remove", "sign-out-then-remove", "uninstall", "remove", "review", "none"] },
+    "locatorKind": { "enum": ["path", "registry", "wmi", "installed-program", "system-query"] },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "resolved", "exists", "sizeBytes", "itemCount"],
+      "properties": {
+        "kind": { "$ref": "#/definitions/locatorKind" },
+        "resolved": { "type": "string" },
+        "exists": { "type": "boolean" },
+        "sizeBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "itemCount": { "type": ["integer", "null"], "minimum": 0 }
+      }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step", "stage", "guidance", "ruleId", "title", "category", "sensitivity", "action", "exportFirst", "signOut", "instructions", "risk", "closeApps", "resetCovers", "reason", "source", "locations"],
+      "properties": {
+        "step": { "type": "integer", "minimum": 1 },
+        "stage": { "$ref": "#/definitions/stage" },
+        "guidance": { "$ref": "#/definitions/guidance" },
+        "ruleId": { "type": "string", "minLength": 1 },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "sensitivity": { "$ref": "#/definitions/sensitivity" },
+        "action": { "enum": ["export-then-remove", "sign-out-then-remove", "uninstall", "remove", "review", "none", null] },
+        "exportFirst": { "type": ["string", "null"] },
+        "signOut": { "type": ["string", "null"] },
+        "instructions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "risk": { "type": ["string", "null"] },
+        "closeApps": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "resetCovers": { "type": ["boolean", "null"] },
+        "reason": { "type": ["string", "null"] },
+        "source": { "type": ["string", "null"] },
+        "locations": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/location" } }
+      },
+      "allOf": [
+        { "if": { "properties": { "stage": { "const": "export" } } },
+          "then": { "properties": { "action": { "const": "export-then-remove" } } } },
+        { "if": { "properties": { "stage": { "const": "sign-out" } } },
+          "then": { "properties": { "action": { "const": "sign-out-then-remove" } } } },
+        { "if": { "properties": { "stage": { "const": "uninstall" } } },
+          "then": { "properties": { "action": { "const": "uninstall" } } } },
+        { "if": { "properties": { "stage": { "const": "remove" } } },
+          "then": { "properties": { "action": { "const": "remove" } } } },
+        { "if": { "properties": { "stage": { "const": "review" } } },
+          "then": { "properties": { "action": { "const": "review" } } } },
+        { "if": { "properties": { "stage": { "const": "no-action" } } },
+          "then": { "properties": { "action": { "const": "none" } } } },
+        { "if": { "properties": { "stage": { "const": "manual" } } },
+          "then": { "properties": { "action": { "type": "null" }, "resetCovers": { "type": "null" } } } }
+      ]
+    }
+  }
+}

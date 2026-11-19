@@ -1,46 +1,46 @@
 {
-    "id":  "browser.chrome.login-data",
-    "platforms":  [
-                      "windows"
-                  ],
-    "category":  "browsers",
-    "title":  "Chrome saved passwords",
-    "whyItMatters":  "Holds every username and password saved in Chrome. The values are encrypted with the Windows account, but scripts that can run as that user can decrypt them.",
-    "sensitivity":  "critical",
-    "locator":  {
-                    "kind":  "path",
-                    "root":  "LOCALAPPDATA",
-                    "path":  "Google/Chrome/User Data/*/Login Data",
-                    "match":  "files"
-                },
-    "measure":  [
-                    "exists",
-                    "sizeBytes",
-                    "lastWriteTime"
-                ],
-    "maxEntries":  5000,
-    "requiresElevation":  false,
-    "verifiedOn":  [
-                       "Windows 11 Pro 26300"
-                   ],
-    "verified":  true,
-    "source":  "Chromium user data directory docs, profile files include Login Data: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-    "notes":  "One Login Data file per profile. Delete it through Chrome (passwords settings) or the profile stays signed in and repopulates it.",
-    "cleanup":  {
-        "action":  "export-then-remove",
-        "exportFirst":  "In Chrome, open Settings > Autofill and passwords > Google Password Manager and use Export passwords to save them to a file you keep.",
-        "signOut":  "In Chrome, open Settings > You and Google and turn off sync, so the account stops keeping this PC in step.",
-        "steps":  [
-            "Close every Chrome window.",
-            "In Chrome, delete the saved passwords you no longer need from the password manager.",
-            "Delete the login data file named in the plan if it is still there."
-        ],
-        "risk":  "Without the export, every password saved in Chrome is lost; while the profile stays signed in, sync can restore the file.",
-        "closeApps":  [
-            "Google Chrome"
-        ],
-        "resetCovers":  true,
-        "reason":  null,
-        "source":  "Google Chrome Help, Manage passwords in Chrome: https://support.google.com/chrome/answer/95606"
-    }
+  "id": "browser.chrome.login-data",
+  "platforms": [
+    "windows"
+  ],
+  "category": "browsers",
+  "title": "Chrome saved passwords",
+  "whyItMatters": "Holds every username and password saved in Chrome. The values are encrypted with the Windows account, but scripts that can run as that user can decrypt them.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Google/Chrome/User Data/*/Login Data",
+    "match": "files"
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "Chromium user data directory docs, profile files include Login Data: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+  "notes": "One Login Data file per profile. Delete it through Chrome (passwords settings) or the profile stays signed in and repopulates it.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Chrome, open Settings > Autofill and passwords > Google Password Manager and use Export passwords to save them to a file you keep.",
+    "signOut": "In Chrome, open Settings > You and Google and turn off sync, so the account stops keeping this PC in step.",
+    "steps": [
+      "Close every Chrome window.",
+      "Delete the saved passwords in Chrome only if you want them gone from your Google account too; otherwise skip this step.",
+      "Delete the login data file named in the plan if it is still there."
+    ],
+    "risk": "Without the export, every password saved in Chrome is lost; while the profile stays signed in, sync can restore the file.",
+    "closeApps": [
+      "Google Chrome"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Google Chrome Help, Manage passwords in Chrome: https://support.google.com/chrome/answer/95606"
+  }
 }

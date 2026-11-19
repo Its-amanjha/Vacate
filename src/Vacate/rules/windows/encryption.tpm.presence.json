@@ -1,6 +1,8 @@
 {
   "id": "encryption.tpm.presence",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "disk-encryption",
   "title": "TPM presence and state",
   "whyItMatters": "A TPM changes how BitLocker keys are protected and what must be considered before the machine leaves the owner's control.",
@@ -9,24 +11,32 @@
     "kind": "wmi",
     "namespace": "root/CIMV2/Security/MicrosoftTpm",
     "className": "Win32_Tpm",
-    "properties": ["IsEnabled_InitialValue", "IsActivated_InitialValue"]
+    "properties": [
+      "IsEnabled_InitialValue",
+      "IsActivated_InitialValue"
+    ]
   },
-  "measure": ["exists", "properties"],
+  "measure": [
+    "exists",
+    "properties"
+  ],
   "maxEntries": 5000,
   "requiresElevation": true,
-  "verifiedOn": ["Windows 11 Pro 26300"],
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
   "verified": true,
   "source": "Microsoft Learn Win32_Tpm class: https://learn.microsoft.com/en-us/windows/win32/secprov/win32-tpm",
   "notes": "Read-only CIM query of the two initial-state properties. No TPM method is invoked and no ownership is changed. Absent on machines without a TPM.",
-    "cleanup": {
-        "action": "none",
-        "exportFirst": null,
-        "signOut": null,
-        "steps": [],
-        "risk": "A TPM is a chip state, not stored personal data, so there is nothing on this PC to delete. Clearing TPM ownership is an administrator decision that a reset of this PC already makes.",
-        "closeApps": [],
-        "resetCovers": true,
-        "reason": "This is a hardware fact about the machine, not a file or setting that holds personal data, so there is nothing to remove here.",
-        "source": "Microsoft Learn, Trusted Platform Module (TPM) overview: https://learn.microsoft.com/en-us/windows/security/hardware-security/tpm/trusted-platform-module-overview"
-    }
+  "cleanup": {
+    "action": "none",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [],
+    "risk": "A TPM is a chip state, not stored personal data, so there is nothing on this PC to delete. Clearing TPM ownership is an administrator decision that a reset of this PC already makes.",
+    "closeApps": [],
+    "resetCovers": false,
+    "reason": "This is a hardware fact about the machine, not a file or setting that holds personal data, so there is nothing to remove here.",
+    "source": "Microsoft Learn, Trusted Platform Module (TPM) overview: https://learn.microsoft.com/en-us/windows/security/hardware-security/tpm/trusted-platform-module-overview"
+  }
 }

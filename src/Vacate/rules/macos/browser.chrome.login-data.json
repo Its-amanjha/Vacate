@@ -31,7 +31,7 @@
     "steps": [
       "Close every Chrome window so the login data file is not locked.",
       "Delete the saved passwords in the Chrome password manager.",
-      "Delete the Chrome folder named in the plan if the login data file is still there."
+      "Delete the Login Data file named in the plan if it is still there; leave the rest of the Chrome folder alone."
     ],
     "risk": "Saved website passwords leave this Mac. Anything you did not export cannot be recovered from it.",
     "closeApps": [

@@ -1,6 +1,8 @@
 {
   "id": "encryption.bitlocker.status",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "disk-encryption",
   "title": "BitLocker protection status",
   "whyItMatters": "Whether each drive is protected determines how much data someone can read from the disk after handover, and whether a recovery key must be recorded.",
@@ -9,28 +11,36 @@
     "kind": "wmi",
     "namespace": "root/CIMV2/Security/MicrosoftVolumeEncryption",
     "className": "Win32_EncryptableVolume",
-    "properties": ["DriveLetter", "ProtectionStatus"]
+    "properties": [
+      "DriveLetter",
+      "ProtectionStatus"
+    ]
   },
-  "measure": ["exists", "properties"],
+  "measure": [
+    "exists",
+    "properties"
+  ],
   "maxEntries": 5000,
   "requiresElevation": true,
-  "verifiedOn": ["Windows 11 Pro 26300"],
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
   "verified": true,
   "source": "Microsoft Learn Win32_EncryptableVolume class: https://learn.microsoft.com/en-us/windows/win32/secprov/win32-encryptablevolume",
   "notes": "Read-only CIM query. ProtectionStatus 1 means protected, 0 means off. Recovery keys are not retrieved; only the two named properties are requested.",
-    "cleanup": {
-        "action": "review",
-        "exportFirst": "Record the BitLocker recovery key for every protected drive, and keep that record off this PC, before the machine changes hands.",
-        "signOut": null,
-        "steps": [
-            "Note which drives the plan shows as protected.",
-            "Find the recovery key in your Microsoft account or your organisation's directory and store it somewhere else.",
-            "Leave protection on until the PC is reset, because a reset needs the key."
-        ],
-        "risk": "Turning protection off leaves the drive readable to anyone who gets the disk. Losing the recovery key locks you out of an encrypted drive for good.",
-        "closeApps": [],
-        "resetCovers": true,
-        "reason": null,
-        "source": "Microsoft Learn, BitLocker overview: https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/"
-    }
+  "cleanup": {
+    "action": "review",
+    "exportFirst": "Record the BitLocker recovery key for every protected drive, and keep that record off this PC, before the machine changes hands.",
+    "signOut": null,
+    "steps": [
+      "Note which drives the plan shows as protected.",
+      "Find the recovery key in your Microsoft account or your organisation's directory and store it somewhere else.",
+      "Leave protection on until the PC is reset, because a reset needs the key."
+    ],
+    "risk": "Turning protection off leaves the drive readable to anyone who gets the disk. Losing the recovery key locks you out of an encrypted drive for good.",
+    "closeApps": [],
+    "resetCovers": false,
+    "reason": null,
+    "source": "Microsoft Learn, BitLocker overview: https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/"
+  }
 }

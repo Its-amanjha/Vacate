@@ -30,7 +30,7 @@
     "steps": [],
     "risk": "Nothing is lost here; if FileVault is off, turn it on before handover so the disk cannot be read.",
     "closeApps": [],
-    "resetCovers": true,
+    "resetCovers": false,
     "reason": "FileVault is a setting, not a store of personal data, so the plan only reports whether it is on.",
     "source": "Apple Support, Protect data on your Mac with FileVault: https://support.apple.com/guide/mac-help/protect-data-on-your-mac-with-filevault-mh11785/mac"
   }

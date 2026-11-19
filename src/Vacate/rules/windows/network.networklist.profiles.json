@@ -31,7 +31,7 @@
       "Forget the Wi-Fi networks you no longer use in Settings > Network & internet > Wi-Fi > Manage known networks.",
       "Do not edit this list in Registry Editor; Windows manages it, and the full reset clears the network history named in the plan."
     ],
-    "risk": "Removes the remembered network list for the machine. Windows adds a profile again for the network you are connected to.",
+    "risk": "Windows keeps this list itself. Forgetting networks in Settings is enough, and the full reset clears the rest.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

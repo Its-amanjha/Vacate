@@ -26,7 +26,7 @@
   "source": "Microsoft Learn: WSL distribution list under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss - https://learn.microsoft.com/en-us/windows/wsl/disk-space",
   "notes": "One GUID subkey per installed distribution. Names, BasePath values and VHD files are not read; only key, value and subkey counts are reported.",
   "cleanup": {
-    "action": "uninstall",
+    "action": "export-then-remove",
     "exportFirst": "Start each distribution and copy out the files and keys you still need; uninstalling deletes the whole file system.",
     "signOut": null,
     "steps": [

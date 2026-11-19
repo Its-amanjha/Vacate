@@ -26,13 +26,13 @@
   "source": "Microsoft Learn, Run and RunOnce registry keys: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
   "notes": "Machine-wide autostart list. Value data is never read and registry last-write time is unavailable (D3). The 32-bit view is not queried.",
   "cleanup": {
-    "action": "remove",
+    "action": "review",
     "exportFirst": null,
     "signOut": null,
     "steps": [
-      "Open Task Manager and select Startup apps.",
-      "Disable the entries for programs you no longer want to start with Windows.",
-      "Uninstall programs you no longer need; the full reset clears anything left in the key named in the plan."
+      "Entries here start for every user of this PC. Disable the ones you do not want in Task Manager > Startup apps.",
+      "Uninstall programs you no longer need from Settings > Apps > Installed apps.",
+      "Only an administrator can remove the entry itself; without one, the full reset at the end of this plan clears it."
     ],
     "risk": "Removes those programs from the machine-wide autostart list, so they no longer start for any user. A driver or security tool named here may stop loading.",
     "closeApps": [],

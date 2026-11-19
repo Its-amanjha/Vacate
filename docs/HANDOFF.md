@@ -1,6 +1,9 @@
-# vacate - Phase 1 hand-off report
+# vacate - hand-off report (Phase 1 and Phase 2)
 
-Date: 2026-11-19 · Repository: https://github.com/Its-amanjha/Vacate · Spec: [docs/SPEC.md](SPEC.md)
+Phase 1: 2026-11-19 · Phase 2: 2026-11-20 · Repository: https://github.com/Its-amanjha/Vacate ·
+Spec: [docs/SPEC.md](SPEC.md) · User guide: [docs/GUIDE.md](GUIDE.md)
+
+Sections 1-7 are the Phase 1 report the spec asks for. Section 8 is Phase 2.
 
 Phase 1 is a **read-only audit**. vacate scans a Windows, Linux or macOS computer for the personal
 data and traces a person leaves behind, and writes a report plus an ordered de-link checklist. It
@@ -37,20 +40,22 @@ prints), `summary.md`, `checklist.md` and `scan.log` into `runs/<timestamp>/`.
 
 ## 3. Test summary lines
 
-Run on 2026-11-19 against the code published in this report:
+Run on 2026-11-20 against the code published in this report (Phase 2 included):
 
 ```
-SUMMARY [Desktop 5.1.26100.9818] passed=299 failed=0 skipped=7
-SUMMARY [Core 7.7.0] passed=302 failed=0 skipped=4 (Windows)
-SUMMARY [Core 7.7.0] passed=301 failed=0 skipped=5 (Ubuntu 24.04, WSL)
+SUMMARY [Desktop 5.1.26100.9818] passed=341 failed=0 skipped=14
+SUMMARY [Core 7.7.0] passed=351 failed=0 skipped=4 (Windows)
+SUMMARY [Core 7.7.0] passed=350 failed=0 skipped=5 (Ubuntu 24.04, WSL)
 LINT issues=0
 ```
 
-- GitHub Actions run `44559222971` on `292ee21`: **completed/success** - test (ubuntu-pwsh)=success, test (windows-pwsh)=success, test (macos-pwsh)=success, test (windows-powershell)=success.
-  Each job also runs a redacted sample scan and uploads it as an artifact.
-- Sabotage self-test (`tools/Invoke-SabotageTest.ps1`): **all 6 mutations caught** (force
+- Last CI run checked by hand: GitHub Actions run `44559222971` on `292ee21` (Phase 1
+  code): **completed/success** - test (ubuntu-pwsh)=success, test (windows-pwsh)=success, test (macos-pwsh)=success, test (windows-powershell)=success. Each job also runs a redacted sample scan and,
+  since Phase 2, builds a plan from it, and uploads both as an artifact.
+- Sabotage self-test (`tools/Invoke-SabotageTest.ps1`): **all 8 mutations caught** (force
   exists, drop a rule, skip the link guard, ignore the budget, disable redaction, let a
-  wrong-platform rule run). Details in [SABOTAGE.md](SABOTAGE.md).
+  wrong-platform rule run, and for Phase 2: the plan drops a trace, the cleanup check allows
+  delete commands). Details in [SABOTAGE.md](SABOTAGE.md).
 - Performance (`tests/perf`, opt-in): a 50,000-file synthetic profile scans in 26.7 s on
   PowerShell 5.1, 13.6 s on PowerShell 7 (Windows) and 13.4 s on Ubuntu, well inside the 120 s budget.
 - Static safety test: no network calls, no dynamic code, no shell, no writes outside the single
@@ -125,6 +130,12 @@ Full text and reasons in [DECISIONS.md](../DECISIONS.md).
 - **D41** macOS rules found by the CI runner scan are marked `verified: true` with `verifiedOn: ["macOS 26.7.2 (GitHub Actions CI)"]`, i.e.
 - **D42** Each rule's `measure` list is applied by the engine to every trace: undeclared size, date, count or properties are dropped.
 - **D43** `docs/SPEC.md` (the original brief) is published with the code; internal team notes are not, and code comments no longer cite them.
+- **D44** Phase 2 cleanup knowledge lives in each rule file as an optional `cleanup` object (action, exportFirst, signOut, steps, risk, closeApps, resetCovers, reason, source), validated by the loa...
+- **D45** The plan accounts for every trace in the report: each trace appears in exactly one step.
+- **D46** The plan ends with the platform's built-in full reset (Windows Reset this PC, macOS Erase All Content and Settings, Linux reinstall with disk erase), marked "only if you are giving the wh...
+- **D47** Cleanup text is instructions in words: menu paths and plain descriptions.
+- **D48** `vacate plan -Run <dir>` reads `report.json` from an existing run folder and writes `plan.json`, `plan.md` and `plan.html` into that folder through the single output writer.
+- **D49** Plan steps are one per rule (all of that rule's locations listed), ordered by stage (export, sign out, uninstall, remove, review, manual, no action), then sensitivity (critical first), th...
 
 ## 6. Known false-positive risks
 
@@ -153,6 +164,47 @@ how, the risk, and an export-first warning.
 - Tests that map every trace to a plan step or an explicit "no action", per platform.
 - Before Phase 2: verify macOS on a personal Mac, run the elevated Windows scan, and keep rule ids
   stable so saved reports can be planned later.
+
+## 8. Phase 2: guided cleanup (dry run)
+
+Phase 2 is done. `vacate plan -Run <dir>` reads a saved `report.json` and writes `plan.json`,
+`plan.md` and `plan.html` into the same run folder. It never scans and never changes anything.
+
+| | |
+|---|---|
+| Rules with cleanup guidance | **223 of 223** (a test fails if any rule has none) |
+| Real Windows scan (elevated) | 44 plan steps cover all 49 traces, 44 with guidance |
+| Real Linux scan (WSL) | 20 plan steps cover all 26 traces, 20 with guidance |
+| Plan schema | `schemas/plan.schema.json`, checked by tests on PowerShell 7 |
+| Decisions | D44-D49 |
+
+How the plan works:
+- **Every trace is covered** (D45). One step per rule, listing all its locations. A rule without
+  guidance or missing from the catalog still gets a step that says so.
+- **Order** (D49): save what you want to keep, sign out, uninstall, remove, decide yourself, no
+  guidance, no action; then critical before low; then rule id.
+- **Words only** (D47). The loader rejects cleanup text with a shell delete command or backtick.
+- **No hand-deleting system-managed data.** Guidance uses the app or system settings, or points
+  to the full reset. System logs are never cleared by hand: that can look like hiding activity.
+- **Ends with the built-in reset** (D46): Reset this PC, Erase All Content and Settings, or a
+  reinstall over the whole disk. vacate does not erase.
+
+How the guidance was checked: written from vendor help pages per platform, then reviewed rule by
+rule by the integrator and once more by an independent reviewer (47 findings: 3 high, 9 medium,
+35 low). All high and medium findings and the lows that changed behaviour were fixed; 20 weak
+sources were replaced with exact vendor articles.
+
+Not verified:
+- **No step was followed by hand on a real machine.** Menu paths come from vendor documentation
+  and can move with updates. The plan points to the vendor page for each step.
+- macOS guidance has the same limit as macOS rules: no personal Mac has been used.
+- The plan cannot tell whether an export worked or an account is really signed out. A second scan
+  shows what is still present.
+
+What Phase 3 (safe deletion) would require, from the spec roadmap: allow-listed roots, link
+resolution, Recycle Bin or Trash by default, an exact-path registry and plist allow-list,
+`-Execute -Confirm <MACHINENAME>`, a verification re-scan and an undo log. The Phase 2 plan
+(`plan.json`) is the natural input: each step already names its rule, action and locations.
 
 ## Legal and ethical scope
 

@@ -1,43 +1,42 @@
 {
-    "id":  "network.printers.user",
-    "platforms":  [
-                      "windows"
-                  ],
-    "category":  "network",
-    "title":  "Mapped network printers",
-    "whyItMatters":  "Per-user printer connections reveal office or home network resources the account used, including server and share names.",
-    "sensitivity":  "low",
-    "locator":  {
-                    "kind":  "registry",
-                    "hive":  "HKCU",
-                    "key":  "Printers\\Connections"
-                },
-    "measure":  [
-                    "exists",
-                    "valueCount",
-                    "subkeyCount"
-                ],
-    "maxEntries":  5000,
-    "requiresElevation":  false,
-    "verifiedOn":  [
-                       "Windows 11 Pro 26300"
-                   ],
-    "verified":  true,
-    "source":  "Windows per-user mapped printers under HKCU\\Printers\\Connections (Microsoft Learn printer connection documentation)",
-    "notes":  "One subkey per connected printer. Connection strings are not read; only counts are reported. Registry last-write time is unavailable (D3).",
-    "cleanup": {
-        "action": "remove",
-        "exportFirst": null,
-        "signOut": null,
-        "steps": [
-            "Open Settings > Bluetooth & devices > Printers & scanners.",
-            "Select each printer the plan lists and choose Remove.",
-            "Reconnect a printer you still need from the same page."
-        ],
-        "risk": "Removes the printer connections from this account. The printers stay available to other machines and can be added again.",
-        "closeApps": [],
-        "resetCovers": true,
-        "reason": null,
-        "source": "Microsoft Support, Fix shared printer connection problems in Windows: https://support.microsoft.com/en-us/windows/hardware/printer/fix-shared-printer-connection-problems-in-windows"
-    }
+  "id": "network.printers.user",
+  "platforms": [
+    "windows"
+  ],
+  "category": "network",
+  "title": "Mapped network printers",
+  "whyItMatters": "Per-user printer connections reveal office or home network resources the account used, including server and share names.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Printers\\Connections"
+  },
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "Windows per-user mapped printers under HKCU\\Printers\\Connections (Microsoft Learn printer connection documentation)",
+  "notes": "One subkey per connected printer. Connection strings are not read; only counts are reported. Registry last-write time is unavailable (D3).",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open Settings > Bluetooth & devices > Printers & scanners.",
+      "Select each printer the plan lists and choose Remove."
+    ],
+    "risk": "Removes the printer connections from this account. The printers stay available to other machines and can be added again.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Support, Fix shared printer connection problems in Windows: https://support.microsoft.com/en-us/windows/hardware/printer/fix-shared-printer-connection-problems-in-windows"
+  }
 }

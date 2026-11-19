@@ -40,7 +40,8 @@ $hashNames = @('src', 'tests', 'schemas', 'vacate.ps1', 'PSScriptAnalyzerSetting
 $hostExe = (Get-Process -Id $PID).Path
 $docPath = Join-Path $repoRoot 'docs/SABOTAGE.md'
 
-# The six mutations from SPEC "Harness self-test". Every anchor must match exactly once, so a
+# The six mutations from SPEC "Harness self-test", plus two Phase 2 mutations (the planner and
+# the cleanup text check). Every anchor must match exactly once, so a
 # refactor makes the harness throw instead of silently running a mutation that no longer applies.
 $mutations = @(
     [pscustomobject][ordered]@{
@@ -94,6 +95,24 @@ $mutations = @(
         Anchor  = '        if (-not $Platform -or @($r.platforms) -ccontains $Platform) { $rules.Add($r) } else { $na.Add($r) }'
         Replace = '        $rules.Add($r)'
         Expect  = 'Import-VacateRuleSet must park other platforms in NotApplicable'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'plan drops a trace'
+        File    = 'src/Vacate/Private/Planner.ps1'
+        Kind    = 'replace'
+        Anchor  = '    if ($covered -ne $traces.Count) { throw "plan: internal error, $covered of $($traces.Count) traces covered." }'
+        # Drops the last location of every step after the coverage total was counted, and makes
+        # the coverage throw unreachable, so the plan silently loses traces without complaining.
+        Replace = '    foreach ($s in $stepArr) { if (@($s.locations).Count -gt 0) { $s.locations = @(@($s.locations) | Select-Object -First (@($s.locations).Count - 1)) } }; if ($false) { throw "plan: internal error, $covered of $($traces.Count) traces covered." }'
+        Expect  = 'New-VacatePlan must cover every trace exactly once'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'cleanup allows delete commands'
+        File    = 'src/Vacate/Private/RuleLoader.ps1'
+        Kind    = 'replace'
+        Anchor  = '    elseif ($Value -match $script:VacateCleanupForbiddenPattern) {'
+        Replace = '    elseif ($Value -match ''zzz-never-matches-zzz'') {'
+        Expect  = 'Test-VacateCleanup must reject shell commands and backticks'
     }
 )
 

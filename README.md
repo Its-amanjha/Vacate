@@ -22,9 +22,15 @@ result.
 
 Phase 1 works end to end on Windows 11 (PowerShell 5.1 and 7) and on Ubuntu 24.04 (tested in
 WSL, PowerShell 7): `scan`, `rules`, `report`, `checklist` and `version` all run. The catalog has
-about 200 rules across Windows, Linux and macOS. Rules confirmed on a real machine are marked
+223 rules across Windows, Linux and macOS. Rules confirmed on a real machine are marked
 `verified` in [RULES.md](RULES.md); the rest still run and are listed as unverified in every
-report. macOS is **ci-verified**: 24 macOS rules were confirmed by a scan on the GitHub Actions macOS 26.7.2 runner, not yet on a personal Mac.
+report. macOS is **ci-verified**: 24 macOS rules were confirmed by a scan on the GitHub Actions
+macOS 26.7.2 runner, not yet on a personal Mac.
+
+Phase 2 adds `plan -Run <dir>`: a step-by-step cleanup plan for every trace in a report (what to
+save, where to sign out, what to remove, the risk), ending with the operating system's own reset.
+It is advice only; vacate still changes nothing. New here? Read the plain-language
+[guide](docs/GUIDE.md).
 
 ## Quickstart
 
@@ -129,7 +135,7 @@ On Windows use `.\vacate.ps1 <command>`. On macOS and Linux use `pwsh ./vacate.p
 | `rules validate` | Checks every rule file. Exits 1 if any file is invalid. |
 | `report -Run <dir>` | Rebuilds `report.html`, `summary.md` and `checklist.md` from an existing `report.json`. |
 | `checklist -Run <dir>` | Rebuilds `checklist.md` from an existing `report.json`. |
-| `plan -Run <dir>` | Phase 2 (in progress): writes `plan.json`, `plan.md` and `plan.html`, a step-by-step cleanup plan for every trace in the report. Advice only; vacate still changes nothing. |
+| `plan -Run <dir>` | Phase 2: writes `plan.json`, `plan.md` and `plan.html`, a step-by-step cleanup plan for every trace in the report. Advice only; vacate still changes nothing. |
 | `version` | Prints the version. |
 
 ## Output files
@@ -164,7 +170,7 @@ vacate is for devices you own or are authorised to hand over or erase. Do not us
 evidence, defeat a legal hold, or falsify records. vacate is not a secure-erase tool and does not
 certify that a device is clean.
 
-## Phase 1 hand-off
+## Hand-off report
 
-What works per platform, what is still unverified, test results and every design decision:
-[docs/HANDOFF.md](docs/HANDOFF.md).
+What works per platform, what is still unverified, test results and every design decision, for
+Phase 1 and Phase 2: [docs/HANDOFF.md](docs/HANDOFF.md).

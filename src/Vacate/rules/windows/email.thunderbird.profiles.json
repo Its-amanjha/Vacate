@@ -1,0 +1,22 @@
+{
+  "id": "email.thunderbird.profiles",
+  "platforms": ["windows"],
+  "category": "email",
+  "title": "Thunderbird mail profiles",
+  "whyItMatters": "Thunderbird profiles hold local mail folders, account settings and address books. Their size shows how much correspondence remains on this machine.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Thunderbird/Profiles/*",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Thunderbird profile directory %APPDATA%/Thunderbird/Profiles - https://github.com/RyanDFIR/hindsight",
+  "notes": "Each profile folder has a random name ending in .default-release. Mail folders and address books are counted only; no message is read."
+}

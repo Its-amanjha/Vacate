@@ -1,0 +1,21 @@
+{
+  "id": "browser.opera.profiles",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Opera browser profile",
+  "whyItMatters": "Opera keeps one browsing identity on macOS. Its history and saved logins show where the user went and what they signed into.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/com.operasoftware.Opera/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Opera macOS profile root ~/Library/Application Support/com.operasoftware.Opera - https://www.browserforensics.app/en/blog/brave-opera-vivaldi-profile-locations",
+  "notes": "Opera uses a single-profile layout on macOS, with no Default subfolder. Opera GX and Beta use sibling folders and are not covered here."
+}

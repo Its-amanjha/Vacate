@@ -1,0 +1,21 @@
+{
+  "id": "browser.edge.profiles",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Microsoft Edge browser profiles",
+  "whyItMatters": "Edge profiles can be signed into work or personal accounts, so they reveal which identities were used on this Mac.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Microsoft Edge/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Chromium browser profile roots on macOS, Edge at ~/Library/Application Support/Microsoft Edge - https://www.macforensics.app/en/artifacts/chrome-firefox",
+  "notes": "Preferences marks each real profile. Cookies and history sit in the same profile folder but are separate rules elsewhere in the catalog."
+}

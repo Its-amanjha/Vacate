@@ -1,0 +1,21 @@
+{
+  "id": "browser.chrome.profiles",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Chrome browser profiles",
+  "whyItMatters": "Each Chrome profile is a separate browsing identity with its own sign-ins. Their names show how many identities were kept on this Mac.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Google/Chrome/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Chromium user data directory docs, macOS profile layout: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+  "notes": "Matches Preferences, which every real profile has, so sibling folders such as Crash Reports are not matched. Profile folders are Default, Profile 1, ..."
+}

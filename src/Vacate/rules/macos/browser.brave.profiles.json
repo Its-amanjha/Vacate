@@ -1,0 +1,21 @@
+{
+  "id": "browser.brave.profiles",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Brave browser profiles",
+  "whyItMatters": "Brave profiles hold separate browsing identities and saved data. Their count shows whether the browser was used for more than one identity.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/BraveSoftware/Brave-Browser/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Brave profile locations: macOS ~/Library/Application Support/BraveSoftware/Brave-Browser - https://www.browserforensics.app/en/blog/brave-opera-vivaldi-profile-locations",
+  "notes": "Chromium layout without the extra User Data segment found on Windows. Preferences marks a real profile (Default, Profile 1, ...)."
+}

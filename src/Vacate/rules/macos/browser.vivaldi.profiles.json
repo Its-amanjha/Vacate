@@ -1,0 +1,21 @@
+{
+  "id": "browser.vivaldi.profiles",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Vivaldi browser profiles",
+  "whyItMatters": "Vivaldi profiles are separate browsing identities with their own history and sign-ins, which matter before a handover.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Vivaldi/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Vivaldi profile locations: macOS ~/Library/Application Support/Vivaldi - https://www.browserforensics.app/en/blog/brave-opera-vivaldi-profile-locations",
+  "notes": "Chromium-style profile folders (Default, Profile 1, ...), each identified by its Preferences file. No file content is read."
+}

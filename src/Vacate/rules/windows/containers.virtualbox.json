@@ -1,0 +1,22 @@
+{
+  "id": "containers.virtualbox",
+  "platforms": ["windows"],
+  "category": "containers-vms",
+  "title": "VirtualBox virtual machines",
+  "whyItMatters": "A virtual machine folder contains a whole second computer: settings, virtual disks and snapshots. It can hold data no other rule will see.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "VirtualBox VMs",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Oracle VirtualBox User Guide, default machine folder $HOME/VirtualBox VMs - https://www.virtualbox.org/manual/ch10.html",
+  "notes": "Default machine folder only. Unconfirmed: a custom Default Machine Folder changed in VirtualBox preferences is not matched. Virtual disks are counted by size, never opened."
+}

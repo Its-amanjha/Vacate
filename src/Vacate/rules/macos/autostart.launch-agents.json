@@ -1,0 +1,21 @@
+{
+  "id": "autostart.launch-agents",
+  "platforms": ["macos"],
+  "category": "autostart",
+  "title": "User launch agents",
+  "whyItMatters": "Launch agents start programs at login. Their names reveal background tools that may keep sessions or sync data running.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "LaunchAgents/*.plist",
+    "match": "files"
+  },
+  "measure": ["exists", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple launchd documentation: per-user agents live in ~/Library/LaunchAgents - https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html",
+  "notes": "Names only; plists are never parsed and no launchd command is invoked. System agents under /Library/LaunchAgents are out of scope."
+}

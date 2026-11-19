@@ -9,6 +9,9 @@ BeforeAll {
 
     $script:onWindows = ($PSVersionTable.PSEdition -eq 'Desktop') -or ((Get-Variable IsWindows -ValueOnly -ErrorAction SilentlyContinue) -eq $true)
     $script:platformName = InModuleScope Vacate { Get-VacatePlatform }
+    # The fixture profile uses POSIX paths on every non-Windows host, so a macOS host runs the
+    # linux fixture rules; test.macos.only then stays the "other platform" rule (CI macOS job).
+    if ($script:platformName -eq 'macos') { $script:platformName = 'linux' }
 
     # Setup fixture tree under [IO.Path]::GetTempPath()
     $script:tree = Join-Path ([IO.Path]::GetTempPath()) ('vacate-int-' + [guid]::NewGuid().ToString('N'))

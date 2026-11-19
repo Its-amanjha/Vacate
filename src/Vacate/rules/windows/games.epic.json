@@ -1,0 +1,22 @@
+{
+  "id": "games.epic",
+  "platforms": ["windows"],
+  "category": "games-licenses",
+  "title": "Epic Games Launcher data",
+  "whyItMatters": "The launcher's Saved folder holds account-ID files, settings and local game saves. It shows which Epic accounts were used on this PC.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "EpicGamesLauncher/Saved",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Epic Games support: account ID .dat files under %LOCALAPPDATA%/EpicGamesLauncher/Saved/Data - https://www.epicgames.com/help/c-45487929/c-38978022/what-is-an-epic-games-account-id-and-where-can-i-find-it-a24590453",
+  "notes": "Account-ID files and save folders are counted, never opened. Game saves in other locations (Documents, Saved Games) are out of scope."
+}

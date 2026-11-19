@@ -1,0 +1,22 @@
+{
+  "id": "games.battlenet",
+  "platforms": ["windows"],
+  "category": "games-licenses",
+  "title": "Battle.net launcher data",
+  "whyItMatters": "The per-user Battle.net folder holds the launcher config and cache. It shows which Blizzard account was signed in on this machine.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Battle.net",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Battle.net.config in %APPDATA%/Battle.net (Windows Report) and Blizzard Support article 34719 for the machine-wide ProgramData copy",
+  "notes": "Only the per-user roaming folder is matched. The machine-wide C:/ProgramData/Battle.net copy is not covered. Config files are never parsed."
+}

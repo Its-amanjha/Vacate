@@ -1,0 +1,22 @@
+{
+  "id": "files.desktop",
+  "platforms": ["windows"],
+  "category": "personal-files",
+  "title": "Desktop files",
+  "whyItMatters": "Whatever was left on the desktop: documents, photos, screenshots, exports and shortcuts. File names alone often reveal health, money, family and work details.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Desktop",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Windows known folder Desktop, default path under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
+  "notes": "If OneDrive Known Folder Move is on, the real Desktop is %USERPROFILE% OneDrive Desktop and this folder may be empty or a stub; both are counted separately. The Desktop folder of every user on the PC is the user-profiles rules' job."
+}

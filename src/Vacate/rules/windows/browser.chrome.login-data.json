@@ -1,0 +1,21 @@
+{
+  "id": "browser.chrome.login-data",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Chrome saved passwords",
+  "whyItMatters": "Holds every username and password saved in Chrome. The values are encrypted with the Windows account, but scripts that can run as that user can decrypt them.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Google/Chrome/User Data/*/Login Data",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Chromium user data directory docs, profile files include Login Data: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+  "notes": "One Login Data file per profile. Delete it through Chrome (passwords settings) or the profile stays signed in and repopulates it."
+}

@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.places",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Firefox browsing history",
+  "whyItMatters": "Lists every page visited with timestamps and visit counts, plus bookmarks and tags. It shows interests, habits and often which services the person uses.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Mozilla/Firefox/Profiles/*/places.sqlite",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Mozilla Support, profiles where Firefox stores user data (places.sqlite): https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
+  "notes": "One places.sqlite per profile, with places.sqlite-wal and -shm alongside while Firefox is open."
+}

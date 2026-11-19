@@ -1,0 +1,21 @@
+{
+  "id": "browser.opera.profiles",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Opera browser profile",
+  "whyItMatters": "The Opera profile holds history, sessions, bookmarks and saved logins. Anyone who takes the disk can see what was browsed and which sites kept the user signed in.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Opera Software/Opera Stable/Default/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Opera Help, About Opera shows the profile path; Opera keeps user data in Roaming under Opera Software/Opera Stable: https://help.opera.com/en/latest/",
+  "notes": "Opera is Chromium-based but keeps its user data in Roaming, with the profile in a Default subfolder (newer builds). Older builds put Preferences directly in Opera Stable. Opera GX uses Opera GX Stable; Beta and Developer builds have their own folders."
+}

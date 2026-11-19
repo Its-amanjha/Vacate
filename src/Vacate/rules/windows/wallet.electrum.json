@@ -1,0 +1,22 @@
+{
+  "id": "wallet.electrum",
+  "platforms": ["windows"],
+  "category": "wallets",
+  "title": "Electrum wallet files",
+  "whyItMatters": "Electrum keeps one file per wallet, encrypted with the wallet password, plus labels and addresses. A copy lets someone try passwords offline and link the person to their Bitcoin.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Electrum/wallets",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Electrum documentation, Where is the Electrum datadir located: https://docs.electrum.org/en/latest/faq.html",
+  "notes": "One file per wallet, default_wallet on a fresh install. The parent folder holds config, logs and blockchain headers. A wallet saved elsewhere by the user is only caught by the personal-folder rules."
+}

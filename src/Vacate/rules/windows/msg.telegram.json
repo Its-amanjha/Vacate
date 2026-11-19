@@ -1,0 +1,22 @@
+{
+  "id": "msg.telegram",
+  "platforms": ["windows"],
+  "category": "messaging",
+  "title": "Telegram Desktop data folder",
+  "whyItMatters": "Telegram Desktop keeps the signed-in account, cached chats, photos and files locally. The tdata folder is enough to open the account on another computer.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Telegram Desktop/tdata",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Telegram Desktop is open source and keeps its working folder (tdata) in the app-data folder: https://github.com/telegramdesktop/tdesktop",
+  "notes": "Standard installed build. A portable build keeps tdata next to Telegram.exe, the Microsoft Store build uses Telegram Desktop UWP under %APPDATA%, and a custom working directory moves it. A local passcode encrypts the key data."
+}

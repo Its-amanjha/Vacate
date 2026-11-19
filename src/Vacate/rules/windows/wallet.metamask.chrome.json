@@ -1,0 +1,22 @@
+{
+  "id": "wallet.metamask.chrome",
+  "platforms": ["windows"],
+  "category": "wallets",
+  "title": "MetaMask wallet in Chrome",
+  "whyItMatters": "The extension stores the encrypted vault with the wallet seed and every key it manages, plus a record of accounts and networks. With the password the funds are gone.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Google/Chrome/User Data/*/Local Extension Settings/nkbihfbeogaeaoehlefnkodbefgpgknn",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "MetaMask extension id nkbihfbeogaeaoehlefnkodbefgpgknn from its Chrome Web Store listing: https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn",
+  "notes": "Local Extension Settings holds the chrome.storage.local LevelDB. Brave installs MetaMask from the Chrome Web Store and uses the same extension id under its own user data folder. The wildcard matches any Chrome profile."
+}

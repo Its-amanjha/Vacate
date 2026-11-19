@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.cookies",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Firefox cookies and site sessions",
+  "whyItMatters": "Cookie values can still open sites the person stayed signed into. On Windows they are protected with the account, but anything running as that user can read them.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Mozilla/Firefox/Profiles/*/cookies.sqlite",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Mozilla Support, profiles where Firefox stores user data (cookies.sqlite): https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
+  "notes": "One cookies.sqlite per profile; -wal and -shm files appear while Firefox is open."
+}

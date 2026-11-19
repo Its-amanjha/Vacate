@@ -1,0 +1,22 @@
+{
+  "id": "msg.slack",
+  "platforms": ["windows"],
+  "category": "messaging",
+  "title": "Slack workspaces and messages",
+  "whyItMatters": "Slack keeps downloaded files, cached channel history and the signed-in workspaces on the computer. It shows which employers and teams the person belonged to.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Slack",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Slack desktop is an Electron app with user data in the app-data folder (per-workspace cache and downloads): https://slack.com/help",
+  "notes": "Classic Slack desktop client. Slack's newer builds ship as a Microsoft Store package; check Packages under %LOCALAPPDATA% for a Slack package if this folder is absent. Cached messages are readable in the local store."
+}

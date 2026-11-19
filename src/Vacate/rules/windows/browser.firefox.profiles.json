@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.profiles",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Firefox profile folders",
+  "whyItMatters": "Firefox keeps one folder per profile for browsing history, cookies, saved logins and form data. The set of profiles and their names shows who used the browser and for what.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Mozilla/Firefox/Profiles/*",
+    "match": "directories"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Mozilla Support, profiles where Firefox stores user data: https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
+  "notes": "Each profile folder is named <random>.default, <random>.default-release or a user-chosen name. Crash Reports and other non-profile folders live next to Profiles, not inside it."
+}

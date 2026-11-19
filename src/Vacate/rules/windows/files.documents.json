@@ -1,0 +1,22 @@
+{
+  "id": "files.documents",
+  "platforms": ["windows"],
+  "category": "personal-files",
+  "title": "Documents folder",
+  "whyItMatters": "Contracts, tax papers, medical letters, scans and saved downloads live here. File names and dates alone can expose a lot about the person's life.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Documents",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Windows known folder Documents, default path under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
+  "notes": "If OneDrive Known Folder Move is on, the real Documents folder is under %USERPROFILE% OneDrive and this one may be empty or a stub. Some applications also save wallets and exports here, so count it even when it looks empty."
+}

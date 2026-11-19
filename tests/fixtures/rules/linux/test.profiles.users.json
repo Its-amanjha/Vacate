@@ -1,0 +1,22 @@
+{
+  "id": "test.profiles.users",
+  "platforms": ["linux"],
+  "category": "user-profiles",
+  "title": "Other user profiles",
+  "whyItMatters": "Tracks other user profile directories with excludeHome.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "USERS",
+    "path": "*",
+    "match": "directories",
+    "excludeHome": true
+  },
+  "measure": ["exists", "itemCount"],
+  "maxEntries": 100,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Integration test fixture rule for excludeHome user enumeration",
+  "notes": null
+}

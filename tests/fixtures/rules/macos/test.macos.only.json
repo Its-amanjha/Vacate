@@ -1,0 +1,22 @@
+{
+  "id": "test.macos.only",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Safari browser directory",
+  "whyItMatters": "Tracks Safari application directory on macOS.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Safari",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 100,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Integration test fixture rule for macOS other-platform testing",
+  "notes": null
+}

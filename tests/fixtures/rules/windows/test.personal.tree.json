@@ -1,0 +1,22 @@
+{
+  "id": "test.personal.tree",
+  "platforms": ["windows"],
+  "category": "personal-files",
+  "title": "Documents tree directory",
+  "whyItMatters": "Tracks documents directory with full recursion.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "documents",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 100,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Integration test fixture rule for recursive directory matching",
+  "notes": null
+}

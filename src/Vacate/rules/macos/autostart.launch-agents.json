@@ -19,8 +19,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Apple launchd documentation: per-user agents live in ~/Library/LaunchAgents - https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html",
   "notes": "Names only; plists are never parsed and no launchd command is invoked. System agents under /Library/LaunchAgents are out of scope."
 }

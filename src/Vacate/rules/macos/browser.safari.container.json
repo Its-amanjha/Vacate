@@ -22,8 +22,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Browser forensics reference for Safari container layout: ~/Library/Containers/com.apple.Safari/Data/Library - https://www.browserforensics.app/en/blog/safari-history-file-locations",
   "notes": "TCC-protected like ~/Library/Safari; needs Full Disk Access on a live system. Safari 17+ extra profiles and cookies live under Data/Library. Metadata only."
 }

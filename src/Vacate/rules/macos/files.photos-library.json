@@ -22,8 +22,10 @@
   ],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Apple Support: Photos Library is stored by default in the Pictures folder - https://support.apple.com/guide/photos/photo-library-overview-pht211de786/mac",
   "notes": "Recurses for size and count by metadata only (a folder's own size is near zero); large libraries hit the 20000 cap and are marked truncated. Files are never opened. Libraries moved off ~/Pictures are not matched."
 }

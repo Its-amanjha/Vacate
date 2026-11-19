@@ -19,8 +19,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Apple macOS user guide: /Applications contains the apps installed for all users",
   "notes": "Names only, no recursion into app bundles. Apps installed under ~/Applications or elsewhere are out of scope."
 }

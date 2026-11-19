@@ -17,8 +17,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Apple platform security documentation and the allow-listed read-only fdesetup status query in Private/SystemQueries.ps1",
   "notes": "Uses the fixed system-query name only: no shell, no sudo and no credential prompt. A missing binary or denied query is recorded as a skip."
 }

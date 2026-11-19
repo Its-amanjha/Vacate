@@ -22,8 +22,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "macOS artifact cheat sheet: ~/Library/Application Support/com.apple.sharedfilelist holds .sfl2/.sfl3 recent item lists - https://www.macforensics.app/en/artifacts/cheat-sheet",
   "notes": "Full Disk Access may be needed on a live system. The .sfl files are counted, never parsed; encoded bookmark paths are not decoded."
 }

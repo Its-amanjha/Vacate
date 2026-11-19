@@ -21,8 +21,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "macforensics.app cheat sheet (Time Machine): /Library/Preferences/com.apple.TimeMachine.plist",
   "notes": "Metadata only. The plist is never opened or parsed, so backup destinations and included volumes are not read. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

@@ -21,8 +21,10 @@
   ],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Apple macOS User Guide, the Library folder; per-user caches live in ~/Library/Caches",
   "notes": "Sizes and counts only; no cached file is opened. Caches under /Library and container-specific caches elsewhere are not covered. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

@@ -22,8 +22,10 @@
   ],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Apple Support, add Desktop and Documents to iCloud Drive: https://support.apple.com/en-us/109344",
   "notes": "Desktop is TCC-protected on modern macOS; without Full Disk Access the scan records a permission skip. If iCloud sync is on, files may be online-only placeholders."
 }

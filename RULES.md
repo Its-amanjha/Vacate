@@ -96,22 +96,22 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `wallet.metamask.edge` | wallets | critical | `LOCALAPPDATA/Microsoft/Edge/User Data/*/Local Extension Settings/ejbalbakoplchlghecdalmeeeajnimhm` | no | no |
 | `wallet.monero-gui` | wallets | critical | `HOME/Documents/Monero/wallets` | no | no |
 
-## macOS (62 rules, 0 verified)
+## macOS (62 rules, 24 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
 | `activity.calendars` | activity | high | `LIBRARY/Calendars` | no | no |
-| `activity.contacts` | activity | high | `LIBRARY/Application Support/AddressBook` | no | no |
-| `activity.download-quarantine` | activity | high | `LIBRARY/Preferences/com.apple.LaunchServices.QuarantineEventsV2` | no | no |
+| `activity.contacts` | activity | high | `LIBRARY/Application Support/AddressBook` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `activity.download-quarantine` | activity | high | `LIBRARY/Preferences/com.apple.LaunchServices.QuarantineEventsV2` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `activity.ds-store.desktop` | activity | low | `HOME/Desktop` | no | no |
 | `activity.ds-store.documents` | activity | low | `HOME/Documents` | no | no |
 | `activity.ds-store.downloads` | activity | low | `HOME/Downloads` | no | no |
-| `activity.recent-items` | activity | medium | `LIBRARY/Application Support/com.apple.sharedfilelist` | no | no |
-| `activity.reminders` | activity | medium | `LIBRARY/Group Containers/group.com.apple.reminders` | no | no |
+| `activity.recent-items` | activity | medium | `LIBRARY/Application Support/com.apple.sharedfilelist` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `activity.reminders` | activity | medium | `LIBRARY/Group Containers/group.com.apple.reminders` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `activity.saved-app-state` | activity | medium | `LIBRARY/Saved Application State` | no | no |
 | `activity.shell-history.bash` | activity | medium | `HOME/.bash_history` | no | no |
 | `activity.shell-history.zsh` | activity | medium | `HOME/.zsh_history` | no | no |
-| `autostart.launch-agents` | autostart | low | `LIBRARY/LaunchAgents/*.plist` | no | no |
+| `autostart.launch-agents` | autostart | low | `LIBRARY/LaunchAgents/*.plist` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `browser.brave.profiles` | browsers | medium | `LIBRARY/Application Support/BraveSoftware/Brave-Browser/*/Preferences` | no | no |
 | `browser.chrome.history` | browsers | high | `LIBRARY/Application Support/Google/Chrome/*/History` | no | no |
 | `browser.chrome.login-data` | browsers | critical | `LIBRARY/Application Support/Google/Chrome/*/Login Data` | no | no |
@@ -119,34 +119,34 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `browser.edge.profiles` | browsers | medium | `LIBRARY/Application Support/Microsoft Edge/*/Preferences` | no | no |
 | `browser.firefox.profiles` | browsers | medium | `LIBRARY/Application Support/Firefox/Profiles/*/prefs.js` | no | no |
 | `browser.opera.profiles` | browsers | medium | `LIBRARY/Application Support/com.operasoftware.Opera/Preferences` | no | no |
-| `browser.safari.container` | browsers | high | `LIBRARY/Containers/com.apple.Safari` | no | no |
-| `browser.safari.data` | browsers | high | `LIBRARY/Safari` | no | no |
+| `browser.safari.container` | browsers | high | `LIBRARY/Containers/com.apple.Safari` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `browser.safari.data` | browsers | high | `LIBRARY/Safari` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `browser.vivaldi.profiles` | browsers | medium | `LIBRARY/Application Support/Vivaldi/*/Preferences` | no | no |
 | `cloud.dropbox` | cloud-sync | medium | `LIBRARY/CloudStorage/Dropbox*` | no | no |
 | `cloud.google-drive` | cloud-sync | medium | `LIBRARY/CloudStorage/GoogleDrive-*` | no | no |
 | `cloud.icloud-clouddocs` | cloud-sync | medium | `LIBRARY/Application Support/CloudDocs` | no | no |
 | `cloud.icloud-drive` | cloud-sync | medium | `LIBRARY/Mobile Documents` | no | no |
 | `cloud.onedrive` | cloud-sync | medium | `LIBRARY/CloudStorage/OneDrive-*` | no | no |
-| `credentials.keychains` | credentials | critical | `LIBRARY/Keychains` | no | no |
+| `credentials.keychains` | credentials | critical | `LIBRARY/Keychains` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `dev.aws.config` | developer-secrets | critical | `HOME/.aws` | no | no |
-| `dev.azure.config` | developer-secrets | critical | `HOME/.azure` | no | no |
+| `dev.azure.config` | developer-secrets | critical | `HOME/.azure` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `dev.docker.config` | developer-secrets | critical | `HOME/.docker/config.json` | no | no |
 | `dev.git-credentials` | developer-secrets | critical | `HOME/.git-credentials` | no | no |
 | `dev.kube.config` | developer-secrets | critical | `HOME/.kube` | no | no |
 | `dev.npmrc` | developer-secrets | critical | `HOME/.npmrc` | no | no |
-| `dev.ssh.keys` | developer-secrets | critical | `HOME/.ssh` | no | no |
-| `email.apple-mail` | email | high | `LIBRARY/Mail` | no | no |
-| `email.apple-notes` | email | high | `LIBRARY/Group Containers/group.com.apple.notes` | no | no |
-| `encryption.filevault.status` | disk-encryption | low | system query `filevault-status` | no | no |
-| `files.desktop` | personal-files | medium | `HOME/Desktop` | no | no |
-| `files.documents` | personal-files | medium | `HOME/Documents` | no | no |
-| `files.downloads` | personal-files | medium | `HOME/Downloads` | no | no |
-| `files.movies` | personal-files | medium | `HOME/Movies` | no | no |
-| `files.music` | personal-files | medium | `HOME/Music` | no | no |
-| `files.photos-library` | personal-files | medium | `HOME/Pictures/*.photoslibrary` | no | no |
-| `files.trash` | personal-files | medium | `HOME/.Trash` | no | no |
+| `dev.ssh.keys` | developer-secrets | critical | `HOME/.ssh` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `email.apple-mail` | email | high | `LIBRARY/Mail` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `email.apple-notes` | email | high | `LIBRARY/Group Containers/group.com.apple.notes` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `encryption.filevault.status` | disk-encryption | low | system query `filevault-status` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `files.desktop` | personal-files | medium | `HOME/Desktop` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `files.documents` | personal-files | medium | `HOME/Documents` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `files.downloads` | personal-files | medium | `HOME/Downloads` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `files.movies` | personal-files | medium | `HOME/Movies` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `files.music` | personal-files | medium | `HOME/Music` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `files.photos-library` | personal-files | medium | `HOME/Pictures/*.photoslibrary` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `files.trash` | personal-files | medium | `HOME/.Trash` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `msg.discord` | messaging | high | `LIBRARY/Application Support/discord` | no | no |
-| `msg.imessage` | messaging | high | `LIBRARY/Messages` | no | no |
+| `msg.imessage` | messaging | high | `LIBRARY/Messages` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `msg.signal` | messaging | high | `LIBRARY/Application Support/Signal` | no | no |
 | `msg.slack` | messaging | high | `LIBRARY/Application Support/Slack` | no | no |
 | `msg.telegram` | messaging | high | `LIBRARY/Application Support/Telegram Desktop` | no | no |
@@ -154,9 +154,9 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `network.bluetooth.devices` | network | medium | `SYSTEM/Library/Bluetooth/Library/Preferences/com.apple.MobileBluetooth.devices.plist` | yes | no |
 | `network.wifi.known-networks` | network | high | `SYSTEM/Library/Preferences/com.apple.wifi.known-networks.plist` | yes | no |
 | `profiles.other-users` | user-profiles | low | `USERS/*` | no | no |
-| `programs.applications` | installed-programs | low | `APPLICATIONS/*.app` | no | no |
-| `system.caches` | system-traces | low | `LIBRARY/Caches` | no | no |
-| `system.time-machine.prefs` | system-traces | low | `SYSTEM/Library/Preferences/com.apple.TimeMachine.plist` | no | no |
+| `programs.applications` | installed-programs | low | `APPLICATIONS/*.app` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `system.caches` | system-traces | low | `LIBRARY/Caches` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `system.time-machine.prefs` | system-traces | low | `SYSTEM/Library/Preferences/com.apple.TimeMachine.plist` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `wallet.electrum` | wallets | critical | `HOME/.electrum` | no | no |
 | `wallet.exodus` | wallets | critical | `LIBRARY/Application Support/Exodus` | no | no |
 | `wallet.ledger-live` | wallets | critical | `LIBRARY/Application Support/Ledger*` | no | no |

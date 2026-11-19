@@ -22,8 +22,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Azure CLI configuration and cached credentials in ~/.azure: https://learn.microsoft.com/en-us/cli/azure/azure-cli-configuration",
   "notes": "Older CLI versions use accessTokens.json; newer ones use an MSAL cache. On macOS tokens may be backed by the Keychain, which is not accessed."
 }

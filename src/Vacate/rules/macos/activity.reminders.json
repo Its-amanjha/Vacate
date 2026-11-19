@@ -22,8 +22,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "macforensics.app artifact cheat sheet (Calendar/Contacts/Reminders)",
   "notes": "TCC-protected; needs Full Disk Access. Proposed in W3-D2 review."
 }

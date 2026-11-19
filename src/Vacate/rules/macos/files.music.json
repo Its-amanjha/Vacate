@@ -22,8 +22,10 @@
   ],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Apple macOS User Guide, folders in your home folder (Music)",
   "notes": "Counts files and total size only; no track or playlist is opened. A library stored on an external drive is not covered. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

@@ -22,8 +22,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "macOS artifact reference: ~/Library/Messages/chat.db and Attachments - https://www.macforensics.app/en/artifacts/cheat-sheet",
   "notes": "TCC-protected (Messages data): a live scan needs Full Disk Access; root alone is not enough. chat.db and attachments are never opened."
 }

@@ -22,8 +22,10 @@
   ],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Apple macOS User Guide, Downloads folder in the home folder",
   "notes": "Downloads is TCC-protected; without Full Disk Access the scan records a permission skip. File contents are never opened. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

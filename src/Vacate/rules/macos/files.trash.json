@@ -22,8 +22,10 @@
   ],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "Apple macOS User Guide, delete files (items move to the Trash); per-user Trash is the ~/.Trash folder (Unconfirmed: no Apple page names the path)",
   "notes": "TCC-protected: without Full Disk Access a live scan gets a permission skip. Items are counted by metadata; per-volume .Trashes folders are out of scope. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

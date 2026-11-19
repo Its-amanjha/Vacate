@@ -21,8 +21,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "macforensics.app artifact cheat sheet (QuarantineEventsV2)",
   "notes": "SQLite file; size and date only, never opened. Proposed in W3-D2 review."
 }

@@ -22,8 +22,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "macOS 26.7.2 (GitHub Actions CI)"
+  ],
+  "verified": true,
   "source": "macforensics.app cheat sheet (Apple Mail); Apple lists ~/Library/Mail among folders that need Full Disk Access",
   "notes": "TCC-protected: without Full Disk Access the folder returns 'Operation not permitted' on a live system. Mailboxes are counted, never read. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
 }

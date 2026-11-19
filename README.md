@@ -162,3 +162,8 @@ does not see. The last section is the one that tells you what the scan missed.
 vacate is for devices you own or are authorised to hand over or erase. Do not use it to destroy
 evidence, defeat a legal hold, or falsify records. vacate is not a secure-erase tool and does not
 certify that a device is clean.
+
+## Phase 1 hand-off
+
+What works per platform, what is still unverified, test results and every design decision:
+[docs/HANDOFF.md](docs/HANDOFF.md).

@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/vacate/vacate/schemas/rule.schema.json",
+  "title": "vacate detection rule",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id", "platforms", "category", "title", "whyItMatters", "sensitivity", "locator",
+    "measure", "maxEntries", "requiresElevation", "verifiedOn", "verified", "source", "notes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9-]+)+$",
+      "maxLength": 100
+    },
+    "platforms": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["windows", "macos", "linux"] }
+    },
+    "category": {
+      "enum": [
+        "browsers", "credentials", "developer-secrets", "network", "activity",
+        "personal-files", "cloud-sync", "messaging", "email", "wallets",
+        "installed-programs", "user-profiles", "disk-encryption", "system-traces",
+        "autostart", "containers-vms", "games-licenses", "ai-assistants"
+      ]
+    },
+    "title": { "type": "string", "minLength": 3, "maxLength": 120 },
+    "whyItMatters": { "type": "string", "minLength": 10, "maxLength": 400 },
+    "sensitivity": { "enum": ["low", "medium", "high", "critical"] },
+    "locator": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "enum": ["path", "registry", "wmi", "installed-program", "system-query"] }
+      },
+      "allOf": [
+        { "if": { "properties": { "kind": { "const": "path" } } },
+          "then": { "$ref": "#/definitions/pathLocator" } },
+        { "if": { "properties": { "kind": { "const": "registry" } } },
+          "then": { "$ref": "#/definitions/registryLocator" } },
+        { "if": { "properties": { "kind": { "const": "wmi" } } },
+          "then": { "$ref": "#/definitions/wmiLocator" } },
+        { "if": { "properties": { "kind": { "const": "installed-program" } } },
+          "then": { "$ref": "#/definitions/installedProgramLocator" } },
+        { "if": { "properties": { "kind": { "const": "system-query" } } },
+          "then": { "$ref": "#/definitions/systemQueryLocator" } }
+      ]
+    },
+    "measure": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": ["exists", "sizeBytes", "lastWriteTime", "itemCount", "valueCount", "subkeyCount", "properties"]
+      }
+    },
+    "maxEntries": { "type": "integer", "minimum": 1, "maximum": 50000 },
+    "requiresElevation": { "type": "boolean" },
+    "verifiedOn": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 3, "maxLength": 60 }
+    },
+    "verified": { "type": "boolean" },
+    "source": { "type": "string", "minLength": 10, "maxLength": 400 },
+    "notes": { "type": ["string", "null"], "maxLength": 600 }
+  },
+  "definitions": {
+    "rootToken": {
+      "enum": [
+        "HOME", "USERS", "APPDATA", "LOCALAPPDATA", "PROGRAMDATA", "SYSTEMDRIVE",
+        "LIBRARY", "APPLICATIONS", "SYSTEM", "XDG_CONFIG", "XDG_DATA", "XDG_STATE", "ETC", "VAR"
+      ]
+    },
+    "pathLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "root", "path", "match"],
+      "properties": {
+        "kind": { "const": "path" },
+        "root": { "$ref": "#/definitions/rootToken" },
+        "path": {
+          "type": "string",
+          "maxLength": 260,
+          "pattern": "^$|^[^/\\\\:<>|\"]([^\\\\:<>|\"]*[^/\\\\:<>|\"])?$"
+        },
+        "match": { "enum": ["files", "directories", "any"] },
+        "recurse": { "type": "boolean" },
+        "include": { "type": "string", "minLength": 1, "maxLength": 100, "pattern": "^[^/\\\\]+$" },
+        "excludeHome": { "type": "boolean" }
+      }
+    },
+    "registryLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "hive", "key"],
+      "properties": {
+        "kind": { "const": "registry" },
+        "hive": { "enum": ["HKCU", "HKLM"] },
+        "key": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "pattern": "^[^\\\\/][^/]*[^\\\\/]$"
+        },
+        "view": { "enum": ["Default", "Registry32", "Registry64"] }
+      }
+    },
+    "wmiLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "namespace", "className", "properties"],
+      "properties": {
+        "kind": { "const": "wmi" },
+        "namespace": { "type": "string", "pattern": "^root(/[A-Za-z0-9_]+)*$" },
+        "className": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$" },
+        "properties": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$" }
+        }
+      }
+    },
+    "installedProgramLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "scope"],
+      "properties": {
+        "kind": { "const": "installed-program" },
+        "scope": { "enum": ["user", "machine", "all"] }
+      }
+    },
+    "systemQueryLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": { "const": "system-query" },
+        "name": { "enum": ["filevault-status", "block-devices", "mounts"] }
+      }
+    }
+  }
+}

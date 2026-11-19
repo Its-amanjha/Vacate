@@ -1,0 +1,20 @@
+# Decisions
+
+Every non-obvious choice and every deviation from [docs/SPEC.md](docs/SPEC.md). Newest last.
+Owner: Claude. Partners propose entries in their hand-off.
+
+| # | Date | Decision | Why |
+|---|---|---|---|
+| D1 | 2026-11-19 | Own directory walker on `DirectoryInfo.EnumerateFileSystemInfos()` instead of `EnumerationOptions`. | `EnumerationOptions` (`IgnoreInaccessible`, `AttributesToSkip`) does not exist in .NET Framework, so it breaks PowerShell 5.1. The walker skips reparse points and catches access errors per directory, giving the same behaviour on both. |
+| D2 | 2026-11-19 | Per-rule timeout is a cooperative deadline checked inside the walker on every entry. | 5.1 has no `-Parallel`; runspaces add complexity and non-determinism. A deadline check stops a rule within one entry of the limit. |
+| D3 | 2026-11-19 | Registry key last-write time is reported as `null` with reason "not available without native API". | .NET `RegistryKey` does not expose it; getting it needs P/Invoke via `Add-Type`, which the spec bans (no compiled helpers, no dynamic code). |
+| D4 | 2026-11-19 | JSON Schema validation tests run only on PowerShell 7. | `Test-Json` does not exist in 5.1. The 5.1 job runs the loader's own structural checks. |
+| D5 | 2026-11-19 | macOS is deferred until a Mac is available. macOS rules ship `verified: false`. | Project owner has no Mac yet. Will be `ci-verified` once GitHub Actions runs, and verified later on a real Mac. |
+| D6 | 2026-11-19 | Linux verification uses WSL Ubuntu 24.04. | Available locally. WSL differs from a desktop install (no GUI apps by default, `/mnt/*` Windows drives, no real block devices). Rules seen only via fixtures stay `verified: false`. |
+| D7 | 2026-11-19 | One rule per JSON file, named `<rule-id>.json`. | Lets several agents add rules in parallel without merge conflicts; the loader checks the file name equals the id. |
+| D8 | 2026-11-19 | Rules live per platform folder; `platforms` must include the folder's platform. The spec's example rule (three platforms + `LOCALAPPDATA`) would be rejected by the spec's own token rule, so cross-platform rules are split per platform. | Keeps the token rule enforceable. |
+| D9 | 2026-11-19 | Path locator gains optional `recurse` (sum sizes/counts below each match), `include` (file-name glob when recursing) and `excludeHome` (skip the current user's profile, for "other users" rules). | The spec needs folder sizes, a capped `.DS_Store` count and other-profile names, which a one-segment glob alone cannot express. |
+| D10 | 2026-11-19 | One trace per matched target (per glob match), not one per rule. | The spec requires a concrete `resolved` locator per trace. |
+| D11 | 2026-11-19 | Report gains top-level `skipped[]` (`ruleId`, `reason`, `detail`) and categories are a fixed enum of 18. | The spec's report section 7 needs skip reasons, but the sample JSON had nowhere to put them. |
+| D12 | 2026-11-19 | `Glob`, reparse and cloud-placeholder checks live in `Private/Primitives.ps1`. | PathJail and Providers both need them; one copy avoids drift between parallel authors. |
+| D13 | 2026-11-19 | Unix root detection uses `[Environment]::UserName -eq 'root'`. | .NET resolves it from the effective uid; no external `id` binary and no P/Invoke needed. |

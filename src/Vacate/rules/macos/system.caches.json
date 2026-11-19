@@ -1,0 +1,22 @@
+{
+  "id": "system.caches",
+  "platforms": ["macos"],
+  "category": "system-traces",
+  "title": "Application caches",
+  "whyItMatters": "Application caches can retain thumbnails, previews and temporary copies of documents long after the original was closed.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Caches",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple macOS user guide: ~/Library/Caches holds per-user application cache data",
+  "notes": "Sizes and counts only; no cached file is opened. Caches under /Library and container-specific caches elsewhere are not covered."
+}

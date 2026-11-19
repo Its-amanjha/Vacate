@@ -114,9 +114,7 @@ function Invoke-VacateScan {
         $logLines = @($logLines[0], 'log details omitted because -Redact was used')
     }
 
-    if (-not [IO.Directory]::Exists($runsBase)) {
-        if ($PSCmdlet.ShouldProcess($runsBase, 'Create runs folder')) { [void][IO.Directory]::CreateDirectory($runsBase) }
-    }
+    # New-VacateRunFolder (Output.ps1, the only writer) creates runs/ and the run folder together.
     $runDir = New-VacateRunFolder -BaseDir $runsBase -Now $finished
     Write-VacateRunOutput -BaseDir $runsBase -RunDir $runDir -Report $report -Log $logLines
     return $runDir

@@ -76,7 +76,16 @@ BeforeAll {
         [pscustomobject]@{ Kind = 'write'; Name = 'Set-CimInstance'; Regex = 'Set-CimInstance' },
         [pscustomobject]@{ Kind = 'write'; Name = 'Invoke-CimMethod'; Regex = 'Invoke-CimMethod' },
         [pscustomobject]@{ Kind = 'write'; Name = 'Remove-CimInstance'; Regex = 'Remove-CimInstance' },
-        [pscustomobject]@{ Kind = 'write'; Name = 'New-CimInstance'; Regex = 'New-CimInstance' }
+        [pscustomobject]@{ Kind = 'write'; Name = 'New-CimInstance'; Regex = 'New-CimInstance' },
+        # Added by Claude on review: other .NET ways to create, change or remove files.
+        [pscustomobject]@{ Kind = 'write'; Name = 'CreateDirectory'; Regex = 'CreateDirectory' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'AppendAll'; Regex = 'AppendAll(Text|Lines)' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'WriteAllLines'; Regex = 'WriteAllLines' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'File/Directory mutation'; Regex = '\[(System\.)?IO\.(File|Directory)\]::(Create|Move|Copy|Replace|Delete|SetAttributes|SetLastWriteTime\w*|SetCreationTime\w*|SetAccessControl)\b' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'StreamWriter'; Regex = 'StreamWriter' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'FileStream'; Regex = 'FileStream' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'OpenWrite'; Regex = 'OpenWrite' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'Set-Acl'; Regex = 'Set-Acl' }
     )
 
     function ConvertTo-StaticSafetyCode {

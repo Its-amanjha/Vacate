@@ -151,7 +151,66 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `wallet.ledger-live` | wallets | critical | `LIBRARY/Application Support/Ledger*` | no | no |
 | `wallet.monero-gui` | wallets | critical | `LIBRARY/Application Support/monero-wallet-gui` | no | no |
 
-## Linux (0 rules, 0 verified)
+## Linux (58 rules, 0 verified)
 
-_No rules yet._
+| id | category | sensitivity | locator | elevation | verified |
+|---|---|---|---|---|---|
+| `activity.recently-used` | activity | medium | `XDG_DATA/recently-used.xbel` | no | no |
+| `activity.shell-history.bash` | activity | high | `HOME/.bash_history` | no | no |
+| `activity.shell-history.fish` | activity | high | `XDG_DATA/fish/fish_history` | no | no |
+| `activity.shell-history.zsh` | activity | high | `HOME/.zsh_history` | no | no |
+| `autostart.desktop-entries` | autostart | low | `XDG_CONFIG/autostart/*.desktop` | no | no |
+| `autostart.systemd-user` | autostart | low | `XDG_CONFIG/systemd/user/*` | no | no |
+| `browser.brave.profiles` | browsers | medium | `XDG_CONFIG/BraveSoftware/Brave-Browser/*/Preferences` | no | no |
+| `browser.chrome.cache` | browsers | low | `HOME/.cache/google-chrome` | no | no |
+| `browser.chrome.profiles` | browsers | medium | `XDG_CONFIG/google-chrome/*/Preferences` | no | no |
+| `browser.chromium.profiles` | browsers | medium | `XDG_CONFIG/chromium/*/Preferences` | no | no |
+| `browser.firefox.cache` | browsers | low | `HOME/.cache/mozilla/firefox` | no | no |
+| `browser.firefox.profiles` | browsers | medium | `HOME/.mozilla/firefox/*/prefs.js` | no | no |
+| `browser.firefox.profiles.flatpak` | browsers | medium | `HOME/.var/app/org.mozilla.firefox/.mozilla/firefox/*/prefs.js` | no | no |
+| `browser.firefox.profiles.snap` | browsers | medium | `HOME/snap/firefox/common/.mozilla/firefox/*/prefs.js` | no | no |
+| `browser.opera.profiles` | browsers | medium | `XDG_CONFIG/opera/*/Preferences` | no | no |
+| `browser.vivaldi.profiles` | browsers | medium | `XDG_CONFIG/vivaldi/*/Preferences` | no | no |
+| `cloud.dropbox` | cloud-sync | medium | `HOME/Dropbox` | no | no |
+| `cloud.nextcloud` | cloud-sync | medium | `XDG_CONFIG/Nextcloud` | no | no |
+| `containers.libvirt` | containers-vms | medium | `VAR/lib/libvirt/images` | yes | no |
+| `containers.podman` | containers-vms | medium | `XDG_DATA/containers/storage` | no | no |
+| `containers.virtualbox` | containers-vms | medium | `HOME/VirtualBox VMs` | no | no |
+| `credentials.gnupg` | credentials | critical | `HOME/.gnupg` | no | no |
+| `credentials.keyrings` | credentials | critical | `XDG_DATA/keyrings` | no | no |
+| `dev.aws.config` | developer-secrets | critical | `HOME/.aws` | no | no |
+| `dev.azure.config` | developer-secrets | critical | `HOME/.azure` | no | no |
+| `dev.docker.config` | developer-secrets | critical | `HOME/.docker` | no | no |
+| `dev.git-credentials` | developer-secrets | critical | `HOME/.git-credentials` | no | no |
+| `dev.kube.config` | developer-secrets | critical | `HOME/.kube` | no | no |
+| `dev.npmrc` | developer-secrets | critical | `HOME/.npmrc` | no | no |
+| `dev.ssh.keys` | developer-secrets | critical | `HOME/.ssh` | no | no |
+| `encryption.block-devices` | disk-encryption | medium | system query `block-devices` | no | no |
+| `encryption.crypttab` | disk-encryption | medium | `ETC/crypttab` | no | no |
+| `files.desktop` | personal-files | medium | `HOME/Desktop` | no | no |
+| `files.documents` | personal-files | medium | `HOME/Documents` | no | no |
+| `files.downloads` | personal-files | medium | `HOME/Downloads` | no | no |
+| `files.pictures` | personal-files | medium | `HOME/Pictures` | no | no |
+| `files.trash` | personal-files | medium | `XDG_DATA/Trash` | no | no |
+| `files.videos` | personal-files | medium | `HOME/Videos` | no | no |
+| `games.steam` | games-licenses | medium | `XDG_DATA/Steam/userdata` | no | no |
+| `games.steam.flatpak` | games-licenses | medium | `HOME/.var/app/com.valvesoftware.Steam/.local/share/Steam/userdata` | no | no |
+| `msg.discord` | messaging | high | `XDG_CONFIG/discord` | no | no |
+| `msg.discord.flatpak` | messaging | high | `HOME/.var/app/com.discordapp.Discord/config/discord` | no | no |
+| `msg.element` | messaging | high | `XDG_CONFIG/Element` | no | no |
+| `msg.element.flatpak` | messaging | high | `HOME/.var/app/im.riot.Riot/config/Element` | no | no |
+| `msg.signal` | messaging | high | `XDG_CONFIG/Signal` | no | no |
+| `msg.signal.flatpak` | messaging | high | `HOME/.var/app/org.signal.Signal/config/Signal` | no | no |
+| `msg.slack` | messaging | high | `XDG_CONFIG/Slack` | no | no |
+| `msg.telegram` | messaging | high | `XDG_DATA/TelegramDesktop/tdata` | no | no |
+| `msg.telegram.flatpak` | messaging | high | `HOME/.var/app/org.telegram.desktop/data/TelegramDesktop/tdata` | no | no |
+| `msg.telegram.snap` | messaging | high | `HOME/snap/telegram-desktop/common/.local/share/TelegramDesktop/tdata` | no | no |
+| `profiles.other-users` | user-profiles | low | `USERS/*` | no | no |
+| `programs.desktop-entries` | installed-programs | low | `APPLICATIONS/*.desktop` | no | no |
+| `programs.desktop-entries.user` | installed-programs | low | `XDG_DATA/applications/*.desktop` | no | no |
+| `system.var-log` | system-traces | low | `VAR/log` | no | no |
+| `wallet.electrum` | wallets | critical | `HOME/.electrum/wallets` | no | no |
+| `wallet.exodus` | wallets | critical | `XDG_CONFIG/Exodus` | no | no |
+| `wallet.ledger-live` | wallets | critical | `XDG_CONFIG/Ledger Live` | no | no |
+| `wallet.monero-gui` | wallets | critical | `HOME/Monero` | no | no |
 

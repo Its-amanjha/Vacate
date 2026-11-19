@@ -1,0 +1,21 @@
+{
+  "id": "browser.vivaldi.profiles",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Vivaldi browser profiles",
+  "whyItMatters": "Each Vivaldi profile holds its own history, sessions, mail accounts and saved logins. The profiles show who used the browser and what they were doing.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Vivaldi/User Data/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Chromium user data directory docs (Vivaldi uses User Data with per-profile folders): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+  "notes": "Matches the Preferences marker file so non-profile folders are skipped. Vivaldi Snapshots use a separate Vivaldi Snapshot/User Data tree."
+}

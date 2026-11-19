@@ -1,0 +1,21 @@
+{
+  "id": "browser.chrome.cookies",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Chrome cookies and site sessions",
+  "whyItMatters": "Cookie values can still open sites the person stayed signed into, including mail, shopping and social accounts, without needing the password.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Google/Chrome/User Data/*/Network/Cookies",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Chromium source, cookie store moved to the Network folder per profile (net/base/features and chrome/browser/profiles): https://chromium.googlesource.com/chromium/src/",
+  "notes": "Current location since Chrome 96. Older Chrome stored Cookies directly in the profile folder; check User Data/*/Cookies as well. Looked for on this PC: exists (Network/Cookies)."
+}

@@ -1,0 +1,21 @@
+{
+  "id": "browser.brave.profiles",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Brave browser profiles",
+  "whyItMatters": "Each Brave profile is a separate browsing identity with its own history, bookmarks and wallets. Its presence shows the browser was used and how many identities were kept apart.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "BraveSoftware/Brave-Browser/User Data/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Chromium user data directory docs (Brave uses the Chromium layout under BraveSoftware/Brave-Browser): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+  "notes": "Matches the Preferences marker file so non-profile folders are skipped. Brave Browser Beta and Nightly use separate folders next to this one."
+}

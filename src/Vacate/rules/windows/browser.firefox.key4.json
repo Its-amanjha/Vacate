@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.key4",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Firefox password key store",
+  "whyItMatters": "This file holds the keys that decrypt the saved passwords in logins.json. Copy it with logins.json and the saved passwords can be recovered on another machine.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Mozilla/Firefox/Profiles/*/key4.db",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Mozilla Support, profiles where Firefox stores user data (key4.db): https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
+  "notes": "If the user set a Primary Password, the keys are additionally protected by it and cannot be used without it. Pair rule: browser.firefox.logins."
+}

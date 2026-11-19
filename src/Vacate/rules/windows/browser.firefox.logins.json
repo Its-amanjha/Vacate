@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.logins",
+  "platforms": ["windows"],
+  "category": "browsers",
+  "title": "Firefox saved logins",
+  "whyItMatters": "Lists every site, username and (encrypted) password Firefox saved. With the key file from the same profile, a stranger can recover the passwords themselves.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Mozilla/Firefox/Profiles/*/logins.json",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Mozilla Support, profiles where Firefox stores user data (logins.json): https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
+  "notes": "Passwords are encrypted with the key in key4.db in the same profile, so the two files should be read together. Pair rule: browser.firefox.key4."
+}

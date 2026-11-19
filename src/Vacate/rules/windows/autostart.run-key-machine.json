@@ -1,28 +1,43 @@
 {
-    "id":  "autostart.run-key-machine",
-    "platforms":  [
-                      "windows"
-                  ],
-    "category":  "autostart",
-    "title":  "Machine Run key autostarts",
-    "whyItMatters":  "Programs in this key start for every user. It reveals machine-wide agents that may keep data in sync on the handed-over PC.",
-    "sensitivity":  "low",
-    "locator":  {
-                    "kind":  "registry",
-                    "hive":  "HKLM",
-                    "key":  "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
-                },
-    "measure":  [
-                    "exists",
-                    "valueCount",
-                    "subkeyCount"
-                ],
-    "maxEntries":  5000,
-    "requiresElevation":  false,
-    "verifiedOn":  [
-                       "Windows 11 Pro 26300"
-                   ],
-    "verified":  true,
-    "source":  "Microsoft Learn, Run and RunOnce registry keys: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
-    "notes":  "Machine-wide autostart list. Value data is never read and registry last-write time is unavailable (D3). The 32-bit view is not queried."
+  "id": "autostart.run-key-machine",
+  "platforms": [
+    "windows"
+  ],
+  "category": "autostart",
+  "title": "Machine Run key autostarts",
+  "whyItMatters": "Programs in this key start for every user. It reveals machine-wide agents that may keep data in sync on the handed-over PC.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKLM",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+  },
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "Microsoft Learn, Run and RunOnce registry keys: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
+  "notes": "Machine-wide autostart list. Value data is never read and registry last-write time is unavailable (D3). The 32-bit view is not queried.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open Task Manager and select Startup apps.",
+      "Disable the entries for programs you no longer want to start with Windows.",
+      "Uninstall programs you no longer need; the full reset clears anything left in the key named in the plan."
+    ],
+    "risk": "Removes those programs from the machine-wide autostart list, so they no longer start for any user. A driver or security tool named here may stop loading.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

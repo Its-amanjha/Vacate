@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Steam DPAPI key at %LOCALAPPDATA%/Steam/htmlcache/LocalProfs.json - https://www.forensicxlab.com/blog/steam",
-  "notes": "The main account files (loginusers.vdf, userdata) sit in the Steam install directory under Program Files, which has no root token; this rule covers only reachable LocalAppData state. Unconfirmed: custom install directories are not matched."
+  "notes": "The main account files (loginusers.vdf, userdata) sit in the Steam install directory under Program Files, which has no root token; this rule covers only reachable LocalAppData state. Unconfirmed: custom install directories are not matched.",
+    "cleanup": {
+        "action": "sign-out-then-remove",
+        "exportFirst": "Copy any game saves kept only on this PC, since some titles do not use Steam Cloud.",
+        "signOut": "Sign out of Steam and remove this computer from your authorized devices in Steam Guard settings.",
+        "steps": [
+            "Sign out of Steam.",
+            "On the Steam website, open Account Details, then Authorized Devices, and choose Sign out everywhere.",
+            "Uninstall Steam and delete the folder named in the plan."
+        ],
+        "risk": "Removes the local client state and cached sign-in from this PC. Games, licences and cloud saves stay with the Steam account.",
+        "closeApps": [
+            "Steam"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Valve, Account Security Recommendations (Steam Support): https://help.steampowered.com/en/faqs/view/6639-EB3C-EC79-FF60"
+    }
 }

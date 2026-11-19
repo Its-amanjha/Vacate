@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Slack Desktop artifacts: ~/Library/Application Support/Slack - https://docs.macfor.io/plugins/communication-slack",
-  "notes": "Sandboxed installs use ~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack instead. Cookies and IndexedDB are not read."
+  "notes": "Sandboxed installs use ~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack instead. Cookies and IndexedDB are not read.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Download the files you posted or still need from Slack, because the cached copies on this Mac are removed.",
+    "signOut": "Sign out of every workspace from Slack's own menu, so those workspaces stop trusting this Mac.",
+    "steps": [
+      "Quit Slack so its cached files are not in use.",
+      "Move Slack to the Trash from Applications and empty the Trash.",
+      "Delete the Slack folder named in the plan if it is still there."
+    ],
+    "risk": "Cached messages, session tokens and uploads for the signed-in workspaces leave this Mac.",
+    "closeApps": [
+      "Slack"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Slack, Sign out of Slack: https://slack.com/help/articles/214613347-Sign-out-of-Slack"
+  }
 }

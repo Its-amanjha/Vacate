@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "MetaMask extension id nkbihfbeogaeaoehlefnkodbefgpgknn from its Chrome Web Store listing: https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn",
-  "notes": "Local Extension Settings holds the chrome.storage.local LevelDB. Brave installs MetaMask from the Chrome Web Store and uses the same extension id under its own user data folder. The wildcard matches any Chrome profile."
+  "notes": "Local Extension Settings holds the chrome.storage.local LevelDB. Brave installs MetaMask from the Chrome Web Store and uses the same extension id under its own user data folder. The wildcard matches any Chrome profile.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Confirm you have the recovery phrase or backup: the Secret Recovery Phrase for every MetaMask wallet, written down offline.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup before removing anything.",
+      "In Chrome, open the extensions page and remove MetaMask.",
+      "Delete the MetaMask extension data folder named in the plan."
+    ],
+    "risk": "Without the Secret Recovery Phrase the wallet cannot be restored; removing the extension deletes its encrypted vault here.",
+    "closeApps": [
+      "Google Chrome"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "MetaMask Help Center, How to delete your MetaMask wallet: https://support.metamask.io/configure/wallet/how-can-i-delete-my-metamask-wallet"
+  }
 }

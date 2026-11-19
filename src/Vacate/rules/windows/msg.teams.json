@@ -27,5 +27,22 @@
                    ],
     "verified":  true,
     "source":  "Microsoft Learn, Clear the Teams client cache (new Teams path under Packages/MSTeams_LocalCache): https://learn.microsoft.com/en-us/troubleshoot/microsoftteams/teams-administration/clear-teams-cache",
-    "notes":  "New Teams (MSIX). Classic Teams kept data in the roaming folder under Microsoft Teams. Signing out of Teams does not remove the cache; the app has to be reset."
+    "notes":  "New Teams (MSIX). Classic Teams kept data in the roaming folder under Microsoft Teams. Signing out of Teams does not remove the cache; the app has to be reset.",
+    "cleanup":  {
+        "action":  "sign-out-then-remove",
+        "exportFirst":  "Download any file or chat you need from Teams first, because only the local cache is removed here.",
+        "signOut":  "In Teams, open your profile picture and sign out, so the account no longer keeps a session on this PC.",
+        "steps":  [
+            "Close Teams.",
+            "Uninstall Microsoft Teams from Settings > Apps > Installed apps.",
+            "Delete the Teams cache folder named in the plan if it is still there."
+        ],
+        "risk":  "Removes cached chats, channel posts and downloaded files for every account used in Teams on this PC.",
+        "closeApps":  [
+            "Microsoft Teams"
+        ],
+        "resetCovers":  true,
+        "reason":  null,
+        "source":  "Microsoft Learn, Clear the Teams client cache: https://learn.microsoft.com/en-us/troubleshoot/microsoftteams/teams-administration/clear-teams-cache"
+    }
 }

@@ -26,5 +26,21 @@
   ],
   "verified": true,
   "source": "macforensics.app cheat sheet (Time Machine): /Library/Preferences/com.apple.TimeMachine.plist",
-  "notes": "Metadata only. The plist is never opened or parsed, so backup destinations and included volumes are not read. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "Metadata only. The plist is never opened or parsed, so backup destinations and included volumes are not read.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open System Settings > General > Time Machine and check which backup disks this Mac used.",
+      "Remove the backup disk with Forget Destination if backups are no longer wanted.",
+      "Leave the system file named in the plan alone; the full reset at the end of this plan clears it.",
+      "Delete the old backups on any external disk you still have, as they hold full copies."
+    ],
+    "risk": "Backups stop and local snapshots may still hold copies of files; an erase of the Mac removes them.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Back up your files with Time Machine on Mac: https://support.apple.com/guide/mac-help/back-up-files-mh35860/mac"
+  }
 }

@@ -27,5 +27,22 @@
   ],
   "verified": true,
   "source": "Apple macOS User Guide, folders in your home folder (Music)",
-  "notes": "Counts files and total size only; no track or playlist is opened. A library stored on an external drive is not covered. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "Counts files and total size only; no track or playlist is opened. A library stored on an external drive is not covered.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": "Copy anything you want to keep to an external drive or another computer before touching this folder.",
+    "signOut": null,
+    "steps": [
+      "Open the folder named in the plan and decide file by file what has to go.",
+      "Move the files you keep to an external drive, then check that they open.",
+      "Move the rest to the Trash, then empty the Trash before the handover."
+    ],
+    "risk": "Everything left in the folder is deleted once the Trash is emptied; bought music can be downloaded again.",
+    "closeApps": [
+      "Music"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Delete files and folders on Mac: https://support.apple.com/guide/mac-help/delete-files-and-folders-on-mac-mchlp1093/mac"
+  }
 }

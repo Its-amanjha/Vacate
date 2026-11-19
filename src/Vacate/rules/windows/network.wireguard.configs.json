@@ -1,6 +1,8 @@
 {
   "id": "network.wireguard.configs",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "network",
   "title": "WireGuard tunnel configurations",
   "whyItMatters": "WireGuard tunnel files hold private keys and peer endpoints. They reveal the networks this machine was set up to reach.",
@@ -12,11 +14,31 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": true,
   "verifiedOn": [],
   "verified": false,
   "source": "WireGuard official docs: manager service stores tunnels in %ProgramFiles%/WireGuard/Data/Configurations - https://github.com/WireGuard/wireguard-windows/blob/master/docs/enterprise.md",
-  "notes": "No root token exists for Program Files, so SYSTEMDRIVE is used. Needs elevation: .conf.dpapi files are readable only by Local System and administrators. Unconfirmed: non-default install paths are not matched."
+  "notes": "No root token exists for Program Files, so SYSTEMDRIVE is used. Needs elevation: .conf.dpapi files are readable only by Local System and administrators. Unconfirmed: non-default install paths are not matched.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Copy the tunnels you still need to the machine you are moving to; each file holds that tunnel's private key.",
+    "signOut": "Ask the owner of each tunnel's server to remove this machine's public key from the peer list.",
+    "steps": [
+      "Copy out the tunnels you still need.",
+      "Ask the server owner to remove this peer.",
+      "In the WireGuard app, select each tunnel and delete it, then uninstall WireGuard from Settings > Apps > Installed apps."
+    ],
+    "risk": "Deletes the tunnel files and the private keys they hold. Servers that still list this peer keep accepting that key.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "WireGuard, Quick Start: https://www.wireguard.com/quickstart/"
+  }
 }

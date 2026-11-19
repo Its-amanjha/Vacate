@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Elastic detection-rules macOS wallet paths reference ~/Library/Application Support/Exodus - https://github.com/elastic/detection-rules/issues/6616",
-  "notes": "Contains the encrypted exodus.wallet vault and timestamped backups. Unconfirmed (no Mac to test): macOS 27 may block this folder with com.apple.macl; no file is opened."
+  "notes": "Contains the encrypted exodus.wallet vault and timestamped backups. Unconfirmed (no Mac to test): macOS 27 may block this folder with com.apple.macl; no file is opened.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Use the recovery phrase screens in Exodus to write down the phrase for each wallet, and store the paper somewhere safe.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup for every wallet in the app.",
+      "Quit Exodus so the vault is not in use.",
+      "Delete the Exodus folder named in the plan, then empty the Trash."
+    ],
+    "risk": "The encrypted vault and its backups leave this Mac. The funds are recoverable only with the recovery phrase.",
+    "closeApps": [
+      "Exodus"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Exodus, How do I delete my wallet and start over?: https://support.exodus.com/support/en/articles/8598644-how-do-i-delete-my-wallet-and-start-over"
+  }
 }

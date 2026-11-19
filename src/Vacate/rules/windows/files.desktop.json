@@ -27,5 +27,22 @@
                    ],
     "verified":  true,
     "source":  "Windows known folder Desktop, default path under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
-    "notes":  "If OneDrive Known Folder Move is on, the real Desktop is %USERPROFILE% OneDrive Desktop and this folder may be empty or a stub; both are counted separately. The Desktop folder of every user on the PC is the user-profiles rules\u0027 job."
+    "notes":  "If OneDrive Known Folder Move is on, the real Desktop is %USERPROFILE% OneDrive Desktop and this folder may be empty or a stub; both are counted separately. The Desktop folder of every user on the PC is the user-profiles rules\u0027 job.",
+    "cleanup": {
+        "action": "review",
+        "exportFirst": "Copy what you want to keep to an external drive or your cloud account before deleting anything in this folder.",
+        "signOut": null,
+        "steps": [
+            "Open the folder named in the plan and look through it before deleting anything.",
+            "Check for the same files in OneDrive if the folder looks empty, because Known Folder Move can redirect it.",
+            "Copy what you keep to a drive you are taking with you, then delete the rest."
+        ],
+        "risk": "Anything deleted from the desktop is gone unless you copied it out first. Shortcuts can be recreated; files cannot.",
+        "closeApps": [
+            "File Explorer"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Free up drive space in Windows: https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/free-up-drive-space-in-windows"
+    }
 }

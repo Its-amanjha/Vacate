@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Monero documentation, monero-wallet-gui reference (defaults): wallets are created under $HOME/Monero/wallets",
-  "notes": "The wizard can place wallets elsewhere; only the default is checked. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "The wizard can place wallets elsewhere; only the default is checked.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Open each wallet in Monero GUI and write down its recovery phrase, or save its keys file to a drive you keep.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or keys file for every wallet in this folder.",
+      "Quit Monero GUI so the wallet files are not in use.",
+      "Delete the wallets folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Wallet files and keys leave this Mac. Without the phrase or keys file the funds cannot be recovered.",
+    "closeApps": [
+      "Monero GUI"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Monero, Restoring a wallet from private keys: https://www.getmonero.org/resources/user-guides/restore_from_keys.html"
+  }
 }

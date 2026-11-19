@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Oracle VirtualBox User Guide, default machine folder $HOME/VirtualBox VMs - https://www.virtualbox.org/manual/ch10.html",
-  "notes": "Default machine folder only. Unconfirmed: a custom Default Machine Folder changed in VirtualBox preferences is not matched. Virtual disks are counted by size, never opened."
+  "notes": "Default machine folder only. Unconfirmed: a custom Default Machine Folder changed in VirtualBox preferences is not matched. Virtual disks are counted by size, never opened.",
+    "cleanup": {
+        "action": "export-then-remove",
+        "exportFirst": "Export each machine you still need to an appliance, or copy its disk files, before deleting anything here.",
+        "signOut": null,
+        "steps": [
+            "Open VirtualBox and remove the machines you no longer need, choosing Delete all files.",
+            "Uninstall VirtualBox from Settings > Apps > Installed apps.",
+            "Delete the virtual machine folder named in the plan if anything is left."
+        ],
+        "risk": "Deletes the virtual machines on this PC, including their disks and snapshots. Files inside a machine cannot be recovered once it is deleted.",
+        "closeApps": [
+            "VirtualBox"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Oracle, Oracle VM VirtualBox User Manual: https://www.virtualbox.org/manual/"
+    }
 }

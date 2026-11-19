@@ -27,5 +27,20 @@
   ],
   "verified": true,
   "source": "XDG user directories defaults (xdg-user-dirs creates Videos under the home directory): https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
-  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Screen recorders often default to this folder or to the home directory."
+  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Screen recorders often default to this folder or to the home directory.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open the folder named in the plan in your file manager.",
+      "Copy any personal videos or screen recordings you wish to keep to external storage.",
+      "Delete the remaining video files and folders in Videos."
+    ],
+    "risk": "Permanently deletes all personal videos, recorded screencasts, and movie clips in the folder.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Ubuntu Documentation, Desktop guide: https://help.ubuntu.com/stable/ubuntu-help/shell-introduction.html"
+  }
 }

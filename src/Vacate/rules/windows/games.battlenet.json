@@ -1,6 +1,8 @@
 {
   "id": "games.battlenet",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "games-licenses",
   "title": "Battle.net launcher data",
   "whyItMatters": "The per-user Battle.net folder holds the launcher config and cache. It shows which Blizzard account was signed in on this machine.",
@@ -12,11 +14,33 @@
     "match": "directories",
     "recurse": true
   },
-  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
   "source": "Blizzard Support, Deleting Battle.net Files (article 34719): machine-wide data in C:/ProgramData/Battle.net - https://us.battle.net/support/en/article/34719",
-  "notes": "Machine-wide launcher cache and agent data. The per-user %APPDATA%/Battle.net config folder is not covered. Files are counted, never opened or parsed."
+  "notes": "Machine-wide launcher cache and agent data. The per-user %APPDATA%/Battle.net config folder is not covered. Files are counted, never opened or parsed.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Sign out in the Battle.net launcher, so the Blizzard account stops keeping a signed-in session on this machine.",
+    "steps": [
+      "Sign out in the Battle.net launcher.",
+      "Uninstall the launcher from Settings > Apps > Installed apps if the PC no longer needs it.",
+      "Leave the shared folder named in the plan to the full reset; it needs administrator rights to remove."
+    ],
+    "risk": "Removes the launcher and its cache from this PC. Games already installed by the launcher stay on disk and keep their files.",
+    "closeApps": [
+      "Battle.net"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Blizzard, Battle.net Support: https://us.battle.net/support/en/"
+  }
 }

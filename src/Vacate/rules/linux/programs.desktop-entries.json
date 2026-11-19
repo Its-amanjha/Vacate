@@ -24,5 +24,20 @@
   ],
   "verified": true,
   "source": "freedesktop.org Desktop Entry spec plus the FHS location /usr/share/applications for system-wide entries: https://specifications.freedesktop.org/desktop-entry-spec/latest/",
-  "notes": "Names only. Packages without a launcher entry, snap and Flatpak exports installed elsewhere, and console-only tools do not appear here."
+  "notes": "Names only. Packages without a launcher entry, snap and Flatpak exports installed elsewhere, and console-only tools do not appear here.",
+  "cleanup": {
+    "action": "uninstall",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open the App Center or Ubuntu Software from the desktop application menu.",
+      "Select the Manage or Installed tab to view installed software.",
+      "Click Uninstall or the trash icon next to each application you wish to remove."
+    ],
+    "risk": "Removes selected system applications and their desktop launchers from the operating system.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Ubuntu Documentation, Install or remove software: https://help.ubuntu.com/stable/ubuntu-help/addremove-remove.html"
+  }
 }

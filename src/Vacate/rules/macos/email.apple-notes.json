@@ -27,5 +27,21 @@
   ],
   "verified": true,
   "source": "macforensics.app artifact cheat sheet (Apple Notes)",
-  "notes": "TCC-protected; needs Full Disk Access. Proposed in W3-D2 review."
+  "notes": "TCC-protected; needs Full Disk Access.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Notes select the notes you keep and use File > Export as PDF to save each one to a folder outside the app.",
+    "signOut": "Turn Notes off under iCloud in your Apple Account settings, so the notes stop syncing to this Mac.",
+    "steps": [
+      "Quit Notes so the note database is not in use.",
+      "Delete the group.com.apple.notes folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Local notes and attachments are removed from this Mac. Notes stored in iCloud remain in the Apple Account.",
+    "closeApps": [
+      "Notes"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Notes User Guide: https://support.apple.com/guide/notes/welcome/mac"
+  }
 }

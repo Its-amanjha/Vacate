@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "macfor knowledge base, WhatsApp Desktop on macOS: the Catalyst app keeps ChatStorage.sqlite in ~/Library/Group Containers/group.net.whatsapp.WhatsApp.shared",
-  "notes": "Current Catalyst app. The deprecated Electron build used ~/Library/Application Support/WhatsApp (not covered). Group Containers may need Full Disk Access. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "Current Catalyst app. The deprecated Electron build used ~/Library/Application Support/WhatsApp (not covered). Group Containers may need Full Disk Access.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Save the photos and files you still need from the chats, because the local copies on this Mac are removed.",
+    "signOut": "On the phone open WhatsApp settings and remove this Mac from the linked devices list, so it stops receiving messages.",
+    "steps": [
+      "Quit WhatsApp so its files are not in use.",
+      "Move WhatsApp to the Trash from Applications and empty the Trash.",
+      "Delete the group.net.whatsapp.WhatsApp.shared folder named in the plan, then empty the Trash."
+    ],
+    "risk": "The local chat cache and media on this Mac are removed. The conversations stay on the phone.",
+    "closeApps": [
+      "WhatsApp"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "WhatsApp, How to unlink a device: https://faq.whatsapp.com/834124628020911"
+  }
 }

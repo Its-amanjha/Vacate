@@ -18,5 +18,21 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Docker CLI reference, configuration files: the CLI keeps its configuration in ~/.docker, with credentials in config.json: https://docs.docker.com/reference/cli/docker/",
-  "notes": "config.json holds auth entries unless a credential helper is configured, in which case the helper's own store holds them. contexts/ names remote engines the user connected to. DOCKER_CONFIG can move the folder."
+  "notes": "config.json holds auth entries unless a credential helper is configured, in which case the helper's own store holds them. contexts/ names remote engines the user connected to. DOCKER_CONFIG can move the folder.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Log out of Docker Hub and any private container registries in Docker Desktop or your terminal session.",
+    "steps": [
+      "Sign out of connected container registries in Docker Desktop or terminal settings.",
+      "Delete the folder named in the plan using your file manager."
+    ],
+    "risk": "Removes Docker registry authentication tokens, context endpoints, and client configuration.",
+    "closeApps": [
+      "Docker Desktop"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Docker Documentation, Docker CLI reference: https://docs.docker.com/reference/cli/docker/"
+  }
 }

@@ -25,5 +25,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Kubernetes client configuration in ~/.kube: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/",
-  "notes": "Includes config and cached plugin or token files. Cluster endpoints and certificates are not parsed."
+  "notes": "Includes config and cached plugin or token files. Cluster endpoints and certificates are not parsed.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Copy the kubeconfig file named in the plan to a trusted place if you still need those cluster contexts.",
+    "signOut": "Delete the client certificate or token this Mac used from each cluster, so it no longer authenticates.",
+    "steps": [
+      "Copy the contexts you still need and check they work from another machine.",
+      "Remove this Mac's token or certificate from each cluster it can reach.",
+      "Delete the folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Those clusters must be set up again from another machine; a token left valid still grants access.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Kubernetes documentation, Organizing cluster access using kubeconfig files: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/"
+  }
 }

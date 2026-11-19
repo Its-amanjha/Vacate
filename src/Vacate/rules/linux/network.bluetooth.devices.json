@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "BlueZ settings storage docs: adapter and remote device data is kept under /var/lib/bluetooth, one folder per adapter address and per device: https://bluez.readthedocs.io/en/latest/settings-storage/",
-  "notes": "The folder is root-only, hence requiresElevation; the rule reports the folder and its timestamp, not the device folders inside. Older BlueZ 4 installs used a single linkkeys file in the same tree. Systems without Bluetooth never create the folder."
+  "notes": "The folder is root-only, hence requiresElevation; the rule reports the folder and its timestamp, not the device folders inside. Older BlueZ 4 installs used a single linkkeys file in the same tree. Systems without Bluetooth never create the folder.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open Settings > Bluetooth from your desktop application menu.",
+      "Select each paired device in turn and click Forget Device or Remove Device."
+    ],
+    "risk": "Removes pairings for all Bluetooth devices. You will need to pair headphones, keyboards, and mice again.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GNOME Help, Connect your computer to a Bluetooth device: https://help.gnome.org/users/gnome-help/stable/bluetooth-connect-device.html"
+  }
 }

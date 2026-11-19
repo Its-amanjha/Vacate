@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "VirtualBox manual, where VirtualBox stores its files: the default machine folder on Linux is ~/VirtualBox VMs: https://www.virtualbox.org/manual/ch10.html",
-  "notes": "The global VM list, snapshots config and settings are in ~/.config/VirtualBox, which this rule does not count. The machine folder can be changed per VM, and some VMs live on other drives."
+  "notes": "The global VM list, snapshots config and settings are in ~/.config/VirtualBox, which this rule does not count. The machine folder can be changed per VM, and some VMs live on other drives.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Export any virtual machines you want to keep using File > Export Appliance in VirtualBox.",
+    "signOut": null,
+    "steps": [
+      "Open VirtualBox and shut down all virtual machines.",
+      "Right-click each virtual machine in the list and select Remove.",
+      "Click Delete all files, or delete the folder named in the plan."
+    ],
+    "risk": "Permanently deletes all VirtualBox virtual machine disk images, snapshots, and guest files.",
+    "closeApps": [
+      "VirtualBox"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Oracle VM VirtualBox User Manual, Removing Virtual Machines: https://www.virtualbox.org/manual/ch01.html"
+  }
 }

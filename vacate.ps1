@@ -11,6 +11,7 @@
     vacate.ps1 rules validate
     vacate.ps1 report -Run <dir>
     vacate.ps1 checklist -Run <dir>
+    vacate.ps1 plan -Run <dir>
     vacate.ps1 version
 .NOTES
     For devices you own or are authorised to hand over. Not for destroying evidence, defeating a
@@ -43,6 +44,7 @@ function Write-VacateUsage {
     Write-Output '  vacate.ps1 rules validate'
     Write-Output '  vacate.ps1 report -Run <dir>'
     Write-Output '  vacate.ps1 checklist -Run <dir>'
+    Write-Output '  vacate.ps1 plan -Run <dir>      (cleanup plan; advice only, changes nothing)'
     Write-Output '  vacate.ps1 version'
     Write-Output 'vacate only reads. It never deletes, moves or changes anything.'
 }
@@ -60,6 +62,7 @@ try {
             Write-Output ('Scan finished: {0} traces, {1} rules ran, {2} skipped, {3} failed, {4} not applicable.' -f $s.tracesFound, $s.rulesRun, $s.rulesSkipped, $s.rulesFailed, $s.rulesNotApplicable)
             if (-not $rep.scan.complete) { Write-Output 'WARNING: the scan did not finish (time budget). The report is incomplete.' }
             Write-Output ('Report: ' + [IO.Path]::Combine($runDir, 'report.html'))
+            Write-Output ('Next: build a cleanup plan with  vacate.ps1 plan -Run ' + $runDir)
             if (-not $rep.scan.redacted) { Write-Output 'The report lists where your private data is. Treat it like a password; use -Redact to share.' }
             exit 0
         }
@@ -94,6 +97,16 @@ try {
             if (-not $Run) { Write-Output "$Command needs -Run <dir>."; exit 2 }
             $written = & $m { param($D, $W) Export-VacateRun -Run $D -What $W } $Run $Command
             foreach ($w in $written) { Write-Output ('Wrote ' + $w) }
+            exit 0
+        }
+        'plan' {
+            if (-not $Run) { Write-Output 'plan needs -Run <dir>.'; exit 2 }
+            $written = & $m { param($D) Invoke-VacatePlan -Run $D } $Run
+            $pj = & $m { param($D) ConvertFrom-VacateJson -Json ([IO.File]::ReadAllText([IO.Path]::Combine($D, 'plan.json'))) } ([IO.Path]::GetFullPath($Run))
+            $ps = $pj.summary
+            Write-Output ('Plan: {0} steps cover {1} traces; {2} with guidance, {3} without.' -f $ps.steps, $ps.tracesCovered, $ps.withGuidance, ($ps.noGuidance + $ps.ruleMissing))
+            foreach ($w in $written) { Write-Output ('Wrote ' + $w) }
+            Write-Output 'vacate changed nothing. The plan is advice; you do each step yourself.'
             exit 0
         }
         'help' { Write-VacateUsage; exit 0 }

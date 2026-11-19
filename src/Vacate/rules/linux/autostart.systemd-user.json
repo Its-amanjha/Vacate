@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Arch Wiki, systemd/User: per-user units are kept in ~/.config/systemd/user: https://wiki.archlinux.org/title/Systemd/User",
-  "notes": "Names only, no recursion. Enabled units also appear as entries inside *.wants folders, which are matched here as names. Packaged units live in /usr/lib/systemd/user and are not counted."
+  "notes": "Names only, no recursion. Enabled units also appear as entries inside *.wants folders, which are matched here as names. Packaged units live in /usr/lib/systemd/user and are not counted.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Review the user service unit files located in the folder named in the plan.",
+      "Delete any unwanted custom user service files or target symlinks using your file manager."
+    ],
+    "risk": "Background services configured for your user session will no longer start automatically.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "systemd project, systemd.unit: https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html"
+  }
 }

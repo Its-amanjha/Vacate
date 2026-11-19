@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "freedesktop.org Desktop Entry spec: per-user entries go in $XDG_DATA_HOME/applications: https://specifications.freedesktop.org/desktop-entry-spec/latest/",
-  "notes": "Names only. AppImage helpers, Electron installers and manual .desktop files land here; an entry with the same name as a system one overrides it."
+  "notes": "Names only. AppImage helpers, Electron installers and manual .desktop files land here; an entry with the same name as a system one overrides it.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Review custom desktop launcher files located in the folder named in the plan.",
+      "Delete unwanted desktop launcher files using your file manager, or delete the app directory it launches."
+    ],
+    "risk": "Removes per-user custom application launchers from your desktop application menu.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "freedesktop.org, Desktop Entry Specification: https://specifications.freedesktop.org/desktop-entry-spec/latest/"
+  }
 }

@@ -25,5 +25,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "macforensics.app artifact cheat sheet (CloudDocs)",
-  "notes": "Complements cloud.icloud-drive. Proposed in W3-D2 review."
+  "notes": "Complements cloud.icloud-drive.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Copy anything you still need from iCloud Drive in Finder to a drive you keep before the local copy is removed.",
+    "signOut": "In System Settings open your Apple Account and turn iCloud Drive off, so this Mac stops syncing the account's files.",
+    "steps": [
+      "Turn iCloud Drive off for this Mac and wait for Finder to finish removing the local copies.",
+      "Do not delete the folder named in the plan by hand; macOS manages it, and the full reset at the end clears it."
+    ],
+    "risk": "The local iCloud Drive metadata and cached files leave this Mac. The files themselves stay in the Apple Account.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, iCloud User Guide: https://support.apple.com/guide/icloud/welcome/icloud"
+  }
 }

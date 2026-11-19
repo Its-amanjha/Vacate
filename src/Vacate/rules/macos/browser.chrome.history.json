@@ -23,5 +23,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Chromium user data directory docs, History lives in each macOS profile: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "One History file per profile. Sibling History-wal and History-journal files are not counted separately; the database is never opened."
+  "notes": "One History file per profile. Sibling History-wal and History-journal files are not counted separately; the database is never opened.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": "In Chrome open Settings > You and Google and choose Turn off, so the Google account keeps its data but stops syncing this Mac.",
+    "steps": [
+      "Close every Chrome window so the history database is not in use.",
+      "In Chrome open the history page and clear browsing data for all time.",
+      "Delete the Chrome folder named in the plan if the history file is still there."
+    ],
+    "risk": "The list of sites visited on this Mac is gone. History already synced to a Google account stays in that account.",
+    "closeApps": [
+      "Google Chrome"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Google Chrome Help, Delete browsing data in Chrome: https://support.google.com/chrome/answer/95582"
+  }
 }

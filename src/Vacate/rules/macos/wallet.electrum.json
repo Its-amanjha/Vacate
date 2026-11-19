@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Electrum documentation, FAQ \"Where is my wallet file located?\": the data directory on macOS is ~/.electrum (wallets in ~/.electrum/wallets)",
-  "notes": "Earlier draft used ~/Library/Application Support/Electrum, which is not where Electrum keeps wallets. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "Earlier draft used ~/Library/Application Support/Electrum, which is not where Electrum keeps wallets.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Write the seed phrase of each Electrum wallet down on paper from the wallet menu and store it somewhere safe.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup for every wallet in the folder.",
+      "Quit Electrum so its files are not in use.",
+      "Delete the Electrum folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Wallet files and transaction history on this Mac are gone. Without the seed phrase the coins cannot be recovered.",
+    "closeApps": [
+      "Electrum"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Electrum Documentation, FAQ: https://electrum.readthedocs.io/en/latest/faq.html"
+  }
 }

@@ -72,6 +72,10 @@ jobs:
       - name: Sample scan (redacted)
         run: ./vacate.ps1 scan -Redact
 
+      # Phase 2: build the cleanup plan from that run (advice only, writes into the run folder).
+      - name: Sample plan
+        run: ./vacate.ps1 plan -Run (Get-ChildItem runs -Directory | Sort-Object Name | Select-Object -Last 1).FullName
+
       - name: Upload sample report
         if: always()
         uses: actions/upload-artifact@v5

@@ -1,28 +1,43 @@
 {
-    "id":  "activity.runmru",
-    "platforms":  [
-                      "windows"
-                  ],
-    "category":  "activity",
-    "title":  "Run dialog command history",
-    "whyItMatters":  "The RunMRU key lists commands typed into the Run dialog, which can expose programs, paths and URLs the user launched.",
-    "sensitivity":  "medium",
-    "locator":  {
-                    "kind":  "registry",
-                    "hive":  "HKCU",
-                    "key":  "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU"
-                },
-    "measure":  [
-                    "exists",
-                    "valueCount",
-                    "subkeyCount"
-                ],
-    "maxEntries":  5000,
-    "requiresElevation":  false,
-    "verifiedOn":  [
-                       "Windows 11 Pro 26300"
-                   ],
-    "verified":  true,
-    "source":  "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU",
-    "notes":  "MRU value data is not read, only counted. Registry last-write time is unavailable per project decision D3."
+  "id": "activity.runmru",
+  "platforms": [
+    "windows"
+  ],
+  "category": "activity",
+  "title": "Run dialog command history",
+  "whyItMatters": "The RunMRU key lists commands typed into the Run dialog, which can expose programs, paths and URLs the user launched.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU"
+  },
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU",
+  "notes": "MRU value data is not read, only counted. Registry last-write time is unavailable per project decision D3.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Only if you are not doing the full reset at the end of this plan, and you are comfortable with Registry Editor:",
+      "Open Registry Editor and go to the key named in the plan.",
+      "Delete the values in that key but keep the key itself; this empties the history."
+    ],
+    "risk": "Removes the Run dialog history for this account. The Run dialog forgets everything that was typed into it.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

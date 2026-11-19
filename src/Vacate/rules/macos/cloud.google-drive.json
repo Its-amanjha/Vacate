@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Google Drive for desktop on macOS 12.1+ uses ~/Library/CloudStorage/GoogleDrive-<account> - https://tidbits.com/2023/03/10/apples-file-provider-forces-mac-cloud-storage-changes/",
-  "notes": "Newer File Provider location; legacy ~/Google Drive and /Volumes/Google Drive mounts are out of scope. Streamed online-only placeholders are counted, not hydrated."
+  "notes": "Newer File Provider location; legacy ~/Google Drive and /Volumes/Google Drive mounts are out of scope. Streamed online-only placeholders are counted, not hydrated.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Open any file that exists only in the streamed Drive folder and save a copy to a drive you keep.",
+    "signOut": "In the Drive for desktop menu bar icon open the settings and disconnect the account, so it stops syncing this Mac.",
+    "steps": [
+      "Quit Drive for desktop from the menu bar icon.",
+      "Remove the Drive for desktop app if you no longer need it on this Mac.",
+      "Delete the GoogleDrive folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Cached and mirrored copies leave this Mac. Files stay in the Google account, and online-only files were never downloaded.",
+    "closeApps": [
+      "Google Drive"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Google, Customize Drive for desktop settings: https://support.google.com/drive/answer/13470231"
+  }
 }

@@ -67,9 +67,44 @@
     },
     "verified": { "type": "boolean" },
     "source": { "type": "string", "minLength": 10, "maxLength": 400 },
-    "notes": { "type": ["string", "null"], "maxLength": 600 }
+    "notes": { "type": ["string", "null"], "maxLength": 600 },
+    "cleanup": { "$ref": "#/definitions/cleanup" }
   },
   "definitions": {
+    "cleanupText": { "type": "string", "minLength": 10, "maxLength": 300, "pattern": "^[\\x20-\\x7E]+$" },
+    "cleanup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action", "exportFirst", "signOut", "steps", "risk", "closeApps", "resetCovers", "reason", "source"],
+      "properties": {
+        "action": { "enum": ["export-then-remove", "sign-out-then-remove", "uninstall", "remove", "review", "none"] },
+        "exportFirst": { "anyOf": [{ "type": "null" }, { "$ref": "#/definitions/cleanupText" }] },
+        "signOut": { "anyOf": [{ "type": "null" }, { "$ref": "#/definitions/cleanupText" }] },
+        "steps": {
+          "type": "array",
+          "maxItems": 6,
+          "items": { "type": "string", "minLength": 10, "maxLength": 200, "pattern": "^[\\x20-\\x7E]+$" }
+        },
+        "risk": { "$ref": "#/definitions/cleanupText" },
+        "closeApps": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 2, "maxLength": 40 }
+        },
+        "resetCovers": { "type": "boolean" },
+        "reason": { "anyOf": [{ "type": "null" }, { "$ref": "#/definitions/cleanupText" }] },
+        "source": { "type": "string", "minLength": 10, "maxLength": 400 }
+      },
+      "allOf": [
+        { "if": { "properties": { "action": { "const": "none" } } },
+          "then": { "properties": { "reason": { "type": "string" }, "steps": { "maxItems": 0 } } },
+          "else": { "properties": { "reason": { "type": "null" }, "steps": { "minItems": 1 } } } },
+        { "if": { "properties": { "action": { "const": "export-then-remove" } } },
+          "then": { "properties": { "exportFirst": { "type": "string" } } } },
+        { "if": { "properties": { "action": { "const": "sign-out-then-remove" } } },
+          "then": { "properties": { "signOut": { "type": "string" } } } }
+      ]
+    },
     "rootToken": {
       "enum": [
         "HOME", "USERS", "APPDATA", "LOCALAPPDATA", "PROGRAMDATA", "SYSTEMDRIVE",

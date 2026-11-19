@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Telegram Desktop is open source and keeps its working folder (tdata) in the app-data folder: https://github.com/telegramdesktop/tdesktop",
-  "notes": "Standard installed build. A portable build keeps tdata next to Telegram.exe, the Microsoft Store build uses Telegram Desktop UWP under %APPDATA%, and a custom working directory moves it. A local passcode encrypts the key data."
+  "notes": "Standard installed build. A portable build keeps tdata next to Telegram.exe, the Microsoft Store build uses Telegram Desktop UWP under %APPDATA%, and a custom working directory moves it. A local passcode encrypts the key data.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Save any chat, photo or file you need first; Telegram Desktop keeps the only local copy on this PC.",
+    "signOut": "In Telegram, open Settings and end this computer in Active Sessions, so the account no longer trusts it.",
+    "steps": [
+      "Close Telegram Desktop.",
+      "Uninstall Telegram Desktop from Settings > Apps > Installed apps.",
+      "Delete the Telegram data folder named in the plan if it is still there."
+    ],
+    "risk": "Removes cached chats, media and the local sign-in data; the account stays active on your phone.",
+    "closeApps": [
+      "Telegram Desktop"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Telegram FAQ, How do I log out: https://telegram.org/faq#q-how-do-i-log-out"
+  }
 }

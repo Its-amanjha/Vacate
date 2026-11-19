@@ -27,5 +27,23 @@
                    ],
     "verified":  true,
     "source":  "Microsoft Learn, OneDrive Known Folder Move and default sync folder under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
-    "notes":  "Personal accounts use OneDrive; work or school accounts use OneDrive - \u003cOrganization\u003e next to it; the OneDrive* glob matches both (one trace per folder). With Known Folder Move, Desktop, Documents and Pictures live inside this folder. File placeholders may be cloud-only."
+    "notes":  "Personal accounts use OneDrive; work or school accounts use OneDrive - \u003cOrganization\u003e next to it; the OneDrive* glob matches both (one trace per folder). With Known Folder Move, Desktop, Documents and Pictures live inside this folder. File placeholders may be cloud-only.",
+    "cleanup":  {
+        "action":  "sign-out-then-remove",
+        "exportFirst":  "Copy the files you want to keep out of the OneDrive folder to a drive you are taking with you.",
+        "signOut":  "In OneDrive, open Help and Settings > Settings > Account and choose Unlink this PC, so the account stops syncing here.",
+        "steps":  [
+            "Confirm the files you need are copied somewhere safe.",
+            "Close OneDrive from the notification area.",
+            "Unlink the account in OneDrive settings.",
+            "Delete the OneDrive folder named in the plan if it is still there."
+        ],
+        "risk":  "Local copies of synced files are removed; cloud-only placeholders disappear first and files not copied leave this PC.",
+        "closeApps":  [
+            "OneDrive"
+        ],
+        "resetCovers":  true,
+        "reason":  null,
+        "source":  "Microsoft Support, Turn off, disable, or uninstall OneDrive: https://support.microsoft.com/en-us/onedrive/turn-off-disable-or-uninstall-onedrive"
+    }
 }

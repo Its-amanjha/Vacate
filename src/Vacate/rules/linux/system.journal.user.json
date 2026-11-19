@@ -25,5 +25,16 @@
   ],
   "verified": true,
   "source": "systemd-journald docs: with Storage=persistent the journal is kept in /var/log/journal, otherwise it lives only in /run: https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html",
-  "notes": "Sizes only; the journal files themselves are normally root-only or readable by the systemd-journal and adm groups, so a normal user gets permission skips. When Storage=volatile the folder does not exist and the journal is lost at shutdown. Individual user journals under ~/.local/share are not covered."
+  "notes": "Sizes only; the journal files themselves are normally root-only or readable by the systemd-journal and adm groups, so a normal user gets permission skips. When Storage=volatile the folder does not exist and the journal is lost at shutdown. Individual user journals under ~/.local/share are not covered.",
+  "cleanup": {
+    "action": "none",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [],
+    "risk": "Deleting or modifying system journal files manually can corrupt the journal database for active system services.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": "Persistent systemd journal logs are managed by the operating system journal daemon and are removed during OS reinstallation.",
+    "source": "systemd project, systemd-journald.service: https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html"
+  }
 }

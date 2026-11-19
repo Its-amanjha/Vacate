@@ -1,28 +1,45 @@
 {
-    "id":  "activity.shellbags",
-    "platforms":  [
-                      "windows"
-                  ],
-    "category":  "activity",
-    "title":  "Explorer ShellBags",
-    "whyItMatters":  "ShellBags remember folder views and paths the user browsed, including folders on drives that are no longer attached.",
-    "sensitivity":  "medium",
-    "locator":  {
-                    "kind":  "registry",
-                    "hive":  "HKCU",
-                    "key":  "Software\\Microsoft\\Windows\\Shell\\BagMRU"
-                },
-    "measure":  [
-                    "exists",
-                    "valueCount",
-                    "subkeyCount"
-                ],
-    "maxEntries":  5000,
-    "requiresElevation":  false,
-    "verifiedOn":  [
-                       "Windows 11 Pro 26300"
-                   ],
-    "verified":  true,
-    "source":  "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\Shell\\BagMRU (with companion Bags key)",
-    "notes":  "BagMRU is the path tree; the parallel Bags key holds view settings. Only this key is counted; binary values are not decoded."
+  "id": "activity.shellbags",
+  "platforms": [
+    "windows"
+  ],
+  "category": "activity",
+  "title": "Explorer ShellBags",
+  "whyItMatters": "ShellBags remember folder views and paths the user browsed, including folders on drives that are no longer attached.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\Shell\\BagMRU"
+  },
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\Shell\\BagMRU (with companion Bags key)",
+  "notes": "BagMRU is the path tree; the parallel Bags key holds view settings. Only this key is counted; binary values are not decoded.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Only if you are not doing the full reset at the end of this plan, and you are comfortable with Registry Editor:",
+      "Open Registry Editor and go to the key named in the plan.",
+      "Delete the BagMRU subkey, and the Bags subkey beside it, then close Registry Editor."
+    ],
+    "risk": "Removes the stored folder views for this account, including paths of folders that are no longer attached. Windows rebuilds the record for folders browsed later.",
+    "closeApps": [
+      "File Explorer"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

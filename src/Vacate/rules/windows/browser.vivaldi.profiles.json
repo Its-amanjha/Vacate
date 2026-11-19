@@ -17,5 +17,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Chromium user data directory docs (Vivaldi uses User Data with per-profile folders): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "Matches the Preferences marker file so non-profile folders are skipped. Vivaldi Snapshots use a separate Vivaldi Snapshot/User Data tree."
+  "notes": "Matches the Preferences marker file so non-profile folders are skipped. Vivaldi Snapshots use a separate Vivaldi Snapshot/User Data tree.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Vivaldi, use Vivaldi menu > File > Export > Export Passwords, and export bookmarks if you want to keep them.",
+    "signOut": "In Vivaldi, open Settings > Sync and log out, so the browser stops syncing with your Vivaldi account.",
+    "steps": [
+      "Close every Vivaldi window.",
+      "Uninstall Vivaldi from Settings > Apps > Installed apps.",
+      "Delete the Vivaldi user data folder named in the plan if it is still there."
+    ],
+    "risk": "Removes every Vivaldi profile on this PC: history, saved logins, mail accounts, cookies and sessions.",
+    "closeApps": [
+      "Vivaldi"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Vivaldi Browser Help, Import and export browser data: https://help.vivaldi.com/desktop/tools/import-and-export-browser-data"
+  }
 }

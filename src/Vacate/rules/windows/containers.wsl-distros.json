@@ -1,28 +1,43 @@
 {
-    "id":  "containers.wsl-distros",
-    "platforms":  [
-                      "windows"
-                  ],
-    "category":  "containers-vms",
-    "title":  "WSL distributions",
-    "whyItMatters":  "Each registered WSL distro holds a Linux filesystem with its own files and shell history. Missing it would leave a whole user environment unaccounted for.",
-    "sensitivity":  "medium",
-    "locator":  {
-                    "kind":  "registry",
-                    "hive":  "HKCU",
-                    "key":  "Software\\Microsoft\\Windows\\CurrentVersion\\Lxss"
-                },
-    "measure":  [
-                    "exists",
-                    "valueCount",
-                    "subkeyCount"
-                ],
-    "maxEntries":  5000,
-    "requiresElevation":  false,
-    "verifiedOn":  [
-                       "Windows 11 Pro 26300"
-                   ],
-    "verified":  true,
-    "source":  "Microsoft Learn: WSL distribution list under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss - https://learn.microsoft.com/en-us/windows/wsl/disk-space",
-    "notes":  "One GUID subkey per installed distribution. Names, BasePath values and VHD files are not read; only key, value and subkey counts are reported."
+  "id": "containers.wsl-distros",
+  "platforms": [
+    "windows"
+  ],
+  "category": "containers-vms",
+  "title": "WSL distributions",
+  "whyItMatters": "Each registered WSL distro holds a Linux filesystem with its own files and shell history. Missing it would leave a whole user environment unaccounted for.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Lxss"
+  },
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "Microsoft Learn: WSL distribution list under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Lxss - https://learn.microsoft.com/en-us/windows/wsl/disk-space",
+  "notes": "One GUID subkey per installed distribution. Names, BasePath values and VHD files are not read; only key, value and subkey counts are reported.",
+  "cleanup": {
+    "action": "uninstall",
+    "exportFirst": "Start each distribution and copy out the files and keys you still need; uninstalling deletes the whole file system.",
+    "signOut": null,
+    "steps": [
+      "Copy out anything you still need from each distribution.",
+      "Uninstall the distribution from Settings > Apps > Installed apps, which also unregisters it.",
+      "Open Settings > Apps > Installed apps again and check that no Linux distribution is still listed."
+    ],
+    "risk": "Deletes each distribution's whole Linux file system: files, keys, code and shell history. Installed Windows programs are not affected.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Basic commands for WSL: https://learn.microsoft.com/en-us/windows/wsl/basic-commands"
+  }
 }

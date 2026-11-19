@@ -23,5 +23,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "SPEC.md platform roots: USERS = /Users; other profiles are reported by directory name only (path jail rule 6)",
-  "notes": "Names only. excludeHome drops the current account; no recursion into any profile, and no symlink is followed."
+  "notes": "Names only. excludeHome drops the current account; no recursion into any profile, and no symlink is followed.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": "Have each other person copy their files off first, to an external drive or their own new computer.",
+    "signOut": null,
+    "steps": [
+      "Look at the account names in the plan and decide which people still need their accounts.",
+      "In System Settings > Users & Groups, click the info button next to an account and choose Delete User.",
+      "In the dialog, delete the home folder rather than saving a disk image that keeps their data."
+    ],
+    "risk": "That person's files and settings are deleted; the disk image option instead leaves their data on this Mac.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Delete a user or group on Mac: https://support.apple.com/guide/mac-help/delete-a-user-or-group-mchlp1557/mac"
+  }
 }

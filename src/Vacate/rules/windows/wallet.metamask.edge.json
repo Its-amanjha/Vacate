@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "MetaMask extension id ejbalbakoplchlghecdalmeeeajnimhm from its Microsoft Edge Add-ons listing: https://microsoftedge.microsoft.com/addons/detail/metamask/ejbalbakoplchlghecdalmeeeajnimhm",
-  "notes": "Only applies when MetaMask was installed from the Edge Add-ons store. If it was installed in Edge from the Chrome Web Store it keeps the Chrome id, so check wallet.metamask.chrome too."
+  "notes": "Only applies when MetaMask was installed from the Edge Add-ons store. If it was installed in Edge from the Chrome Web Store it keeps the Chrome id, so check wallet.metamask.chrome too.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Confirm you have the recovery phrase or backup: the Secret Recovery Phrase for every MetaMask wallet, written down offline.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup before removing anything.",
+      "In Edge, open the extensions page and remove MetaMask.",
+      "Delete the MetaMask extension data folder named in the plan."
+    ],
+    "risk": "Without the Secret Recovery Phrase the wallet cannot be restored; removing the extension deletes its encrypted vault here.",
+    "closeApps": [
+      "Microsoft Edge"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "MetaMask Help Center, How to delete your MetaMask wallet: https://support.metamask.io/configure/wallet/how-can-i-delete-my-metamask-wallet"
+  }
 }

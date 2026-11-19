@@ -24,5 +24,20 @@
   ],
   "verified": true,
   "source": "Apple launchd documentation: per-user agents live in ~/Library/LaunchAgents - https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html",
-  "notes": "Names only; plists are never parsed and no launchd command is invoked. System agents under /Library/LaunchAgents are out of scope."
+  "notes": "Names only; plists are never parsed and no launchd command is invoked. System agents under /Library/LaunchAgents are out of scope.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open System Settings > General > Login Items & Extensions and note which agents belong to apps you still use.",
+      "Remove those login items there first, so macOS does not start them again.",
+      "Delete the launch agent files named in the plan, then restart the Mac."
+    ],
+    "risk": "Background helpers stop starting at login; an app that depends on one may misbehave until it is reinstalled.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Change Login Items & Extensions settings on Mac: https://support.apple.com/guide/mac-help/change-login-items-extensions-settings-mtusr003/mac"
+  }
 }

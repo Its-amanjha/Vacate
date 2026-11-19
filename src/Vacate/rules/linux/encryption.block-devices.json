@@ -22,5 +22,16 @@
   ],
   "verified": true,
   "source": "lsblk(8) from util-linux reports device name, type, filesystem type and mountpoint as JSON; the engine parses that output: https://man.archlinux.org/man/lsblk.8",
-  "notes": "A LUKS volume shows fstype crypto_LUKS; an opened mapper device shows up separately. Names, types and mountpoints only, no key material. On systems without lsblk the engine records the query as unavailable."
+  "notes": "A LUKS volume shows fstype crypto_LUKS; an opened mapper device shows up separately. Names, types and mountpoints only, no key material. On systems without lsblk the engine records the query as unavailable.",
+  "cleanup": {
+    "action": "none",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [],
+    "risk": "Disk layout and volume encryption status are hardware configuration reports and cannot be manually deleted.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": "This is an operating system query showing disk partition layout and encryption state. No cleanup is required.",
+    "source": "util-linux project, lsblk manual: https://man7.org/linux/man-pages/man8/lsblk.8.html"
+  }
 }

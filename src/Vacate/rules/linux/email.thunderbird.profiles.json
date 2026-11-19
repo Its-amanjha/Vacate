@@ -17,5 +17,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Mozilla Support, profiles: Thunderbird stores its profile folders in ~/.thunderbird on Linux: https://support.mozilla.org/en-US/kb/profiles-where-thunderbird-stores-user-data",
-  "notes": "Matches the profile folders themselves, so no mailbox contents are walked; profiles.ini in the same folder names them and is not counted. On Ubuntu 24.04 and later Thunderbird is usually the Snap, which uses ~/snap/thunderbird/common/.thunderbird instead, covered by a separate rule."
+  "notes": "Matches the profile folders themselves, so no mailbox contents are walked; profiles.ini in the same folder names them and is not counted. On Ubuntu 24.04 and later Thunderbird is usually the Snap, which uses ~/snap/thunderbird/common/.thunderbird instead, covered by a separate rule.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Export the address book and calendars from Thunderbird, and copy the profile folder to a backup drive, before anything is removed.",
+    "signOut": "Remove the mail accounts in Thunderbird's account settings, so no saved password or login token for these mailboxes stays on the computer.",
+    "steps": [
+      "Close Thunderbird.",
+      "Uninstall Thunderbird from the App Center if you are removing the app itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Deletes the local copy of all mail, address books, calendars and saved account passwords in those profiles. Mail kept on the server is not affected.",
+    "closeApps": ["Thunderbird"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Profiles - Where Thunderbird stores your messages and other user data: https://support.mozilla.org/en-US/kb/profiles-where-thunderbird-stores-user-data"
+  }
 }

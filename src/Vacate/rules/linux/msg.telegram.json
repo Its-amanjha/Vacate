@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Telegram Desktop (tdesktop) keeps its profile in ~/.local/share/TelegramDesktop/tdata on Linux; see also Arch Wiki Telegram: https://wiki.archlinux.org/title/Telegram",
-  "notes": "tdata is not a readable chat archive but it is the live session. The folder next to it holds downloaded files. The official binary and distro packages use this path; Snap and Flatpak installs have their own trees."
+  "notes": "tdata is not a readable chat archive but it is the live session. The folder next to it holds downloaded files. The official binary and distro packages use this path; Snap and Flatpak installs have their own trees.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "In Telegram Desktop, use the export option in the advanced settings if you want a copy of your chats: the tdata session is not readable.",
+    "signOut": "In Telegram Desktop, open Settings, then the menu in the top right corner, and choose Log out, so this computer stops using the account.",
+    "steps": [
+      "Quit Telegram Desktop from its tray icon.",
+      "Uninstall Telegram from the App Center if you are removing the app itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Ends the session and deletes the local media cache and message database on this computer. Chats stay in your Telegram account.",
+    "closeApps": ["Telegram"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Telegram, How do I log out? (Telegram FAQ): https://telegram.org/faq#q-how-do-i-log-out"
+  }
 }

@@ -27,5 +27,20 @@
   ],
   "verified": true,
   "source": "XDG user directories defaults (xdg-user-dirs creates Pictures under the home directory): https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
-  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Many desktops save screenshots to Pictures/Screenshots."
+  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Many desktops save screenshots to Pictures/Screenshots.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open the folder named in the plan in your file manager.",
+      "Copy any personal photos, scans, and screenshots you want to keep to an external drive.",
+      "Delete the remaining photos and folders in Pictures."
+    ],
+    "risk": "Permanently deletes all photos, screenshots, and graphics files stored in Pictures.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Ubuntu Documentation, Desktop guide: https://help.ubuntu.com/stable/ubuntu-help/shell-introduction.html"
+  }
 }

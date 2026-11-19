@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Ledger support, user data folder on Windows is the app-data folder (app.json): https://support.ledger.com/article/8490479490333-zd",
-  "notes": "Current name since the Ledger Live rename. Older installs and upgraded installs keep the folder under the old name Ledger Live, so check both. Keys never touch this folder."
+  "notes": "Current name since the Ledger Live rename. Older installs and upgraded installs keep the folder under the old name Ledger Live, so check both. Keys never touch this folder.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup for the hardware wallet before removing anything.",
+      "Uninstall Ledger Wallet from Settings > Apps > Installed apps.",
+      "Delete the Ledger folder named in the plan if it is still there."
+    ],
+    "risk": "Removes the account list, balances and settings on this PC; coins stay on the hardware device and its recovery phrase.",
+    "closeApps": [
+      "Ledger Wallet"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Ledger Support, Where is the Ledger Wallet user data folder: https://support.ledger.com/article/8490479490333-zd"
+  }
 }

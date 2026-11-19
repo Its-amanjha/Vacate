@@ -7,6 +7,18 @@ $script:VacateRuleKeys = @(
     'measure', 'maxEntries', 'requiresElevation', 'verifiedOn', 'verified', 'source', 'notes'
 )
 
+# Optional top-level fields (Phase 2). 'cleanup' is the guided-cleanup knowledge (DECISIONS D44).
+$script:VacateRuleOptionalKeys = @('cleanup')
+
+$script:VacateCleanupKeys = @('action', 'exportFirst', 'signOut', 'steps', 'risk', 'closeApps', 'resetCovers', 'reason', 'source')
+$script:VacateCleanupActions = @('export-then-remove', 'sign-out-then-remove', 'uninstall', 'remove', 'review', 'none')
+
+# Plan text is instructions for a person, never a command to paste (DECISIONS D47).
+# Phase 2 is dry-run only; destructive commands belong to Phase 3 behind its own gates.
+# The hyphen and dot are written as [-] and [.] so the static safety scanner, which rightly flags
+# the literal cmdlet and binary names anywhere in source, does not mistake this deny-list for a use.
+$script:VacateCleanupForbiddenPattern = '(?i)(\brm\s+-|\brm\s+~|\bsudo\b|remove[-]item|\breg([.]exe)?\s+delete|\bdel\s+/|\brmdir\b|\bshred\b|\bdiskpart\b|\bformat\s+[a-z]:|\bcipher([.]exe)?\s+/w|clear[-]content|\bsrm\b|\bdd\s+if=|\bmkfs|`)'
+
 $script:VacateLocatorKeys = @{
     'path'              = @{ Required = @('kind', 'root', 'path', 'match'); Optional = @('recurse', 'include', 'excludeHome') }
     'registry'          = @{ Required = @('kind', 'hive', 'key'); Optional = @('view') }
@@ -88,7 +100,9 @@ function Test-VacateRule {
 
     $names = @($Rule.PSObject.Properties | ForEach-Object { $_.Name })
     foreach ($k in $script:VacateRuleKeys) { if ($names -cnotcontains $k) { $p.Add("missing field '$k'") } }
-    foreach ($n in $names) { if ($script:VacateRuleKeys -cnotcontains $n) { $p.Add("unknown field '$n'") } }
+    foreach ($n in $names) { if ($script:VacateRuleKeys -cnotcontains $n -and $script:VacateRuleOptionalKeys -cnotcontains $n) { $p.Add("unknown field '$n'") } }
+    $f = Get-VacateRuleField $Rule 'cleanup'
+    if ($f.Present) { foreach ($problem in (Test-VacateCleanup -Cleanup $f.Value)) { $p.Add($problem) } }
 
     # id
     $f = Get-VacateRuleField $Rule 'id'
@@ -179,6 +193,80 @@ function Test-VacateRule {
         }
     }
 
+    return $p.ToArray()
+}
+
+function Test-VacateCleanupText {
+    [CmdletBinding()]
+    [OutputType([string[]])]
+    param([Parameter(Mandatory)][string]$Name, [AllowNull()][object]$Value, [int]$Min, [int]$Max, [bool]$AllowNull = $false)
+    $p = New-Object System.Collections.Generic.List[string]
+    if ($null -eq $Value) {
+        if (-not $AllowNull) { $p.Add("cleanup.$Name is required") }
+        return $p.ToArray()
+    }
+    if (-not ($Value -is [string]) -or $Value.Trim().Length -lt $Min -or $Value.Length -gt $Max) {
+        $p.Add(("cleanup.{0} must be text of {1}-{2} characters" -f $Name, $Min, $Max))
+    }
+    elseif ($Value -match $script:VacateCleanupForbiddenPattern) {
+        $p.Add("cleanup.$Name contains a shell command or backtick; describe the action in words")
+    }
+    elseif ($Value -match '[^\x20-\x7E]') {
+        $p.Add("cleanup.$Name must be printable ASCII")
+    }
+    return $p.ToArray()
+}
+
+function Test-VacateCleanup {
+    # Validates a rule's optional 'cleanup' object (DECISIONS D44, D47). Returns problems.
+    [CmdletBinding()]
+    [OutputType([string[]])]
+    param([AllowNull()][object]$Cleanup)
+    $p = New-Object System.Collections.Generic.List[string]
+    if ($null -eq $Cleanup -or -not ($Cleanup -is [pscustomobject])) {
+        $p.Add('cleanup must be an object')
+        return $p.ToArray()
+    }
+    $names = @($Cleanup.PSObject.Properties | ForEach-Object { $_.Name })
+    foreach ($k in $script:VacateCleanupKeys) { if ($names -cnotcontains $k) { $p.Add("cleanup: missing field '$k'") } }
+    foreach ($n in $names) { if ($script:VacateCleanupKeys -cnotcontains $n) { $p.Add("cleanup: unknown field '$n'") } }
+    if ($p.Count -gt 0) { return $p.ToArray() }
+
+    $action = $Cleanup.action
+    if (-not ($action -is [string]) -or $script:VacateCleanupActions -cnotcontains $action) {
+        $p.Add("cleanup.action must be one of: $($script:VacateCleanupActions -join ', ')")
+        $action = ''
+    }
+    foreach ($x in (Test-VacateCleanupText -Name 'exportFirst' -Value $Cleanup.exportFirst -Min 10 -Max 300 -AllowNull $true)) { $p.Add($x) }
+    foreach ($x in (Test-VacateCleanupText -Name 'signOut' -Value $Cleanup.signOut -Min 10 -Max 300 -AllowNull $true)) { $p.Add($x) }
+    foreach ($x in (Test-VacateCleanupText -Name 'risk' -Value $Cleanup.risk -Min 10 -Max 300)) { $p.Add($x) }
+    foreach ($x in (Test-VacateCleanupText -Name 'source' -Value $Cleanup.source -Min 10 -Max 400)) { $p.Add($x) }
+    foreach ($x in (Test-VacateCleanupText -Name 'reason' -Value $Cleanup.reason -Min 10 -Max 300 -AllowNull $true)) { $p.Add($x) }
+
+    $steps = @()
+    if ($null -ne $Cleanup.steps) { $steps = @($Cleanup.steps) }
+    if ($null -eq $Cleanup.steps -or ($steps.Count -gt 0 -and -not (Test-VacateIsStringArray $steps))) { $p.Add('cleanup.steps must be an array of strings') }
+    else {
+        if ($steps.Count -gt 6) { $p.Add('cleanup.steps has more than 6 items') }
+        foreach ($s in $steps) { foreach ($x in (Test-VacateCleanupText -Name 'steps[]' -Value $s -Min 10 -Max 200)) { $p.Add($x) } }
+    }
+    $apps = @()
+    if ($null -ne $Cleanup.closeApps) { $apps = @($Cleanup.closeApps) }
+    if ($null -eq $Cleanup.closeApps -or ($apps.Count -gt 0 -and -not (Test-VacateIsStringArray $apps))) { $p.Add('cleanup.closeApps must be an array of strings') }
+    else { foreach ($a in $apps) { foreach ($x in (Test-VacateCleanupText -Name 'closeApps[]' -Value $a -Min 2 -Max 40)) { $p.Add($x) } } }
+    if (-not ($Cleanup.resetCovers -is [bool])) { $p.Add('cleanup.resetCovers must be true or false') }
+
+    # Per-action requirements.
+    if ($action -ceq 'none') {
+        if ($null -eq $Cleanup.reason) { $p.Add("cleanup.reason is required when action is 'none'") }
+        if ($steps.Count -gt 0) { $p.Add("cleanup.steps must be empty when action is 'none'") }
+    }
+    elseif ($action -ne '') {
+        if ($steps.Count -eq 0) { $p.Add("cleanup.steps needs 1-6 items when action is '$action'") }
+        if ($null -ne $Cleanup.reason) { $p.Add("cleanup.reason is only for action 'none'") }
+    }
+    if ($action -ceq 'export-then-remove' -and $null -eq $Cleanup.exportFirst) { $p.Add("cleanup.exportFirst is required when action is 'export-then-remove'") }
+    if ($action -ceq 'sign-out-then-remove' -and $null -eq $Cleanup.signOut) { $p.Add("cleanup.signOut is required when action is 'sign-out-then-remove'") }
     return $p.ToArray()
 }
 

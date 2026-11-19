@@ -17,5 +17,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Mozilla Bugzilla 259356, support for the XDG Base Directory spec: new Firefox profiles use $XDG_CONFIG_HOME/mozilla/firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=259356",
-  "notes": "Unconfirmed: the release number (147, January 2026) comes from Mozilla release notes and press coverage, not from a page this agent read; the Bugzilla bug is the primary source for the path. Only fresh installs and new profiles move; an existing ~/.mozilla/firefox keeps the legacy location, so both rules are needed. The * matches the profile folder and prefs.js is the marker."
+  "notes": "Unconfirmed: the release number (147, January 2026) comes from Mozilla release notes and press coverage, not from a page this agent read; the Bugzilla bug is the primary source for the path. Only fresh installs and new profiles move; an existing ~/.mozilla/firefox keeps the legacy location, so both rules are needed. The * matches the profile folder and prefs.js is the marker.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Firefox, export your bookmarks from the Library and your passwords from the logins settings, and keep both files off this computer.",
+    "signOut": "In Firefox, open the account menu and disconnect this browser from sync, so the account keeps the data and this computer stops using it.",
+    "steps": [
+      "Close every Firefox window.",
+      "Uninstall Firefox from the App Center if you are removing the browser itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes every Firefox profile kept in the config folder: history, bookmarks, saved logins, cookies and downloaded files.",
+    "closeApps": ["Firefox"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Profiles - Where Firefox stores your bookmarks, passwords and other user data: https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data"
+  }
 }

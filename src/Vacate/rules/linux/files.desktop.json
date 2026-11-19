@@ -27,5 +27,20 @@
   ],
   "verified": true,
   "source": "XDG user directories defaults (xdg-user-dirs creates Desktop, Documents, Downloads, Music, Pictures, Videos, Public, Templates): https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
-  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Headless installs have no Desktop folder."
+  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Headless installs have no Desktop folder.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open the folder named in the plan in your file manager.",
+      "Copy any personal documents, images or shortcuts you want to keep to an external drive.",
+      "Delete the remaining files and subfolders from the Desktop."
+    ],
+    "risk": "Permanently deletes any unsaved documents, files, or shortcuts stored on your Desktop.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Ubuntu Documentation, Desktop guide: https://help.ubuntu.com/stable/ubuntu-help/shell-introduction.html"
+  }
 }

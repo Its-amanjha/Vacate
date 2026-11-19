@@ -18,5 +18,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "wg-quick(8) reads <interface>.conf files from /etc/wireguard and creates the folder mode 0700: https://man.archlinux.org/man/wg-quick.8",
-  "notes": "Root-only by design, hence requiresElevation. Configs can live elsewhere when a custom path is passed to wg-quick or the tunnel is managed by a desktop app, which keeps its own copy under the user's home; this rule only covers the system folder."
+  "notes": "Root-only by design, hence requiresElevation. Configs can live elsewhere when a custom path is passed to wg-quick or the tunnel is managed by a desktop app, which keeps its own copy under the user's home; this rule only covers the system folder.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Revoke corresponding public keys on your WireGuard VPN peers or gateways if access should be retired.",
+      "Remove the VPN connection in Settings > Network; leave the system files named in the plan to the full reset."
+    ],
+    "risk": "Removes private WireGuard tunnel configuration keys and peer endpoints from the system.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "WireGuard Project, Quick Start: https://www.wireguard.com/quickstart/"
+  }
 }

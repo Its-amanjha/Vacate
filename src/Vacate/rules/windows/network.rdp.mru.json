@@ -1,6 +1,8 @@
 {
   "id": "network.rdp.mru",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "network",
   "title": "Remote Desktop connection history",
   "whyItMatters": "The MRU list shows hostnames and IP addresses the user connected to with Remote Desktop. It maps internal systems the account could reach.",
@@ -10,11 +12,31 @@
     "hive": "HKCU",
     "key": "Software\\Microsoft\\Terminal Server Client\\Default"
   },
-  "measure": ["exists", "valueCount", "subkeyCount"],
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
   "source": "Microsoft Learn: https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/remove-entries-from-remote-desktop-connection-computer (HKCU\\Software\\Microsoft\\Terminal Server Client\\Default MRU values)",
-  "notes": "MRU0 to MRU9 are values in this key; the Servers sibling key holds one subkey per host. Value data is never read; only counts are reported."
+  "notes": "MRU0 to MRU9 are values in this key; the Servers sibling key holds one subkey per host. Value data is never read; only counts are reported.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Only if you are not doing the full reset at the end of this plan, and you are comfortable with Registry Editor:",
+      "Open Registry Editor and go to the key named in the plan.",
+      "Delete the values that hold the recent host names, keeping the key itself.",
+      "Remove saved Remote Desktop entries in Credential Manager as well."
+    ],
+    "risk": "Clears the Remote Desktop host history for this account. Saved passwords for those hosts sit in Credential Manager and are not removed here.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "freedesktop.org Autostart spec: per-user autostart entries are .desktop files in $XDG_CONFIG_HOME/autostart: https://specifications.freedesktop.org/autostart-spec/latest/",
-  "notes": "Names only. System-wide entries live in /etc/xdg/autostart and are not counted here; a user entry with the same file name overrides a system one."
+  "notes": "Names only. System-wide entries live in /etc/xdg/autostart and are not counted here; a user entry with the same file name overrides a system one.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open Startup Applications Preferences from the desktop application menu.",
+      "Select each unwanted startup entry and click Remove, or delete the file named in the plan."
+    ],
+    "risk": "Selected applications will no longer start automatically when you log into the desktop.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GNOME Help, Start applications automatically: https://help.gnome.org/users/gnome-help/stable/shell-apps-auto-start.html"
+  }
 }

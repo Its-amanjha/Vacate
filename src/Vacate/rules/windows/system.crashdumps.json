@@ -19,5 +19,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Microsoft Learn Windows Error Reporting: per-user crash dumps stored in %LOCALAPPDATA%/CrashDumps",
-  "notes": "Only .dmp files are counted. The machine-wide C:/Windows/MEMORY.DMP needs elevation and is deliberately out of scope. No dump is opened."
+  "notes": "Only .dmp files are counted. The machine-wide C:/Windows/MEMORY.DMP needs elevation and is deliberately out of scope. No dump is opened.",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [
+            "Open the folder named in the plan.",
+            "Check with whoever supports the failing application whether a dump is still needed.",
+            "Delete the dump files, then empty the Recycle Bin."
+        ],
+        "risk": "Deletes the crash dumps on this PC. They cannot be recreated afterwards, which matters if an app is still being diagnosed.",
+        "closeApps": [
+            "File Explorer"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Learn, Collecting user-mode dumps: https://learn.microsoft.com/en-us/windows/win32/wer/collecting-user-mode-dumps"
+    }
 }

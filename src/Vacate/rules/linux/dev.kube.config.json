@@ -27,5 +27,19 @@
   ],
   "verified": true,
   "source": "Kubernetes docs, organizing cluster access: kubeconfig defaults to $HOME/.kube/config: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/",
-  "notes": "config is the default kubeconfig; cache holds discovery and http caches. KUBECONFIG can point somewhere else and some tools write several files into this folder."
+  "notes": "config is the default kubeconfig; cache holds discovery and http caches. KUBECONFIG can point somewhere else and some tools write several files into this folder.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Copy any cluster certificates or configuration files you need to keep to a secure location before deletion.",
+    "signOut": null,
+    "steps": [
+      "Revoke client certificates or access tokens with your Kubernetes cluster administrator if needed.",
+      "Delete the folder named in the plan using your file manager."
+    ],
+    "risk": "Removes access credentials, cluster endpoints, and client certificates for all configured Kubernetes clusters.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Kubernetes Documentation, Organizing Cluster Access Using kubeconfig Files: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/"
+  }
 }

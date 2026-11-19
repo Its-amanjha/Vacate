@@ -18,5 +18,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Azure CLI configuration and cached credentials in ~/.azure: https://learn.microsoft.com/en-us/cli/azure/azure-cli-configuration",
-  "notes": "Older CLI versions use accessTokens.json; newer ones use an MSAL token cache. Both sit in this folder."
+  "notes": "Older CLI versions use accessTokens.json; newer ones use an MSAL token cache. Both sit in this folder.",
+    "cleanup": {
+        "action": "sign-out-then-remove",
+        "exportFirst": null,
+        "signOut": "Sign out of the Azure CLI, then remove this device's cached sign-in from your Microsoft account security page.",
+        "steps": [
+            "Sign out of the Azure command line tools you used on this PC.",
+            "Delete the folder named in the plan."
+        ],
+        "risk": "Removes the cached Azure sign-in and subscription settings from this PC. Access granted to the account itself is unchanged.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Learn, Sign in with Azure CLI: https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli"
+    }
 }

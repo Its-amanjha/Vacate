@@ -18,5 +18,20 @@
   "verifiedOn": ["Windows 11 Pro 26300"],
   "verified": true,
   "source": "WLAN profile XMLs live under %PROGRAMDATA%/Microsoft/Wlansvc/Profiles/Interfaces; see https://passcape.com/windows_password_recovery_dpapi_decoder",
-  "notes": "Keys inside the XML are DPAPI-protected. Needs elevation because the store is machine-wide. Counts profile files only; none are parsed."
+  "notes": "Keys inside the XML are DPAPI-protected. Needs elevation because the store is machine-wide. Counts profile files only; none are parsed.",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": "Write down the Wi-Fi passwords you still need, for example the home network, before the profiles are removed.",
+        "signOut": null,
+        "steps": [
+            "Open Settings > Network & internet > Wi-Fi > Manage known networks.",
+            "Select each network you no longer need and choose Forget.",
+            "Repeat until the list is empty, then check the folder named in the plan."
+        ],
+        "risk": "The PC forgets the saved networks and their passwords, so it cannot reconnect without the password again.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Connect to a Wi-Fi network in Windows: https://support.microsoft.com/en-us/windows/experience/connectivity-networking/connect-to-a-wi-fi-network-in-windows"
+    }
 }

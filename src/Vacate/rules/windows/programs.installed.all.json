@@ -22,5 +22,20 @@
                    ],
     "verified":  true,
     "source":  "Windows uninstall registry keys in HKLM and HKCU Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall, both 32- and 64-bit views",
-    "notes":  "Provider reads both registry views and both hives. Install date, publisher and scope come from uninstall entries; no program files are opened."
+    "notes":  "Provider reads both registry views and both hives. Install date, publisher and scope come from uninstall entries; no program files are opened.",
+    "cleanup": {
+        "action": "review",
+        "exportFirst": null,
+        "signOut": "Sign out of and deactivate the programs that hold accounts or licences before you uninstall them, so seats and cloud data stay with you.",
+        "steps": [
+            "Read the list in the plan and pick the programs this PC no longer needs.",
+            "Sign out of and deactivate each of those programs, and copy out any data stored inside them.",
+            "Uninstall them from Settings > Apps > Installed apps."
+        ],
+        "risk": "Uninstalling can remove local data, sign-in sessions and licence seats. Some programs leave settings and folders behind.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Uninstall or remove apps and programs in Windows: https://support.microsoft.com/en-us/windows/apps/uninstall-or-remove-apps-and-programs-in-windows"
+    }
 }

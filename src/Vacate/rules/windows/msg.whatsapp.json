@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "MSIX packaged apps keep user data in Packages/<PackageFamilyName>/LocalState: https://learn.microsoft.com/en-us/uwp/api/windows.storage.applicationdata.localfolder",
-  "notes": "source uncertain: no vendor page documents the local data folder; the package family name comes from community reports, so the publisher hash is wildcarded. Microsoft Store build. The older Electron WhatsApp Desktop kept data under %APPDATA% WhatsApp instead. Message database and media are encrypted by the app."
+  "notes": "source uncertain: no vendor page documents the local data folder; the package family name comes from community reports, so the publisher hash is wildcarded. Microsoft Store build. The older Electron WhatsApp Desktop kept data under %APPDATA% WhatsApp instead. Message database and media are encrypted by the app.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Export the chat you need from your phone, because WhatsApp Desktop keeps only a local copy on this PC.",
+    "signOut": "In WhatsApp Desktop, open Settings > Log out, or unlink this computer from Linked devices on your phone.",
+    "steps": [
+      "Close WhatsApp.",
+      "Uninstall WhatsApp from Settings > Apps > Installed apps.",
+      "Delete the WhatsApp package folder named in the plan if it is still there."
+    ],
+    "risk": "Removes the local copy of chats, contacts and media on this PC; the account stays on your phone.",
+    "closeApps": [
+      "WhatsApp"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "WhatsApp Help Center, How to unlink a device: https://faq.whatsapp.com/834124628020911"
+  }
 }

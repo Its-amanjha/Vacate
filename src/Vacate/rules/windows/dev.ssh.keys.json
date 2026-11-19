@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "OpenSSH user key location: https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement (user keys under ~/.ssh)",
-  "notes": "Metadata only; key material is never opened. Known_hosts and config files in the same folder are included in the count."
+  "notes": "Metadata only; key material is never opened. Known_hosts and config files in the same folder are included in the count.",
+    "cleanup": {
+        "action": "export-then-remove",
+        "exportFirst": "Copy the keys you still need to the machine you are moving to, or make new keys there, before deleting anything here.",
+        "signOut": "Remove the public key from every server and Git host that trusts it, and change anything those keys protected.",
+        "steps": [
+            "Make a list of the servers and hosts that trust these keys.",
+            "Remove the public key from each one and add a new key where you still need access.",
+            "Delete the folder named in the plan."
+        ],
+        "risk": "Deletes the private keys on this PC for good. Anything still trusting those keys stays reachable until you remove the public key from it.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Learn, Key Management for OpenSSH on Windows: https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement"
+    }
 }

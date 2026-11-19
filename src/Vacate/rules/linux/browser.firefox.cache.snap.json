@@ -27,5 +27,20 @@
   ],
   "verified": true,
   "source": "Snap confinement keeps per-user data under ~/snap/<name>/common (snapcraft.io/docs/data-locations); observed created by Firefox snap 160 on Ubuntu 24.04 by Claude",
-  "notes": "Snap counterpart of browser.firefox.cache, whose native path is ~/.cache/mozilla/firefox. Folder sizes only; cache files are never opened."
+  "notes": "Snap counterpart of browser.firefox.cache, whose native path is ~/.cache/mozilla/firefox. Folder sizes only; cache files are never opened.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Close every Firefox window, including the tray icon, so the cache files are not in use.",
+      "Open the Files app, press Ctrl+H to show hidden folders, and find the cache folder named in the plan.",
+      "Move that folder to the Trash and empty the Trash."
+    ],
+    "risk": "Only cached copies of pages and images are lost. Firefox rebuilds the cache as you browse; history, bookmarks and saved logins stay.",
+    "closeApps": ["Firefox"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, How to clear the Firefox cache: https://support.mozilla.org/en-US/kb/how-clear-firefox-cache"
+  }
 }

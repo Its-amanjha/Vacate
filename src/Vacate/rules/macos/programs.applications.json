@@ -24,5 +24,20 @@
   ],
   "verified": true,
   "source": "Apple macOS user guide: /Applications contains the apps installed for all users",
-  "notes": "Names only, no recursion into app bundles. Apps installed under ~/Applications or elsewhere are out of scope."
+  "notes": "Names only, no recursion into app bundles. Apps installed under ~/Applications or elsewhere are out of scope.",
+  "cleanup": {
+    "action": "uninstall",
+    "exportFirst": null,
+    "signOut": "Sign out of any account inside each app before it is removed, so it is no longer a signed-in device.",
+    "steps": [
+      "List the apps in the plan you no longer need, and open each one to sign out first.",
+      "Quit the app, then drag it from the Applications folder to the Trash.",
+      "Empty the Trash, then check the folders in the plan for leftover support files."
+    ],
+    "risk": "The apps and their settings are gone; anything you still want must be downloaded and set up again.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Delete files and folders on Mac: https://support.apple.com/guide/mac-help/delete-files-and-folders-on-mac-mchlp1093/mac"
+  }
 }

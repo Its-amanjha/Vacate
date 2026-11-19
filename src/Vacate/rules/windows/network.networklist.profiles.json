@@ -1,6 +1,8 @@
 {
   "id": "network.networklist.profiles",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "network",
   "title": "Known network list profiles",
   "whyItMatters": "This key records every network the machine has joined, including SSIDs and gateways. It reveals where the computer has been connected.",
@@ -10,11 +12,29 @@
     "hive": "HKLM",
     "key": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\NetworkList\\Profiles"
   },
-  "measure": ["exists", "valueCount", "subkeyCount"],
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
   "source": "Windows Network List service registry: https://learn.microsoft.com/en-us/windows/win32/api/netlistapi (NetworkList\\Profiles subkeys, well-known forensic artifact)",
-  "notes": "HKLM machine-wide key; individual per-network GUID subkeys are counted but their values are not read. Registry last-write time is unavailable."
+  "notes": "HKLM machine-wide key; individual per-network GUID subkeys are counted but their values are not read. Registry last-write time is unavailable.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Forget the Wi-Fi networks you no longer use in Settings > Network & internet > Wi-Fi > Manage known networks.",
+      "Do not edit this list in Registry Editor; Windows manages it, and the full reset clears the network history named in the plan."
+    ],
+    "risk": "Removes the remembered network list for the machine. Windows adds a profile again for the network you are connected to.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

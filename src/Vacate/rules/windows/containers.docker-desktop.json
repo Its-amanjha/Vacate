@@ -27,5 +27,22 @@
                    ],
     "verified":  true,
     "source":  "Docker Desktop on Windows stores WSL2 VM data under %LOCALAPPDATA%/Docker/wsl (Docker Desktop documentation)",
-    "notes":  "Counts the docker_data.vhdx and settings by metadata; VHD contents are never opened. Unconfirmed: custom disk image locations configured in Docker Desktop are not matched."
+    "notes":  "Counts the docker_data.vhdx and settings by metadata; VHD contents are never opened. Unconfirmed: custom disk image locations configured in Docker Desktop are not matched.",
+    "cleanup": {
+        "action": "uninstall",
+        "exportFirst": "Push or export the images you still need, and copy database files out of the containers; the virtual disk is deleted with the uninstall.",
+        "signOut": "Sign out of Docker Desktop and of any registry accounts it holds, so the account stops trusting this machine.",
+        "steps": [
+            "Close Docker Desktop and every running container.",
+            "Uninstall Docker Desktop from Settings > Apps > Installed apps.",
+            "Delete the folder named in the plan if it is still there."
+        ],
+        "risk": "Deletes the container images, containers, volumes and databases kept in Docker's virtual disk. None of it can be recovered from this PC.",
+        "closeApps": [
+            "Docker Desktop"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Docker, Uninstall Docker Desktop: https://docs.docker.com/desktop/uninstall/"
+    }
 }

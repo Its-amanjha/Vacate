@@ -27,5 +27,23 @@
   ],
   "verified": true,
   "source": "macforensics.app artifact cheat sheet (Calendar/Contacts/Reminders)",
-  "notes": "TCC-protected; needs Full Disk Access. Proposed in W3-D2 review."
+  "notes": "TCC-protected; needs Full Disk Access.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Contacts choose File > Export > Contacts Archive, then copy the archive off this Mac.",
+    "signOut": "Sign out of the account that holds the contacts, in System Settings > Apple Account or Internet Accounts.",
+    "steps": [
+      "Check that cards stored under On My Mac are included in the archive.",
+      "Quit Contacts so its files are no longer in use.",
+      "Delete the folder named in the plan if it still exists.",
+      "Empty the Trash."
+    ],
+    "risk": "Cards that exist only on this Mac are lost; contacts already stored on an account server stay in the account.",
+    "closeApps": [
+      "Contacts"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Export or archive contacts in Contacts on Mac: https://support.apple.com/guide/contacts/export-or-archive-contacts-adrbdcfd32e6/mac"
+  }
 }

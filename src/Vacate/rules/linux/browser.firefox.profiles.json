@@ -17,5 +17,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Mozilla Support, where Firefox stores user data (profile folder with prefs.js); Linux default profile root ~/.mozilla/firefox: https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
-  "notes": "prefs.js marks a real profile, so cache and Crash Reports folders are skipped. Firefox 147+ on a fresh install uses $XDG_CONFIG_HOME/mozilla/firefox instead; upgraded installs keep ~/.mozilla/firefox. profiles.ini can point at profiles stored elsewhere, which this rule does not follow."
+  "notes": "prefs.js marks a real profile, so cache and Crash Reports folders are skipped. Firefox 147+ on a fresh install uses $XDG_CONFIG_HOME/mozilla/firefox instead; upgraded installs keep ~/.mozilla/firefox. profiles.ini can point at profiles stored elsewhere, which this rule does not follow.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Firefox, export your bookmarks from the Library and your passwords from the logins settings, and keep both files off this computer.",
+    "signOut": "In Firefox, open the account menu and disconnect this browser from sync, so the account keeps the data and this computer stops using it.",
+    "steps": [
+      "Close every Firefox window.",
+      "Uninstall Firefox from the App Center if you are removing the browser itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes every Firefox profile on this computer: history, bookmarks, saved logins, cookies and the files you downloaded through the browser.",
+    "closeApps": ["Firefox"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Profiles - Where Firefox stores your bookmarks, passwords and other user data: https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data"
+  }
 }

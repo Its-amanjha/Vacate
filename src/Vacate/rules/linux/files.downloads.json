@@ -27,5 +27,20 @@
   ],
   "verified": true,
   "source": "XDG user directories defaults (xdg-user-dirs creates Downloads under the home directory): https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
-  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Telegram and some browsers use their own subfolder inside it."
+  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Telegram and some browsers use their own subfolder inside it.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open the folder named in the plan in your file manager.",
+      "Move any downloaded documents, tickets, or installers you want to keep to another location.",
+      "Delete the remaining files and folders in Downloads."
+    ],
+    "risk": "Permanently deletes all downloaded files, installers, documents, and media stored in Downloads.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Ubuntu Documentation, Desktop guide: https://help.ubuntu.com/stable/ubuntu-help/shell-introduction.html"
+  }
 }

@@ -24,5 +24,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "GNU Bash manual, HISTFILE: defaults to ~/.bash_history; listed in the macforensics.app artifact cheat sheet (Shell History)",
-  "notes": "Only metadata is recorded; command lines are never opened. bash_sessions and other variants are not covered by this rule. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "Only metadata is recorded; command lines are never opened. bash_sessions and other variants are not covered by this rule.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Quit Terminal and any other terminal app so the history file is not written again.",
+      "Open the file named in the plan in a text editor and copy out any command you need to keep.",
+      "Delete the file, then empty the Trash, so the next shell starts with empty history."
+    ],
+    "risk": "Every command you typed is lost, including passwords or tokens typed by mistake and still readable in it.",
+    "closeApps": [
+      "Terminal"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GNU Bash manual, Bash Variables (HISTFILE): https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html"
+  }
 }

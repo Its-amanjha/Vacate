@@ -18,5 +18,23 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Monero GUI Windows installer creates and uses Documents/Monero/wallets as the default wallet folder: https://github.com/monero-project/monero-gui/blob/master/installers/windows/Monero.iss",
-  "notes": "Default location created by the installer. The wizard lets the user pick another folder, so a wallet saved elsewhere is only caught by the personal-folder rules. App settings and logs live in %APPDATA% monero-gui, not here."
+  "notes": "Default location created by the installer. The wizard lets the user pick another folder, so a wallet saved elsewhere is only caught by the personal-folder rules. App settings and logs live in %APPDATA% monero-gui, not here.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Confirm you have the recovery phrase or backup: the 25-word seed or the address, view key and spend key for each wallet.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup before removing anything.",
+      "Open Monero GUI and restore one wallet from its seed or keys to prove the backup works.",
+      "Uninstall Monero GUI from Settings > Apps > Installed apps.",
+      "Delete the wallet folder named in the plan."
+    ],
+    "risk": "Wallet key files cannot be restored without the seed or keys; deleting them loses access to the funds.",
+    "closeApps": [
+      "Monero GUI"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Monero, Restoring a wallet from private keys: https://www.getmonero.org/resources/user-guides/restore_from_keys.html"
+  }
 }

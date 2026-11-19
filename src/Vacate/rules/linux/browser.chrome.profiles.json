@@ -17,5 +17,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Chromium docs, user data directory and per-profile folders; Chrome on Linux keeps its user data root in ~/.config/google-chrome: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "Matches the Preferences file that every profile has, so sibling non-profile folders are skipped. google-chrome is the stable package; beta and dev use google-chrome-beta and google-chrome-unstable. The Local State file with the profile list sits next to the profile folders."
+  "notes": "Matches the Preferences file that every profile has, so sibling non-profile folders are skipped. google-chrome is the stable package; beta and dev use google-chrome-beta and google-chrome-unstable. The Local State file with the profile list sits next to the profile folders.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Chrome, export your passwords from the password manager and your bookmarks from the bookmark manager, and save both files off this computer.",
+    "signOut": "In Chrome, open Settings > You and Google and turn sync off or sign out, so the account keeps the synced data but this browser stops using it.",
+    "steps": [
+      "Close every Chrome window.",
+      "Uninstall Google Chrome from the App Center if you are removing the browser itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes every Chrome profile on this computer: history, bookmarks, saved passwords, cookies, extensions and open sessions.",
+    "closeApps": ["Google Chrome"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Google Chrome Help, Sign in and turn on sync in Chrome: https://support.google.com/chrome/answer/185277"
+  }
 }

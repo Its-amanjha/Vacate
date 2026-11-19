@@ -27,5 +27,22 @@
                    ],
     "verified":  true,
     "source":  "Windows known folder Videos, default path under the user profile: https://support.microsoft.com/windows",
-    "notes":  "Known Folder Move does not redirect Videos, so this is normally the real folder. Screen recordings from games and meeting apps are often saved here."
+    "notes":  "Known Folder Move does not redirect Videos, so this is normally the real folder. Screen recordings from games and meeting apps are often saved here.",
+    "cleanup": {
+        "action": "review",
+        "exportFirst": "Copy what you want to keep to an external drive or your cloud account before deleting anything in this folder.",
+        "signOut": null,
+        "steps": [
+            "Open the folder named in the plan and look through it before deleting anything.",
+            "Check for the same files in OneDrive if the folder looks empty, because Known Folder Move can redirect it.",
+            "Copy what you keep to a drive you are taking with you, then delete the rest."
+        ],
+        "risk": "Recordings deleted here are gone unless you copied them out first, and large files rarely survive in a cloud account by accident.",
+        "closeApps": [
+            "File Explorer"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Free up drive space in Windows: https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/free-up-drive-space-in-windows"
+    }
 }

@@ -25,5 +25,19 @@
   ],
   "verified": true,
   "source": "npm docs, npmrc: the per-user config file is $HOME/.npmrc: https://docs.npmjs.com/cli/v10/configuring-npm/npmrc",
-  "notes": "Lines like //registry.npmjs.org/:_authToken=... are normally stored in plain text. npm also reads project .npmrc files, which this rule does not touch, and NPM_CONFIG_USERCONFIG can move this file."
+  "notes": "Lines like //registry.npmjs.org/:_authToken=... are normally stored in plain text. npm also reads project .npmrc files, which this rule does not touch, and NPM_CONFIG_USERCONFIG can move this file.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Log out of your npm account in the terminal or revoke active access tokens in your npmjs.com account settings.",
+    "steps": [
+      "Revoke active publication and access tokens in your npmjs.com profile settings under Access Tokens.",
+      "Delete the file named in the plan using your file manager."
+    ],
+    "risk": "Removes npm authentication tokens, custom package registry configurations, and user preferences.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "npm Documentation, npmrc: https://docs.npmjs.com/cli/v10/configuring-npm/npmrc"
+  }
 }

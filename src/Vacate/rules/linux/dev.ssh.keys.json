@@ -27,5 +27,20 @@
   ],
   "verified": true,
   "source": "OpenSSH manual pages: user keys default to ~/.ssh/id_* with known_hosts, config and authorized_keys in the same folder: https://www.openssh.com/manual.html",
-  "notes": "id_* files without a .pub suffix are private keys. known_hosts reveals which servers were used even when the keys are gone. authorized_keys shows which other keys may log in as this user."
+  "notes": "id_* files without a .pub suffix are private keys. known_hosts reveals which servers were used even when the keys are gone. authorized_keys shows which other keys may log in as this user.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Back up any SSH private keys and configuration files you need onto an encrypted external drive.",
+    "signOut": null,
+    "steps": [
+      "Copy any needed SSH keys or config files to a secure offline location.",
+      "Remove corresponding public keys from remote servers and cloud accounts if access is being retired.",
+      "Delete the folder named in the plan using your file manager."
+    ],
+    "risk": "Permanently deletes all private SSH authentication keys, server known host records, and client configuration.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "OpenSSH Manual, ssh-keygen: https://www.openssh.com/manual.html"
+  }
 }

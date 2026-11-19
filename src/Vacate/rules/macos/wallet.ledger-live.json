@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Ledger support: user data under macOS Library/Application Support/Ledger Wallet - https://support.ledger.com/article/8490479490333-zd",
-  "notes": "Glob covers the current 'Ledger Wallet' folder and the older 'Ledger Live' name. app.json is never opened; the recovery phrase is not on disk here."
+  "notes": "Glob covers the current 'Ledger Wallet' folder and the older 'Ledger Live' name. app.json is never opened; the recovery phrase is not on disk here.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup for the device, and that the device still restores from it.",
+      "Quit the Ledger app so its files are not in use.",
+      "Delete the Ledger folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Account names and settings leave this Mac. The coins stay on the hardware device and come back with its phrase.",
+    "closeApps": [
+      "Ledger Wallet"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Ledger, How to fully uninstall Ledger Wallet (formerly Ledger Live): https://support.ledger.com/article/7643373623453-zd"
+  }
 }

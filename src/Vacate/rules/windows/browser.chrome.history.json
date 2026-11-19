@@ -25,5 +25,22 @@
                    ],
     "verified":  true,
     "source":  "Chromium user data directory docs, profile files include History: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-    "notes":  "One History file per profile. Chrome may also leave History-journal and History-wal next to it. Looked for on this PC: exists (Default profile)."
+    "notes":  "One History file per profile. Chrome may also leave History-journal and History-wal next to it. Looked for on this PC: exists (Default profile).",
+    "cleanup":  {
+        "action":  "remove",
+        "exportFirst":  "Export bookmarks from Chrome Bookmark manager if you want to keep the sites you saved.",
+        "signOut":  null,
+        "steps":  [
+            "Close every Chrome window.",
+            "In Chrome, open Settings > Privacy and security and delete browsing data.",
+            "Delete the history file named in the plan if it is still there."
+        ],
+        "risk":  "Removes local visit history for every Chrome profile on this PC; signed-in sync can copy it back until sync is turned off.",
+        "closeApps":  [
+            "Google Chrome"
+        ],
+        "resetCovers":  true,
+        "reason":  null,
+        "source":  "Google Chrome Help, Delete browsing data in Chrome: https://support.google.com/chrome/answer/95582"
+    }
 }

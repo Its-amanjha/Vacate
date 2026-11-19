@@ -17,5 +17,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "AI forensics handbook (urock-ailab.github.io/forensics-handbook/ai/02-artifacts/chat-services/copilot/windows.html): Store app data under %LOCALAPPDATA%/Packages/Microsoft.Copilot_*",
-  "notes": "source uncertain: Microsoft documents Copilot chat history as account/cloud based and publishes no local history path, and the app data suffix varies by build. Windows 11 22H2+; newer app (2026-08-18) also uses LOCALAPPDATA/Microsoft/Copilot/User Data. Metadata only."
+  "notes": "source uncertain: Microsoft documents Copilot chat history as account/cloud based and publishes no local history path, and the app data suffix varies by build. Windows 11 22H2+; newer app (2026-08-18) also uses LOCALAPPDATA/Microsoft/Copilot/User Data. Metadata only.",
+    "cleanup": {
+        "action": "export-then-remove",
+        "exportFirst": "Download or read your Copilot activity history in the Microsoft privacy dashboard first; most of it is stored with your account, not only on this PC.",
+        "signOut": "Sign out of the Microsoft Copilot app on this PC so the account keeps no signed-in session here.",
+        "steps": [
+            "Sign out of the Copilot app on this PC.",
+            "Uninstall the Copilot app from Settings > Apps > Installed apps.",
+            "Delete the app data folder named in the plan if it is still there."
+        ],
+        "risk": "Removes the Copilot app and its local state from this PC. Chats saved with your Microsoft account stay there until you delete them in the privacy dashboard.",
+        "closeApps": [
+            "Microsoft Copilot"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Manage your Copilot activity history in the privacy dashboard: https://support.microsoft.com/en-us/privacy/manage-your-copilot-activity-history-in-the-privacy-dashboard"
+    }
 }

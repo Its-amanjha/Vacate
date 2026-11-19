@@ -25,5 +25,19 @@
   ],
   "verified": true,
   "source": "GNU Bash manual, HISTFILE: the default history file is ~/.bash_history: https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html",
-  "notes": "bash writes the file when the shell exits, so the newest commands may be missing while a terminal is open. HISTFILE, HISTSIZE and HISTIGNORE in .bashrc can change what is kept or where."
+  "notes": "bash writes the file when the shell exits, so the newest commands may be missing while a terminal is open. HISTFILE, HISTSIZE and HISTIGNORE in .bashrc can change what is kept or where.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Close all open terminal windows so the shell does not write history on exit.",
+      "Delete the file named in the plan using your file manager."
+    ],
+    "risk": "Deletes your command recall history in Bash. Past commands and any credentials typed into the shell will be lost.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GNU Bash manual, Bash Variables: https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html"
+  }
 }

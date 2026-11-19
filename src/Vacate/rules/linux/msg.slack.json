@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Slack Help, update the Slack desktop app: the Linux package stores its data in ~/.config/Slack: https://slack.com/intl/en-gb/help/articles/360048367814-Update-the-Slack-desktop-app",
-  "notes": "Holds the Chromium profile, IndexedDB caches and downloaded files per workspace. The snap keeps its data under ~/snap/slack/current/.config/Slack and the Flatpak under ~/.var/app/com.slack.Slack/config/Slack."
+  "notes": "Holds the Chromium profile, IndexedDB caches and downloaded files per workspace. The snap keeps its data under ~/snap/slack/current/.config/Slack and the Flatpak under ~/.var/app/com.slack.Slack/config/Slack.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "In Slack, click your workspace name in the sidebar and choose Sign out, or sign out all other sessions from your Slack account settings.",
+    "steps": [
+      "Quit Slack from its tray icon.",
+      "Uninstall Slack from the App Center if you are removing the app itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes the message cache, downloaded files and drafts for every workspace on this computer. Workspace data on the servers is untouched.",
+    "closeApps": ["Slack"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Slack Help, Sign out of Slack: https://slack.com/help/articles/214613347-Sign-out-of-Slack"
+  }
 }

@@ -17,5 +17,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Chromium user data directory docs plus Snap confinement: the Snap user data dir is ~/snap/chromium/common/chromium, and each profile is a subfolder with a Preferences file: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "Matches the Preferences marker so non-profile folders such as Crash Reports are skipped. Ubuntu's Chromium is a Snap since 20.04. Some older installs put the Default profile under ~/snap/chromium/current/.config/chromium; current is a symlink and is not followed."
+  "notes": "Matches the Preferences marker so non-profile folders such as Crash Reports are skipped. Ubuntu's Chromium is a Snap since 20.04. Some older installs put the Default profile under ~/snap/chromium/current/.config/chromium; current is a symlink and is not followed.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Chromium, export your bookmarks from the bookmark manager and your passwords from the password manager, and keep both files off this computer.",
+    "signOut": null,
+    "steps": [
+      "Close every Chromium window.",
+      "Uninstall the Chromium snap from the App Center or with the Snap Store app.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes every Chromium profile in the snap folder: history, bookmarks, saved passwords, cookies and extensions. No online copy exists.",
+    "closeApps": ["Chromium"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Chromium Docs, User data directory: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md"
+  }
 }

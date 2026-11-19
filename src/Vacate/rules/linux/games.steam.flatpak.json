@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Flatpak sandbox permissions: per-app data lives in ~/.var/app/<app-id>/data; Steam's Flathub id is com.valvesoftware.Steam: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
-  "notes": "Same numeric per-account layout as the native install. Some Flatpak setups also place a Steam tree in ~/.var/app/com.valvesoftware.Steam/.steam."
+  "notes": "Same numeric per-account layout as the native install. Some Flatpak setups also place a Steam tree in ~/.var/app/com.valvesoftware.Steam/.steam.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "In Steam, click your account name in the top right and select Sign out of account.",
+    "steps": [
+      "Launch Steam and sign out of your account to disconnect cloud sync and active sessions.",
+      "Exit Steam completely.",
+      "Uninstall Steam from your Software manager, or delete the folder named in the plan."
+    ],
+    "risk": "Removes local Flatpak Steam account profiles, cached cloud saves, screenshots, and game configurations.",
+    "closeApps": [
+      "Steam"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Valve Steam Support, Account Deauthorization: https://help.steampowered.com/en/faqs/view/727E-0428-BEA0-5080"
+  }
 }

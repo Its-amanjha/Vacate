@@ -1,6 +1,8 @@
 {
   "id": "activity.wordwheelquery",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "activity",
   "title": "Start menu search history",
   "whyItMatters": "WordWheelQuery records terms typed into the Start menu search box, which can reveal what the user was looking for.",
@@ -10,11 +12,30 @@
     "hive": "HKCU",
     "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\WordWheelQuery"
   },
-  "measure": ["exists", "valueCount", "subkeyCount"],
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
   "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\WordWheelQuery",
-  "notes": "Search terms are not read. The MRU ordering and value data are out of scope; only existence and counts are recorded."
+  "notes": "Search terms are not read. The MRU ordering and value data are out of scope; only existence and counts are recorded.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Only if you are not doing the full reset at the end of this plan, and you are comfortable with Registry Editor:",
+      "Open Registry Editor and go to the key named in the plan.",
+      "Delete the values in that key but keep the key itself; this empties the search history."
+    ],
+    "risk": "Removes the Start menu search history for this account. Windows starts a new list on the next search.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

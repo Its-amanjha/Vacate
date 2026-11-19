@@ -25,5 +25,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "AWS CLI configuration files in ~/.aws: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html",
-  "notes": "Covers credentials, config and cached SSO tokens in subfolders. Nothing inside is read; macOS Keychain is not consulted."
+  "notes": "Covers credentials, config and cached SSO tokens in subfolders. Nothing inside is read; macOS Keychain is not consulted.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Copy the credentials and config files named in the plan to a safe place if you still need those keys.",
+    "signOut": "In the AWS console deactivate and then delete the access keys this Mac used, under IAM > Users > Security credentials.",
+    "steps": [
+      "Sign in to the AWS console and find the access key that belongs to this Mac.",
+      "Deactivate the key, test that nothing still needs it, then delete it.",
+      "Delete the folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Scripts and tools that used these keys stop working; keys left active still grant access from any copy.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "AWS CLI User Guide, Configuration and credential file settings: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html"
+  }
 }

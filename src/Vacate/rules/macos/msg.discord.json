@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "DC3 technical advisory: Discord on macOS stores files under ~/Library/Application Support/discord (lowercase)",
-  "notes": "Folder name is lowercase on macOS. Unconfirmed (no Mac to test): macOS 27 may block this path with com.apple.macl even with Full Disk Access; treat that as a permission skip."
+  "notes": "Folder name is lowercase on macOS. Unconfirmed (no Mac to test): macOS 27 may block this path with com.apple.macl even with Full Disk Access; treat that as a permission skip.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Save any file or image you downloaded through Discord that you still need, because the local cache goes with it.",
+    "signOut": "In Discord open the user settings and log out, then change the account password so old sessions end.",
+    "steps": [
+      "Quit Discord so its cached files are not in use.",
+      "Move Discord to the Trash from Applications and empty the Trash.",
+      "Delete the discord folder named in the plan if it is still there."
+    ],
+    "risk": "Cached chats, session tokens and downloads for the Discord account are removed from this Mac.",
+    "closeApps": [
+      "Discord"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Discord, How do I log out?: https://support.discord.com/hc/en-us/articles/209572128-How-do-I-log-out"
+  }
 }

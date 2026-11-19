@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Signal Desktop artifacts: ~/Library/Application Support/Signal - https://docs.macfor.io/plugins/messaging-signal",
-  "notes": "The SQLCipher database and attachments are never opened or decrypted. Unconfirmed (no Mac to test): macOS 27 may protect this folder with com.apple.macl, causing a permission skip."
+  "notes": "The SQLCipher database and attachments are never opened or decrypted. Unconfirmed (no Mac to test): macOS 27 may protect this folder with com.apple.macl, causing a permission skip.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "On the phone that Signal is registered to, open Settings > Linked Devices and remove this Mac, so it stops receiving messages.",
+    "steps": [
+      "Quit Signal on this Mac so its database is not in use.",
+      "Move Signal to the Trash from Applications and empty the Trash.",
+      "Delete the Signal folder named in the plan if it is still there."
+    ],
+    "risk": "The local message database and attachments are removed from this Mac. The conversations stay on the phone.",
+    "closeApps": [
+      "Signal"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Signal, Unlinking devices: https://support.signal.org/hc/en-us/articles/360007321111-Unlinking-devices"
+  }
 }

@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Flatpak sandbox permissions: per-app config lives in ~/.var/app/<app-id>/config; Element's Flathub id is im.riot.Riot: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
-  "notes": "Same Element profile as the native install. The sandbox folder keeps the old Riot app id even though the app is called Element."
+  "notes": "Same Element profile as the native install. The sandbox folder keeps the old Riot app id even though the app is called Element.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Export any room keys or files you still need from Element's settings first: encrypted history cannot be read again without those keys.",
+    "signOut": "In Element, open All settings > Sessions and sign out this session, so the Matrix account stops trusting it.",
+    "steps": [
+      "Close Element.",
+      "Uninstall the Element Flatpak from the App Center or from your Flatpak tool.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes the Matrix session, the local message cache and the encryption keys inside the sandbox. Chats stay on the homeserver.",
+    "closeApps": ["Element"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Element, Sessions (Element Web/Desktop client settings): https://docs.element.io/latest/element-support/element-webdesktop-client-settings/sessions"
+  }
 }

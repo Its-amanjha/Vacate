@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "printers.conf(5): CUPS keeps the printer definitions in /etc/cups/printers.conf, readable only by root and the lp group: https://man.archlinux.org/man/printers.conf.5",
-  "notes": "Normally root-only, so requiresElevation. Device URIs can embed smb:// or ipp:// addresses, and some embed credentials for a Windows print share. Printers added only in the desktop settings without running cupsd are not listed here."
+  "notes": "Normally root-only, so requiresElevation. Device URIs can embed smb:// or ipp:// addresses, and some embed credentials for a Windows print share. Printers added only in the desktop settings without running cupsd are not listed here.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open Settings > Printers from your desktop environment.",
+      "Click the options menu next to each configured printer and select Remove Printer."
+    ],
+    "risk": "Removes all configured local and network printers. You will need to reconfigure printer drivers and queues to print again.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GNOME Help, Set up a local printer: https://help.gnome.org/users/gnome-help/stable/printing-setup.html"
+  }
 }

@@ -27,5 +27,20 @@
   ],
   "verified": true,
   "source": "Azure CLI configuration and cached credentials in ~/.azure: https://learn.microsoft.com/en-us/cli/azure/azure-cli-configuration",
-  "notes": "Older CLI versions use accessTokens.json; newer ones use an MSAL cache. On macOS tokens may be backed by the Keychain, which is not accessed."
+  "notes": "Older CLI versions use accessTokens.json; newer ones use an MSAL cache. On macOS tokens may be backed by the Keychain, which is not accessed.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Sign out of the Azure CLI sessions this account uses, or revoke the device sessions in the Azure portal.",
+    "steps": [
+      "Sign out of the Azure CLI so its cached sign-in tokens stop working.",
+      "Open Keychain Access and remove any leftover Azure token entries.",
+      "Delete the folder named in the plan, then empty the Trash."
+    ],
+    "risk": "You must sign in again for the next Azure command; subscription choices stored on this Mac are lost.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Azure CLI configuration: https://learn.microsoft.com/en-us/cli/azure/azure-cli-configuration"
+  }
 }

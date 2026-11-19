@@ -24,5 +24,23 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Docker stores registry auth in ~/.docker/config.json: https://docs.docker.com/reference/cli/docker/login/",
-  "notes": "On macOS Docker Desktop normally uses the OS keychain as credential helper. The config file is never opened by vacate."
+  "notes": "On macOS Docker Desktop normally uses the OS keychain as credential helper. The config file is never opened by vacate.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Sign out of Docker Desktop and of each registry listed in the file, so the saved logins stop working.",
+    "steps": [
+      "Open the file named in the plan and note which registries have saved logins.",
+      "Sign out of those registries and of the Docker account.",
+      "Delete the file named in the plan, then empty the Trash.",
+      "Remove any Docker entries from Keychain Access."
+    ],
+    "risk": "Pulling or pushing private images needs a new sign-in; registry addresses saved in the file are lost.",
+    "closeApps": [
+      "Docker Desktop"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Docker Docs, docker login: https://docs.docker.com/reference/cli/docker/login/"
+  }
 }

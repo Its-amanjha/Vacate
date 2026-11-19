@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Microsoft Support, Create an Outlook Data File: offline .ost files are saved under drive:/Users/user/AppData/Local/Microsoft/Outlook - https://support.microsoft.com/en-us/outlook/create-an-outlook-data-file-pst-to-save-your-information",
-  "notes": "OST files are server caches; PST archives are usually under Documents/Outlook Files and are not matched here. No mail file is opened or indexed."
+  "notes": "OST files are server caches; PST archives are usually under Documents/Outlook Files and are not matched here. No mail file is opened or indexed.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Outlook, use File > Open & Export > Import/Export to save mail, contacts and calendar to a .pst file you keep.",
+    "signOut": "In Outlook, remove the account in Account Settings so the profile no longer signs in on this PC.",
+    "steps": [
+      "Close Outlook.",
+      "Remove the email account or profile the way the vendor page describes.",
+      "Delete the Outlook folder named in the plan if it is still there."
+    ],
+    "risk": "Removes the offline copy of mail, calendar and contacts for this profile; anything not exported and not on the server is gone.",
+    "closeApps": [
+      "Outlook"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Support, Remove or delete an email account from classic Outlook for Windows: https://support.microsoft.com/en-us/outlook/remove-or-delete-an-email-account-from-classic-outlook-for-windows"
+  }
 }

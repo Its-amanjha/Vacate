@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Thunderbird profile directory %APPDATA%/Thunderbird/Profiles - https://github.com/RyanDFIR/hindsight",
-  "notes": "Each profile folder has a random name ending in .default-release. Mail folders and address books are counted only; no message is read."
+  "notes": "Each profile folder has a random name ending in .default-release. Mail folders and address books are counted only; no message is read.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Copy the mail folders you want to keep, and export address books from Thunderbird Address Book before removing the profiles.",
+    "signOut": null,
+    "steps": [
+      "Close Thunderbird.",
+      "Open the Thunderbird profile manager and remove each profile listed there.",
+      "Delete the Thunderbird profile folders named in the plan if they are still there."
+    ],
+    "risk": "Removes local mail, address books and account settings for every Thunderbird profile on this PC.",
+    "closeApps": [
+      "Thunderbird"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Profile Manager - Create and remove Thunderbird profiles: https://support.mozilla.org/en-US/kb/profile-manager-create-and-remove-thunderbird-profiles"
+  }
 }

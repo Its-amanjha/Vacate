@@ -18,5 +18,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Kubernetes client configuration in ~/.kube: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/",
-  "notes": "Includes config and any cached plugin or token files. Cluster endpoints and certificates are not parsed."
+  "notes": "Includes config and any cached plugin or token files. Cluster endpoints and certificates are not parsed.",
+    "cleanup": {
+        "action": "sign-out-then-remove",
+        "exportFirst": null,
+        "signOut": "Remove this machine's user, token or client certificate in each cluster, so the kubeconfig cannot be used any more.",
+        "steps": [
+            "Remove or rotate the credentials this machine used in each cluster.",
+            "Delete the folder named in the plan."
+        ],
+        "risk": "Removes the cluster credentials from this PC. Tokens and client certificates held in the cluster keep working until they are removed there.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Kubernetes, Organizing Cluster Access Using kubeconfig Files: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/"
+    }
 }

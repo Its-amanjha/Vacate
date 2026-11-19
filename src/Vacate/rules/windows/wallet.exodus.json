@@ -18,5 +18,23 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Exodus knowledge base, the wallet data folder is exodus.wallet inside the Exodus app-data folder: https://www.exodus.com/support/",
-  "notes": "Encrypted storage.seco files inside. Timestamped archives of earlier vaults sit in a Backups folder next to it under %APPDATA% Exodus, so the parent folder matters too."
+  "notes": "Encrypted storage.seco files inside. Timestamped archives of earlier vaults sit in a Backups folder next to it under %APPDATA% Exodus, so the parent folder matters too.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Confirm you have the recovery phrase or backup: the 12-word secret key for every wallet in Exodus, written down offline.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup before removing anything.",
+      "In Exodus, open Settings and remove the wallet once the secret key is written down.",
+      "Uninstall Exodus from Settings > Apps > Installed apps.",
+      "Delete the wallet folder named in the plan, including any backups next to it."
+    ],
+    "risk": "Without the 12-word secret key the wallet cannot be restored and the funds are lost; this removes every local copy here.",
+    "closeApps": [
+      "Exodus"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Exodus Knowledge Base, How do I delete my wallet and start over: https://www.exodus.com/support/en/articles/8598644-how-do-i-delete-my-wallet-and-start-over"
+  }
 }

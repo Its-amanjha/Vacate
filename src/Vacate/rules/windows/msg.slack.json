@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Slack desktop is an Electron app with user data in the app-data folder (per-workspace cache and downloads): https://slack.com/help",
-  "notes": "Classic Slack desktop client. Slack's newer builds ship as a Microsoft Store package; check Packages under %LOCALAPPDATA% for a Slack package if this folder is absent. Cached messages are readable in the local store."
+  "notes": "Classic Slack desktop client. Slack's newer builds ship as a Microsoft Store package; check Packages under %LOCALAPPDATA% for a Slack package if this folder is absent. Cached messages are readable in the local store.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Download any file or message you need from Slack first, because only the local cache is removed here.",
+    "signOut": "In Slack, sign out of each workspace, then sign out all other sessions from your account settings.",
+    "steps": [
+      "Close Slack.",
+      "Uninstall Slack from Settings > Apps > Installed apps.",
+      "Delete the Slack folder named in the plan if it is still there."
+    ],
+    "risk": "Removes cached channel history and downloads for every workspace signed in on this PC.",
+    "closeApps": [
+      "Slack"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Slack Help Center, Sign out of Slack: https://slack.com/help/articles/214613347-Sign-out-of-Slack"
+  }
 }

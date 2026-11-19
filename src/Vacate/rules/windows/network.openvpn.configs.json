@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "OpenVPN GUI docs: per-user config directory C:/Users/<user>/OpenVPN/config - https://github.com/OpenVPN/openvpn-gui/blob/master/README.rst",
-  "notes": "Per-user profiles only; the system-wide C:/Program Files/OpenVPN/config tree is not covered. .ovpn files, certificates and keys are never opened."
+  "notes": "Per-user profiles only; the system-wide C:/Program Files/OpenVPN/config tree is not covered. .ovpn files, certificates and keys are never opened.",
+    "cleanup": {
+        "action": "export-then-remove",
+        "exportFirst": "Copy the profiles you still need to the machine you are moving to, and keep the VPN logins in a password manager.",
+        "signOut": "Ask the owner of each VPN server to revoke this device's certificate, or change the account password it used.",
+        "steps": [
+            "Copy out the profiles you still need.",
+            "Ask the server owner to revoke this device if it used a certificate.",
+            "Delete the folder named in the plan."
+        ],
+        "risk": "Deletes the VPN profiles, including any certificates and keys stored inside them. The remote network keeps trusting anything not revoked there.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "OpenVPN, Community OpenVPN How-To: https://openvpn.net/community-resources/how-to/"
+    }
 }

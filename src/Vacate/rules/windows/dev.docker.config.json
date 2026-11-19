@@ -26,5 +26,19 @@
                    ],
     "verified":  true,
     "source":  "Docker stores registry auth in ~/.docker/config.json: https://docs.docker.com/reference/cli/docker/login/",
-    "notes":  "The auth material is OS-dependent (credential helper or base64 token). The file is never opened by vacate."
+    "notes":  "The auth material is OS-dependent (credential helper or base64 token). The file is never opened by vacate.",
+    "cleanup": {
+        "action": "sign-out-then-remove",
+        "exportFirst": null,
+        "signOut": "Sign out of each container registry you are signed in to, using Docker's sign-out option, so the saved entry stops working.",
+        "steps": [
+            "Sign out of every registry account you used with Docker.",
+            "Delete the file named in the plan if it is still there."
+        ],
+        "risk": "Removes the saved registry sign-in from this PC. Registries still accept the old credential until you sign out or revoke the token.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Docker, docker logout: https://docs.docker.com/reference/cli/docker/logout/"
+    }
 }

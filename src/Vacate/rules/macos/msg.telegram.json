@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Telegram Desktop standalone data path ~/Library/Application Support/Telegram Desktop/tdata - https://kb.macfor.io/docs/communication/telegram",
-  "notes": "Mac App Store build uses ~/Library/Containers/ru.keepcoder.Telegram/Data/Library/Application Support/Telegram Desktop instead. tdata is never opened."
+  "notes": "Mac App Store build uses ~/Library/Containers/ru.keepcoder.Telegram/Data/Library/Application Support/Telegram Desktop instead. tdata is never opened.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Save the media and files you still need from Telegram, because the local cache goes with the folder.",
+    "signOut": "In Telegram, open Settings, then the menu in the top right corner, and choose Log out, so this Mac stops using the account.",
+    "steps": [
+      "Quit Telegram so its data folder is not in use.",
+      "Move Telegram to the Trash from Applications and empty the Trash.",
+      "Delete the Telegram Desktop folder named in the plan if it is still there."
+    ],
+    "risk": "The local message cache and downloaded media are removed from this Mac. Chats stay in the Telegram account.",
+    "closeApps": [
+      "Telegram"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Telegram, How do I log out? (Telegram FAQ): https://telegram.org/faq#q-how-do-i-log-out"
+  }
 }

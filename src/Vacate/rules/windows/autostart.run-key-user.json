@@ -24,5 +24,20 @@
                    ],
     "verified":  true,
     "source":  "Microsoft Learn, Run and RunOnce registry keys: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys",
-    "notes":  "Per-user autostart list. Command strings are not read; only value counts are reported. Registry last-write time is unavailable (D3)."
+    "notes":  "Per-user autostart list. Command strings are not read; only value counts are reported. Registry last-write time is unavailable (D3).",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [
+            "Open Task Manager and check the Startup apps tab to see which entries you still need.",
+            "Open Registry Editor and go to the key named in the plan.",
+            "Delete the values for the programs you no longer want to start at sign-in."
+        ],
+        "risk": "Removes those programs from this account's autostart list. The programs stay installed and only stop starting by themselves.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+    }
 }

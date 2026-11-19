@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "fish shell docs, interactive use: the history file is ~/.local/share/fish/fish_history: https://fishshell.com/docs/current/interactive.html",
-  "notes": "Each entry stores a command plus its timestamp. fish keeps the file in the XDG data directory, so XDG_DATA_HOME moves it."
+  "notes": "Each entry stores a command plus its timestamp. fish keeps the file in the XDG data directory, so XDG_DATA_HOME moves it.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Close all open Fish terminal sessions.",
+      "Delete the file named in the plan using your file manager."
+    ],
+    "risk": "Deletes your command recall history in Fish shell. Past commands and execution timestamps will be permanently removed.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "fish shell docs, Interactive use: https://fishshell.com/docs/current/interactive.html"
+  }
 }

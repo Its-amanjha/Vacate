@@ -18,5 +18,21 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Exodus Knowledge Base: on Linux the data folder is ~/.config/Exodus (Developer > Data Folder opens it): https://www.exodus.com/support/en/articles/8598644-how-do-i-delete-my-wallet-and-start-over",
-  "notes": "exodus.wallet holds the encrypted storage.seco files; the Backups folder keeps timestamped copies of earlier vaults, so the parent folder matters too. The vault is encrypted with the wallet password and the 12-word phrase."
+  "notes": "exodus.wallet holds the encrypted storage.seco files; the Backups folder keeps timestamped copies of earlier vaults, so the parent folder matters too. The vault is encrypted with the wallet password and the 12-word phrase.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Exodus, open the security settings and confirm your 12-word recovery phrase is written down and stored off this computer.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup for this wallet.",
+      "Close Exodus, including its icon in the tray.",
+      "Copy the folder named in the plan to a backup device if you want a copy of the vault.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Deletes the encrypted vault and its timestamped backups on this computer. Without the recovery phrase the wallet cannot be restored.",
+    "closeApps": ["Exodus"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Exodus Support, How do I delete my wallet and start over: https://www.exodus.com/support/en/articles/8598644-how-do-i-delete-my-wallet-and-start-over"
+  }
 }

@@ -26,5 +26,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "SWGDE technical notes on macOS artifacts (13-F-002) list .DS_Store as a Finder activity artifact",
-  "notes": "Narrow replacement for a whole-home walk, which hit maxEntries before finding anything (the walker counts every visited entry). Downloads is TCC-protected without Full Disk Access. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "Narrow replacement for a whole-home walk, which hit maxEntries before finding anything (the walker counts every visited entry). Downloads is TCC-protected without Full Disk Access.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "In the Finder choose Go > Go to Folder and open the folder named in the plan.",
+      "Select the .DS_Store files and move them to the Trash.",
+      "Empty the Trash before the Mac changes hands."
+    ],
+    "risk": "Finder writes a new .DS_Store file as soon as someone opens the folder again, so this is a small last-minute step.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Delete files and folders on Mac: https://support.apple.com/guide/mac-help/delete-files-and-folders-on-mac-mchlp1093/mac"
+  }
 }

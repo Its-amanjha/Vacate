@@ -18,5 +18,21 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Signal Desktop is an Electron app and keeps its profile in the XDG config directory; the source and docs name the Signal folder: https://github.com/signalapp/Signal-Desktop",
-  "notes": "sql/db.sqlite is SQLCipher-encrypted and its key sits in the desktop keyring; attachments, drafts and logs sit beside it. Signed out does not mean deleted. The Flatpak uses ~/.var/app/org.signal.Signal/config/Signal."
+  "notes": "sql/db.sqlite is SQLCipher-encrypted and its key sits in the desktop keyring; attachments, drafts and logs sit beside it. Signed out does not mean deleted. The Flatpak uses ~/.var/app/org.signal.Signal/config/Signal.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Save any photos or files you want to keep from the conversations: Signal keeps no copy of them on a server.",
+    "signOut": "In Signal Desktop, open Settings > General and choose Delete Data, which unlinks this computer and wipes its message history.",
+    "steps": [
+      "On your phone, open Signal, then Settings > Linked devices, and unlink this computer.",
+      "Quit Signal Desktop from its tray icon.",
+      "Uninstall Signal from the App Center if you are removing the app itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes the local copy of every conversation, attachment and draft on this computer. The messages stay on the linked phone only.",
+    "closeApps": ["Signal"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Signal Support, Unlinking devices: https://support.signal.org/hc/en-us/articles/360007321111-Unlinking-devices"
+  }
 }

@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Arch Wiki, Discord: configuration and cache are kept in ~/.config/discord and ~/.cache/discord: https://wiki.archlinux.org/title/Discord",
-  "notes": "The directory is lowercase discord. Canary and PTB builds use discordcanary and discordptb, which this rule does not match. The Flatpak uses ~/.var/app/com.discordapp.Discord/config/discord."
+  "notes": "The directory is lowercase discord. Canary and PTB builds use discordcanary and discordptb, which this rule does not match. The Flatpak uses ~/.var/app/com.discordapp.Discord/config/discord.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "In Discord, open the user settings with the cog next to your name and press Log Out, so the session on this computer ends.",
+    "steps": [
+      "Quit Discord from its tray icon.",
+      "Uninstall Discord from the App Center if you are removing the app itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes the signed-in session, the message cache, drafts and downloaded files. Messages on the Discord servers are untouched.",
+    "closeApps": ["Discord"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Discord Support, How do I log out?: https://support.discord.com/hc/en-us/articles/209572128-How-do-I-log-out"
+  }
 }

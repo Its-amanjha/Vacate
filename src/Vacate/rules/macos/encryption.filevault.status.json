@@ -22,5 +22,16 @@
   ],
   "verified": true,
   "source": "Apple platform security documentation and the allow-listed read-only fdesetup status query in Private/SystemQueries.ps1",
-  "notes": "Uses the fixed system-query name only: no shell, no sudo and no credential prompt. A missing binary or denied query is recorded as a skip."
+  "notes": "Uses the fixed system-query name only: no shell, no sudo and no credential prompt. A missing binary or denied query is recorded as a skip.",
+  "cleanup": {
+    "action": "none",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [],
+    "risk": "Nothing is lost here; if FileVault is off, turn it on before handover so the disk cannot be read.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": "FileVault is a setting, not a store of personal data, so the plan only reports whether it is on.",
+    "source": "Apple Support, Protect data on your Mac with FileVault: https://support.apple.com/guide/mac-help/protect-data-on-your-mac-with-filevault-mh11785/mac"
+  }
 }

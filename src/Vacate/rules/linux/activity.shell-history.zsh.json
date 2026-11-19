@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "zsh manual, Parameters: HISTFILE defaults to ~/.zsh_history and SAVEHIST controls how many lines are kept: https://zsh.sourceforge.io/Doc/Release/Parameters.html",
-  "notes": "With EXTENDED_HISTORY each line carries a timestamp, which turns the file into an activity log. ZDOTDIR and HISTFILE can move it elsewhere."
+  "notes": "With EXTENDED_HISTORY each line carries a timestamp, which turns the file into an activity log. ZDOTDIR and HISTFILE can move it elsewhere.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Close all open Zsh terminal sessions.",
+      "Delete the file named in the plan using your file manager."
+    ],
+    "risk": "Deletes your command recall history in Zsh. Past interactive commands and arguments will no longer be available.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "zsh manual, Parameters: https://zsh.sourceforge.io/Doc/Release/Parameters.html"
+  }
 }

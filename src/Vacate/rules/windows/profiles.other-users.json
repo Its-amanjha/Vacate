@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "SPEC.md platform roots: USERS = C:\\Users; other profiles are reported by directory name only (path jail rule 6)",
-  "notes": "Names only. excludeHome drops the current account; no recursion into any profile, and no junction or symlink is followed."
+  "notes": "Names only. excludeHome drops the current account; no recursion into any profile, and no junction or symlink is followed.",
+    "cleanup": {
+        "action": "review",
+        "exportFirst": "Ask each person to copy their own files out first; removing the account deletes the profile folder.",
+        "signOut": null,
+        "steps": [
+            "Read the profile names the plan lists and find out who each one belongs to.",
+            "Ask the owner of an account to take their files before you touch it.",
+            "For an account that is finished, open Settings > Accounts > Other users, select it and choose Remove."
+        ],
+        "risk": "Removing an account deletes that person's profile folder with their files, settings and sign-in. It cannot be undone, and their Microsoft account is untouched.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Manage User Accounts in Windows: https://support.microsoft.com/en-us/windows/security/identity-signin/manage-user-accounts-in-windows"
+    }
 }

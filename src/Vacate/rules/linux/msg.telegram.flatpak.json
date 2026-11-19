@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Flatpak sandbox permissions: per-app data lives in ~/.var/app/<app-id>/data; Telegram's Flathub id is org.telegram.desktop: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
-  "notes": "Same tdata contents as the native install, under the Flatpak data directory."
+  "notes": "Same tdata contents as the native install, under the Flatpak data directory.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "In Telegram Desktop, use the export option in the advanced settings if you want a copy of your chats: the tdata session is not readable.",
+    "signOut": "In Telegram Desktop, open Settings, then the menu in the top right corner, and choose Log out, so this computer stops using the account.",
+    "steps": [
+      "Quit Telegram Desktop from its tray icon.",
+      "Uninstall the Telegram Flatpak from the App Center or from your Flatpak tool.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Ends the session and deletes the local media cache and message database inside the sandbox. Chats stay in your Telegram account.",
+    "closeApps": ["Telegram"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Telegram, How do I log out? (Telegram FAQ): https://telegram.org/faq#q-how-do-i-log-out"
+  }
 }

@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Arch Wiki, Dropbox: the desktop client syncs to ~/Dropbox by default and keeps its state in ~/.dropbox: https://wiki.archlinux.org/title/Dropbox",
-  "notes": "Dropbox asks for the sync location during setup and it can be changed later, so this is the default only. Business accounts may use a named folder instead. The account and folder list live in ~/.dropbox, which this rule does not count."
+  "notes": "Dropbox asks for the sync location during setup and it can be changed later, so this is the default only. Business accounts may use a named folder instead. The account and folder list live in ~/.dropbox, which this rule does not count.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Check that every file you need is uploaded to your Dropbox account; files that never synced are deleted with the local folder.",
+    "signOut": "Sign in at dropbox.com, open Settings > Security, find this computer under Devices and click Unlink.",
+    "steps": [
+      "Quit the Dropbox desktop app from its tray icon.",
+      "Uninstall the Dropbox app from the App Center or from Discover if you no longer need it.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes the local copies of everything in Dropbox, plus anything that never finished syncing. The files stay in the Dropbox account.",
+    "closeApps": ["Dropbox"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Dropbox Help, View your devices and log out remotely: https://help.dropbox.com/security/device-list-remote-sign-out"
+  }
 }

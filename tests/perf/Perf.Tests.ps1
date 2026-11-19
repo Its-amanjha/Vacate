@@ -1,4 +1,4 @@
-# Perf.Tests.ps1 - opt-in performance budget tests (task W3-H).
+# Perf.Tests.ps1 - opt-in performance budget tests.
 # PowerShell 5.1 compatible. ASCII only.
 #
 # Builds a synthetic 50,000-file home under the OS temp folder, points a fake platform

@@ -27,5 +27,22 @@
   ],
   "verified": true,
   "source": "Apple Support: Photos Library is stored by default in the Pictures folder - https://support.apple.com/guide/photos/photo-library-overview-pht211de786/mac",
-  "notes": "Recurses for size and count by metadata only (a folder's own size is near zero); large libraries hit the 20000 cap and are marked truncated. Files are never opened. Libraries moved off ~/Pictures are not matched."
+  "notes": "Recurses for size and count by metadata only (a folder's own size is near zero); large libraries hit the 20000 cap and are marked truncated. Files are never opened. Libraries moved off ~/Pictures are not matched.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Photos choose File > Export > Export Unmodified Originals for the items you keep, then copy them off this Mac.",
+    "signOut": "Turn off iCloud Photos in System Settings > Apple Account > iCloud before removing any local copy.",
+    "steps": [
+      "Open Photos and check that every photo you need is exported or safe in iCloud.",
+      "Quit Photos so the library is no longer in use.",
+      "Delete the library folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Photos held only in this library are gone for good; anything in iCloud Photos stays in the account.",
+    "closeApps": [
+      "Photos"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Export photos, videos, slideshows, and memories on Mac: https://support.apple.com/guide/photos/export-photos-videos-slideshows-and-memories-pht6e157c5f/mac"
+  }
 }

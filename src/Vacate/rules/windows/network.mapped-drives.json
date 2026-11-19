@@ -24,5 +24,20 @@
                    ],
     "verified":  true,
     "source":  "Per-user mapped drives are stored under HKCU\\Network (Microsoft Learn: net use / Windows network connections registry)",
-    "notes":  "One subkey per mapped drive letter. Only key and value counts are reported; connection strings and any saved credentials are not read."
+    "notes":  "One subkey per mapped drive letter. Only key and value counts are reported; connection strings and any saved credentials are not read.",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [
+            "Open File Explorer and select This PC.",
+            "Right-click each mapped drive and select Disconnect.",
+            "Remove any saved credentials for those servers in Credential Manager."
+        ],
+        "risk": "The drive mappings and any saved credentials for those shares are removed from this account. Shared files on the server are untouched.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Map a network drive in Windows: https://support.microsoft.com/en-us/windows/map-a-network-drive-in-windows-29ce55d1-34e3-a7e2-4801-131475f9557d"
+    }
 }

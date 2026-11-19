@@ -17,5 +17,16 @@
   "verifiedOn": [],
   "verified": false,
   "source": "crypttab(5) manual page: /etc/crypttab describes encrypted block devices unlocked at boot: https://man.archlinux.org/man/crypttab.5",
-  "notes": "Entries name the backing device, the mapping name, the key file or none, and options. No key material is stored here. Full-disk encryption set up by the installer is usually not listed, so an absent file does not mean the disk is unencrypted. Where /etc is unreadable the engine records a permission skip."
+  "notes": "Entries name the backing device, the mapping name, the key file or none, and options. No key material is stored here. Full-disk encryption set up by the installer is usually not listed, so an absent file does not mean the disk is unencrypted. Where /etc is unreadable the engine records a permission skip.",
+  "cleanup": {
+    "action": "none",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [],
+    "risk": "Modifying or deleting crypttab can prevent the operating system from unlocking encrypted disks and booting.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": "This system configuration file maps encrypted block devices at boot time and will be cleared upon OS reinstallation.",
+    "source": "systemd project, crypttab: https://www.freedesktop.org/software/systemd/man/latest/crypttab.html"
+  }
 }

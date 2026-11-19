@@ -1,6 +1,8 @@
 {
   "id": "activity.muicache",
-  "platforms": ["windows"],
+  "platforms": [
+    "windows"
+  ],
   "category": "activity",
   "title": "MuiCache application names",
   "whyItMatters": "MuiCache stores display names for programs the user launched, revealing app installs that may no longer be present.",
@@ -10,11 +12,30 @@
     "hive": "HKCU",
     "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MuiCache"
   },
-  "measure": ["exists", "valueCount", "subkeyCount"],
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
   "maxEntries": 5000,
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
   "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MuiCache",
-  "notes": "Value data is not read. This rule reports the presence and size of the cache, not the application names inside it."
+  "notes": "Value data is not read. This rule reports the presence and size of the cache, not the application names inside it.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Only if you are not doing the full reset at the end of this plan, and you are comfortable with Registry Editor:",
+      "Open Registry Editor and go to the key named in the plan; Windows has no settings page for this cache.",
+      "Delete the key, then close Registry Editor."
+    ],
+    "risk": "Removes the cached program name list for this account. Windows refills it when programs are started again.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

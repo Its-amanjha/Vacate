@@ -27,5 +27,20 @@
                    ],
     "verified":  true,
     "source":  "Per-user temporary directory %LOCALAPPDATA%/Temp; standard Windows application temp location",
-    "notes":  "Higher cap because the folder can be large. File names and sizes only; contents are never opened."
+    "notes":  "Higher cap because the folder can be large. File names and sizes only; contents are never opened.",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [
+            "Close every open program, including installers that are still running.",
+            "Open Settings > System > Storage > Cleanup recommendations and review Temporary files.",
+            "Select the temporary files and remove them."
+        ],
+        "risk": "Removes the temporary files of this account. Unsaved work in open programs and running installers can be lost.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Free up drive space in Windows: https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/free-up-drive-space-in-windows"
+    }
 }

@@ -18,5 +18,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "freedesktop.org Thumbnail Managing Standard: thumbnails are cached under $XDG_CACHE_HOME/thumbnails, default ~/.cache/thumbnails: https://specifications.freedesktop.org/thumbnail-spec/latest/",
-  "notes": "Normal and large sizes are separate subfolders. File names are MD5 hashes of the URI, not readable names, and some desktop environments prune old entries. Respects XDG_CACHE_HOME, which this rule does not read."
+  "notes": "Normal and large sizes are separate subfolders. File names are MD5 hashes of the URI, not readable names, and some desktop environments prune old entries. Respects XDG_CACHE_HOME, which this rule does not read.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open the file manager and press Ctrl+H to show hidden files.",
+      "Delete the folder named in the plan to clear all cached preview images."
+    ],
+    "risk": "Removes cached image, video and document preview thumbnails. File managers will regenerate thumbnails on demand when folders are opened.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "freedesktop.org, Thumbnail Managing Standard: https://specifications.freedesktop.org/thumbnail-spec/latest/"
+  }
 }

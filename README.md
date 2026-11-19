@@ -129,6 +129,7 @@ On Windows use `.\vacate.ps1 <command>`. On macOS and Linux use `pwsh ./vacate.p
 | `rules validate` | Checks every rule file. Exits 1 if any file is invalid. |
 | `report -Run <dir>` | Rebuilds `report.html`, `summary.md` and `checklist.md` from an existing `report.json`. |
 | `checklist -Run <dir>` | Rebuilds `checklist.md` from an existing `report.json`. |
+| `plan -Run <dir>` | Phase 2 (in progress): writes `plan.json`, `plan.md` and `plan.html`, a step-by-step cleanup plan for every trace in the report. Advice only; vacate still changes nothing. |
 | `version` | Prints the version. |
 
 ## Output files

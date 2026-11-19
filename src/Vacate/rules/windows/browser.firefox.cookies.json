@@ -17,5 +17,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Mozilla Support, profiles where Firefox stores user data (cookies.sqlite): https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
-  "notes": "One cookies.sqlite per profile; -wal and -shm files appear while Firefox is open."
+  "notes": "One cookies.sqlite per profile; -wal and -shm files appear while Firefox is open.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Close every Firefox window.",
+      "In Firefox, open Settings > Privacy & Security and clear cookies and site data.",
+      "Delete the cookies file named in the plan if it is still there."
+    ],
+    "risk": "Signs you out of sites in Firefox and removes site data for every profile on this PC.",
+    "closeApps": [
+      "Mozilla Firefox"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Clear cookies and site data in Firefox: https://support.mozilla.org/en-US/kb/clear-cookies-and-site-data-firefox"
+  }
 }

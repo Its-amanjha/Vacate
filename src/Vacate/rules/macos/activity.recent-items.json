@@ -27,5 +27,21 @@
   ],
   "verified": true,
   "source": "macOS artifact cheat sheet: ~/Library/Application Support/com.apple.sharedfilelist holds .sfl2/.sfl3 recent item lists - https://www.macforensics.app/en/artifacts/cheat-sheet",
-  "notes": "Full Disk Access may be needed on a live system. The .sfl files are counted, never parsed; encoded bookmark paths are not decoded."
+  "notes": "Full Disk Access may be needed on a live system. The .sfl files are counted, never parsed; encoded bookmark paths are not decoded.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Choose Apple menu > Recent Items > Clear Menu to empty the system list.",
+      "In each app you use, choose File > Open Recent and clear that list as well.",
+      "Delete the folder named in the plan if it still exists.",
+      "Empty the Trash."
+    ],
+    "risk": "Lists of recently opened documents, apps and servers are cleared; apps add new entries when they are used again.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Open recently used items on Mac: https://support.apple.com/guide/mac-help/open-recently-used-items-on-mac-mchlp2724/mac"
+  }
 }

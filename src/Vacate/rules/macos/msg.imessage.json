@@ -27,5 +27,21 @@
   ],
   "verified": true,
   "source": "macOS artifact reference: ~/Library/Messages/chat.db and Attachments - https://www.macforensics.app/en/artifacts/cheat-sheet",
-  "notes": "TCC-protected (Messages data): a live scan needs Full Disk Access; root alone is not enough. chat.db and attachments are never opened."
+  "notes": "TCC-protected (Messages data): a live scan needs Full Disk Access; root alone is not enough. chat.db and attachments are never opened.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Save or print the conversations you need from the Messages window, because the attachments and history go with the folder.",
+    "signOut": "In Messages open Settings > iMessage and sign out of the Apple Account, then turn Messages off in iCloud.",
+    "steps": [
+      "Quit Messages so its database is not in use.",
+      "Delete the Messages folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Every conversation, attachment and contact detail kept by Messages leaves this Mac. iCloud copies stay in the account.",
+    "closeApps": [
+      "Messages"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Messages User Guide: https://support.apple.com/guide/messages/welcome/mac"
+  }
 }

@@ -25,5 +25,22 @@
                    ],
     "verified":  true,
     "source":  "Chromium user data directory docs (Edge uses the Chromium layout): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-    "notes":  "Matches the Preferences marker file so non-profile folders (Crash Reports, ShaderCache) are skipped. Looked for on this PC: exists."
+    "notes":  "Matches the Preferences marker file so non-profile folders (Crash Reports, ShaderCache) are skipped. Looked for on this PC: exists.",
+    "cleanup":  {
+        "action":  "export-then-remove",
+        "exportFirst":  "Export saved passwords from Edge Passwords and favorites from the favorites manager, so you keep both before the profiles go.",
+        "signOut":  "In Edge, open Settings > Profiles, sign out, and turn off sync, so the account stops keeping this PC in step.",
+        "steps":  [
+            "Close every Edge window.",
+            "Edge is part of Windows and usually cannot be uninstalled; in Edge open Settings > Profiles and remove each profile instead.",
+            "Delete the Edge user data folder named in the plan if it is still there."
+        ],
+        "risk":  "Removes every Edge profile on this PC: history, saved logins, cookies, favorites and open sessions.",
+        "closeApps":  [
+            "Microsoft Edge"
+        ],
+        "resetCovers":  true,
+        "reason":  null,
+        "source":  "Microsoft Support, Sign in to sync Microsoft Edge across devices: https://support.microsoft.com/en-US/edge/sign-in-to-sync-microsoft-edge-across-devices"
+    }
 }

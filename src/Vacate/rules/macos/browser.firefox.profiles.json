@@ -23,5 +23,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Firefox profile location on macOS: ~/Library/Application Support/Firefox/Profiles - https://github.com/RyanDFIR/hindsight",
-  "notes": "Profile folders have random names such as xxxx.default-release. prefs.js is present in each profile; the file is never opened."
+  "notes": "Profile folders have random names such as xxxx.default-release. prefs.js is present in each profile; the file is never opened.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Firefox open the passwords page and use Export Logins, then export bookmarks to a file you keep.",
+    "signOut": "In Firefox open the sync settings and disconnect this device, so the Mozilla account no longer holds its data.",
+    "steps": [
+      "Close every Firefox window so the profile files are not in use.",
+      "Move Firefox to the Trash from Applications and empty the Trash.",
+      "Delete the Firefox folder named in the plan if it is still there."
+    ],
+    "risk": "Removes every Firefox profile on this Mac: history, cookies, saved logins and bookmarks.",
+    "closeApps": [
+      "Firefox"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Export login data from Firefox: https://support.mozilla.org/en-US/kb/export-login-data-firefox"
+  }
 }

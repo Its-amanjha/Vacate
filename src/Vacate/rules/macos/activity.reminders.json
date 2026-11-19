@@ -27,5 +27,23 @@
   ],
   "verified": true,
   "source": "macforensics.app artifact cheat sheet (Calendar/Contacts/Reminders)",
-  "notes": "TCC-protected; needs Full Disk Access. Proposed in W3-D2 review."
+  "notes": "TCC-protected; needs Full Disk Access.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Sign out of the Apple Account in System Settings > Apple Account once each list is confirmed on another device.",
+    "steps": [
+      "Open Reminders and check that every list also appears on a device signed in to the same account.",
+      "Quit Reminders so its data is no longer in use.",
+      "Delete the folder named in the plan if it still exists.",
+      "Empty the Trash."
+    ],
+    "risk": "Lists that were never synced are lost with the folder; lists shown on another device stay in the account.",
+    "closeApps": [
+      "Reminders"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Reminders User Guide for Mac: https://support.apple.com/guide/reminders/welcome/mac"
+  }
 }

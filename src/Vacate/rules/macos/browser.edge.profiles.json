@@ -23,5 +23,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Chromium browser profile roots on macOS, Edge at ~/Library/Application Support/Microsoft Edge - https://www.macforensics.app/en/artifacts/chrome-firefox",
-  "notes": "Preferences marks each real profile. Cookies and history sit in the same profile folder but are separate rules elsewhere in the catalog."
+  "notes": "Preferences marks each real profile. Cookies and history sit in the same profile folder but are separate rules elsewhere in the catalog.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "In Edge export favourites from the favourites page, and save any passwords you keep in the browser.",
+    "signOut": "In Edge sign out of the account in the profile settings, so the work or personal account stops trusting this Mac.",
+    "steps": [
+      "Close every Edge window so the profile files are not in use.",
+      "Move Microsoft Edge to the Trash from Applications and empty the Trash.",
+      "Delete the Microsoft Edge folder named in the plan if it is still there."
+    ],
+    "risk": "Removes every Edge profile on this Mac: favourites, history, cookies, saved logins and extensions.",
+    "closeApps": [
+      "Microsoft Edge"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Support, View and delete browser history in Microsoft Edge: https://support.microsoft.com/en-us/edge/view-and-delete-browser-history-in-microsoft-edge"
+  }
 }

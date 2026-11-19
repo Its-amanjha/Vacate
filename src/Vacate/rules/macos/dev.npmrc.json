@@ -24,5 +24,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "npm user configuration file ~/.npmrc: https://docs.npmjs.com/cli/configuring-npm/npmrc",
-  "notes": "Project-level .npmrc files inside repositories are out of scope for this home-folder rule."
+  "notes": "Project-level .npmrc files inside repositories are out of scope for this home-folder rule.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Save any registry token you still need in a password manager before you revoke it.",
+    "signOut": "Revoke the token this machine used on the registry website, for example npmjs.com > Access Tokens.",
+    "steps": [
+      "Open the file named in the plan and note which registry tokens it holds.",
+      "Revoke each token on the registry website, so the copies stop working.",
+      "Delete the file named in the plan, then empty the Trash."
+    ],
+    "risk": "Publishing and private installs stop working until you sign in again with a new token.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "npm Docs, .npmrc: https://docs.npmjs.com/cli/configuring-npm/npmrc"
+  }
 }

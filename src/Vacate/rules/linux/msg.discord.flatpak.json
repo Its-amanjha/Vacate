@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Flatpak sandbox permissions: per-app config lives in ~/.var/app/<app-id>/config; Discord's Flathub id is com.discordapp.Discord: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
-  "notes": "Same lowercase discord profile as the native install, relocated into the sandbox."
+  "notes": "Same lowercase discord profile as the native install, relocated into the sandbox.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "In Discord, open the user settings with the cog next to your name and press Log Out, so the session on this computer ends.",
+    "steps": [
+      "Quit Discord from its tray icon.",
+      "Uninstall the Discord Flatpak from the App Center or from your Flatpak tool.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes the signed-in session, the message cache, drafts and downloaded files inside the sandbox. Messages on the servers are untouched.",
+    "closeApps": ["Discord"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Discord Support, How do I log out?: https://support.discord.com/hc/en-us/articles/209572128-How-do-I-log-out"
+  }
 }

@@ -24,5 +24,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "macforensics.app artifact cheat sheet (Bluetooth Devices)",
-  "notes": "Root-only; skipped without elevation. Never parsed. Proposed in W3-D2 review."
+  "notes": "Root-only; skipped without elevation. Never parsed.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "In System Settings > Bluetooth, hold the pointer over a device that is not yours, then Control-click it.",
+      "Choose Forget, and repeat for every paired device you no longer use.",
+      "Leave the system file named in the plan alone; the full reset at the end of this plan clears it."
+    ],
+    "risk": "Those pairings are lost, so keyboards, headsets or phones must be paired again before they can be used.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Connect a Bluetooth device with your Mac: https://support.apple.com/guide/mac-help/connect-a-wireless-accessory-blth1004/mac"
+  }
 }

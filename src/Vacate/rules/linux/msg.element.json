@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Element Desktop docs, user-specified config.json: on Linux the app directory is $XDG_CONFIG_HOME/Element: https://web-docs.element.dev/readme-element-desktop.html",
-  "notes": "The folder is named Element; start it with --profile Work and it becomes Element-Work, and pre-1.7 installs used Riot and Riot-<profile>. The homeserver address is also recorded in config.json. The Flatpak uses ~/.var/app/im.riot.Riot/config/Element."
+  "notes": "The folder is named Element; start it with --profile Work and it becomes Element-Work, and pre-1.7 installs used Riot and Riot-<profile>. The homeserver address is also recorded in config.json. The Flatpak uses ~/.var/app/im.riot.Riot/config/Element.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Export any room keys or files you still need from Element's settings first: encrypted history cannot be read again without those keys.",
+    "signOut": "In Element, open All settings > Sessions and sign out this session, so the Matrix account stops trusting it.",
+    "steps": [
+      "Close Element.",
+      "Uninstall Element from the App Center if you are removing the app itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes the Matrix session, the local message cache and the encryption keys kept on this computer. Chats stay on the homeserver.",
+    "closeApps": ["Element"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Element, Sessions (Element Web/Desktop client settings): https://docs.element.io/latest/element-support/element-webdesktop-client-settings/sessions"
+  }
 }

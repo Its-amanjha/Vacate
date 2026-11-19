@@ -27,5 +27,20 @@
   ],
   "verified": true,
   "source": "Apple Support, add Desktop and Documents to iCloud Drive: https://support.apple.com/en-us/109344",
-  "notes": "Desktop is TCC-protected on modern macOS; without Full Disk Access the scan records a permission skip. If iCloud sync is on, files may be online-only placeholders."
+  "notes": "Desktop is TCC-protected on modern macOS; without Full Disk Access the scan records a permission skip. If iCloud sync is on, files may be online-only placeholders.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": "Copy anything you want to keep to an external drive or another computer before touching this folder.",
+    "signOut": null,
+    "steps": [
+      "Open the folder named in the plan and decide file by file what has to go.",
+      "Move the files you keep to an external drive, then check that they open.",
+      "Move the rest to the Trash, then empty the Trash before the handover."
+    ],
+    "risk": "Everything left in Desktop is deleted for good once the Trash is emptied; only copies made elsewhere survive.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Add Desktop and Documents to iCloud Drive: https://support.apple.com/en-us/109344"
+  }
 }

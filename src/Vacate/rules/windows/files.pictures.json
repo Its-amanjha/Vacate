@@ -27,5 +27,22 @@
                    ],
     "verified":  true,
     "source":  "Windows known folder Pictures, default path under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
-    "notes":  "If OneDrive Known Folder Move is on, the real Pictures folder is under %USERPROFILE% OneDrive. Camera Roll and Screenshots may sit inside rather than beside it."
+    "notes":  "If OneDrive Known Folder Move is on, the real Pictures folder is under %USERPROFILE% OneDrive. Camera Roll and Screenshots may sit inside rather than beside it.",
+    "cleanup": {
+        "action": "review",
+        "exportFirst": "Copy what you want to keep to an external drive or your cloud account before deleting anything in this folder.",
+        "signOut": null,
+        "steps": [
+            "Open the folder named in the plan and look through it before deleting anything.",
+            "Check for the same files in OneDrive if the folder looks empty, because Known Folder Move can redirect it.",
+            "Copy what you keep to a drive you are taking with you, then delete the rest."
+        ],
+        "risk": "Photos deleted here are gone unless you copied them out first. Cloud albums may hold copies, so check them before deleting.",
+        "closeApps": [
+            "File Explorer"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Free up drive space in Windows: https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/free-up-drive-space-in-windows"
+    }
 }

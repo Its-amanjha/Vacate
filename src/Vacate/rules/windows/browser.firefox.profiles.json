@@ -17,5 +17,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Mozilla Support, profiles where Firefox stores user data: https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
-  "notes": "Each profile folder is named <random>.default, <random>.default-release or a user-chosen name. Crash Reports and other non-profile folders live next to Profiles, not inside it."
+  "notes": "Each profile folder is named <random>.default, <random>.default-release or a user-chosen name. Crash Reports and other non-profile folders live next to Profiles, not inside it.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Export bookmarks to an HTML file from Firefox Library > Import and Backup, and export saved logins from Logins and Passwords.",
+    "signOut": "In Firefox, open the account menu and sign out of your Mozilla account, so the profiles stop syncing with it.",
+    "steps": [
+      "Close every Firefox window.",
+      "Open the Firefox profile manager and remove each profile listed there.",
+      "Delete the Firefox profile folders named in the plan if they are still there."
+    ],
+    "risk": "Removes every Firefox profile on this PC: history, cookies, saved logins, form data, extensions and open sessions.",
+    "closeApps": [
+      "Mozilla Firefox"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Profile Manager - Create, remove or switch Firefox profiles: https://support.mozilla.org/en-US/kb/profile-manager-create-remove-switch-firefox-profiles"
+  }
 }

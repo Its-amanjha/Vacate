@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "GNU inetutils manual, the .netrc file: machine and password lines in the user's home directory: https://www.gnu.org/software/inetutils/manual/html_node/The-_002enetrc-file.html",
-  "notes": "Usually protected with chmod 600, and some tools refuse it otherwise. curl and ftp read it too, so it can hold credentials for several hosts. It does not exist unless someone created it by hand or a legacy tool wrote it."
+  "notes": "Usually protected with chmod 600, and some tools refuse it otherwise. curl and ftp read it too, so it can hold credentials for several hosts. It does not exist unless someone created it by hand or a legacy tool wrote it.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Review the accounts listed in the file named in the plan and change their passwords if necessary.",
+      "Delete the file named in the plan using your file manager."
+    ],
+    "risk": "Removes stored plain text machine credentials and login tokens used by curl, FTP, and remote tools.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GNU inetutils manual, The .netrc file: https://www.gnu.org/software/inetutils/manual/html_node/The-_002enetrc-file.html"
+  }
 }

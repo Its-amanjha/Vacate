@@ -25,5 +25,22 @@
                    ],
     "verified":  true,
     "source":  "Chromium user data directory docs, profile files include Login Data (Edge uses this layout): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-    "notes":  "One Login Data file per profile. Work profiles may also sync these passwords to a Microsoft 365 account."
+    "notes":  "One Login Data file per profile. Work profiles may also sync these passwords to a Microsoft 365 account.",
+    "cleanup":  {
+        "action":  "export-then-remove",
+        "exportFirst":  "In Edge, press Alt+F and choose Passwords, then Export passwords to a file you keep. The file is not protected, so keep it safe.",
+        "signOut":  "In Edge, open Settings > Profiles and sign out, so the profile stops syncing saved passwords to the Microsoft account.",
+        "steps":  [
+            "Close every Edge window.",
+            "In Edge, delete the saved passwords you no longer need from Passwords and autofill.",
+            "Delete the login data file named in the plan if it is still there."
+        ],
+        "risk":  "Without the export, every password saved in Edge is lost; while the profile stays signed in, sync can restore the file.",
+        "closeApps":  [
+            "Microsoft Edge"
+        ],
+        "resetCovers":  true,
+        "reason":  null,
+        "source":  "Microsoft Support, Export passwords in Microsoft Edge: https://support.microsoft.com/en-us/edge/export-passwords-in-microsoft-edge"
+    }
 }

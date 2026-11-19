@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "freedesktop.org Recent files spec: recent documents are listed in recently-used.xbel in the user data directory: https://specifications.freedesktop.org/recent-file-spec/latest/",
-  "notes": "Written by GTK applications; each entry holds a file:// URI, a display name, timestamps and often the application that opened it. GNOME's privacy settings can keep the list from being written at all."
+  "notes": "Written by GTK applications; each entry holds a file:// URI, a display name, timestamps and often the application that opened it. GNOME's privacy settings can keep the list from being written at all.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open Settings > Privacy & Security > File History & Trash.",
+      "Click Clear History, or delete the file named in the plan."
+    ],
+    "risk": "Clears the list of recent files shown in file pickers and the desktop file manager. Files on disk are not deleted.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GNOME Help, File history and Trash: https://help.gnome.org/users/gnome-help/stable/privacy-history-recent-off.html"
+  }
 }

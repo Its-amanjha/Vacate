@@ -28,5 +28,22 @@
                    ],
     "verified":  true,
     "source":  "SANS Windows forensic poster: %APPDATA%/Microsoft/Windows/Recent/AutomaticDestinations/*.automaticDestinations-ms",
-    "notes":  "Custom jump lists (*.customDestinations-ms) are a separate artifact and are not counted here. Files are not parsed. One trace per folder (count, size, 3 sample names) instead of one per file, so the report does not list every recently opened file name."
+    "notes":  "Custom jump lists (*.customDestinations-ms) are a separate artifact and are not counted here. Files are not parsed. One trace per folder (count, size, 3 sample names) instead of one per file, so the report does not list every recently opened file name.",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [
+            "Open File Explorer, select See more (the three dots) and then Options.",
+            "In the Privacy section select Clear; this empties the recent items and jump lists for this account.",
+            "Delete any jump list files still in the folder named in the plan. Windows has no setting that lists them."
+        ],
+        "risk": "Clears the recent and jump list record for this account. Windows builds new lists as files are opened again.",
+        "closeApps": [
+            "File Explorer"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+    }
 }

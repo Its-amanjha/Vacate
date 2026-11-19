@@ -25,5 +25,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "macforensics.app artifact cheat sheet (Saved Application State)",
-  "notes": "Folder sizes only. Proposed in W3-D2 review."
+  "notes": "Folder sizes only.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Quit every open app first, because a closing app writes its saved window state.",
+      "Delete the folder named in the plan if it still exists.",
+      "Empty the Trash."
+    ],
+    "risk": "Apps forget which windows and documents were open at the next launch; no document content is deleted.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Delete files and folders on Mac: https://support.apple.com/guide/mac-help/delete-files-and-folders-on-mac-mchlp1093/mac"
+  }
 }

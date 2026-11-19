@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "XDG Base Directory spec (caches go to $XDG_CACHE_HOME, default ~/.cache) plus the Chromium cache layout under the user data directory: https://specifications.freedesktop.org/basedir-spec/latest/",
-  "notes": "One cache tree per profile (Default, Profile 1, ...) with Cache, Code Cache and GPUCache inside. If XDG_CACHE_HOME is set the cache lives there instead. Chromium itself uses ~/.cache/chromium."
+  "notes": "One cache tree per profile (Default, Profile 1, ...) with Cache, Code Cache and GPUCache inside. If XDG_CACHE_HOME is set the cache lives there instead. Chromium itself uses ~/.cache/chromium.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Close every Chrome window, including its background window, so the cache files are not in use.",
+      "Open the Files app, press Ctrl+H to show hidden folders, and find the cache folder named in the plan.",
+      "Move that folder to the Trash and empty the Trash."
+    ],
+    "risk": "Only cached copies of pages, images and scripts are lost. Sites load them again on the next visit; history, saved passwords and sign-ins stay.",
+    "closeApps": ["Google Chrome"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Google Chrome Help, Clear cache and cookies: https://support.google.com/chrome/answer/95582"
+  }
 }

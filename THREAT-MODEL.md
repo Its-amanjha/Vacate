@@ -20,11 +20,7 @@ Phase 1 works end to end on Windows 11 (PowerShell 5.1 and 7) and on Ubuntu 24.0
 (PowerShell 7). The scan engine, path locator, filesystem walker, providers, CLI, report rendering,
 checklist and redaction all run, and real scans wrote all five output files on both systems.
 
-Still `(planned)`: macOS verification on a real Mac (D5), the sabotage self-test harness (W3-C),
-the full integration and performance suites (W3-B, W3-H), report signing and reproducible builds
-(Phase 5). CI is configured and the public repository exists, but the first CI run is still pending
-(M7). Where a control exists but is not proven in a scan, this page says so. `(planned)` marks
-behaviour that no code performs yet.
+Done since: the sabotage self-test (6 deliberate breakages, all caught), the integration suite (fixture scans, write-spy, run-twice determinism) and the 50,000-file performance test. CI runs on Windows (PowerShell 5.1 and 7), Ubuntu and macOS. Still `(planned)`: verification on a personal Mac (macOS is verified only on the CI runner), report signing and reproducible builds (Phase 5). Where a control exists but is not proven in a scan, this page says so. `(planned)` marks behaviour that no code performs yet.
 
 ## False positives
 
@@ -221,8 +217,8 @@ without a BOM. `report -Run` and `checklist -Run` read an existing run folder an
 
 **What remains.** The exclusion depends on absolute path comparison and the platform's case rules;
 it is covered by unit tests, not by a full scan that plants a file in the tool folder. A user can
-point `-Run <dir>` at any folder, but writes stay inside that folder. The full write-spy scan test
-from the specification is still (planned, W3-B). A crash during a write can leave a partial
+point `-Run <dir>` at any folder, but writes stay inside that folder. The integration suite runs a full
+scan with a write-spy and checks the scanned tree is unchanged. A crash during a write can leave a partial
 report, but only inside `runs/`.
 
 ## HTML injection via file names
@@ -260,9 +256,27 @@ fresh key per call, so two redacted reports cannot be matched by their hashes (D
 **What remains.** There is no signature, checksum or append-only log. Anyone who can write the run
 folder can edit the report; the tool cannot detect it. The redaction key is not stored, so hashes
 cannot be re-derived or checked later. Timestamps and durations legitimately differ between runs.
-The engine sorts traces and serializes ordered objects today, but a test that runs the same scan
-twice and compares the reports is still (planned, W3-B). There is no proof that a report came from
+The engine sorts traces and serializes ordered objects, and an integration test runs the same scan
+twice and checks the reports match with time fields blanked. There is no proof that a report came from
 a particular machine. Report signing and reproducible builds are Phase 5 (planned).
+
+## Cleanup plan advice (Phase 2)
+
+**Threat.** A cleanup plan tells a person to delete something. Wrong advice can lose data that was
+never exported, lock someone out of their accounts, or break the operating system.
+
+**Control.** The plan is words only (D47): the rule loader rejects cleanup text that contains a
+shell delete command or a backtick, so no step can be pasted into a terminal. Steps are ordered so
+saving and signing out come before anything that removes data (D49). Wallet rules start with
+confirming the recovery phrase. Guidance never tells a person to hand-delete system-managed data
+(system folders, the machine registry hive, the login keychain, DPAPI keys); it points to the app,
+the system settings, or the full reset at the end of the plan. Every trace gets a step, so nothing
+is dropped silently (D45). `vacate plan` reads `report.json` and writes three files into the run
+folder; it does not scan or change anything else.
+
+**What remains.** Menu paths change with app and operating system updates, and the guidance was
+written from vendor documentation, not tested step by step on each platform. A person can still
+follow a step on the wrong item. The plan cannot see whether an export actually worked.
 
 ## Outside this model
 

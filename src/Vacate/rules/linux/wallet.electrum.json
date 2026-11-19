@@ -18,5 +18,21 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Electrum FAQ, where is my wallet file: the data directory is ~/.electrum and wallets live in its wallets folder: https://docs.electrum.org/en/latest/faq.html",
-  "notes": "Wallet files have no extension and are encrypted with the wallet password; watch-only and multisession wallet folders can also appear. The config and network settings sit in the parent ~/.electrum folder, which this rule does not count."
+  "notes": "Wallet files have no extension and are encrypted with the wallet password; watch-only and multisession wallet folders can also appear. The config and network settings sit in the parent ~/.electrum folder, which this rule does not count.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Open Electrum and write down the seed phrase of every wallet, then copy the wallet files to a backup you keep on another device.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup for each wallet.",
+      "Copy the wallet files to a backup that stays off this computer.",
+      "Close Electrum.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Deletes the wallet files on this computer. Without the seed phrase or the backup the funds cannot be recovered.",
+    "closeApps": ["Electrum"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Electrum Docs, FAQ - where is my wallet file: https://docs.electrum.org/en/latest/faq.html"
+  }
 }

@@ -17,5 +17,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Chromium user data directory docs (Brave uses the Chromium layout under BraveSoftware/Brave-Browser): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "Matches the Preferences marker file so non-profile folders are skipped. Brave Browser Beta and Nightly use separate folders next to this one."
+  "notes": "Matches the Preferences marker file so non-profile folders are skipped. Brave Browser Beta and Nightly use separate folders next to this one.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Brave, export your passwords from the password manager settings page, and export bookmarks from the bookmarks manager.",
+    "signOut": "In Brave, open Settings > Sync and choose Leave Sync Chain, so this computer stops syncing with your other devices.",
+    "steps": [
+      "Close every Brave window.",
+      "Uninstall Brave from Settings > Apps > Installed apps.",
+      "Delete the Brave user data folder named in the plan if it is still there."
+    ],
+    "risk": "Deletes every Brave profile on this PC: history, bookmarks, saved passwords, cookies, extensions and any Brave wallet.",
+    "closeApps": [
+      "Brave"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Brave Help Center, How do I set up Sync: https://support.brave.com/hc/en-us/articles/360021218111-How-do-I-set-up-Sync"
+  }
 }

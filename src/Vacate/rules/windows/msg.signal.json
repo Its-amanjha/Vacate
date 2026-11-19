@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Signal Desktop forensics, data folder under Roaming (sql/db.sqlite, attachments, config): https://www.alexbilz.com/post/2021-06-07-forensic-artifacts-signal-desktop",
-  "notes": "Contains sql/db.sqlite (SQLCipher), attachments, drafts and logs. The database key lives in the Windows Credential Manager on current builds and in config.json on older ones. Signed out does not mean deleted."
+  "notes": "Contains sql/db.sqlite (SQLCipher), attachments, drafts and logs. The database key lives in the Windows Credential Manager on current builds and in config.json on older ones. Signed out does not mean deleted.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Save any photo or file you need from Signal first, because the local copy is all that is removed here.",
+    "signOut": "On your phone, open Signal > Linked devices and unlink this computer, so the account no longer trusts it.",
+    "steps": [
+      "In Signal Desktop, open Settings and choose Delete Data to clear the local message store.",
+      "Uninstall Signal from Settings > Apps > Installed apps.",
+      "Delete the Signal folder named in the plan if it is still there."
+    ],
+    "risk": "Removes the local copy of every conversation and attachment on this PC; nobody can re-read them here.",
+    "closeApps": [
+      "Signal"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Signal Support, Unlinking devices: https://support.signal.org/hc/en-us/articles/360007321111-Unlinking-devices"
+  }
 }

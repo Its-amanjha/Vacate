@@ -23,5 +23,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Brave profile locations: macOS ~/Library/Application Support/BraveSoftware/Brave-Browser - https://www.browserforensics.app/en/blog/brave-opera-vivaldi-profile-locations",
-  "notes": "Chromium layout without the extra User Data segment found on Windows. Preferences marks a real profile (Default, Profile 1, ...)."
+  "notes": "Chromium layout without the extra User Data segment found on Windows. Preferences marks a real profile (Default, Profile 1, ...).",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "In Brave export bookmarks from the bookmark manager, and save any passwords you keep in its password manager.",
+    "signOut": "In Brave open the sync settings and choose Leave sync chain, so the sync account stops trusting this Mac.",
+    "steps": [
+      "Close every Brave window so the profile files are not in use.",
+      "Move Brave Browser to the Trash from Applications and empty the Trash.",
+      "Delete the Brave-Browser folder named in the plan if it is still there."
+    ],
+    "risk": "Removes every Brave profile on this Mac: history, cookies, saved logins and extensions. Synced data stays in the sync chain.",
+    "closeApps": [
+      "Brave Browser"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Brave Help Center, Understanding Brave Sync: https://support.brave.app/hc/en-us/articles/360059793111-Understanding-Brave-Sync"
+  }
 }

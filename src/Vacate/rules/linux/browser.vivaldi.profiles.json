@@ -17,5 +17,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "BrowserForensics, Brave/Opera/Vivaldi profile locations: Vivaldi on Linux keeps profiles under ~/.config/vivaldi/<profile>: https://www.browserforensics.app/en/blog/brave-opera-vivaldi-profile-locations",
-  "notes": "Vivaldi is Chromium-based; the directory is lowercase vivaldi and profiles are Default, Profile 1, ... Matches the Preferences marker file. Vivaldi Snapshot uses a separate vivaldi-snapshot tree and is not matched."
+  "notes": "Vivaldi is Chromium-based; the directory is lowercase vivaldi and profiles are Default, Profile 1, ... Matches the Preferences marker file. Vivaldi Snapshot uses a separate vivaldi-snapshot tree and is not matched.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Vivaldi, export your bookmarks from the bookmark manager and your passwords from the password settings, and keep both files off this computer.",
+    "signOut": "In Vivaldi, open Settings > Sync and sign out of your Vivaldi account, so the synced data stays in the account.",
+    "steps": [
+      "Close every Vivaldi window.",
+      "Uninstall Vivaldi from the App Center if you are removing the browser itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes every Vivaldi profile on this computer: history, bookmarks, saved passwords, cookies, notes and open sessions.",
+    "closeApps": ["Vivaldi"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Vivaldi Help, How to uninstall Vivaldi: https://help.vivaldi.com/desktop/install-update/how-to-uninstall-vivaldi/"
+  }
 }

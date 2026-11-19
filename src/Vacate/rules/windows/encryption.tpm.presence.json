@@ -17,5 +17,16 @@
   "verifiedOn": ["Windows 11 Pro 26300"],
   "verified": true,
   "source": "Microsoft Learn Win32_Tpm class: https://learn.microsoft.com/en-us/windows/win32/secprov/win32-tpm",
-  "notes": "Read-only CIM query of the two initial-state properties. No TPM method is invoked and no ownership is changed. Absent on machines without a TPM."
+  "notes": "Read-only CIM query of the two initial-state properties. No TPM method is invoked and no ownership is changed. Absent on machines without a TPM.",
+    "cleanup": {
+        "action": "none",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [],
+        "risk": "A TPM is a chip state, not stored personal data, so there is nothing on this PC to delete. Clearing TPM ownership is an administrator decision that a reset of this PC already makes.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": "This is a hardware fact about the machine, not a file or setting that holds personal data, so there is nothing to remove here.",
+        "source": "Microsoft Learn, Trusted Platform Module (TPM) overview: https://learn.microsoft.com/en-us/windows/security/hardware-security/tpm/trusted-platform-module-overview"
+    }
 }

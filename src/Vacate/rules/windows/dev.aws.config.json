@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "AWS CLI configuration files in ~/.aws: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html",
-  "notes": "Covers credentials and config plus any cached SSO tokens in subfolders. File contents are not read."
+  "notes": "Covers credentials and config plus any cached SSO tokens in subfolders. File contents are not read.",
+    "cleanup": {
+        "action": "sign-out-then-remove",
+        "exportFirst": null,
+        "signOut": "Delete or deactivate the access keys this PC used in the AWS Identity and Access Management console, so the stored keys stop working.",
+        "steps": [
+            "Revoke the access keys in the AWS console.",
+            "Delete the folder named in the plan.",
+            "Check the AWS console again that no key from this machine is still active."
+        ],
+        "risk": "Removes the AWS profiles from this PC. Keys that are not deleted in AWS keep working from any other machine, so revoke them first.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "AWS, Configuration and credential file settings: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html"
+    }
 }

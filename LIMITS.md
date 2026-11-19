@@ -141,6 +141,18 @@ Status: Phase 1 works end to end on Windows 11 and Ubuntu 24.04 (WSL). See [READ
   there finds far less than the same scan on a desktop Linux install. What to do: scan the Windows
   side separately, and check any app you installed inside WSL by hand.
 
+## Cleanup plan (Phase 2)
+
+- **Advice, not action.** `vacate plan` writes instructions. It does not check that you followed
+  them, that an export worked, or that an account is really signed out. Run a new scan afterwards
+  to see what is left.
+- **Menu paths age.** Steps name menus from vendor documentation at the time of writing. If a menu
+  has moved, follow the goal the step describes and the vendor page in `source`.
+- **Only what the scan found.** A plan has one step per rule that found something. Data in places
+  vacate does not know about gets no step.
+- **A redacted report gives a redacted plan.** Locations show as hashes; run `plan` on the
+  unredacted report on the machine itself to see real paths.
+
 ## What a clean report means
 
 Nothing was found in the locations vacate knows about, on the paths it was allowed to read. It

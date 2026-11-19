@@ -23,5 +23,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Opera macOS profile root ~/Library/Application Support/com.operasoftware.Opera - https://www.browserforensics.app/en/blog/brave-opera-vivaldi-profile-locations",
-  "notes": "Opera uses a single-profile layout on macOS, with no Default subfolder. Opera GX and Beta use sibling folders and are not covered here."
+  "notes": "Opera uses a single-profile layout on macOS, with no Default subfolder. Opera GX and Beta use sibling folders and are not covered here.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "In Opera export bookmarks from the bookmark manager, and save any passwords you keep in the browser.",
+    "signOut": "In Opera sign out of the Opera account in its own account settings, so the account stops trusting this Mac.",
+    "steps": [
+      "Close every Opera window so the profile files are not in use.",
+      "Move Opera to the Trash from Applications and empty the Trash.",
+      "Delete the com.operasoftware.Opera folder named in the plan if it is still there."
+    ],
+    "risk": "Removes the Opera profile on this Mac: history, cookies, saved logins and speed dials.",
+    "closeApps": [
+      "Opera"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Opera Help, Opera account: https://help.opera.com/en/account/"
+  }
 }

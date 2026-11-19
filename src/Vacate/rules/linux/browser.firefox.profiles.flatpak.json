@@ -17,5 +17,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Flatpak sandbox permissions: an app's home directory is ~/.var/app/<app-id>, so Firefox writes ~/.mozilla below it: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
-  "notes": "org.mozilla.firefox is the Flathub app id. The same tree exists for other Flatpak browsers under their own app-id folder."
+  "notes": "org.mozilla.firefox is the Flathub app id. The same tree exists for other Flatpak browsers under their own app-id folder.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Firefox, export your bookmarks from the Library and your passwords from the logins settings, and keep both files off this computer.",
+    "signOut": "In Firefox, open the account menu and disconnect this browser from sync, so the account keeps the data and this computer stops using it.",
+    "steps": [
+      "Close every Firefox window.",
+      "Uninstall the Firefox Flatpak from the App Center or from your Flatpak tool.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes every Firefox profile on this computer: history, bookmarks, saved logins, cookies and the files you downloaded through the browser.",
+    "closeApps": ["Firefox"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Profiles - Where Firefox stores your bookmarks, passwords and other user data: https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data"
+  }
 }

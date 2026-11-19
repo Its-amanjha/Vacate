@@ -24,5 +24,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "macforensics.app artifact cheat sheet (Wi-Fi Known Networks)",
-  "notes": "Root-only (0600); skipped without elevation. Never parsed. Proposed in W3-D2 review."
+  "notes": "Root-only (0600); skipped without elevation. Never parsed.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": "Note the password of any network you still need, using Copy Password in the known networks list.",
+    "signOut": null,
+    "steps": [
+      "In System Settings > Wi-Fi click Advanced and review the list of known networks.",
+      "Remove each network you no longer use with Remove From List.",
+      "Remove the matching passwords in Keychain Access; the full reset at the end of this plan clears the system file."
+    ],
+    "risk": "The Mac forgets those networks and their passwords; networks you keep still join automatically.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Reset or remove Wi-Fi network settings on Mac: https://support.apple.com/guide/mac-help/reset-or-remove-wi-fi-network-settings-on-mac-mchl6129bcb2/mac"
+  }
 }

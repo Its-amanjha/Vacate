@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Discord desktop is an Electron app that stores its user data in the app-data folder (leveldb caches, logs): https://github.com/discord/discord-api-docs",
-  "notes": "Stable client. Discord Canary, PTB and Development builds use discordcanary, discordptb and discorddevelopment folders next to it. Versioned folders under discord hold the app itself."
+  "notes": "Stable client. Discord Canary, PTB and Development builds use discordcanary, discordptb and discorddevelopment folders next to it. Versioned folders under discord hold the app itself.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Save any file or message you need from Discord first, because the local cache is all that is removed here.",
+    "signOut": "In Discord, open User Settings > Authorized Apps and deauthorize apps you no longer use, then sign out of the app.",
+    "steps": [
+      "Close Discord.",
+      "Uninstall Discord from Settings > Apps > Installed apps.",
+      "Delete the Discord folder named in the plan if it is still there."
+    ],
+    "risk": "Removes cached messages, attachments and the local login token; the account stays until the password is changed.",
+    "closeApps": [
+      "Discord"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Discord Support, My Discord Account was Hacked or Compromised: https://support.discord.com/hc/en-us/articles/24160905919511-My-Discord-Account-was-Hacked-or-Compromised"
+  }
 }

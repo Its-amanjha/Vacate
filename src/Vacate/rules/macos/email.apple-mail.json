@@ -27,5 +27,21 @@
   ],
   "verified": true,
   "source": "macforensics.app cheat sheet (Apple Mail); Apple lists ~/Library/Mail among folders that need Full Disk Access",
-  "notes": "TCC-protected: without Full Disk Access the folder returns 'Operation not permitted' on a live system. Mailboxes are counted, never read. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "TCC-protected: without Full Disk Access the folder returns 'Operation not permitted' on a live system. Mailboxes are counted, never read.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Mail select the mailboxes to keep and use Mailbox > Export Mailbox to save them to a folder you keep.",
+    "signOut": "In Mail open Settings > Accounts and remove each account, so this Mac no longer signs in to them.",
+    "steps": [
+      "Quit Mail so the mailbox files are not in use.",
+      "Delete the Mail folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Local copies of messages and attachments are gone. Mail still on the provider's servers can be downloaded elsewhere.",
+    "closeApps": [
+      "Mail"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Mail User Guide: https://support.apple.com/guide/mail/welcome/mac"
+  }
 }

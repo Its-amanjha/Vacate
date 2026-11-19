@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Arch Wiki, Nextcloud: the desktop client keeps nextcloud.cfg in ~/.config/Nextcloud: https://wiki.archlinux.org/title/Nextcloud",
-  "notes": "nextcloud.cfg lists each account, its server URL and every local sync folder; the login is saved in the desktop keyring, not here. The synced folders themselves are elsewhere and are not matched by this rule."
+  "notes": "nextcloud.cfg lists each account, its server URL and every local sync folder; the login is saved in the desktop keyring, not here. The synced folders themselves are elsewhere and are not matched by this rule.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "In the Nextcloud desktop client, open the account settings, select this account and remove it, so the saved login token is dropped.",
+    "steps": [
+      "Quit the Nextcloud desktop client from its tray icon.",
+      "Uninstall the client from the App Center or from Discover if you no longer need it.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes the saved server address, account and folder settings. Files already downloaded stay in their own folders and are not removed here.",
+    "closeApps": ["Nextcloud"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Nextcloud documentation, Desktop client manual: https://docs.nextcloud.com/desktop/latest/"
+  }
 }

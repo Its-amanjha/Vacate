@@ -17,5 +17,19 @@
   "verifiedOn": [],
   "verified": false,
   "source": "GitHub CLI manual, environment: configuration is stored in hosts.yml under the gh folder in XDG_CONFIG_HOME or ~/.config: https://cli.github.com/manual/gh_help_environment",
-  "notes": "Contains one entry per GitHub host with the username and oauth_token; GH_CONFIG_DIR can move it. The older ~/.config/gh/config.yml holds settings only and is not the credential file. A token is revocable from the GitHub account settings."
+  "notes": "Contains one entry per GitHub host with the username and oauth_token; GH_CONFIG_DIR can move it. The older ~/.config/gh/config.yml holds settings only and is not the credential file. A token is revocable from the GitHub account settings.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Sign out of your account with the GitHub CLI logout prompt, or revoke the authorization token in GitHub account settings.",
+    "steps": [
+      "Revoke authorized GitHub CLI OAuth tokens in your GitHub account Settings > Applications.",
+      "Delete the file named in the plan using your file manager."
+    ],
+    "risk": "Removes saved GitHub CLI authentication tokens and host credentials from this PC.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GitHub CLI manual, gh auth logout: https://cli.github.com/manual/gh_auth_logout"
+  }
 }

@@ -25,5 +25,22 @@
                    ],
     "verified":  true,
     "source":  "Chromium user data directory docs, profile files include Web Data: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-    "notes":  "One Web Data file per profile. Card numbers are encrypted with the Windows account; addresses and autofill values are stored as readable text."
+    "notes":  "One Web Data file per profile. Card numbers are encrypted with the Windows account; addresses and autofill values are stored as readable text.",
+    "cleanup":  {
+        "action":  "remove",
+        "exportFirst":  "Copy down any saved addresses or payment details you still need, because Chrome has no export for autofill data.",
+        "signOut":  null,
+        "steps":  [
+            "Close every Chrome window.",
+            "In Chrome, remove saved addresses and payment methods from Settings > Autofill and passwords.",
+            "Delete the web data file named in the plan if it is still there."
+        ],
+        "risk":  "Loses saved names, addresses, phone numbers and payment cards used to fill web forms in Chrome on this PC.",
+        "closeApps":  [
+            "Google Chrome"
+        ],
+        "resetCovers":  true,
+        "reason":  null,
+        "source":  "Google Chrome Help, Delete browsing data in Chrome: https://support.google.com/chrome/answer/95582"
+    }
 }

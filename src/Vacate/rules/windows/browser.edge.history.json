@@ -25,5 +25,22 @@
                    ],
     "verified":  true,
     "source":  "Chromium user data directory docs, profile files include History (Edge uses this layout): https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-    "notes":  "One History file per profile. Looked for on this PC: exists."
+    "notes":  "One History file per profile. Looked for on this PC: exists.",
+    "cleanup":  {
+        "action":  "remove",
+        "exportFirst":  "Export your favorites from Edge if you want to keep the sites you saved.",
+        "signOut":  null,
+        "steps":  [
+            "Close every Edge window.",
+            "In Edge, open Settings > Privacy, search, and services and clear browsing history.",
+            "Delete the history file named in the plan if it is still there."
+        ],
+        "risk":  "Removes local Edge history for every profile on this PC; with sync on, history can come back from the Microsoft account.",
+        "closeApps":  [
+            "Microsoft Edge"
+        ],
+        "resetCovers":  true,
+        "reason":  null,
+        "source":  "Microsoft Support, View and delete browser history in Microsoft Edge: https://support.microsoft.com/en-US/edge/view-and-delete-browser-history-in-microsoft-edge"
+    }
 }

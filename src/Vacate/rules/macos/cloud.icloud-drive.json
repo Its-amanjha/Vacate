@@ -25,5 +25,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Apple support and macOS forensics: iCloud Drive content lives in ~/Library/Mobile Documents - https://www.macforensics.app/en/artifacts/cloud-storage-clients",
-  "notes": "Online-only files appear as 0-byte placeholders; vacate counts metadata and never hydrates or downloads anything. App-specific iCloud folders are included."
+  "notes": "Online-only files appear as 0-byte placeholders; vacate counts metadata and never hydrates or downloads anything. App-specific iCloud folders are included.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Copy every file you need from the iCloud Drive folder in Finder to a drive you keep before removing the local copies.",
+    "signOut": "In System Settings open your Apple Account and turn iCloud Drive off, so this Mac stops syncing the account's files.",
+    "steps": [
+      "Copy the files you need to a drive you keep.",
+      "Turn iCloud Drive off for this Mac and confirm that Finder no longer shows the folder.",
+      "Delete the Mobile Documents folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Local copies of iCloud Drive files are gone. Anything still in the account can be downloaded again on another device.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, iCloud User Guide: https://support.apple.com/guide/icloud/welcome/icloud"
+  }
 }

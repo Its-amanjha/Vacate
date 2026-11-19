@@ -27,5 +27,20 @@
   ],
   "verified": true,
   "source": "OpenSSH ssh(1) manual, FILES: ~/.ssh holds per-user keys and configuration; macforensics.app cheat sheet (SSH)",
-  "notes": "macOS uses the same ~/.ssh layout as Linux. Key material is never opened; known_hosts and config are included in the count only. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "macOS uses the same ~/.ssh layout as Linux. Key material is never opened; known_hosts and config are included in the count only.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Copy any key you still rely on to encrypted storage off this Mac, then plan replacements.",
+    "signOut": "Remove this Mac's public key from every server's authorized keys file and from each Git host account.",
+    "steps": [
+      "List the public keys in the folder named in the plan and where each is installed.",
+      "Remove those public keys from servers, cloud consoles and Git hosts.",
+      "Delete the folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Servers that accepted only these keys deny access until new keys are added; unremoved keys still work.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "OpenSSH manual, ssh(1), FILES section: https://man.openbsd.org/ssh"
+  }
 }

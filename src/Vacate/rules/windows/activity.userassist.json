@@ -1,28 +1,43 @@
 {
-    "id":  "activity.userassist",
-    "platforms":  [
-                      "windows"
-                  ],
-    "category":  "activity",
-    "title":  "UserAssist program execution history",
-    "whyItMatters":  "This key records which GUI programs a user ran and how often. It shows applications the person used on this machine.",
-    "sensitivity":  "medium",
-    "locator":  {
-                    "kind":  "registry",
-                    "hive":  "HKCU",
-                    "key":  "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist"
-                },
-    "measure":  [
-                    "exists",
-                    "valueCount",
-                    "subkeyCount"
-                ],
-    "maxEntries":  5000,
-    "requiresElevation":  false,
-    "verifiedOn":  [
-                       "Windows 11 Pro 26300"
-                   ],
-    "verified":  true,
-    "source":  "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist",
-    "notes":  "ROT13-encoded value names are not decoded. Only key, value and subkey counts are reported; registry last-write time is unavailable."
+  "id": "activity.userassist",
+  "platforms": [
+    "windows"
+  ],
+  "category": "activity",
+  "title": "UserAssist program execution history",
+  "whyItMatters": "This key records which GUI programs a user ran and how often. It shows applications the person used on this machine.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist"
+  },
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist",
+  "notes": "ROT13-encoded value names are not decoded. Only key, value and subkey counts are reported; registry last-write time is unavailable.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Only if you are not doing the full reset at the end of this plan, and you are comfortable with Registry Editor:",
+      "Open Registry Editor and expand the key named in the plan.",
+      "Delete the GUID subkeys under it, then close Registry Editor."
+    ],
+    "risk": "Removes the record of which programs this account ran and how often. Programs still installed keep working normally.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

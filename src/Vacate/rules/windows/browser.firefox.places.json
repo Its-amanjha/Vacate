@@ -17,5 +17,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Mozilla Support, profiles where Firefox stores user data (places.sqlite): https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
-  "notes": "One places.sqlite per profile, with places.sqlite-wal and -shm alongside while Firefox is open."
+  "notes": "One places.sqlite per profile, with places.sqlite-wal and -shm alongside while Firefox is open.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": "In Firefox, open Library > Import and Backup and export bookmarks to an HTML file if you want to keep them.",
+    "signOut": null,
+    "steps": [
+      "Close every Firefox window.",
+      "In Firefox, open History > Clear Recent History and clear everything.",
+      "Delete the places file named in the plan if it is still there."
+    ],
+    "risk": "Removes local history and bookmarks for every Firefox profile on this PC; synced history can return while the account stays signed in.",
+    "closeApps": [
+      "Mozilla Firefox"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Delete browsing, search and download history on Firefox: https://support.mozilla.org/en-US/kb/delete-browsing-search-download-history-firefox"
+  }
 }

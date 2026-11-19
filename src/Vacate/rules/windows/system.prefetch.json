@@ -19,5 +19,16 @@
   "verifiedOn": ["Windows 11 Pro 26300"],
   "verified": true,
   "source": "SANS Windows forensic poster: %SystemDrive%/Windows/Prefetch (*.pf execution files)",
-  "notes": "Machine-wide folder, so elevation is required. Only .pf files are counted; their embedded path and run-count data is never parsed."
+  "notes": "Machine-wide folder, so elevation is required. Only .pf files are counted; their embedded path and run-count data is never parsed.",
+    "cleanup": {
+        "action": "none",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [],
+        "risk": "Prefetch is a cache Windows writes and manages itself, so it holds no documents to remove. Deleting the files by hand only slows the next program starts and Windows writes them again.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": "Windows creates and rebuilds these files itself to speed up program starts. There is no supported setting to clear them, and a reset of this PC is what removes them.",
+        "source": "Microsoft Learn, What is Application Launch Prefetching?: https://learn.microsoft.com/en-us/archive/blogs/chadduffey/what-is-application-launch-prefetching"
+    }
 }

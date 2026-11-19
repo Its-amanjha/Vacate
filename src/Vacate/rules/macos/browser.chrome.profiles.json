@@ -23,5 +23,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Chromium user data directory docs, macOS profile layout: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "Matches Preferences, which every real profile has, so sibling folders such as Crash Reports are not matched. Profile folders are Default, Profile 1, ..."
+  "notes": "Matches Preferences, which every real profile has, so sibling folders such as Crash Reports are not matched. Profile folders are Default, Profile 1, ...",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "In Chrome save bookmarks with the bookmark manager export, and export any saved passwords you need.",
+    "signOut": "In Chrome open Settings > You and Google and choose Turn off, so the Google account keeps its data but stops trusting this Mac.",
+    "steps": [
+      "Close every Chrome window so the profile files are not in use.",
+      "Move Google Chrome to the Trash from Applications and empty the Trash.",
+      "Delete the Google/Chrome folder named in the plan if it is still there."
+    ],
+    "risk": "Removes every Chrome profile on this Mac: history, cookies, saved logins and extensions.",
+    "closeApps": [
+      "Google Chrome"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Google Chrome Help, Sign in and sync in Chrome: https://support.google.com/chrome/answer/185277"
+  }
 }

@@ -18,5 +18,21 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Ledger Support, how to access the Ledger Wallet (formerly Ledger Live) user data file: app.json sits in the app's user data folder: https://support.ledger.com/article/8490479490333-zd",
-  "notes": "source uncertain: Ledger documents the Windows and macOS folders but not the Linux one; ~/.config/Ledger Live is reported by Ledger support and users, and the app was later renamed to Ledger Wallet, so a current install may use ~/.config/Ledger Wallet instead. app.json holds accounts, settings and caches, never keys."
+  "notes": "source uncertain: Ledger documents the Windows and macOS folders but not the Linux one; ~/.config/Ledger Live is reported by Ledger support and users, and the app was later renamed to Ledger Wallet, so a current install may use ~/.config/Ledger Wallet instead. app.json holds accounts, settings and caches, never keys.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Note the accounts shown in Ledger Live and keep the recovery phrase of the hardware wallet safe: only the account list lives on this computer.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup for this wallet.",
+      "Close Ledger Live.",
+      "Uninstall Ledger Live from the App Center if you are removing the app itself.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Deletes the account list, balance history and settings on this computer. The keys and funds stay on the hardware wallet.",
+    "closeApps": ["Ledger Live"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Ledger Support, Ledger Live user data file: https://support.ledger.com/article/8490479490333-zd"
+  }
 }

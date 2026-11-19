@@ -27,5 +27,22 @@
                    ],
     "verified":  true,
     "source":  "Microsoft Learn, new Outlook profile and cache locations: https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/get-started/virtualized-desktop-infrastructure",
-    "notes":  "Microsoft also documents %LOCALAPPDATA%/Microsoft/olk for cache and attachments; that is a separate folder. Mail stays on the server; no content is parsed."
+    "notes":  "Microsoft also documents %LOCALAPPDATA%/Microsoft/olk for cache and attachments; that is a separate folder. Mail stays on the server; no content is parsed.",
+    "cleanup":  {
+        "action":  "sign-out-then-remove",
+        "exportFirst":  "Save any attachment or message you need from new Outlook first, because the local cache is all that is removed here.",
+        "signOut":  "In new Outlook, open View > View settings, then Accounts > Your accounts, select Manage for the account, and choose Remove.",
+        "steps":  [
+            "Close new Outlook.",
+            "Uninstall new Outlook for Windows from Settings > Apps > Installed apps.",
+            "Delete the Outlook package folder named in the plan if it is still there."
+        ],
+        "risk":  "Removes the local cache, settings and downloaded attachments for new Outlook; the mail itself stays in the mailbox.",
+        "closeApps":  [
+            "new Outlook for Windows"
+        ],
+        "resetCovers":  true,
+        "reason":  null,
+        "source":  "Microsoft, Add an email account to Outlook for Windows: https://support.microsoft.com/en-us/outlook/getstarted/add-an-email-account-to-outlook-for-windows"
+    }
 }

@@ -25,5 +25,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Elastic detection-rules macOS wallet paths reference ~/Library/Application Support/monero-wallet-gui - https://github.com/elastic/detection-rules/issues/6616",
-  "notes": "Settings folder only; wallets default to ~/Monero/wallets (see wallet.monero-gui.wallets). Unconfirmed for current GUI builds. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "Settings folder only; wallets default to ~/Monero/wallets (see wallet.monero-gui.wallets). Unconfirmed for current GUI builds.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup for every Monero wallet you used with this app.",
+      "Quit Monero GUI so its settings are not in use.",
+      "Delete the monero-wallet-gui folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Settings and the wallet cache leave this Mac. Wallet files stored elsewhere are handled by their own step.",
+    "closeApps": [
+      "Monero GUI"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Monero, Restoring your Monero Wallet: https://www.getmonero.org/resources/user-guides/restore_account.html"
+  }
 }

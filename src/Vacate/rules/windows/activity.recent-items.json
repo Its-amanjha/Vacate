@@ -28,5 +28,22 @@
                    ],
     "verified":  true,
     "source":  "SANS Windows forensic poster: %APPDATA%/Microsoft/Windows/Recent (.lnk shortcut files)",
-    "notes":  "Counts shortcut files only, not the AutomaticDestinations and CustomDestinations jump-list folders, which have their own rule. One trace per folder (count, size, 3 sample names) instead of one per file, so the report does not list every recently opened file name."
+    "notes":  "Counts shortcut files only, not the AutomaticDestinations and CustomDestinations jump-list folders, which have their own rule. One trace per folder (count, size, 3 sample names) instead of one per file, so the report does not list every recently opened file name.",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [
+            "Open File Explorer, select See more (the three dots) and then Options.",
+            "In the Privacy section select Clear; this empties the recent items for this account.",
+            "Delete any shortcut files still in the folder named in the plan."
+        ],
+        "risk": "Clears the list of recently opened items for this account. New shortcuts appear as files are opened again.",
+        "closeApps": [
+            "File Explorer"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+    }
 }

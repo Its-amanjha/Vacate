@@ -18,5 +18,23 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Electrum documentation, Where is the Electrum datadir located: https://docs.electrum.org/en/latest/faq.html",
-  "notes": "One file per wallet, default_wallet on a fresh install. The parent folder holds config, logs and blockchain headers. A wallet saved elsewhere by the user is only caught by the personal-folder rules."
+  "notes": "One file per wallet, default_wallet on a fresh install. The parent folder holds config, logs and blockchain headers. A wallet saved elsewhere by the user is only caught by the personal-folder rules.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Confirm you have the recovery phrase or backup for every wallet, and copy any wallet file you still need to a drive you keep.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup before removing anything.",
+      "Open Electrum and check that every wallet opens and is backed up.",
+      "Uninstall Electrum from Settings > Apps > Installed apps.",
+      "Delete the Electrum wallet folder named in the plan."
+    ],
+    "risk": "Deleted wallet files cannot be recovered without the wallet password or seed; funds stay on the blockchain but access can be lost.",
+    "closeApps": [
+      "Electrum"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Electrum Documentation, Frequently Asked Questions: https://docs.electrum.org/en/latest/faq.html"
+  }
 }

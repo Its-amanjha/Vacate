@@ -27,5 +27,22 @@
                    ],
     "verified":  true,
     "source":  "Windows known folder Downloads, default path under the user profile: https://support.microsoft.com/windows",
-    "notes":  "Known Folder Move usually does not redirect Downloads, so this folder normally holds the real files. The browser\u0027s download history and the files themselves are separate findings."
+    "notes":  "Known Folder Move usually does not redirect Downloads, so this folder normally holds the real files. The browser\u0027s download history and the files themselves are separate findings.",
+    "cleanup": {
+        "action": "review",
+        "exportFirst": "Copy what you want to keep to an external drive or your cloud account before deleting anything in this folder.",
+        "signOut": null,
+        "steps": [
+            "Open the folder named in the plan and look through it before deleting anything.",
+            "Check for the same files in OneDrive if the folder looks empty, because Known Folder Move can redirect it.",
+            "Copy what you keep to a drive you are taking with you, then delete the rest."
+        ],
+        "risk": "Anything deleted from this folder is gone unless you copied it out first. Installers can be downloaded again; statements and receipts cannot.",
+        "closeApps": [
+            "File Explorer"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Free up drive space in Windows: https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/free-up-drive-space-in-windows"
+    }
 }

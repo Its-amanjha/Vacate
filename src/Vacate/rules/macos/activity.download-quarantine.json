@@ -26,5 +26,22 @@
   ],
   "verified": true,
   "source": "macforensics.app artifact cheat sheet (QuarantineEventsV2)",
-  "notes": "SQLite file; size and date only, never opened. Proposed in W3-D2 review."
+  "notes": "SQLite file; size and date only, never opened.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Quit Safari and every other browser so the record is no longer written.",
+      "Delete the file named in the plan if it still exists.",
+      "Empty the Trash, then repeat for any other user account that keeps its own copy."
+    ],
+    "risk": "The record of which files came from which site is erased; the downloaded files themselves stay where they are.",
+    "closeApps": [
+      "Safari"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Gatekeeper and runtime protection in macOS: https://support.apple.com/guide/security/gatekeeper-and-runtime-protection-sec5599b66df/web"
+  }
 }

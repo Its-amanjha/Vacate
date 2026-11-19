@@ -27,5 +27,22 @@
   ],
   "verified": true,
   "source": "Browser forensics reference for Safari container layout: ~/Library/Containers/com.apple.Safari/Data/Library - https://www.browserforensics.app/en/blog/safari-history-file-locations",
-  "notes": "TCC-protected like ~/Library/Safari; needs Full Disk Access on a live system. Safari 17+ extra profiles and cookies live under Data/Library. Metadata only."
+  "notes": "TCC-protected like ~/Library/Safari; needs Full Disk Access on a live system. Safari 17+ extra profiles and cookies live under Data/Library. Metadata only.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": "In Safari export the bookmarks you keep with File > Export > Bookmarks before clearing anything.",
+    "signOut": null,
+    "steps": [
+      "Quit Safari so its container is not in use.",
+      "In Safari choose History > Clear History and clear all history.",
+      "Delete the Safari container folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Signed-in website sessions, cookies and extra Safari profiles on this Mac are lost. The Apple Account itself is unchanged.",
+    "closeApps": [
+      "Safari"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Clear your browsing history in Safari on Mac: https://support.apple.com/guide/safari/clear-your-browsing-history-sfri47acf5d6/mac"
+  }
 }

@@ -24,5 +24,20 @@
                    ],
     "verified":  true,
     "source":  "Well-known Windows Bluetooth forensics artifact: HKLM\\SYSTEM\\CurrentControlSet\\Services\\BTHPORT\\Parameters\\Devices",
-    "notes":  "Machine-wide pairing records. Only subkey and value counts are reported; device addresses and link keys are never read."
+    "notes":  "Machine-wide pairing records. Only subkey and value counts are reported; device addresses and link keys are never read.",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [
+            "Open Settings > Bluetooth & devices > Devices.",
+            "For each device in the list, open it and select Remove this device.",
+            "Turn Bluetooth off once the list is empty."
+        ],
+        "risk": "The PC forgets every paired device, and they must be paired again to connect. No device is changed in any way.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Safely remove hardware in Windows: https://support.microsoft.com/en-us/windows/hardware/safely-remove-hardware-in-windows"
+    }
 }

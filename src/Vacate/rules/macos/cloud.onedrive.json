@@ -25,5 +25,21 @@
   "verifiedOn": [],
   "verified": false,
   "source": "macOS File Provider sync roots under ~/Library/CloudStorage - https://www.macforensics.app/en/artifacts/cloud-storage-clients",
-  "notes": "Newer macOS 12.3+ location (OneDrive-Personal, OneDrive-<Org>). Older ~/OneDrive installs are not matched. Placeholders are counted, never hydrated."
+  "notes": "Newer macOS 12.3+ location (OneDrive-Personal, OneDrive-<Org>). Older ~/OneDrive installs are not matched. Placeholders are counted, never hydrated.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Copy any file you need from the OneDrive folder in Finder to a drive you keep, since the local copies are removed.",
+    "signOut": "In the OneDrive menu bar icon open the settings and unlink this Mac, so the Microsoft account stops syncing here.",
+    "steps": [
+      "Quit OneDrive from the menu bar icon so the folder is not in use.",
+      "Delete the OneDrive folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Local copies are removed. Files stay in the Microsoft account, and a file that existed only here is gone.",
+    "closeApps": [
+      "OneDrive"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Support, Turn off, disable, or uninstall OneDrive: https://support.microsoft.com/en-us/office/turn-off-disable-or-uninstall-onedrive-f32a17ce-3336-40fe-9c38-6efb09f944b0"
+  }
 }

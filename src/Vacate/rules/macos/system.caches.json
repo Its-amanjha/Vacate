@@ -26,5 +26,20 @@
   ],
   "verified": true,
   "source": "Apple macOS User Guide, the Library folder; per-user caches live in ~/Library/Caches",
-  "notes": "Sizes and counts only; no cached file is opened. Caches under /Library and container-specific caches elsewhere are not covered. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "Sizes and counts only; no cached file is opened. Caches under /Library and container-specific caches elsewhere are not covered.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Quit every app, because a running app writes its cache again when it closes.",
+      "Delete the folder named in the plan, then restart the Mac.",
+      "Check that the apps you use still start normally afterwards."
+    ],
+    "risk": "Apps rebuild caches on next launch, so first starts are slower and offline copies held in caches are lost.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Delete files and folders on Mac: https://support.apple.com/guide/mac-help/delete-files-and-folders-on-mac-mchlp1093/mac"
+  }
 }

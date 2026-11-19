@@ -17,5 +17,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Mozilla Support, profiles where Firefox stores user data (logins.json): https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
-  "notes": "Passwords are encrypted with the key in key4.db in the same profile, so the two files should be read together. Pair rule: browser.firefox.key4."
+  "notes": "Passwords are encrypted with the key in key4.db in the same profile, so the two files should be read together. Pair rule: browser.firefox.key4.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Firefox, open Settings > Privacy & Security > Logins and Passwords and use Export logins to save them to a file you keep.",
+    "signOut": "In Firefox, open the account menu and sign out of your Mozilla account, then choose to delete synced data from this device.",
+    "steps": [
+      "Close every Firefox window.",
+      "In Firefox, remove the saved logins you no longer need from Logins and Passwords.",
+      "Delete the login file named in the plan if it is still there."
+    ],
+    "risk": "Without the export, every login saved in Firefox is lost; the encrypted passwords are only usable with the key file from the same profile.",
+    "closeApps": [
+      "Mozilla Firefox"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Mozilla Support, Password Manager - Remember, delete and edit logins and passwords in Firefox: https://support.mozilla.org/en-US/kb/password-manager-remember-delete-edit-logins"
+  }
 }

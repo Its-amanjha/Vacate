@@ -18,5 +18,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Epic Games support: account ID .dat files under %LOCALAPPDATA%/EpicGamesLauncher/Saved/Data - https://www.epicgames.com/help/c-45487929/c-38978022/what-is-an-epic-games-account-id-and-where-can-i-find-it-a24590453",
-  "notes": "Account-ID files and save folders are counted, never opened. Game saves in other locations (Documents, Saved Games) are out of scope."
+  "notes": "Account-ID files and save folders are counted, never opened. Game saves in other locations (Documents, Saved Games) are out of scope.",
+    "cleanup": {
+        "action": "sign-out-then-remove",
+        "exportFirst": null,
+        "signOut": "Sign out of the Epic Games Launcher in its account settings, so the account stops keeping a signed-in session here.",
+        "steps": [
+            "Sign out of the Epic Games Launcher.",
+            "Uninstall the launcher from Settings > Apps > Installed apps if the PC no longer needs it.",
+            "Delete the folder named in the plan if it is still there."
+        ],
+        "risk": "Removes the launcher's local settings and account records from this PC. Purchased games stay with the Epic account.",
+        "closeApps": [
+            "Epic Games Launcher"
+        ],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Epic Games, Epic Games Support: https://www.epicgames.com/help/en-US/"
+    }
 }

@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Microsoft Learn: Windows.old folder is created at the system drive root during an in-place Windows upgrade",
-  "notes": "Large tree with a 20000-entry cap; truncation is reported if exceeded. The path jail still applies inside the old tree, and no file is opened."
+  "notes": "Large tree with a 20000-entry cap; truncation is reported if exceeded. The path jail still applies inside the old tree, and no file is opened.",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": "Copy anything still needed from the old profile folders inside this tree first; those files are deleted with it.",
+        "signOut": null,
+        "steps": [
+            "Look through the old profile folders named in the plan and copy out anything you still need.",
+            "Open Settings > System > Storage > Cleanup recommendations.",
+            "Select Previous Windows installation(s) and remove them, then check the folder named in the plan is gone."
+        ],
+        "risk": "Deletes the previous Windows installation, including the old profile folders inside it. The previous Windows version can no longer be restored.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Free up drive space in Windows: https://support.microsoft.com/en-us/windows/experience/storage-filemanagement/free-up-drive-space-in-windows"
+    }
 }

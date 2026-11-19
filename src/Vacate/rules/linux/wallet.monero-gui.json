@@ -18,5 +18,21 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Monero Docs, monero-wallet-gui reference: the wallet is created in $HOME/Monero/wallets by default: https://docs.getmonero.org/interacting/monero-wallet-gui-reference",
-  "notes": "The GUI wizard can put wallets in ~/.bitmonero/wallets instead, and this rule does not check there. The wallet list, config and log are in ~/.config/monero-project and the blockchain data in ~/.bitmonero, neither of which is counted here."
+  "notes": "The GUI wizard can put wallets in ~/.bitmonero/wallets instead, and this rule does not check there. The wallet list, config and log are in ~/.config/monero-project and the blockchain data in ~/.bitmonero, neither of which is counted here.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In the Monero GUI, confirm the 25-word seed of every wallet is written down, or copy the wallet files to a device you keep.",
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup for each wallet.",
+      "Close the Monero GUI.",
+      "Copy any wallet file you still need to a backup device.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Deletes the wallet files with their keys and transaction history on this computer. Without the seed or a backup the funds are lost.",
+    "closeApps": ["Monero GUI"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Monero Docs, Monero GUI wallet reference: https://docs.getmonero.org/interacting/monero-wallet-gui-reference"
+  }
 }

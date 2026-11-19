@@ -27,5 +27,16 @@
   ],
   "verified": true,
   "source": "FHS 3.0, /var/log: variable log data for the system lives in /var/log: https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch05s15.html",
-  "notes": "auth.log, syslog and the journal directory hold the useful history, including rotated and compressed copies. Many files are root-only, so the engine records them as permission skips rather than reading them."
+  "notes": "auth.log, syslog and the journal directory hold the useful history, including rotated and compressed copies. Many files are root-only, so the engine records them as permission skips rather than reading them.",
+  "cleanup": {
+    "action": "none",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [],
+    "risk": "Deleting active system log files directly can break log file descriptors for running system daemons.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": "System logs in var-log are managed by system daemons and log rotation services, and will be cleared when the OS is reinstalled.",
+    "source": "Ubuntu Documentation, System Logs: https://help.ubuntu.com/community/LinuxLogFiles"
+  }
 }

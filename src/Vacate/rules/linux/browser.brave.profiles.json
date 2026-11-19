@@ -17,5 +17,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Brave is Chromium-based and keeps the Chromium user data layout under ~/.config/BraveSoftware/Brave-Browser: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
-  "notes": "Matches the Preferences marker file, so non-profile folders are skipped. Brave Beta and Nightly use Brave-Browser-Beta and Brave-Browser-Nightly sibling folders. The Flatpak keeps the tree under ~/.var/app/com.brave.Browser/config/BraveSoftware."
+  "notes": "Matches the Preferences marker file, so non-profile folders are skipped. Brave Beta and Nightly use Brave-Browser-Beta and Brave-Browser-Nightly sibling folders. The Flatpak keeps the tree under ~/.var/app/com.brave.Browser/config/BraveSoftware.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Brave, export your passwords from the password manager and your bookmarks from the bookmark manager, and save both files off this computer.",
+    "signOut": "In Brave, open Settings > Sync and leave the sync chain, so the account keeps the synced data and this computer drops out of it.",
+    "steps": [
+      "Close every Brave window, including the window that keeps running in the tray.",
+      "Uninstall Brave from the App Center, or from the Snap or Flatpak tool if you installed it that way.",
+      "Move the folder named in the plan to the Trash and empty the Trash."
+    ],
+    "risk": "Removes every Brave profile on this computer: history, bookmarks, saved passwords, cookies, extensions and any Brave Wallet or Rewards data.",
+    "closeApps": ["Brave"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Brave Help Center, Delete Sync Account FAQ: https://support.brave.app/hc/en-us/articles/12944495986957-Delete-Sync-Account-FAQ"
+  }
 }

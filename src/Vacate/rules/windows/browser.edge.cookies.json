@@ -25,5 +25,22 @@
                    ],
     "verified":  true,
     "source":  "Chromium cookie store layout under User Data/\u003cprofile\u003e/Network (Edge follows Chromium): https://chromium.googlesource.com/chromium/src/",
-    "notes":  "Older Edge builds stored User Data/*/Cookies directly; check both. Looked for on this PC: exists."
+    "notes":  "Older Edge builds stored User Data/*/Cookies directly; check both. Looked for on this PC: exists.",
+    "cleanup":  {
+        "action":  "remove",
+        "exportFirst":  null,
+        "signOut":  null,
+        "steps":  [
+            "Close every Edge window.",
+            "In Edge, open Settings > Privacy, search, and services and clear cookies and other site data.",
+            "Delete the cookies file named in the plan if it is still there."
+        ],
+        "risk":  "Signs you out of sites in Edge on this PC and clears site preferences; synced data can return until sync is turned off.",
+        "closeApps":  [
+            "Microsoft Edge"
+        ],
+        "resetCovers":  true,
+        "reason":  null,
+        "source":  "Microsoft Support, Manage cookies in Microsoft Edge: https://support.microsoft.com/en-us/edge/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use"
+    }
 }

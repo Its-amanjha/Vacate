@@ -18,5 +18,20 @@
   "verifiedOn": [],
   "verified": false,
   "source": "FHS 3.0, /home: user home directories live under /home on Linux: https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s08.html",
-  "notes": "Names only and never inside another profile. excludeHome keeps the scanning user out. Accounts without a home folder, or with homes elsewhere (LDAP, /var/home on immutable distros), are not listed."
+  "notes": "Names only and never inside another profile. excludeHome keeps the scanning user out. Accounts without a home folder, or with homes elsewhere (LDAP, /var/home on immutable distros), are not listed.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Open Settings > Users from the desktop system settings.",
+      "Unlock administrative privileges and select each unwanted user account.",
+      "Click Remove User and choose Delete Files, so their data does not stay on the disk."
+    ],
+    "risk": "Deleting user accounts permanently removes their login access, personal files, and user configurations.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GNOME Help, Delete a user account: https://help.gnome.org/users/gnome-help/stable/user-delete.html"
+  }
 }

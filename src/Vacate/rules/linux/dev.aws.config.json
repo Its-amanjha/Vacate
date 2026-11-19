@@ -27,5 +27,19 @@
   ],
   "verified": true,
   "source": "AWS CLI docs, where configuration and credentials are stored: ~/.aws/credentials and ~/.aws/config: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html",
-  "notes": "credentials holds access key ids and secret keys in plain text; config holds profiles, regions and role settings; sso/cache holds cached SSO tokens. AWS_CONFIG_FILE and AWS_SHARED_CREDENTIALS_FILE can move the files."
+  "notes": "credentials holds access key ids and secret keys in plain text; config holds profiles, regions and role settings; sso/cache holds cached SSO tokens. AWS_CONFIG_FILE and AWS_SHARED_CREDENTIALS_FILE can move the files.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Sign out of active AWS IAM Identity Center sessions in your terminal or revoke active sessions in the AWS console.",
+    "steps": [
+      "Revoke active access keys in the AWS Management Console if they should no longer be used.",
+      "Delete the folder named in the plan using your file manager."
+    ],
+    "risk": "Removes saved AWS access keys, configuration profiles, and cached SSO authentication tokens from this PC.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Amazon Web Services Documentation, Configuration and credential file settings: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html"
+  }
 }

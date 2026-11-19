@@ -25,5 +25,23 @@
   "verifiedOn": [],
   "verified": false,
   "source": "macforensics.app artifact cheat sheet (Calendar/Contacts/Reminders)",
-  "notes": "TCC-protected; needs Full Disk Access. Proposed in W3-D2 review."
+  "notes": "TCC-protected; needs Full Disk Access.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Calendar choose File > Export > Calendar Archive to save every calendar, then copy the archive off this Mac.",
+    "signOut": "Sign out of the calendar account in System Settings > Apple Account or Internet Accounts, so events stay with the account.",
+    "steps": [
+      "Open Calendar and check that every calendar under On My Mac is covered by the export.",
+      "Quit Calendar so its folders are no longer in use.",
+      "Delete the folder named in the plan if it still exists.",
+      "Empty the Trash so the deleted events cannot be recovered."
+    ],
+    "risk": "Local copies of events, notes and attachments are lost; anything held only on this Mac is gone for good.",
+    "closeApps": [
+      "Calendar"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, Import or export calendars on Mac: https://support.apple.com/guide/calendar/import-or-export-calendars-icl1023/mac"
+  }
 }

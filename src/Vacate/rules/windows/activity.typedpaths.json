@@ -1,28 +1,43 @@
 {
-    "id":  "activity.typedpaths",
-    "platforms":  [
-                      "windows"
-                  ],
-    "category":  "activity",
-    "title":  "Typed Explorer paths",
-    "whyItMatters":  "This key holds paths typed into Explorer\u0027s address bar, revealing locations the user navigated to directly.",
-    "sensitivity":  "medium",
-    "locator":  {
-                    "kind":  "registry",
-                    "hive":  "HKCU",
-                    "key":  "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths"
-                },
-    "measure":  [
-                    "exists",
-                    "valueCount",
-                    "subkeyCount"
-                ],
-    "maxEntries":  5000,
-    "requiresElevation":  false,
-    "verifiedOn":  [
-                       "Windows 11 Pro 26300"
-                   ],
-    "verified":  true,
-    "source":  "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths",
-    "notes":  "Only value and subkey counts are reported; the typed URLs and paths themselves are never read."
+  "id": "activity.typedpaths",
+  "platforms": [
+    "windows"
+  ],
+  "category": "activity",
+  "title": "Typed Explorer paths",
+  "whyItMatters": "This key holds paths typed into Explorer's address bar, revealing locations the user navigated to directly.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths"
+  },
+  "measure": [
+    "exists",
+    "valueCount",
+    "subkeyCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths",
+  "notes": "Only value and subkey counts are reported; the typed URLs and paths themselves are never read.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Only if you are not doing the full reset at the end of this plan, and you are comfortable with Registry Editor:",
+      "Open Registry Editor and go to the key named in the plan.",
+      "Delete the values in that key but keep the key itself; this empties the list."
+    ],
+    "risk": "Removes the addresses typed into the Explorer address bar for this account. Windows starts a new list when addresses are typed again.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Learn, Registry (Win32 system services): https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry"
+  }
 }

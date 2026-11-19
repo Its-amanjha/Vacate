@@ -25,5 +25,21 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Dropbox on File Provider moves the folder to ~/Library/CloudStorage/Dropbox - https://www.macforensics.app/en/artifacts/cloud-storage-clients",
-  "notes": "Newer File Provider installs only. Legacy ~/Dropbox may be a symlink to this folder; the path jail never follows links. Online-only placeholders are not hydrated."
+  "notes": "Newer File Provider installs only. Legacy ~/Dropbox may be a symlink to this folder; the path jail never follows links. Online-only placeholders are not hydrated.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Copy any file you need that exists only in the local Dropbox folder to a drive you keep, since the copies go with it.",
+    "signOut": "In the Dropbox menu bar icon open the account settings and sign out, then remove this Mac from the account's connected devices.",
+    "steps": [
+      "Quit Dropbox from the menu bar icon so the folder is not in use.",
+      "Delete the Dropbox folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Local copies on this Mac are removed. Files still in the Dropbox account are untouched, and online-only files were never here.",
+    "closeApps": [
+      "Dropbox"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Dropbox Help, Sign in and sign out of Dropbox: https://help.dropbox.com/account-access/sign-in-out"
+  }
 }

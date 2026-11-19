@@ -24,5 +24,22 @@
   "verifiedOn": [],
   "verified": false,
   "source": "zsh manual, HISTFILE (macOS default shell since Catalina writes ~/.zsh_history); macforensics.app cheat sheet (Shell History)",
-  "notes": "Only existence, size and timestamps are recorded. Commands are never read. An extended history file under a custom HISTFILE is out of scope. Reviewed in W3-D2 (independent review, docs/research/macos-review.md)."
+  "notes": "Only existence, size and timestamps are recorded. Commands are never read. An extended history file under a custom HISTFILE is out of scope.",
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Quit Terminal and any other terminal app so the history file is not written again.",
+      "Open the file named in the plan in a text editor and copy out any command you need to keep.",
+      "Delete the file, then empty the Trash, so the next shell starts with empty history."
+    ],
+    "risk": "Every command you typed is lost, including paths, server names or tokens typed by mistake.",
+    "closeApps": [
+      "Terminal"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "zsh manual, Parameters set by the shell (HISTFILE): https://zsh.sourceforge.net/Doc/Release/Parameters.html"
+  }
 }

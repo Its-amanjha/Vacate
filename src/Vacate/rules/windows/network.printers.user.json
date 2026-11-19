@@ -24,5 +24,20 @@
                    ],
     "verified":  true,
     "source":  "Windows per-user mapped printers under HKCU\\Printers\\Connections (Microsoft Learn printer connection documentation)",
-    "notes":  "One subkey per connected printer. Connection strings are not read; only counts are reported. Registry last-write time is unavailable (D3)."
+    "notes":  "One subkey per connected printer. Connection strings are not read; only counts are reported. Registry last-write time is unavailable (D3).",
+    "cleanup": {
+        "action": "remove",
+        "exportFirst": null,
+        "signOut": null,
+        "steps": [
+            "Open Settings > Bluetooth & devices > Printers & scanners.",
+            "Select each printer the plan lists and choose Remove.",
+            "Reconnect a printer you still need from the same page."
+        ],
+        "risk": "Removes the printer connections from this account. The printers stay available to other machines and can be added again.",
+        "closeApps": [],
+        "resetCovers": true,
+        "reason": null,
+        "source": "Microsoft Support, Fix shared printer connection problems in Windows: https://support.microsoft.com/en-us/windows/hardware/printer/fix-shared-printer-connection-problems-in-windows"
+    }
 }

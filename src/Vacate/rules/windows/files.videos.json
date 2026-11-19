@@ -1,0 +1,22 @@
+{
+  "id": "files.videos",
+  "platforms": ["windows"],
+  "category": "personal-files",
+  "title": "Videos folder",
+  "whyItMatters": "Recordings and clips saved by the person, plus exports from editors. Names, dates and sizes show what was recorded and when, which is often more telling than the files themselves.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Videos",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Windows known folder Videos, default path under the user profile: https://support.microsoft.com/windows",
+  "notes": "Known Folder Move does not redirect Videos, so this is normally the real folder. Screen recordings from games and meeting apps are often saved here."
+}

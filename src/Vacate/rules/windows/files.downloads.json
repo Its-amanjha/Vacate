@@ -1,0 +1,22 @@
+{
+  "id": "files.downloads",
+  "platforms": ["windows"],
+  "category": "personal-files",
+  "title": "Downloads folder",
+  "whyItMatters": "Invoices, tickets, bank statements, installers and photos that were never filed away. It is the folder people forget to empty before selling a computer.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Downloads",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Windows known folder Downloads, default path under the user profile: https://support.microsoft.com/windows",
+  "notes": "Known Folder Move usually does not redirect Downloads, so this folder normally holds the real files. The browser's download history and the files themselves are separate findings."
+}

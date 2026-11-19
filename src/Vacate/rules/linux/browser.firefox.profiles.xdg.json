@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.profiles.xdg",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Firefox profiles (XDG location)",
+  "whyItMatters": "New Firefox installs keep their profiles under ~/.config instead of ~/.mozilla. The folder holds the same history, bookmarks, cookies and saved logins, so a scan that only looks at ~/.mozilla misses them.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "mozilla/firefox/*/prefs.js",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Mozilla Bugzilla 259356, support for the XDG Base Directory spec: new Firefox profiles use $XDG_CONFIG_HOME/mozilla/firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=259356",
+  "notes": "Unconfirmed: the release number (147, January 2026) comes from Mozilla release notes and press coverage, not from a page this agent read; the Bugzilla bug is the primary source for the path. Only fresh installs and new profiles move; an existing ~/.mozilla/firefox keeps the legacy location, so both rules are needed. The * matches the profile folder and prefs.js is the marker."
+}

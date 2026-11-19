@@ -1,0 +1,21 @@
+{
+  "id": "email.thunderbird.profiles",
+  "platforms": ["linux"],
+  "category": "email",
+  "title": "Thunderbird mail profiles",
+  "whyItMatters": "Each Thunderbird profile holds the local copy of mail folders, the address book, calendar and saved account passwords. It shows who the person corresponded with and often the content of the messages.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".thunderbird/*",
+    "match": "directories"
+  },
+  "measure": ["exists", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Mozilla Support, profiles: Thunderbird stores its profile folders in ~/.thunderbird on Linux: https://support.mozilla.org/en-US/kb/profiles-where-thunderbird-stores-user-data",
+  "notes": "Matches the profile folders themselves, so no mailbox contents are walked; profiles.ini in the same folder names them and is not counted. On Ubuntu 24.04 and later Thunderbird is usually the Snap, which uses ~/snap/thunderbird/common/.thunderbird instead, covered by a separate rule."
+}

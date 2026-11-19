@@ -1,0 +1,21 @@
+{
+  "id": "network.cups.printers",
+  "platforms": ["linux"],
+  "category": "network",
+  "title": "Configured printers",
+  "whyItMatters": "CUPS lists every printer the machine can reach, with its queue name and often a network address or a saved SMB/Windows login. It tells a stranger which office, home or print shop the person used, and how to reach those devices.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "ETC",
+    "path": "cups/printers.conf",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "printers.conf(5): CUPS keeps the printer definitions in /etc/cups/printers.conf, readable only by root and the lp group: https://man.archlinux.org/man/printers.conf.5",
+  "notes": "Normally root-only, so requiresElevation. Device URIs can embed smb:// or ipp:// addresses, and some embed credentials for a Windows print share. Printers added only in the desktop settings without running cupsd are not listed here."
+}

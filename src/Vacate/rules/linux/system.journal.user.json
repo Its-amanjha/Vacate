@@ -1,0 +1,22 @@
+{
+  "id": "system.journal.user",
+  "platforms": ["linux"],
+  "category": "system-traces",
+  "title": "systemd journal (persistent)",
+  "whyItMatters": "The persistent systemd journal records services started, logins, errors and device events across reboots. It builds a timeline of how the machine was used, long after the plain log files were rotated away.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "VAR",
+    "path": "log/journal",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "systemd-journald docs: with Storage=persistent the journal is kept in /var/log/journal, otherwise it lives only in /run: https://www.freedesktop.org/software/systemd/man/latest/systemd-journald.service.html",
+  "notes": "Sizes only; the journal files themselves are normally root-only or readable by the systemd-journal and adm groups, so a normal user gets permission skips. When Storage=volatile the folder does not exist and the journal is lost at shutdown. Individual user journals under ~/.local/share are not covered."
+}

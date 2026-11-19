@@ -1,0 +1,21 @@
+{
+  "id": "email.thunderbird.profiles.snap",
+  "platforms": ["linux"],
+  "category": "email",
+  "title": "Thunderbird mail profiles (Snap install)",
+  "whyItMatters": "The Snap version of Thunderbird keeps its profiles under the snap folder instead of ~/.thunderbird, with the local mail copy, address book, calendar and saved account passwords, and is easy to miss.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "snap/thunderbird/common/.thunderbird/*",
+    "match": "directories"
+  },
+  "measure": ["exists", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Ubuntu ships Thunderbird as a Snap since 24.04, and Mozilla Support places the profile at ~/snap/thunderbird/common/.thunderbird: https://support.mozilla.org/en-US/questions/1469510",
+  "notes": "Matches the profile folders only, not the mailbox files inside them. Ubuntu 24.04 switched the default Thunderbird to the Snap and did not always migrate an existing ~/.thunderbird, so both locations can hold data; the Flatpak uses ~/.var/app/org.mozilla.Thunderbird/.thunderbird."
+}

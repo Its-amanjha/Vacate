@@ -1,0 +1,22 @@
+{
+  "id": "activity.thumbnails",
+  "platforms": ["linux"],
+  "category": "activity",
+  "title": "Thumbnail cache",
+  "whyItMatters": "Desktop file managers cache small previews of pictures, videos and documents that were viewed, in plain image files named after a hash of the original path. The cache can reveal what was browsed even after the files themselves were deleted.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".cache/thumbnails",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "freedesktop.org Thumbnail Managing Standard: thumbnails are cached under $XDG_CACHE_HOME/thumbnails, default ~/.cache/thumbnails: https://specifications.freedesktop.org/thumbnail-spec/latest/",
+  "notes": "Normal and large sizes are separate subfolders. File names are MD5 hashes of the URI, not readable names, and some desktop environments prune old entries. Respects XDG_CACHE_HOME, which this rule does not read."
+}

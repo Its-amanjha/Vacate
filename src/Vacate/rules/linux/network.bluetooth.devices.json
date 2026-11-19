@@ -1,0 +1,21 @@
+{
+  "id": "network.bluetooth.devices",
+  "platforms": ["linux"],
+  "category": "network",
+  "title": "Paired Bluetooth devices",
+  "whyItMatters": "BlueZ keeps one folder per paired device with its name, MAC address and pairing keys. The names alone show which phone, headset, car or keyboard the person paired, and the keys allow reconnecting to those devices.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "VAR",
+    "path": "lib/bluetooth",
+    "match": "directories"
+  },
+  "measure": ["exists", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "BlueZ settings storage docs: adapter and remote device data is kept under /var/lib/bluetooth, one folder per adapter address and per device: https://bluez.readthedocs.io/en/latest/settings-storage/",
+  "notes": "The folder is root-only, hence requiresElevation; the rule reports the folder and its timestamp, not the device folders inside. Older BlueZ 4 installs used a single linkkeys file in the same tree. Systems without Bluetooth never create the folder."
+}

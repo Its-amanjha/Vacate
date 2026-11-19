@@ -1,0 +1,22 @@
+{
+  "id": "network.wireguard.configs",
+  "platforms": ["linux"],
+  "category": "network",
+  "title": "WireGuard tunnel configs",
+  "whyItMatters": "Each WireGuard config file holds the private key of a VPN tunnel and the peers it connects to. A copy of the file is enough to join the person's private network or to impersonate their machine.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "ETC",
+    "path": "wireguard",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "wg-quick(8) reads <interface>.conf files from /etc/wireguard and creates the folder mode 0700: https://man.archlinux.org/man/wg-quick.8",
+  "notes": "Root-only by design, hence requiresElevation. Configs can live elsewhere when a custom path is passed to wg-quick or the tunnel is managed by a desktop app, which keeps its own copy under the user's home; this rule only covers the system folder."
+}

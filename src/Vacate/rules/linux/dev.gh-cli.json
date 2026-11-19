@@ -1,0 +1,21 @@
+{
+  "id": "dev.gh-cli",
+  "platforms": ["linux"],
+  "category": "developer-secrets",
+  "title": "GitHub CLI logins",
+  "whyItMatters": "The GitHub CLI writes an OAuth token for every signed-in GitHub account to hosts.yml in plain text. With that token a stranger can act as the person on GitHub, including reading private repositories.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "gh/hosts.yml",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "GitHub CLI manual, environment: configuration is stored in hosts.yml under the gh folder in XDG_CONFIG_HOME or ~/.config: https://cli.github.com/manual/gh_help_environment",
+  "notes": "Contains one entry per GitHub host with the username and oauth_token; GH_CONFIG_DIR can move it. The older ~/.config/gh/config.yml holds settings only and is not the credential file. A token is revocable from the GitHub account settings."
+}

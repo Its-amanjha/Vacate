@@ -1,0 +1,21 @@
+{
+  "id": "browser.chromium.profiles.snap",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Chromium browser profiles (Snap install)",
+  "whyItMatters": "The Snap build of Chromium keeps browsing history, sessions, bookmarks, cookies and saved logins in the snap folder instead of ~/.config/chromium, so a scan of the normal location alone sees nothing.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "snap/chromium/common/chromium/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Chromium user data directory docs plus Snap confinement: the Snap user data dir is ~/snap/chromium/common/chromium, and each profile is a subfolder with a Preferences file: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+  "notes": "Matches the Preferences marker so non-profile folders such as Crash Reports are skipped. Ubuntu's Chromium is a Snap since 20.04. Some older installs put the Default profile under ~/snap/chromium/current/.config/chromium; current is a symlink and is not followed."
+}

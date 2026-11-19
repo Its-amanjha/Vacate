@@ -1,0 +1,21 @@
+{
+  "id": "dev.netrc",
+  "platforms": ["linux"],
+  "category": "developer-secrets",
+  "title": "netrc login file",
+  "whyItMatters": "A .netrc file stores logins and passwords in plain text for FTP, mail and some command-line tools. Anyone who reads the file has working credentials for those services.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".netrc",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "GNU inetutils manual, the .netrc file: machine and password lines in the user's home directory: https://www.gnu.org/software/inetutils/manual/html_node/The-_002enetrc-file.html",
+  "notes": "Usually protected with chmod 600, and some tools refuse it otherwise. curl and ftp read it too, so it can hold credentials for several hosts. It does not exist unless someone created it by hand or a legacy tool wrote it."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "network.networkmanager.connections",
+  "platforms": ["linux"],
+  "category": "network",
+  "title": "Saved network connections",
+  "whyItMatters": "NetworkManager stores every saved Wi-Fi, VPN and mobile connection here, including Wi-Fi passwords and often VPN credentials in plain text. It maps the networks the person used and can give a stranger access to them.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "ETC",
+    "path": "NetworkManager/system-connections",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "NetworkManager.conf(5): system-connections names the directory of connection profiles, default /etc/NetworkManager/system-connections: https://networkmanager.dev/docs/api/latest/NetworkManager.conf.html",
+  "notes": "The keyfiles are normally mode 600 and owned by root, so a normal user cannot list or read them; the engine records the skip instead of failing. Wi-Fi passphrases and some VPN secrets are stored in clear text in these files when they are not held by a secret agent, which is why the rule is critical."
+}

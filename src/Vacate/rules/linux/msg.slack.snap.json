@@ -1,0 +1,22 @@
+{
+  "id": "msg.slack.snap",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Slack workspace data (Snap install)",
+  "whyItMatters": "The Snap version of Slack keeps its own copy of every signed-in workspace, with message cache, files, drafts and the session, under the snap folder rather than ~/.config. It shows which companies the person worked with.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "snap/slack/*/.config/Slack",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Snap keeps per-app data in ~/snap/<name>/<revision>; Slack's Snap uses ~/.config/Slack inside it: https://snapcraft.io/slack and https://slack.com/intl/en-gb/help/articles/360048367814-Update-the-Slack-desktop-app",
+  "notes": "The * is the snap revision number, not a single fixed folder: after an update snap may keep more than one revision, so this rule can match several and their sizes overlap with what Slack actually uses. ~/snap/slack/current is a symlink, which the path jail refuses to follow, so the revision folder is matched directly. A Flatpak install uses ~/.var/app/com.slack.Slack/config/Slack."
+}

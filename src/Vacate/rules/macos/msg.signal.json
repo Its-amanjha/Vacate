@@ -18,5 +18,5 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Signal Desktop artifacts: ~/Library/Application Support/Signal - https://docs.macfor.io/plugins/messaging-signal",
-  "notes": "The SQLCipher database and attachments are never opened or decrypted. macOS 27 may protect this folder with com.apple.macl, causing a permission skip."
+  "notes": "The SQLCipher database and attachments are never opened or decrypted. Unconfirmed (no Mac to test): macOS 27 may protect this folder with com.apple.macl, causing a permission skip."
 }

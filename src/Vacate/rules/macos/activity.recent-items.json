@@ -1,0 +1,22 @@
+{
+  "id": "activity.recent-items",
+  "platforms": ["macos"],
+  "category": "activity",
+  "title": "Recently opened items",
+  "whyItMatters": "Shared File Lists record recently opened documents, applications and network servers. They show what the user worked on and where they connected.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/com.apple.sharedfilelist",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macOS artifact cheat sheet: ~/Library/Application Support/com.apple.sharedfilelist holds .sfl2/.sfl3 recent item lists - https://www.macforensics.app/en/artifacts/cheat-sheet",
+  "notes": "Full Disk Access may be needed on a live system. The .sfl files are counted, never parsed; encoded bookmark paths are not decoded."
+}

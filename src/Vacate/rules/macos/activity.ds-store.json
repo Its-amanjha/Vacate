@@ -1,0 +1,23 @@
+{
+  "id": "activity.ds-store",
+  "platforms": ["macos"],
+  "category": "activity",
+  "title": "DS_Store metadata files",
+  "whyItMatters": "A .DS_Store records folder view settings and names of items that may have been removed. It can reveal directory contents long after files are gone.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "",
+    "match": "directories",
+    "recurse": true,
+    "include": ".DS_Store"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SWGDE macOS tech notes 13-F-002-2.0 list DS Store activity as a macOS user-activity artifact",
+  "notes": "Home-folder walk capped at 5000 entries. Only files named .DS_Store are counted; reparse points, other users and other volumes are excluded by the path jail."
+}

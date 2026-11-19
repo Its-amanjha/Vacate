@@ -1,0 +1,22 @@
+{
+  "id": "test.activity.file",
+  "platforms": ["linux"],
+  "category": "activity",
+  "title": "Single activity file",
+  "whyItMatters": "Tracks a single activity file without recursion.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "activity_file.txt",
+    "match": "files",
+    "recurse": false
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 100,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Integration test fixture rule for non-recursive single file matching",
+  "notes": null
+}

@@ -1,0 +1,23 @@
+{
+  "id": "test.activity.include",
+  "platforms": ["linux"],
+  "category": "activity",
+  "title": "Logs directory filtered by include glob",
+  "whyItMatters": "Tracks logs filtered by include pattern with recursion.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "logs",
+    "match": "directories",
+    "recurse": true,
+    "include": "*.log"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 100,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Integration test fixture rule for include-filtered directory recursion",
+  "notes": null
+}

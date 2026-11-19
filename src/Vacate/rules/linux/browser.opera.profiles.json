@@ -1,0 +1,21 @@
+{
+  "id": "browser.opera.profiles",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Opera browser profile",
+  "whyItMatters": "The Opera profile holds history, sessions, bookmarks and saved logins. Anyone who takes the disk can see what was browsed and which sites kept the user signed in.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "opera/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Opera on Linux keeps its user data root in ~/.config/opera (opera://about shows the exact profile and cache paths): https://filepathgeek.com/posts/opera-browser-profile-location",
+  "notes": "Opera One builds put the profile in a Default subfolder; older builds wrote Preferences directly into ~/.config/opera, which this glob does not match. Opera GX uses ~/.config/opera-gx; Beta and Developer builds have their own folders."
+}

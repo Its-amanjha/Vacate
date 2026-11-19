@@ -1,0 +1,21 @@
+{
+  "id": "browser.chrome.profiles",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Chrome browser profiles",
+  "whyItMatters": "Each profile is a separate browsing identity. Profile names and the accounts signed into Chrome show who used this computer and how many separated identities they kept.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "google-chrome/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Chromium docs, user data directory and per-profile folders; Chrome on Linux keeps its user data root in ~/.config/google-chrome: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+  "notes": "Matches the Preferences file that every profile has, so sibling non-profile folders are skipped. google-chrome is the stable package; beta and dev use google-chrome-beta and google-chrome-unstable. The Local State file with the profile list sits next to the profile folders."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "wallet.exodus",
+  "platforms": ["linux"],
+  "category": "wallets",
+  "title": "Exodus wallet vault",
+  "whyItMatters": "The Exodus folder holds the encrypted vault with the private keys for all of the person's coins. With the password it is the money; without it, it still proves what they owned.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "Exodus",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Exodus Knowledge Base: on Linux the data folder is ~/.config/Exodus (Developer > Data Folder opens it): https://www.exodus.com/support/en/articles/8598644-how-do-i-delete-my-wallet-and-start-over",
+  "notes": "exodus.wallet holds the encrypted storage.seco files; the Backups folder keeps timestamped copies of earlier vaults, so the parent folder matters too. The vault is encrypted with the wallet password and the 12-word phrase."
+}

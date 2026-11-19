@@ -1,0 +1,21 @@
+{
+  "id": "autostart.systemd-user",
+  "platforms": ["linux"],
+  "category": "autostart",
+  "title": "systemd user services",
+  "whyItMatters": "User units started with the session include sync clients, VPN and remote access helpers. The unit names show what keeps running in the background for this account.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "systemd/user/*",
+    "match": "any"
+  },
+  "measure": ["exists", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Arch Wiki, systemd/User: per-user units are kept in ~/.config/systemd/user: https://wiki.archlinux.org/title/Systemd/User",
+  "notes": "Names only, no recursion. Enabled units also appear as entries inside *.wants folders, which are matched here as names. Packaged units live in /usr/lib/systemd/user and are not counted."
+}

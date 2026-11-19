@@ -1,0 +1,21 @@
+{
+  "id": "activity.recently-used",
+  "platforms": ["linux"],
+  "category": "activity",
+  "title": "Recently used files list",
+  "whyItMatters": "Desktop applications record the documents, images and folders they opened, with paths and timestamps. It is a ready-made list of what the person worked on and when.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_DATA",
+    "path": "recently-used.xbel",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "freedesktop.org Recent files spec: recent documents are listed in recently-used.xbel in the user data directory: https://specifications.freedesktop.org/recent-file-spec/latest/",
+  "notes": "Written by GTK applications; each entry holds a file:// URI, a display name, timestamps and often the application that opened it. GNOME's privacy settings can keep the list from being written at all."
+}

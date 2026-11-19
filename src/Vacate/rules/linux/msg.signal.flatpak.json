@@ -1,0 +1,22 @@
+{
+  "id": "msg.signal.flatpak",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Signal Desktop conversations (Flatpak)",
+  "whyItMatters": "The Flatpak build keeps the same Signal conversation database and attachments inside its sandbox folder, so a native-only check will miss it.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".var/app/org.signal.Signal/config/Signal",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Flatpak sandbox permissions: per-app config lives in ~/.var/app/<app-id>/config; Signal's Flathub id is org.signal.Signal: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
+  "notes": "Same sql/db.sqlite, attachments and logs as the native install, relocated into the sandbox. The database key stays in the desktop keyring."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "msg.slack",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Slack desktop workspace data",
+  "whyItMatters": "Slack keeps a local copy of every signed-in workspace: message cache, files, drafts and the session itself. It shows which companies the person worked with.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "Slack",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Slack Help, update the Slack desktop app: the Linux package stores its data in ~/.config/Slack: https://slack.com/intl/en-gb/help/articles/360048367814-Update-the-Slack-desktop-app",
+  "notes": "Holds the Chromium profile, IndexedDB caches and downloaded files per workspace. The snap keeps its data under ~/snap/slack/current/.config/Slack and the Flatpak under ~/.var/app/com.slack.Slack/config/Slack."
+}

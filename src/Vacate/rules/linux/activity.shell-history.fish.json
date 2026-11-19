@@ -1,0 +1,21 @@
+{
+  "id": "activity.shell-history.fish",
+  "platforms": ["linux"],
+  "category": "activity",
+  "title": "Fish command history",
+  "whyItMatters": "Fish saves every command it has seen, with timestamps, so it doubles as a record of when the person used this computer and what they ran.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_DATA",
+    "path": "fish/fish_history",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "fish shell docs, interactive use: the history file is ~/.local/share/fish/fish_history: https://fishshell.com/docs/current/interactive.html",
+  "notes": "Each entry stores a command plus its timestamp. fish keeps the file in the XDG data directory, so XDG_DATA_HOME moves it."
+}

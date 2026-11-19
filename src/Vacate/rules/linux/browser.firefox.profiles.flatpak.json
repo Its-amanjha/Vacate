@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.profiles.flatpak",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Firefox profiles (Flatpak install)",
+  "whyItMatters": "The Flatpak build keeps the Firefox profile inside its own sandbox folder, with the same history, bookmarks, cookies and saved logins as a native install.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".var/app/org.mozilla.firefox/.mozilla/firefox/*/prefs.js",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Flatpak sandbox permissions: an app's home directory is ~/.var/app/<app-id>, so Firefox writes ~/.mozilla below it: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
+  "notes": "org.mozilla.firefox is the Flathub app id. The same tree exists for other Flatpak browsers under their own app-id folder."
+}

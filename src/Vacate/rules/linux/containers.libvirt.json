@@ -1,0 +1,22 @@
+{
+  "id": "containers.libvirt",
+  "platforms": ["linux"],
+  "category": "containers-vms",
+  "title": "libvirt virtual machine disks",
+  "whyItMatters": "Virtual machines run by libvirt keep their disk images here, each a complete guest system with its own files. They are large and are not removed when the machine definition is deleted.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "VAR",
+    "path": "lib/libvirt/images",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": true,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "libvirt storage documentation: the default directory storage pool for qemu:///system is /var/lib/libvirt/images: https://libvirt.org/storage.html",
+  "notes": "Normally root-only, hence requiresElevation. Session VMs (qemu:///session) keep their disks in ~/.local/share/libvirt/images, and custom pools can point anywhere, so this rule does not see every VM."
+}

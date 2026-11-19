@@ -1,0 +1,21 @@
+{
+  "id": "activity.shell-history.zsh",
+  "platforms": ["linux"],
+  "category": "activity",
+  "title": "Zsh command history",
+  "whyItMatters": "Every command typed in a zsh shell is saved here, including server names, paths and commands run against private data.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".zsh_history",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "zsh manual, Parameters: HISTFILE defaults to ~/.zsh_history and SAVEHIST controls how many lines are kept: https://zsh.sourceforge.io/Doc/Release/Parameters.html",
+  "notes": "With EXTENDED_HISTORY each line carries a timestamp, which turns the file into an activity log. ZDOTDIR and HISTFILE can move it elsewhere."
+}

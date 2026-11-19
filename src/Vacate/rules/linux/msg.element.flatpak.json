@@ -1,0 +1,22 @@
+{
+  "id": "msg.element.flatpak",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Element desktop data (Flatpak)",
+  "whyItMatters": "The Flatpak build keeps the Matrix session, rooms and encryption keys inside its sandbox folder, where a native-only check will not find them.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".var/app/im.riot.Riot/config/Element",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Flatpak sandbox permissions: per-app config lives in ~/.var/app/<app-id>/config; Element's Flathub id is im.riot.Riot: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
+  "notes": "Same Element profile as the native install. The sandbox folder keeps the old Riot app id even though the app is called Element."
+}

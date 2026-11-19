@@ -1,0 +1,22 @@
+{
+  "id": "files.desktop",
+  "platforms": ["linux"],
+  "category": "personal-files",
+  "title": "Desktop folder",
+  "whyItMatters": "People park the files they are working on at that moment on the Desktop: drafts, scans, screenshots and downloads they meant to sort later. Names and dates alone can expose a lot.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Desktop",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "XDG user directories defaults (xdg-user-dirs creates Desktop, Documents, Downloads, Music, Pictures, Videos, Public, Templates): https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
+  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Headless installs have no Desktop folder."
+}

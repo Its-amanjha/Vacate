@@ -1,0 +1,22 @@
+{
+  "id": "dev.azure.config",
+  "platforms": ["linux"],
+  "category": "developer-secrets",
+  "title": "Azure CLI sign-in state",
+  "whyItMatters": "The Azure CLI folder caches sign-in tokens and lists every subscription and tenant the user could reach. A copied token cache can be replayed until it expires.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".azure",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Microsoft Learn, Azure CLI configuration: the config directory is ~/.azure and holds azureProfile.json and the token caches: https://learn.microsoft.com/en-us/cli/azure/azure-cli-configuration",
+  "notes": "azureProfile.json lists subscriptions and tenants; msal_token_cache.* holds access and refresh tokens. The folder also appears on machines that only installed the CLI, so presence alone does not prove a sign-in."
+}

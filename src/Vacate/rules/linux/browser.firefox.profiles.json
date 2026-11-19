@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.profiles",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Firefox profiles",
+  "whyItMatters": "A Firefox profile holds history, bookmarks, cookies, saved logins and open sessions. The folder name alone shows how many separate browsing identities were used.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".mozilla/firefox/*/prefs.js",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Mozilla Support, where Firefox stores user data (profile folder with prefs.js); Linux default profile root ~/.mozilla/firefox: https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data",
+  "notes": "prefs.js marks a real profile, so cache and Crash Reports folders are skipped. Firefox 147+ on a fresh install uses $XDG_CONFIG_HOME/mozilla/firefox instead; upgraded installs keep ~/.mozilla/firefox. profiles.ini can point at profiles stored elsewhere, which this rule does not follow."
+}

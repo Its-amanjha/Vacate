@@ -1,0 +1,22 @@
+{
+  "id": "msg.telegram",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Telegram Desktop session and cache",
+  "whyItMatters": "tdata holds the keys that keep the account signed in on this machine, plus the local media cache of chats. A copied tdata folder can be used to read the account.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_DATA",
+    "path": "TelegramDesktop/tdata",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Telegram Desktop (tdesktop) keeps its profile in ~/.local/share/TelegramDesktop/tdata on Linux; see also Arch Wiki Telegram: https://wiki.archlinux.org/title/Telegram",
+  "notes": "tdata is not a readable chat archive but it is the live session. The folder next to it holds downloaded files. The official binary and distro packages use this path; Snap and Flatpak installs have their own trees."
+}

@@ -1,0 +1,21 @@
+{
+  "id": "encryption.crypttab",
+  "platforms": ["linux"],
+  "category": "disk-encryption",
+  "title": "Encrypted volume table",
+  "whyItMatters": "crypttab names the encrypted volumes unlocked at boot and how they are keyed. It tells a buyer which disks are protected and whether a key file on the disk was used.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "ETC",
+    "path": "crypttab",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "crypttab(5) manual page: /etc/crypttab describes encrypted block devices unlocked at boot: https://man.archlinux.org/man/crypttab.5",
+  "notes": "Entries name the backing device, the mapping name, the key file or none, and options. No key material is stored here. Full-disk encryption set up by the installer is usually not listed, so an absent file does not mean the disk is unencrypted. Where /etc is unreadable the engine records a permission skip."
+}

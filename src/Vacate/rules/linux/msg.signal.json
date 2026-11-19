@@ -1,0 +1,22 @@
+{
+  "id": "msg.signal",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Signal Desktop conversations",
+  "whyItMatters": "Signal keeps a local copy of every conversation, attachment and draft. The database is encrypted, but the folder shows the account existed and how much was kept.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "Signal",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Signal Desktop is an Electron app and keeps its profile in the XDG config directory; the source and docs name the Signal folder: https://github.com/signalapp/Signal-Desktop",
+  "notes": "sql/db.sqlite is SQLCipher-encrypted and its key sits in the desktop keyring; attachments, drafts and logs sit beside it. Signed out does not mean deleted. The Flatpak uses ~/.var/app/org.signal.Signal/config/Signal."
+}

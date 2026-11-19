@@ -1,0 +1,21 @@
+{
+  "id": "autostart.desktop-entries",
+  "platforms": ["linux"],
+  "category": "autostart",
+  "title": "Programs started at login",
+  "whyItMatters": "These entries show what runs by itself every time the user logs in: sync clients, chat apps, remote access tools. The names are a short list of what the person relies on.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "autostart/*.desktop",
+    "match": "files"
+  },
+  "measure": ["exists", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "freedesktop.org Autostart spec: per-user autostart entries are .desktop files in $XDG_CONFIG_HOME/autostart: https://specifications.freedesktop.org/autostart-spec/latest/",
+  "notes": "Names only. System-wide entries live in /etc/xdg/autostart and are not counted here; a user entry with the same file name overrides a system one."
+}

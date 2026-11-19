@@ -1,0 +1,22 @@
+{
+  "id": "wallet.electrum",
+  "platforms": ["linux"],
+  "category": "wallets",
+  "title": "Electrum wallet files",
+  "whyItMatters": "One file per Electrum wallet, each holding the encrypted seed and keys. A copy plus the password is the funds; without it, the file names still show which wallets existed.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".electrum/wallets",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Electrum FAQ, where is my wallet file: the data directory is ~/.electrum and wallets live in its wallets folder: https://docs.electrum.org/en/latest/faq.html",
+  "notes": "Wallet files have no extension and are encrypted with the wallet password; watch-only and multisession wallet folders can also appear. The config and network settings sit in the parent ~/.electrum folder, which this rule does not count."
+}

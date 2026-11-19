@@ -1,0 +1,22 @@
+{
+  "id": "cloud.nextcloud",
+  "platforms": ["linux"],
+  "category": "cloud-sync",
+  "title": "Nextcloud desktop client config",
+  "whyItMatters": "The Nextcloud client config names the server, the account and every synced folder, and keeps the saved login that reconnects without asking. It points straight at the copies of the files left on disk.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "Nextcloud",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Arch Wiki, Nextcloud: the desktop client keeps nextcloud.cfg in ~/.config/Nextcloud: https://wiki.archlinux.org/title/Nextcloud",
+  "notes": "nextcloud.cfg lists each account, its server URL and every local sync folder; the login is saved in the desktop keyring, not here. The synced folders themselves are elsewhere and are not matched by this rule."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "containers.virtualbox",
+  "platforms": ["linux"],
+  "category": "containers-vms",
+  "title": "VirtualBox virtual machines",
+  "whyItMatters": "Each virtual machine is a full disk image: an old Windows install, a work environment or a test system with its own accounts and files. Deleting the VM from the list does not delete the image.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "VirtualBox VMs",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "VirtualBox manual, where VirtualBox stores its files: the default machine folder on Linux is ~/VirtualBox VMs: https://www.virtualbox.org/manual/ch10.html",
+  "notes": "The global VM list, snapshots config and settings are in ~/.config/VirtualBox, which this rule does not count. The machine folder can be changed per VM, and some VMs live on other drives."
+}

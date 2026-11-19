@@ -1,0 +1,21 @@
+{
+  "id": "browser.chromium.profiles",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Chromium browser profiles",
+  "whyItMatters": "Chromium keeps browsing history, sessions, bookmarks and saved logins per profile. Anyone who takes the disk can see what was browsed and which sites kept the user signed in.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "chromium/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Arch Wiki, Chromium: the profile is kept in ~/.config/chromium and follows the Chromium user data layout: https://wiki.archlinux.org/title/Chromium",
+  "notes": "Distribution Chromium, not Chrome; both can be installed side by side. Matches the Preferences marker file so non-profile folders are skipped. The Chromium snap keeps the same tree under ~/snap/chromium/common/chromium instead of ~/.config/chromium."
+}

@@ -1,0 +1,21 @@
+{
+  "id": "programs.desktop-entries.user",
+  "platforms": ["linux"],
+  "category": "installed-programs",
+  "title": "Installed applications (this user)",
+  "whyItMatters": "Launchers a person adds for themselves show the apps they installed without the package manager, and often the work or hobby they set up the machine for.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_DATA",
+    "path": "applications/*.desktop",
+    "match": "files"
+  },
+  "measure": ["exists", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "freedesktop.org Desktop Entry spec: per-user entries go in $XDG_DATA_HOME/applications: https://specifications.freedesktop.org/desktop-entry-spec/latest/",
+  "notes": "Names only. AppImage helpers, Electron installers and manual .desktop files land here; an entry with the same name as a system one overrides it."
+}

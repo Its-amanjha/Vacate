@@ -1,0 +1,22 @@
+{
+  "id": "msg.telegram.flatpak",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Telegram Desktop session and cache (Flatpak)",
+  "whyItMatters": "The Flatpak build keeps the live Telegram session and media cache inside its sandbox folder, where a native-only check will not find it.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".var/app/org.telegram.desktop/data/TelegramDesktop/tdata",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Flatpak sandbox permissions: per-app data lives in ~/.var/app/<app-id>/data; Telegram's Flathub id is org.telegram.desktop: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
+  "notes": "Same tdata contents as the native install, under the Flatpak data directory."
+}

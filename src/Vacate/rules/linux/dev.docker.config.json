@@ -1,0 +1,22 @@
+{
+  "id": "dev.docker.config",
+  "platforms": ["linux"],
+  "category": "developer-secrets",
+  "title": "Docker CLI credentials",
+  "whyItMatters": "The Docker CLI folder holds registry logins, sometimes in plain text, plus context files for remote and cloud engines. Those logins push and pull private images.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".docker",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Docker CLI reference, configuration files: the CLI keeps its configuration in ~/.docker, with credentials in config.json: https://docs.docker.com/reference/cli/docker/",
+  "notes": "config.json holds auth entries unless a credential helper is configured, in which case the helper's own store holds them. contexts/ names remote engines the user connected to. DOCKER_CONFIG can move the folder."
+}

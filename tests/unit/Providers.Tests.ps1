@@ -391,7 +391,13 @@ Describe 'New-VacateRegistryProvider' {
             $k.SetValue('testVal1', 'hello')
             $k.SetValue('testVal2', 99)
             $child = $k.CreateSubKey('childSubKey')
+            $child.SetValue('DisplayName', 'TestApp')
+            $child.SetValue('Publisher', 'Acme Corp')
+            $child.SetValue('BinaryData', [byte[]]@(1, 2, 3), [Microsoft.Win32.RegistryValueKind]::Binary)
             $child.Dispose()
+            $child2 = $k.CreateSubKey('alphaSubKey')
+            $child2.SetValue('DisplayName', 'AlphaApp')
+            $child2.Dispose()
             $k.Dispose()
         }
     }
@@ -422,11 +428,38 @@ Describe 'New-VacateRegistryProvider' {
         $keyInfo = $provider.GetKey('HKCU', '', 'Default')
         $keyInfo | Should -Not -BeNullOrEmpty
         $keyInfo.ValueCount | Should -Be 2
-        $keyInfo.SubKeyCount | Should -Be 1
-        $keyInfo.SubKeyNames | Should -Be @('childSubKey')
+        $keyInfo.SubKeyCount | Should -Be 2
+        $keyInfo.SubKeyNames | Should -Be @('alphaSubKey', 'childSubKey')
 
         $missingInfo = $provider.GetKey('HKCU', 'non_existent_key', 'Default')
         $missingInfo | Should -BeNullOrEmpty
+    }
+
+    It 'reads subkey values via GetSubKeyValues (Windows)' -Skip:(-not $script:onWindows) {
+        $regBase = @{
+            HKCU = @{ Hive = 'HKCU'; Prefix = $script:testRegKeyPath }
+        }
+
+        $provider = InModuleScope Vacate -Parameters @{ RB = $regBase } {
+            param($RB)
+            New-VacateRegistryProvider -RegistryBase $RB
+        }
+
+        $subValues = $provider.GetSubKeyValues('HKCU', '', 'Default', @('DisplayName', 'Publisher', 'BinaryData', 'Missing'))
+        $subValues | Should -Not -BeNullOrEmpty
+        $subValues.Count | Should -Be 2
+
+        $subValues[0].SubKey | Should -Be 'alphaSubKey'
+        $subValues[0].Values['DisplayName'] | Should -Be 'AlphaApp'
+        $subValues[0].Values['Publisher'] | Should -BeNullOrEmpty
+
+        $subValues[1].SubKey | Should -Be 'childSubKey'
+        $subValues[1].Values['DisplayName'] | Should -Be 'TestApp'
+        $subValues[1].Values['Publisher'] | Should -Be 'Acme Corp'
+        $subValues[1].Values['BinaryData'] | Should -BeNullOrEmpty
+
+        $missingSub = $provider.GetSubKeyValues('HKCU', 'non_existent_path', 'Default', @('DisplayName'))
+        $missingSub | Should -BeNullOrEmpty
     }
 
     It '8. throws provider: registry is Windows-only on non-Windows platforms' -Skip:($script:onWindows) {

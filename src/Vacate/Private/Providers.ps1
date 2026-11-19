@@ -278,7 +278,180 @@ function New-VacateRegistryProvider {
         }
     }.GetNewClosure()
 
+    $getSubKeyValuesMethod = {
+        param(
+            [string]$Hive,
+            [string]$Path,
+            [string]$View,
+            [string[]]$ValueNames
+        )
+
+        if ([string]::IsNullOrEmpty($Hive)) {
+            return $null
+        }
+
+        $baseEntry = $null
+        if ($null -ne $RegistryBase) {
+            if ($RegistryBase.Contains($Hive)) {
+                $baseEntry = $RegistryBase[$Hive]
+            }
+            elseif ($RegistryBase.Contains($Hive.ToUpperInvariant())) {
+                $baseEntry = $RegistryBase[$Hive.ToUpperInvariant()]
+            }
+        }
+
+        $targetHiveName = $Hive
+        $prefix = ''
+        if ($null -ne $baseEntry) {
+            if ($baseEntry -is [System.Collections.IDictionary] -or $baseEntry -is [pscustomobject]) {
+                if ($null -ne $baseEntry.Hive -and [string]$baseEntry.Hive -ne '') {
+                    $targetHiveName = [string]$baseEntry.Hive
+                }
+                if ($null -ne $baseEntry.Prefix) {
+                    $prefix = [string]$baseEntry.Prefix
+                }
+            }
+        }
+
+        $regHive = $null
+        switch ($targetHiveName.ToUpperInvariant()) {
+            'HKCU' { $regHive = [Microsoft.Win32.RegistryHive]::CurrentUser }
+            'HKEY_CURRENT_USER' { $regHive = [Microsoft.Win32.RegistryHive]::CurrentUser }
+            'CURRENTUSER' { $regHive = [Microsoft.Win32.RegistryHive]::CurrentUser }
+            'HKLM' { $regHive = [Microsoft.Win32.RegistryHive]::LocalMachine }
+            'HKEY_LOCAL_MACHINE' { $regHive = [Microsoft.Win32.RegistryHive]::LocalMachine }
+            'LOCALMACHINE' { $regHive = [Microsoft.Win32.RegistryHive]::LocalMachine }
+            default { throw "registry: unsupported hive '$Hive'" }
+        }
+
+        $regView = [Microsoft.Win32.RegistryView]::Default
+        if (-not [string]::IsNullOrEmpty($View)) {
+            switch ($View.ToUpperInvariant()) {
+                'DEFAULT' { $regView = [Microsoft.Win32.RegistryView]::Default }
+                'REGISTRY32' { $regView = [Microsoft.Win32.RegistryView]::Registry32 }
+                'REGISTRY64' { $regView = [Microsoft.Win32.RegistryView]::Registry64 }
+                default { throw "registry: unsupported view '$View'" }
+            }
+        }
+
+        $cleanPrefix = ''
+        if ($prefix.Length -gt 0) {
+            $cleanPrefix = $prefix.Trim([char[]]@([char]'/', [char]'\'))
+        }
+        $cleanPath = ''
+        if (-not [string]::IsNullOrEmpty($Path)) {
+            $cleanPath = $Path.Trim([char[]]@([char]'/', [char]'\'))
+        }
+
+        $effectivePath = ''
+        if ($cleanPrefix.Length -gt 0 -and $cleanPath.Length -gt 0) {
+            $effectivePath = $cleanPrefix + '\' + $cleanPath
+        }
+        elseif ($cleanPrefix.Length -gt 0) {
+            $effectivePath = $cleanPrefix
+        }
+        elseif ($cleanPath.Length -gt 0) {
+            $effectivePath = $cleanPath
+        }
+
+        $effectivePath = $effectivePath.Replace('/', '\')
+
+        $baseKey = $null
+        $parentKey = $null
+        try {
+            $baseKey = [Microsoft.Win32.RegistryKey]::OpenBaseKey($regHive, $regView)
+            try {
+                $parentKey = $baseKey.OpenSubKey($effectivePath, $false)
+            }
+            catch [System.Security.SecurityException] {
+                return $null
+            }
+            catch [System.UnauthorizedAccessException] {
+                return $null
+            }
+
+            if ($null -eq $parentKey) {
+                return $null
+            }
+
+            $subKeyNames = @($parentKey.GetSubKeyNames())
+            if ($subKeyNames.Length -gt 1) {
+                [System.Array]::Sort($subKeyNames, [System.StringComparer]::Ordinal)
+            }
+            if ($subKeyNames.Length -gt 2000) {
+                $capped = New-Object string[] 2000
+                [System.Array]::Copy($subKeyNames, $capped, 2000)
+                $subKeyNames = $capped
+            }
+
+            $results = New-Object 'System.Collections.Generic.List[object]'
+            $safeNames = @()
+            if ($null -ne $ValueNames) {
+                $safeNames = $ValueNames
+            }
+
+            foreach ($skName in $subKeyNames) {
+                $childKey = $null
+                try {
+                    $childKey = $parentKey.OpenSubKey($skName, $false)
+                }
+                catch [System.Security.SecurityException] {
+                    $childKey = $null
+                }
+                catch [System.UnauthorizedAccessException] {
+                    $childKey = $null
+                }
+
+                if ($null -eq $childKey) {
+                    continue
+                }
+
+                try {
+                    $valuesMap = [ordered]@{}
+                    foreach ($vn in $safeNames) {
+                        $val = $null
+                        try {
+                            $kind = $childKey.GetValueKind($vn)
+                            if ($kind -eq [Microsoft.Win32.RegistryValueKind]::Binary) {
+                                $val = $null
+                            }
+                            else {
+                                $raw = $childKey.GetValue($vn, $null)
+                                if ($null -ne $raw) {
+                                    $val = [string]$raw
+                                }
+                            }
+                        }
+                        catch {
+                            $val = $null
+                        }
+                        $valuesMap[$vn] = $val
+                    }
+
+                    $results.Add([ordered]@{
+                        SubKey = $skName
+                        Values = $valuesMap
+                    })
+                }
+                finally {
+                    $childKey.Dispose()
+                }
+            }
+
+            return [object[]]$results.ToArray()
+        }
+        finally {
+            if ($null -ne $parentKey) {
+                $parentKey.Dispose()
+            }
+            if ($null -ne $baseKey) {
+                $baseKey.Dispose()
+            }
+        }
+    }.GetNewClosure()
+
     $provider | Add-Member -MemberType ScriptMethod -Name 'GetKey' -Value $getKeyMethod
+    $provider | Add-Member -MemberType ScriptMethod -Name 'GetSubKeyValues' -Value $getSubKeyValuesMethod
     return $provider
 }
 

@@ -1,0 +1,25 @@
+{
+   "blockdevices": [
+      {
+         "name": "sda",
+         "type": "disk",
+         "fstype": "ext4",
+         "mountpoint": null
+      },{
+         "name": "sdb",
+         "type": "disk",
+         "fstype": "ext4",
+         "mountpoint": "/usr/src/linux-headers-6.18.58.1-microsoft-standard-WSL2"
+      },{
+         "name": "sdc",
+         "type": "disk",
+         "fstype": "swap",
+         "mountpoint": "[SWAP]"
+      },{
+         "name": "sdd",
+         "type": "disk",
+         "fstype": "ext4",
+         "mountpoint": "/mnt/wslg/distro"
+      }
+   ]
+}

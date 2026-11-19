@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (${{ matrix.name }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: windows-powershell
+            os: windows-latest
+            shell: powershell
+          - name: windows-pwsh
+            os: windows-latest
+            shell: pwsh
+          - name: ubuntu-pwsh
+            os: ubuntu-latest
+            shell: pwsh
+          - name: macos-pwsh
+            os: macos-latest
+            shell: pwsh
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Pester 5 and PSScriptAnalyzer
+        shell: ${{ matrix.shell }}
+        run: |
+          Install-Module -Name Pester -MinimumVersion 5.5 -MaximumVersion 5.99 -Repository PSGallery -Force -Scope CurrentUser -SkipPublisherCheck
+          Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -SkipPublisherCheck
+
+      - name: Run tests
+        shell: ${{ matrix.shell }}
+        run: ./tests/Run-Tests.ps1
+
+      - name: Run lint
+        if: matrix.name == 'ubuntu-pwsh'
+        shell: ${{ matrix.shell }}
+        run: ./tests/Invoke-Lint.ps1
+
+      - name: Validate rule files
+        if: matrix.shell == 'pwsh'
+        shell: pwsh
+        run: |
+          foreach ($platform in @('windows', 'macos', 'linux')) {
+            ./tests/Test-RuleFiles.ps1 -Platform $platform
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+
+      - name: Upload sample report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sample-report-${{ matrix.name }}
+          path: runs/
+          if-no-files-found: ignore
+          retention-days: 7

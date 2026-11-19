@@ -1,0 +1,20 @@
+{
+  "id": "activity.muicache",
+  "platforms": ["windows"],
+  "category": "activity",
+  "title": "MuiCache application names",
+  "whyItMatters": "MuiCache stores display names for programs the user launched, revealing app installs that may no longer be present.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MuiCache"
+  },
+  "measure": ["exists", "valueCount", "subkeyCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MuiCache",
+  "notes": "Value data is not read. This rule reports the presence and size of the cache, not the application names inside it."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "activity.userassist",
+  "platforms": ["windows"],
+  "category": "activity",
+  "title": "UserAssist program execution history",
+  "whyItMatters": "This key records which GUI programs a user ran and how often. It shows applications the person used on this machine.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "registry",
+    "hive": "HKCU",
+    "key": "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist"
+  },
+  "measure": ["exists", "valueCount", "subkeyCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SANS Windows forensic poster: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist",
+  "notes": "ROT13-encoded value names are not decoded. Only key, value and subkey counts are reported; registry last-write time is unavailable."
+}

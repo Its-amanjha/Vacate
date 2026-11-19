@@ -192,12 +192,23 @@ Describe 'Import-VacateRuleSet' {
         $res.FileCount | Should -Be 4
     }
 
-    It 'rejects duplicate ids across folders' {
-        Write-TestRule $dir 'windows' (Get-TestRule @{ id = 'dup.rule' })
-        $other = Get-TestRule @{ id = 'dup.rule'; platforms = @('linux') } -Locator ([ordered]@{ kind = 'path'; root = 'HOME'; path = 'x'; match = 'files' })
-        Write-TestRule $dir 'linux' $other
+    It 'rejects the same id twice for the same platform' {
+        $win = Get-TestRule @{ id = 'dup.rule'; platforms = @('windows', 'linux') } -Locator ([ordered]@{ kind = 'path'; root = 'HOME'; path = 'x'; match = 'files' })
+        Write-TestRule $dir 'windows' $win
+        $lin = Get-TestRule @{ id = 'dup.rule'; platforms = @('linux') } -Locator ([ordered]@{ kind = 'path'; root = 'HOME'; path = 'x'; match = 'files' })
+        Write-TestRule $dir 'linux' $lin
         $res = InModuleScope Vacate -Parameters @{ D = $dir } { param($D) Import-VacateRuleSet -Path $D }
-        (@($res.Errors | ForEach-Object { $_.Problems }) -join ';') | Should -Match "duplicate id 'dup.rule'"
+        (@($res.Errors | ForEach-Object { $_.Problems }) -join ';') | Should -Match "duplicate id 'dup.rule' for platform 'linux'"
+    }
+
+    It 'allows the same id once per platform' {
+        Write-TestRule $dir 'windows' (Get-TestRule @{ id = 'browser.chrome.history' })
+        $lin = Get-TestRule @{ id = 'browser.chrome.history'; platforms = @('linux') } -Locator ([ordered]@{ kind = 'path'; root = 'XDG_CONFIG'; path = 'google-chrome/*/History'; match = 'files' })
+        Write-TestRule $dir 'linux' $lin
+        $res = InModuleScope Vacate -Parameters @{ D = $dir } { param($D) Import-VacateRuleSet -Path $D -Platform 'linux' }
+        @($res.Errors).Count | Should -Be 0
+        @($res.Rules).Count | Should -Be 1
+        $res.Rules[0].platforms | Should -Be @('linux')
     }
 
     It 'rejects a file name that differs from the id' {

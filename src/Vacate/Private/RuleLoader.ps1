@@ -329,13 +329,20 @@ function Import-VacateRuleSet {
             if ($null -ne $rule) {
                 foreach ($x in (Test-VacateRule -Rule $rule)) { $problems.Add($x) }
                 $id = Get-VacateRuleField $rule 'id'
+                $pl = Get-VacateRuleField $rule 'platforms'
                 if ($id.Present -and $id.Value -is [string]) {
                     $base = [IO.Path]::GetFileNameWithoutExtension($file)
                     if ($base -cne $id.Value) { $problems.Add("file name must equal id '$($id.Value)'") }
-                    if ($seen.ContainsKey($id.Value)) { $problems.Add("duplicate id '$($id.Value)' (also in $($seen[$id.Value]))") }
-                    else { $seen[$id.Value] = $file }
+                    # An id must be unique per platform (DECISIONS D21): the same id may exist once
+                    # in windows/ and once in linux/, but never twice for the same platform.
+                    $declared = @($folderPlatform)
+                    if ($pl.Present -and (Test-VacateIsStringArray $pl.Value)) { $declared = @($pl.Value) }
+                    foreach ($dp in $declared) {
+                        $key = [string]$dp + '|' + $id.Value
+                        if ($seen.ContainsKey($key)) { $problems.Add("duplicate id '$($id.Value)' for platform '$dp' (also in $($seen[$key]))") }
+                        else { $seen[$key] = $file }
+                    }
                 }
-                $pl = Get-VacateRuleField $rule 'platforms'
                 if ($pl.Present -and (Test-VacateIsStringArray $pl.Value) -and @($pl.Value) -cnotcontains $folderPlatform) {
                     $problems.Add("platforms must include '$folderPlatform' (the folder it lives in)")
                 }

@@ -8,7 +8,7 @@
   "locator": {
     "kind": "path",
     "root": "HOME",
-    "path": "OneDrive",
+    "path": "OneDrive*",
     "match": "directories",
     "recurse": true
   },
@@ -18,5 +18,5 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Microsoft Learn, OneDrive Known Folder Move and default sync folder under the user profile: https://learn.microsoft.com/en-us/onedrive/redirect-known-folders",
-  "notes": "Personal accounts use OneDrive; work or school accounts use OneDrive - <Organization> next to it, which this rule does not match. With Known Folder Move, Desktop, Documents and Pictures live inside this folder. File placeholders may be cloud-only."
+  "notes": "Personal accounts use OneDrive; work or school accounts use OneDrive - <Organization> next to it; the OneDrive* glob matches both (one trace per folder). With Known Folder Move, Desktop, Documents and Pictures live inside this folder. File placeholders may be cloud-only."
 }

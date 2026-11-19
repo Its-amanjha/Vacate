@@ -1,0 +1,203 @@
+{
+   "filesystems": [
+      {
+         "target": "/",
+         "source": "/dev/sdd",
+         "fstype": "ext4",
+         "children": [
+            {
+               "target": "/usr/lib/modules/6.18.58.1-microsoft-standard-WSL2",
+               "source": "none",
+               "fstype": "overlay"
+            },{
+               "target": "/usr/src/linux-headers-6.18.58.1-microsoft-standard-WSL2",
+               "source": "/dev/sdb[/6.18.58.1-microsoft-standard-WSL2/linux-headers]",
+               "fstype": "ext4"
+            },{
+               "target": "/mnt/wsl",
+               "source": "none",
+               "fstype": "tmpfs"
+            },{
+               "target": "/usr/lib/wsl/drivers",
+               "source": "drivers",
+               "fstype": "9p"
+            },{
+               "target": "/mnt/wslg",
+               "source": "none",
+               "fstype": "tmpfs",
+               "children": [
+                  {
+                     "target": "/mnt/wslg/distro",
+                     "source": "/dev/sdd",
+                     "fstype": "ext4"
+                  },{
+                     "target": "/mnt/wslg/versions.txt",
+                     "source": "none[/etc/versions.txt]",
+                     "fstype": "overlay"
+                  },{
+                     "target": "/mnt/wslg/doc",
+                     "source": "none[/usr/share/doc]",
+                     "fstype": "overlay"
+                  },{
+                     "target": "/mnt/wslg/run/user/1000",
+                     "source": "tmpfs",
+                     "fstype": "tmpfs"
+                  }
+               ]
+            },{
+               "target": "/usr/lib/wsl/lib",
+               "source": "none",
+               "fstype": "overlay"
+            },{
+               "target": "/init",
+               "source": "rootfs[/init]",
+               "fstype": "rootfs"
+            },{
+               "target": "/dev",
+               "source": "none",
+               "fstype": "devtmpfs",
+               "children": [
+                  {
+                     "target": "/dev/pts",
+                     "source": "devpts",
+                     "fstype": "devpts"
+                  },{
+                     "target": "/dev/shm",
+                     "source": "none",
+                     "fstype": "tmpfs"
+                  },{
+                     "target": "/dev/hugepages",
+                     "source": "hugetlbfs",
+                     "fstype": "hugetlbfs"
+                  },{
+                     "target": "/dev/mqueue",
+                     "source": "mqueue",
+                     "fstype": "mqueue"
+                  }
+               ]
+            },{
+               "target": "/sys",
+               "source": "sysfs",
+               "fstype": "sysfs",
+               "children": [
+                  {
+                     "target": "/sys/fs/cgroup",
+                     "source": "cgroup2",
+                     "fstype": "cgroup2"
+                  },{
+                     "target": "/sys/kernel/debug",
+                     "source": "debugfs",
+                     "fstype": "debugfs"
+                  },{
+                     "target": "/sys/kernel/tracing",
+                     "source": "tracefs",
+                     "fstype": "tracefs"
+                  },{
+                     "target": "/sys/fs/fuse/connections",
+                     "source": "fusectl",
+                     "fstype": "fusectl"
+                  },{
+                     "target": "/sys/kernel/config",
+                     "source": "configfs",
+                     "fstype": "configfs"
+                  }
+               ]
+            },{
+               "target": "/proc",
+               "source": "proc",
+               "fstype": "proc",
+               "children": [
+                  {
+                     "target": "/proc/sys/fs/binfmt_misc",
+                     "source": "binfmt_misc",
+                     "fstype": "binfmt_misc",
+                     "children": [
+                        {
+                           "target": "/proc/sys/fs/binfmt_misc/status",
+                           "source": "none[/wsl/binfmt-status-lock]",
+                           "fstype": "tmpfs"
+                        }
+                     ]
+                  }
+               ]
+            },{
+               "target": "/run",
+               "source": "none",
+               "fstype": "tmpfs",
+               "children": [
+                  {
+                     "target": "/run/lock",
+                     "source": "none",
+                     "fstype": "tmpfs"
+                  },{
+                     "target": "/run/shm",
+                     "source": "none",
+                     "fstype": "tmpfs"
+                  },{
+                     "target": "/run/user",
+                     "source": "none",
+                     "fstype": "tmpfs",
+                     "children": [
+                        {
+                           "target": "/run/user",
+                           "source": "none[/run/user]",
+                           "fstype": "tmpfs",
+                           "children": [
+                              {
+                                 "target": "/run/user/1000",
+                                 "source": "tmpfs",
+                                 "fstype": "tmpfs"
+                              }
+                           ]
+                        }
+                     ]
+                  }
+               ]
+            },{
+               "target": "/tmp/.X11-unix",
+               "source": "none[/.X11-unix]",
+               "fstype": "tmpfs"
+            },{
+               "target": "/mnt/c",
+               "source": "C:\\",
+               "fstype": "9p"
+            },{
+               "target": "/mnt/d",
+               "source": "D:\\",
+               "fstype": "9p"
+            },{
+               "target": "/mnt/e",
+               "source": "E:\\",
+               "fstype": "9p"
+            },{
+               "target": "/mnt/f",
+               "source": "F:\\",
+               "fstype": "9p"
+            },{
+               "target": "/mnt/g",
+               "source": "G:\\",
+               "fstype": "9p"
+            },{
+               "target": "/snap",
+               "source": "/dev/sdd[/snap]",
+               "fstype": "ext4",
+               "children": [
+                  {
+                     "target": "/snap/powershell/456",
+                     "source": "snapfuse",
+                     "fstype": "fuse.snapfuse"
+                  },{
+                     "target": "/snap/core22/3129",
+                     "source": "snapfuse",
+                     "fstype": "fuse.snapfuse"
+                  },{
+                     "target": "/snap/snapd/28332",
+                     "source": "snapfuse",
+                     "fstype": "fuse.snapfuse"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

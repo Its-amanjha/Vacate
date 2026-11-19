@@ -1,0 +1,22 @@
+{
+  "id": "wallet.exodus",
+  "platforms": ["windows"],
+  "category": "wallets",
+  "title": "Exodus wallet vault",
+  "whyItMatters": "The Exodus wallet folder holds the encrypted vault with the private keys for all of the person's coins. With the password it is the money; without it, it still proves what they owned.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Exodus/exodus.wallet",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Exodus knowledge base, the wallet data folder is exodus.wallet inside the Exodus app-data folder: https://www.exodus.com/support/",
+  "notes": "Encrypted storage.seco files inside. Timestamped archives of earlier vaults sit in a Backups folder next to it under %APPDATA% Exodus, so the parent folder matters too."
+}

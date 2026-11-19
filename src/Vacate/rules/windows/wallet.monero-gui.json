@@ -1,0 +1,22 @@
+{
+  "id": "wallet.monero-gui",
+  "platforms": ["windows"],
+  "category": "wallets",
+  "title": "Monero GUI wallet files",
+  "whyItMatters": "Monero wallet .keys files hold the spend key protected only by the wallet password. A copy lets someone try passwords offline and take the funds.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Documents/Monero/wallets",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Monero GUI Windows installer creates and uses Documents/Monero/wallets as the default wallet folder: https://github.com/monero-project/monero-gui/blob/master/installers/windows/Monero.iss",
+  "notes": "Default location created by the installer. The wizard lets the user pick another folder, so a wallet saved elsewhere is only caught by the personal-folder rules. App settings and logs live in %APPDATA% monero-gui, not here."
+}

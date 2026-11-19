@@ -1,0 +1,22 @@
+{
+  "id": "wallet.ledger-live",
+  "platforms": ["windows"],
+  "category": "wallets",
+  "title": "Ledger Wallet accounts and settings",
+  "whyItMatters": "Ledger Wallet keeps the list of accounts, balances, transaction history and settings on disk. Private keys stay on the hardware device, but the file shows what the person holds and where.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Ledger Wallet",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Ledger support, user data folder on Windows is the app-data folder (app.json): https://support.ledger.com/article/8490479490333-zd",
+  "notes": "Current name since the Ledger Live rename. Older installs and upgraded installs keep the folder under the old name Ledger Live, so check both. Keys never touch this folder."
+}

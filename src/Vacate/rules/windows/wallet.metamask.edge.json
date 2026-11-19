@@ -1,0 +1,22 @@
+{
+  "id": "wallet.metamask.edge",
+  "platforms": ["windows"],
+  "category": "wallets",
+  "title": "MetaMask wallet in Edge",
+  "whyItMatters": "The extension stores the encrypted vault with the wallet seed and every key it manages, plus a record of accounts and networks. With the password the funds are gone.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Microsoft/Edge/User Data/*/Local Extension Settings/ejbalbakoplchlghecdalmeeeajnimhm",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "MetaMask extension id ejbalbakoplchlghecdalmeeeajnimhm from its Microsoft Edge Add-ons listing: https://microsoftedge.microsoft.com/addons/detail/metamask/ejbalbakoplchlghecdalmeeeajnimhm",
+  "notes": "Only applies when MetaMask was installed from the Edge Add-ons store. If it was installed in Edge from the Chrome Web Store it keeps the Chrome id, so check wallet.metamask.chrome too."
+}

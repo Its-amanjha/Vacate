@@ -1,0 +1,19 @@
+{
+  "id": "encryption.filevault.status",
+  "platforms": ["macos"],
+  "category": "disk-encryption",
+  "title": "FileVault status",
+  "whyItMatters": "Whether FileVault is on determines how much data someone can read from the disk after handover and whether recovery keys matter.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "system-query",
+    "name": "filevault-status"
+  },
+  "measure": ["exists", "properties"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple platform security documentation and the allow-listed read-only fdesetup status query in Private/SystemQueries.ps1",
+  "notes": "Uses the fixed system-query name only: no shell, no sudo and no credential prompt. A missing binary or denied query is recorded as a skip."
+}

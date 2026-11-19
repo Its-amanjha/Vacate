@@ -1,0 +1,21 @@
+{
+  "id": "dev.npmrc",
+  "platforms": ["macos"],
+  "category": "developer-secrets",
+  "title": "npm user config with registry tokens",
+  "whyItMatters": "The user npmrc can hold auth tokens for package registries, which allow publishing or private downloads as this user.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".npmrc",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "npm user configuration file ~/.npmrc: https://docs.npmjs.com/cli/configuring-npm/npmrc",
+  "notes": "Project-level .npmrc files inside repositories are out of scope for this home-folder rule."
+}

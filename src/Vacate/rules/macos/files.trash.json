@@ -1,0 +1,22 @@
+{
+  "id": "files.trash",
+  "platforms": ["macos"],
+  "category": "personal-files",
+  "title": "Trash",
+  "whyItMatters": "Deleted files sit in the Trash until it is emptied. A handover can pass on documents the owner thought they had removed.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".Trash",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SPEC.md macOS starter set and macOS forensics references: per-user Trash at ~/.Trash",
+  "notes": "TCC-protected: without Full Disk Access a live scan gets a permission skip. Items are counted by metadata; per-volume .Trashes folders are out of scope."
+}

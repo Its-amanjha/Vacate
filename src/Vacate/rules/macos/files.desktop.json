@@ -1,0 +1,22 @@
+{
+  "id": "files.desktop",
+  "platforms": ["macos"],
+  "category": "personal-files",
+  "title": "Desktop files",
+  "whyItMatters": "Desktop files are usually active work in progress and often include documents the owner would not want a stranger to see.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Desktop",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple Support, add Desktop and Documents to iCloud Drive: https://support.apple.com/en-us/109344",
+  "notes": "Desktop is TCC-protected on modern macOS; without Full Disk Access the scan records a permission skip. If iCloud sync is on, files may be online-only placeholders."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "profiles.other-users",
+  "platforms": ["macos"],
+  "category": "user-profiles",
+  "title": "Other user profiles on this Mac",
+  "whyItMatters": "Other accounts have their own home folders under /Users. The machine may hold data belonging to people other than the person handing it over.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "USERS",
+    "path": "*",
+    "match": "directories",
+    "excludeHome": true
+  },
+  "measure": ["exists", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "SPEC.md platform roots: USERS = /Users; other profiles are reported by directory name only (path jail rule 6)",
+  "notes": "Names only. excludeHome drops the current account; no recursion into any profile, and no symlink is followed."
+}

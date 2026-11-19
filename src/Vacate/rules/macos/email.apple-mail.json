@@ -1,0 +1,22 @@
+{
+  "id": "email.apple-mail",
+  "platforms": ["macos"],
+  "category": "email",
+  "title": "Apple Mail data",
+  "whyItMatters": "Mail keeps local copies of messages, attachments and account settings. A new owner could read correspondence that was never deleted.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Mail",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macOS Apple Mail artifacts under ~/Library/Mail - https://www.macfor.io/compatibility (TCC-protected Mail collection)",
+  "notes": "TCC-protected: without Full Disk Access the folder returns 'Operation not permitted' on a live system. Mailboxes are counted, never read."
+}

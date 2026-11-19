@@ -1,0 +1,22 @@
+{
+  "id": "files.downloads",
+  "platforms": ["macos"],
+  "category": "personal-files",
+  "title": "Downloads folder",
+  "whyItMatters": "Downloads often holds installers, statements and files that were never filed away. It is a common place for private leftovers.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Downloads",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple macOS user guide: ~/Downloads is the default download destination in Safari and Finder",
+  "notes": "Downloads is TCC-protected; without Full Disk Access the scan records a permission skip. File contents are never opened."
+}

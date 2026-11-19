@@ -1,0 +1,22 @@
+{
+  "id": "msg.telegram",
+  "platforms": ["macos"],
+  "category": "messaging",
+  "title": "Telegram Desktop data",
+  "whyItMatters": "Telegram keeps cached messages and downloaded media locally. It shows which account was signed in and how much chat data is on disk.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Telegram Desktop",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Telegram Desktop standalone data path ~/Library/Application Support/Telegram Desktop/tdata - https://kb.macfor.io/docs/communication/telegram",
+  "notes": "Mac App Store build uses ~/Library/Containers/ru.keepcoder.Telegram/Data/Library/Application Support/Telegram Desktop instead. tdata is never opened."
+}

@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.profiles",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Firefox browser profiles",
+  "whyItMatters": "Firefox profiles keep separate histories and saved logins. The number and names of profiles show how the browser was divided up.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Firefox/Profiles/*/prefs.js",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Firefox profile location on macOS: ~/Library/Application Support/Firefox/Profiles - https://github.com/RyanDFIR/hindsight",
+  "notes": "Profile folders have random names such as xxxx.default-release. prefs.js is present in each profile; the file is never opened."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "msg.whatsapp",
+  "platforms": ["macos"],
+  "category": "messaging",
+  "title": "WhatsApp Desktop data",
+  "whyItMatters": "WhatsApp stores local chat caches, media and session state. The folder reveals that the account was used on this Mac.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/WhatsApp",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "WhatsApp Desktop macOS artifacts under Library/Application Support - https://www.group-ib.com/blog/whatsapp-forensic-artifacts/",
+  "notes": "Newer sandboxed builds use ~/Library/Containers/desktop.WhatsApp/Data/Library/Application Support/WhatsApp instead; that variant is not matched here. No content read."
+}

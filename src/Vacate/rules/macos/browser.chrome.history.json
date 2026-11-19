@@ -1,0 +1,21 @@
+{
+  "id": "browser.chrome.history",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Chrome browsing history",
+  "whyItMatters": "Lists every page visited, when, how often and what was typed into the address bar. It reveals health, money, relationship and work interests in detail.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Google/Chrome/*/History",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Chromium user data directory docs, History lives in each macOS profile: https://chromium.googlesource.com/chromium/src/+/main/docs/user_data_dir.md",
+  "notes": "One History file per profile. Sibling History-wal and History-journal files are not counted separately; the database is never opened."
+}

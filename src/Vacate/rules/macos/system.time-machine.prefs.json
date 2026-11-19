@@ -1,0 +1,21 @@
+{
+  "id": "system.time-machine.prefs",
+  "platforms": ["macos"],
+  "category": "system-traces",
+  "title": "Time Machine preferences",
+  "whyItMatters": "The Time Machine settings file shows whether local backups were configured and where backups may have gone.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "SYSTEM",
+    "path": "Library/Preferences/com.apple.TimeMachine.plist",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple macOS support: Time Machine settings are stored in /Library/Preferences/com.apple.TimeMachine.plist",
+  "notes": "Metadata only. The plist is never opened or parsed, so backup destinations and included volumes are not read."
+}

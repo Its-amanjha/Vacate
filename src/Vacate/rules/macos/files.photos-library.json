@@ -1,0 +1,21 @@
+{
+  "id": "files.photos-library",
+  "platforms": ["macos"],
+  "category": "personal-files",
+  "title": "Photos libraries",
+  "whyItMatters": "A Photos library can hold years of personal photographs and videos. Its size and location show how much visual history stays on the Mac.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Pictures/*.photoslibrary",
+    "match": "directories"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple Support: Photos Library is stored by default in the Pictures folder - https://support.apple.com/guide/photos/photo-library-overview-pht211de786/mac",
+  "notes": "No recursion: size comes from the library package's own metadata, never its contents. Libraries moved off ~/Pictures are not matched."
+}

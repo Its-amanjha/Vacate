@@ -1,0 +1,21 @@
+{
+  "id": "activity.shell-history.bash",
+  "platforms": ["macos"],
+  "category": "activity",
+  "title": "bash command history",
+  "whyItMatters": "On older macOS versions and in many terminals, bash records typed commands. Those commands can expose paths, servers and entered secrets.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".bash_history",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "macOS shell history forensics: ~/.bash_history is the default bash history file on macOS",
+  "notes": "Only metadata is recorded; command lines are never opened. bash_sessions and other variants are not covered by this rule."
+}

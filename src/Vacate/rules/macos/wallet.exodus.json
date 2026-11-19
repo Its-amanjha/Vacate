@@ -1,0 +1,22 @@
+{
+  "id": "wallet.exodus",
+  "platforms": ["macos"],
+  "category": "wallets",
+  "title": "Exodus wallet vault",
+  "whyItMatters": "Exodus stores an encrypted vault with the private keys for the person's coins. With the password it is the money; without it, it still proves what they owned.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Exodus",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Elastic detection-rules macOS wallet paths reference ~/Library/Application Support/Exodus - https://github.com/elastic/detection-rules/issues/6616",
+  "notes": "Contains the encrypted exodus.wallet vault and timestamped backups. macOS 27 may block this folder with com.apple.macl; no file is opened."
+}

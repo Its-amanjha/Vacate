@@ -1,0 +1,22 @@
+{
+  "id": "wallet.electrum",
+  "platforms": ["macos"],
+  "category": "wallets",
+  "title": "Electrum wallet data",
+  "whyItMatters": "Electrum keeps wallet files holding keys and transaction history. Losing them can make the coins unrecoverable without the seed phrase.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Electrum",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Elastic detection-rules macOS wallet paths reference ~/Library/Application Support/Electrum - https://github.com/elastic/detection-rules/issues/6616",
+  "notes": "Config and wallet files are counted only. Wallets kept at a custom path outside Application Support are not covered."
+}

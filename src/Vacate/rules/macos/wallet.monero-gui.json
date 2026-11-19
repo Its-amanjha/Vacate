@@ -1,0 +1,22 @@
+{
+  "id": "wallet.monero-gui",
+  "platforms": ["macos"],
+  "category": "wallets",
+  "title": "Monero GUI wallet data",
+  "whyItMatters": "The Monero GUI folder holds wallet cache and configuration. Wallet files reveal that Monero was used and may point to keys stored elsewhere.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/monero-wallet-gui",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Elastic detection-rules macOS wallet paths reference ~/Library/Application Support/monero-wallet-gui - https://github.com/elastic/detection-rules/issues/6616",
+  "notes": "Wallet files can be stored outside this folder by the user. No wallet file, key image or cache is opened or parsed."
+}

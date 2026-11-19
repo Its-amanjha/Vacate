@@ -1,0 +1,21 @@
+{
+  "id": "dev.docker.config",
+  "platforms": ["windows"],
+  "category": "developer-secrets",
+  "title": "Docker registry sign-in config",
+  "whyItMatters": "Saved registry auth entries in this file can let someone pull or push container images as the account owner.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".docker/config.json",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Docker stores registry auth in ~/.docker/config.json: https://docs.docker.com/reference/cli/docker/login/",
+  "notes": "The auth material is OS-dependent (credential helper or base64 token). The file is never opened by vacate."
+}

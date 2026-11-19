@@ -1,0 +1,22 @@
+{
+  "id": "dev.aws.config",
+  "platforms": ["windows"],
+  "category": "developer-secrets",
+  "title": "AWS CLI credentials and config",
+  "whyItMatters": "AWS access keys and session settings in this folder can be used to act as the account owner against cloud resources.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".aws",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "AWS CLI configuration files in ~/.aws: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html",
+  "notes": "Covers credentials and config plus any cached SSO tokens in subfolders. File contents are not read."
+}

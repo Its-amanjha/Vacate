@@ -66,6 +66,34 @@ function ConvertTo-VacateIsoTime {
     return $dt.ToString('yyyy-MM-ddTHH:mm:ssZ', [Globalization.CultureInfo]::InvariantCulture)
 }
 
+function ConvertFrom-VacateJson {
+    # ConvertFrom-Json that behaves the same on 5.1 and 7: PowerShell 7 turns ISO date strings into
+    # [datetime], which would change report text on a round trip. Every [datetime] is turned back
+    # into the ISO-8601 UTC string the report uses (DECISIONS D26).
+    [CmdletBinding()]
+    [OutputType([object])]
+    param([Parameter(Mandatory)][AllowEmptyString()][string]$Json)
+    $obj = $Json | ConvertFrom-Json
+    return (ConvertTo-VacateDateString -Value $obj)
+}
+
+function ConvertTo-VacateDateString {
+    [CmdletBinding()]
+    [OutputType([object])]
+    param([AllowNull()][object]$Value)
+    if ($null -eq $Value) { return $null }
+    if ($Value -is [datetime]) { return (ConvertTo-VacateIsoTime $Value) }
+    if ($Value -is [pscustomobject]) {
+        foreach ($p in @($Value.PSObject.Properties)) { $p.Value = ConvertTo-VacateDateString -Value $p.Value }
+        return $Value
+    }
+    if ($Value -is [array]) {
+        for ($i = 0; $i -lt $Value.Length; $i++) { $Value[$i] = ConvertTo-VacateDateString -Value $Value[$i] }
+        return , $Value
+    }
+    return $Value
+}
+
 function New-VacateTrace {
     # Builds a trace with the fixed property order from SPEC "Trace".
     [CmdletBinding()]

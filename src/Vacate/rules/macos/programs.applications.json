@@ -1,0 +1,21 @@
+{
+  "id": "programs.applications",
+  "platforms": ["macos"],
+  "category": "installed-programs",
+  "title": "Installed applications",
+  "whyItMatters": "The list of installed apps shows which services and cloud clients may still hold sign-ins or licenses that need attention.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "APPLICATIONS",
+    "path": "*.app",
+    "match": "directories"
+  },
+  "measure": ["exists", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple macOS user guide: /Applications contains the apps installed for all users",
+  "notes": "Names only, no recursion into app bundles. Apps installed under ~/Applications or elsewhere are out of scope."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "browser.safari.data",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Safari browser data",
+  "whyItMatters": "Safari's History.db, bookmarks and download list show where the user went online and what they brought onto the Mac.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Safari",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple/Mac forensics reference: ~/Library/Safari holds History.db, Bookmarks.plist and Downloads.plist - https://www.macforensics.app/en/artifacts/safari-history",
+  "notes": "TCC-protected: without Full Disk Access a live scan gets 'Operation not permitted', even as root. Files, databases and plists are never opened or parsed."
+}

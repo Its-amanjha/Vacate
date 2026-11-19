@@ -1,0 +1,22 @@
+{
+  "id": "browser.safari.container",
+  "platforms": ["macos"],
+  "category": "browsers",
+  "title": "Safari sandbox container",
+  "whyItMatters": "Modern Safari keeps cookies, preferences, tab state and extra profiles in its container. Missing it would leave out signed-in session data.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Containers/com.apple.Safari",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Browser forensics reference for Safari container layout: ~/Library/Containers/com.apple.Safari/Data/Library - https://www.browserforensics.app/en/blog/safari-history-file-locations",
+  "notes": "TCC-protected like ~/Library/Safari; needs Full Disk Access on a live system. Safari 17+ extra profiles and cookies live under Data/Library. Metadata only."
+}

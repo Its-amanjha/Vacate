@@ -18,5 +18,5 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Elastic detection-rules macOS wallet paths reference ~/Library/Application Support/Exodus - https://github.com/elastic/detection-rules/issues/6616",
-  "notes": "Contains the encrypted exodus.wallet vault and timestamped backups. macOS 27 may block this folder with com.apple.macl; no file is opened."
+  "notes": "Contains the encrypted exodus.wallet vault and timestamped backups. Unconfirmed (no Mac to test): macOS 27 may block this folder with com.apple.macl; no file is opened."
 }

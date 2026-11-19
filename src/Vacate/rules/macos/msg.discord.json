@@ -18,5 +18,5 @@
   "verifiedOn": [],
   "verified": false,
   "source": "DC3 technical advisory: Discord on macOS stores files under ~/Library/Application Support/discord (lowercase)",
-  "notes": "Folder name is lowercase on macOS. macOS 27 may block this path with com.apple.macl even with Full Disk Access; treat that as a permission skip."
+  "notes": "Folder name is lowercase on macOS. Unconfirmed (no Mac to test): macOS 27 may block this path with com.apple.macl even with Full Disk Access; treat that as a permission skip."
 }

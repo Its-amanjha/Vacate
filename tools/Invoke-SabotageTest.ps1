@@ -328,20 +328,24 @@ try {
         throw ('sabotage: the unmutated copy does not pass ({0}); mutations cannot be judged' -f $baseline.Summary)
     }
 
-    foreach ($mutation in $selected) {
-        Write-Output ('sabotage: applying "{0}" to {1}' -f $mutation.Name, $mutation.File)
-        Invoke-VacateMutation -Mutation $mutation -Root $repoRoot -Copy $copyRoot
+    # $entry, not $mutation: the -Mutation parameter is typed [string], so reusing that name
+    # would coerce each entry to a string (PowerShell variables are case-insensitive).
+    foreach ($entry in $selected) {
+        Write-Output ('sabotage: applying "{0}" to {1}' -f $entry.Name, $entry.File)
+        Invoke-VacateMutation -Mutation $entry -Root $repoRoot -Copy $copyRoot
         $run = Invoke-VacateSuite -Exe $hostExe -Copy $copyRoot
         $caught = ($run.Code -ne 0 -or $run.Failed -gt 0)
-        Write-Output ('sabotage: "{0}" -> {1} ({2})' -f $mutation.Name, $(if ($caught) { 'caught' } else { 'STAYED GREEN' }), $run.Summary)
+        $verdict = 'STAYED GREEN'
+        if ($caught) { $verdict = 'caught' }
+        Write-Output ('sabotage: "{0}" -> {1} ({2})' -f $entry.Name, $verdict, $run.Summary)
         [void]$results.Add([pscustomobject][ordered]@{
-                Mutation = $mutation
+                Mutation = $entry
                 Run      = $run
                 Caught   = $caught
             })
         # Restore the copy's file so the next mutation starts from pristine source.
-        $original = Join-Path $repoRoot ([string]$mutation.File)
-        [void][IO.File]::Copy($original, (Join-Path $copyRoot ([string]$mutation.File)), $true)
+        $original = Join-Path $repoRoot ([string]$entry.File)
+        [void][IO.File]::Copy($original, (Join-Path $copyRoot ([string]$entry.File)), $true)
     }
 
     $after = Get-VacateTreeHash -Root $repoRoot -Names $hashNames
@@ -356,7 +360,8 @@ try {
     $version = $PSVersionTable.PSVersion.ToString()
     $runtime = '{0} {1} via {2} on {3}' -f $edition, $version, (Split-Path -Leaf $hostExe), [Environment]::OSVersion.VersionString
     $markdown = Get-VacateSabotageMarkdown -Date ((Get-Date).ToString('yyyy-MM-dd')) -Runtime $runtime -Baseline $baseline -Results $results.ToArray() -HashedFiles $beforeCount
-    [IO.File]::WriteAllText($docPath, $markdown, (New-Object Text.UTF8Encoding $false))
+    # LF line endings, so the checked-in document is identical on every host (SPEC non-negotiable 8).
+    [IO.File]::WriteAllText($docPath, ($markdown -replace "`r`n", "`n"), (New-Object Text.UTF8Encoding $false))
     Write-Output ('sabotage: wrote {0}' -f $docPath)
 
     $green = @($results | Where-Object { $_.Caught -ne $true })

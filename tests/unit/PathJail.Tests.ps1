@@ -15,7 +15,7 @@ BeforeAll {
     }
 
     function Get-TestFileSystem {
-        # Minimal real-disk provider with the CONTRACTS section 4 shape (metadata only).
+        # Minimal real-disk provider with the filesystem provider shape (metadata only).
         $fs = [pscustomobject]@{ Calls = (New-Object System.Collections.Generic.List[string]) }
         $fs | Add-Member -MemberType ScriptMethod -Name GetItem -Value {
             param([string]$Path)

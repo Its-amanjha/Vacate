@@ -80,6 +80,40 @@ Describe 'Invoke-VacateEngine' {
     }
 }
 
+Describe 'Select-VacateMeasure' {
+    It 'keeps only the metadata the rule asks for' {
+        $r = Get-TestRule 'm.rule'
+        $r.measure = @('exists', 'lastWriteTime')
+        $res = InModuleScope Vacate -Parameters @{ R = @($r); C = (Get-TestContext); E = @{ path = $okExec } } { param($R, $C, $E) Invoke-VacateEngine -Rules $R -Context $C -Executors $E }
+        $t = $res.Traces[0]
+        $t.sizeBytes | Should -BeNullOrEmpty
+        $t.itemCount | Should -BeNullOrEmpty
+        $t.exists | Should -BeTrue
+        $t.locator.resolved | Should -Not -BeNullOrEmpty
+    }
+
+    It 'keeps size and count when they are declared' {
+        $r = Get-TestRule 'm.full'
+        $r.measure = @('exists', 'sizeBytes', 'itemCount')
+        $res = InModuleScope Vacate -Parameters @{ R = @($r); C = (Get-TestContext); E = @{ path = $okExec } } { param($R, $C, $E) Invoke-VacateEngine -Rules $R -Context $C -Executors $E }
+        $res.Traces[0].sizeBytes | Should -Be 10
+        $res.Traces[0].itemCount | Should -Be 1
+    }
+
+    It 'filters registry counts and drops undeclared properties' {
+        InModuleScope Vacate {
+            $reg = [pscustomobject]@{ locator = [pscustomobject]@{ kind = 'registry' }; measure = @('exists', 'valueCount') }
+            $t = [pscustomobject]@{ sizeBytes = $null; lastWriteTime = $null; itemCount = 5; properties = [pscustomobject]@{ valueCount = 3; subkeyCount = 2 } }
+            $o = Select-VacateMeasure -Trace $t -Rule $reg
+            $o.itemCount | Should -Be 5
+            @($o.properties.PSObject.Properties.Name) | Should -Be @('valueCount')
+            $wmi = [pscustomobject]@{ locator = [pscustomobject]@{ kind = 'wmi' }; measure = @('exists') }
+            $t2 = [pscustomobject]@{ sizeBytes = $null; lastWriteTime = $null; itemCount = $null; properties = [pscustomobject]@{ DriveLetter = 'C:' } }
+            (Select-VacateMeasure -Trace $t2 -Rule $wmi).PSObject.Properties['properties'] | Should -BeNullOrEmpty
+        }
+    }
+}
+
 Describe 'Summary and report assembly' {
     It 'computes rule status exactly as documented' {
         $traces = @([pscustomobject]@{ ruleId = 'a'; category = 'browsers'; sizeBytes = 100; sensitivity = 'high' }, [pscustomobject]@{ ruleId = 'a'; category = 'browsers'; sizeBytes = $null; sensitivity = 'critical' }, [pscustomobject]@{ ruleId = 'c'; category = 'activity'; sizeBytes = 5; sensitivity = 'low' })

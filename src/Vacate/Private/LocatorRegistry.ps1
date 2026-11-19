@@ -1,9 +1,9 @@
 # LocatorRegistry.ps1 - registry locator executor, plus the helpers every locator shares.
-# Owner: Pi. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 #
 # Executors never read environment variables, never touch disk except through the context
 # providers, never write anything, and never throw for an expected condition: a missing key or
-# a denied key comes back as a skip (CONTRACTS section 9).
+# a denied key comes back as a skip.
 
 function New-VacateLocatorResult {
     # The result every locator executor returns. Shared with LocatorWmi, LocatorInstalledProgram,
@@ -108,7 +108,7 @@ function Get-VacateLocatorFailure {
 }
 
 function Invoke-VacateRegistryLocator {
-    # CONTRACTS 9: a present key gives one trace with value/subkey counts, a missing key gives
+    # a present key gives one trace with value/subkey counts, a missing key gives
     # nothing, and a denied key gives a permission skip.
     [CmdletBinding()]
     [OutputType([pscustomobject])]

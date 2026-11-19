@@ -1,5 +1,5 @@
-# LocatorPath.ps1 - executor for 'path' rules. Owner: Claude.
-# PowerShell 5.1 compatible. ASCII only. CONTRACTS section 9.
+# LocatorPath.ps1 - executor for 'path' rules.
+# PowerShell 5.1 compatible. ASCII only.
 # Resolves targets through the path jail, then measures each one with the read-only walker.
 # Metadata only: never opens a file.
 

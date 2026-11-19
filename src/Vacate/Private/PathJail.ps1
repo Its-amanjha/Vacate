@@ -1,5 +1,5 @@
-# PathJail.ps1 - keeps every scan inside its allowed root. Owner: Claude (W1-A, taken over from Codex).
-# PowerShell 5.1 compatible. ASCII only. See docs/CONTRACTS.md section 3.
+# PathJail.ps1 - keeps every scan inside its allowed root.
+# PowerShell 5.1 compatible. ASCII only.
 # Only the injected $FileSystem provider touches disk; no Resolve-Path / Get-ChildItem / Test-Path
 # here, because those can follow links or bypass the provider boundary.
 
@@ -155,7 +155,7 @@ function Resolve-VacateRuleTargets {
     # Expands a rule path under Root one segment at a time through the provider and returns the
     # targets that pass every jail check. Never follows a reparse point.
     [CmdletBinding()]
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Name fixed by docs/CONTRACTS.md section 3.')]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseSingularNouns', '', Justification = 'Public name kept stable for callers.')]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', 'MountPoints', Justification = 'Used inside the $check scriptblock.')]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', 'Exclude', Justification = 'Used inside the $check scriptblock.')]
     [OutputType([hashtable])]

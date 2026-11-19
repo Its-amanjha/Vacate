@@ -1,5 +1,5 @@
 # Models.ps1 - shared constants and object constructors.
-# Owner: Claude. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 
 $script:VacateToolName = 'vacate'
 $script:VacateToolVersion = '0.1.0'

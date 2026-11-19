@@ -131,7 +131,7 @@ the tool download a file, which would both use the network and change the disk.
 level, and a link is rejected with reason `link`; it is never followed (`PathJail.ps1`). Real
 junction and symlink tests pass on Windows and Ubuntu. The walker refuses to descend into a
 reparse point, counts it in `SkippedLinks`, and treats cloud placeholders by metadata only, never
-opening them (`docs/CONTRACTS.md`). macOS path normalization treats `/var` and `/private/var` as
+opening them. macOS path normalization treats `/var` and `/private/var` as
 the same place.
 
 **What remains.** The walker half now runs in real scans, but there is a time-of-check to
@@ -214,7 +214,7 @@ where it reads also weakens the "writes nothing" promise.
 `runs/<timestamp>/`, and refuses any path outside it, including a path whose parent is a link
 (D28). The scan context carries an `Exclude` list of absolute paths that are never scanned: the
 tool folder and `runs/`, so the tool may live inside a scanned root without auditing its own
-files (`docs/CONTRACTS.md` section 9, D28). A static safety test forbids write calls outside
+files (D28). A static safety test forbids write calls outside
 `Output.ps1` and was checked by planting a write in another file (D30). Report files are UTF-8
 without a BOM. `report -Run` and `checklist -Run` read an existing run folder and rewrite only
 `report.html`, `summary.md` and `checklist.md` inside that folder.

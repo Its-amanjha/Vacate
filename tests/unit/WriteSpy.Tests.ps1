@@ -1,5 +1,5 @@
 # WriteSpy.Tests.ps1 - unit tests for tree snapshot, compare, and spy provider.
-# Owner: Gemini. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 
 BeforeAll {
     Import-Module (Join-Path $PSScriptRoot '../../src/Vacate/Vacate.psm1') -Force

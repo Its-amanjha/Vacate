@@ -1,5 +1,5 @@
 # Platform.ps1 - platform detection, environment snapshot, profile dispatch, elevation.
-# Owner: Pi. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 #
 # This file holds the only code in the module that is allowed to read the process
 # environment. Everything else receives an -Environment hashtable, so tests can point

@@ -1,4 +1,4 @@
-# Redaction.ps1 - makes a shareable copy of a report. Owner: Claude.
+# Redaction.ps1 - makes a shareable copy of a report.
 # PowerShell 5.1 compatible. ASCII only.
 # Names and path segments become stable hashes (same input -> same hash within one report);
 # counts, sizes, times, rule ids and catalog text are kept. The HMAC key is random per call and

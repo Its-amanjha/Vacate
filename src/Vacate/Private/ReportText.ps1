@@ -1,5 +1,5 @@
 # ReportText.ps1 - fixed wording used by the report: category meanings and honest limits.
-# Owner: Claude. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 # Limitations follow docs/SPEC.md "Platform limitations to write down". Do not soften them.
 
 $script:VacateCategoryMeaning = [ordered]@{

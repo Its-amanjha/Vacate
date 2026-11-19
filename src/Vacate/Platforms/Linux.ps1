@@ -1,5 +1,5 @@
 # Linux.ps1 - Linux platform profile.
-# Owner: Pi. PowerShell 5.1 compatible. ASCII only. Reads no environment, touches no filesystem.
+# PowerShell 5.1 compatible. ASCII only. Reads no environment, touches no filesystem.
 
 function Get-VacateLinuxProfile {
     # Roots follow the SPEC "Platform roots" table. XDG_* follows the XDG Base Directory

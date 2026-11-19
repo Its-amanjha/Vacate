@@ -1,5 +1,5 @@
 # WriteSpy.ps1 - test helpers for verifying read-only invariants.
-# Owner: Gemini. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 
 function Get-VacateTreeSnapshot {
     [CmdletBinding()]

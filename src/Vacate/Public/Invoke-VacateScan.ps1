@@ -1,8 +1,8 @@
-# Invoke-VacateScan.ps1 - public: scan this machine and re-render saved runs. Owner: Claude.
+# Invoke-VacateScan.ps1 - public: scan this machine and re-render saved runs.
 # PowerShell 5.1 compatible. ASCII only.
 
 function New-VacateScanContext {
-    # Production context (CONTRACTS section 9). Fixed roots; there is no override flag.
+    # Production context. Fixed roots; there is no override flag.
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '', Justification = 'Constructs an in-memory object; changes no state.')]
     [OutputType([pscustomobject])]

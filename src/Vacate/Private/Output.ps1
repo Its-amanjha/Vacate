@@ -1,4 +1,4 @@
-# Output.ps1 - the ONLY place vacate writes to disk. Owner: Claude.
+# Output.ps1 - the ONLY place vacate writes to disk.
 # PowerShell 5.1 compatible. ASCII only.
 # Every write must land inside the run base folder (runs/). The run base is excluded from every
 # scan (DECISIONS D28), so the tool never reports or touches its own output.

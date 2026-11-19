@@ -1,4 +1,4 @@
-# ReportRenderer.ps1 - turns a report object into HTML and Markdown. Owner: Claude.
+# ReportRenderer.ps1 - turns a report object into HTML and Markdown.
 # PowerShell 5.1 compatible. ASCII only.
 # Every value from the report goes through ConvertTo-VacateHtmlText (WebUtility.HtmlEncode).
 # No script, no external fonts, no CDN: the page must read with JavaScript off and print cleanly.

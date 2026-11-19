@@ -1,5 +1,5 @@
 # SystemQueries.ps1 - the only external binaries vacate may run, and their parsers.
-# Owner: Pi. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 #
 # Data is hard-coded here: a named query maps to one absolute binary and a fixed argument
 # array. Nothing comes from rule files or from the user, there is no shell, no elevation
@@ -37,7 +37,7 @@ function Get-VacateSystemQueryTable {
 
 function Invoke-VacateSystemQuery {
     # Runs one allow-listed query and returns its parsed value, never raw output.
-    # -Platform accepts a platform name or a profile object (CONTRACTS section 5).
+    # -Platform accepts a platform name or a profile object.
     [CmdletBinding()]
     [OutputType([pscustomobject])]
     param(

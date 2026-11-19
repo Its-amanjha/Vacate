@@ -1,4 +1,4 @@
-# Get-VacateRule.ps1 - public: list, show and validate the rule catalog. Owner: Claude.
+# Get-VacateRule.ps1 - public: list, show and validate the rule catalog.
 # PowerShell 5.1 compatible. ASCII only.
 
 function Get-VacateRule {

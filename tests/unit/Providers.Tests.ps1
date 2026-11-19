@@ -1,5 +1,5 @@
 # Providers.Tests.ps1 - unit tests for read-only filesystem/registry providers and walker.
-# Owner: Gemini. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 
 $script:onWindows = ($PSVersionTable.PSEdition -eq 'Desktop')
 if (-not $script:onWindows) {

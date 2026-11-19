@@ -1,4 +1,4 @@
-# Checklist.ps1 - builds the ordered de-link checklist from a report. Owner: Claude.
+# Checklist.ps1 - builds the ordered de-link checklist from a report.
 # PowerShell 5.1 compatible. ASCII only.
 # Order follows docs/SPEC.md "Checklist generation": export and sign out BEFORE uninstalling,
 # because uninstalling can remove the session you need to sign out of.

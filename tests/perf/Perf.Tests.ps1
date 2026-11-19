@@ -1,5 +1,5 @@
 # Perf.Tests.ps1 - opt-in performance budget tests (task W3-H).
-# Owner: OpenCode-3. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 #
 # Builds a synthetic 50,000-file home under the OS temp folder, points a fake platform
 # profile at it and runs the real rule catalog through the engine. These tests are not

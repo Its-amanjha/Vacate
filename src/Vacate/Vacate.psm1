@@ -1,4 +1,4 @@
-# Vacate.psm1 - module loader. Owner: Claude.
+# Vacate.psm1 - module loader.
 # Loads Models.ps1, then Private/, Platforms/, Public/ in ordinal-sorted order.
 # Do not register files here by hand; drop a .ps1 into the right folder instead.
 

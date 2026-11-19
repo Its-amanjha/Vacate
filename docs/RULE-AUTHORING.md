@@ -1,6 +1,6 @@
 # How to write a vacate rule
 
-Owner: Claude. For rule authors (Freebuff, OpenCode, anyone). Read `CLAUDE.md` first.
+For rule authors (Freebuff, OpenCode, anyone). Read `CLAUDE.md` first.
 
 ## One rule = one file
 

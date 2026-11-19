@@ -1,5 +1,5 @@
-# Engine.ps1 - runs the rules and assembles the report. Owner: Claude.
-# PowerShell 5.1 compatible. ASCII only. See docs/CONTRACTS.md sections 8-9.
+# Engine.ps1 - runs the rules and assembles the report.
+# PowerShell 5.1 compatible. ASCII only.
 #
 # Rule status (DECISIONS D27), recomputable from report.json alone:
 #   failed  = distinct ruleIds in errors[]
@@ -93,7 +93,7 @@ function Invoke-VacateEngine {
         try {
             if ($exec -is [scriptblock]) { $res = & $exec $rule $Context $ruleDeadline }
             else { $res = & $exec -Rule $rule -Context $Context -Deadline $ruleDeadline }
-            foreach ($t in @($res.Traces)) { if ($null -ne $t) { $traces.Add($t) } }
+            foreach ($t in @($res.Traces)) { if ($null -ne $t) { $traces.Add((Select-VacateMeasure -Trace $t -Rule $rule)) } }
             foreach ($s in @($res.Skips)) { if ($null -ne $s) { $skips.Add($s) } }
             foreach ($e in @($res.Errors)) { if ($null -ne $e) { $errors.Add($e) } }
             foreach ($p in @($res.Programs)) { if ($null -ne $p) { $programs.Add($p) } }
@@ -117,6 +117,33 @@ function Invoke-VacateEngine {
         Programs = (Get-VacateOrderedItem -Item $programs.ToArray() -Key { param($x) [string]$x.name + "`t" + [string]$x.version + "`t" + [string]$x.scope })
         Log      = $log.ToArray()
     }
+}
+
+function Select-VacateMeasure {
+    # Applies the rule's `measure` list to a trace (DECISIONS D42): metadata the rule did not ask
+    # for is set to $null / removed, so the report only carries what the rule declares.
+    # `exists`, the locator and sample names are always kept.
+    [CmdletBinding()]
+    [OutputType([object])]
+    param([Parameter(Mandatory)][object]$Trace, [Parameter(Mandatory)][object]$Rule)
+    $m = @($Rule.measure)
+    $kind = [string]$Rule.locator.kind
+    if ($m -cnotcontains 'sizeBytes') { $Trace.sizeBytes = $null }
+    if ($m -cnotcontains 'lastWriteTime') { $Trace.lastWriteTime = $null }
+    $keepCount = ($m -ccontains 'itemCount') -or ($kind -ceq 'registry' -and (($m -ccontains 'valueCount') -or ($m -ccontains 'subkeyCount')))
+    if (-not $keepCount) { $Trace.itemCount = $null }
+    if ($Trace.PSObject.Properties['properties'] -and $null -ne $Trace.properties) {
+        if ($kind -ceq 'registry') {
+            $props = $Trace.properties
+            foreach ($k in @('valueCount', 'subkeyCount')) {
+                if ($m -ccontains $k) { continue }
+                if ($props -is [Collections.IDictionary]) { if ($props.Contains($k)) { $props.Remove($k) } }
+                elseif ($props.PSObject.Properties[$k]) { $props.PSObject.Properties.Remove($k) }
+            }
+        }
+        elseif ($m -cnotcontains 'properties') { $Trace.PSObject.Properties.Remove('properties') }
+    }
+    return $Trace
 }
 
 function Get-VacateOrderedItem {

@@ -1,4 +1,4 @@
-# RuleLoader.ps1 - loads and validates rule JSON files. Owner: Claude.
+# RuleLoader.ps1 - loads and validates rule JSON files.
 # PowerShell 5.1 compatible. ASCII only. Validation is hand-written so it runs on 5.1
 # (no Test-Json there, see DECISIONS D4); schemas/rule.schema.json mirrors these checks.
 

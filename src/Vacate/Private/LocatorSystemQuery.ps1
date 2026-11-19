@@ -1,11 +1,11 @@
 # LocatorSystemQuery.ps1 - system-query locator executor.
-# Owner: Pi. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 #
 # The query name comes from the rule; the binary and arguments come from the allow-list in
 # Private/SystemQueries.ps1, never from data. No shell, no elevation, no user input.
 
 function Invoke-VacateSystemQueryLocator {
-    # CONTRACTS 9: ok gives one trace carrying the parsed value; unavailable, timeout and
+    # ok gives one trace carrying the parsed value; unavailable, timeout and
     # not-applicable give a skip; error gives an error entry. Raw output is never reported.
     [CmdletBinding()]
     [OutputType([pscustomobject])]

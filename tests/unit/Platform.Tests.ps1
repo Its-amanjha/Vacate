@@ -111,7 +111,7 @@ Describe 'Get-VacateEnvironmentSnapshot' {
 }
 
 Describe 'profile object shape' {
-    It 'returns the CONTRACTS section 2 properties in order (<Platform>)' -ForEach @(@{ Platform = 'windows' }, @{ Platform = 'macos' }, @{ Platform = 'linux' }) {
+    It 'returns the profile properties in order (<Platform>)' -ForEach @(@{ Platform = 'windows' }, @{ Platform = 'macos' }, @{ Platform = 'linux' }) {
         $platformProfile = Get-TestProfile -Platform $Platform -Environment (Get-TestProfileEnvironment -Platform $Platform)
 
         (@($platformProfile.PSObject.Properties.Name) -join ',') | Should -Be ($script:contractProperties -join ',')

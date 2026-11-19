@@ -1,5 +1,5 @@
 # LocatorInstalledProgram.ps1 - installed-program locator executor.
-# Owner: Pi. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 #
 # Reads the uninstall keys through the context registry provider, which exposes only the named
 # values. Nothing is opened, no program file is touched, nothing is installed or removed.
@@ -8,7 +8,7 @@ $script:VacateUninstallKeyPath = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Unin
 $script:VacateUninstallValueNames = @('DisplayName', 'Publisher', 'DisplayVersion', 'InstallDate', 'SystemComponent')
 
 function Invoke-VacateInstalledProgramLocator {
-    # CONTRACTS 9: HKLM 64-bit and 32-bit plus HKCU per scope; entries without a display name and
+    # HKLM 64-bit and 32-bit plus HKCU per scope; entries without a display name and
     # system components are dropped, duplicates are removed, and the result is sorted ordinal.
     [CmdletBinding()]
     [OutputType([pscustomobject])]

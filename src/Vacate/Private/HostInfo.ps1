@@ -1,11 +1,11 @@
 # HostInfo.ps1 - the report scan.host object (machine, OS, architecture, user, volumes).
-# Owner: Pi. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 #
 # Read-only and defensive: a failing CIM query or system query empties that field instead of
 # aborting the scan. No environment reads outside the injected snapshot.
 
 function Get-VacateHostInfo {
-    # CONTRACTS 9: name, os, version, architecture, user, volumes (report schema order).
+    # name, os, version, architecture, user, volumes (report schema order).
     [CmdletBinding()]
     [OutputType([pscustomobject])]
     param(

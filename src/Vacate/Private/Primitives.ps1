@@ -1,5 +1,5 @@
 # Primitives.ps1 - tiny pure helpers shared by PathJail and Providers.
-# Owner: Claude. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 
 function Test-VacateGlobMatch {
     # One path segment. '*' = zero or more chars, '?' = exactly one char. Everything else literal.

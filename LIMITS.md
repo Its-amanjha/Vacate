@@ -126,8 +126,10 @@ Status: Phase 1 works end to end on Windows 11 and Ubuntu 24.04 (WSL). See [READ
 
 ## Limits seen in real scans
 
-- **Time limits on a huge folder.** Each rule stops after 10 seconds, and the whole scan has a
-  budget (120 seconds by default). A folder such as Temp can be so large that a rule stops before
+- **Time limits on a huge folder.** Each rule has a 10-second limit and the whole scan has a
+  budget (120 seconds by default). The limit is checked between files while a folder is walked, so
+  a rule stops within one file of it. A single slow system call (one registry or WMI read) cannot be
+  interrupted and may run past the limit; PowerShell 5.1 has no way to cancel it (DECISIONS D2). A folder such as Temp can be so large that a rule stops before
   it has counted everything. The rule is then recorded with reason `timeout` in the skip list
   (with a partial trace, if it produced one), or the remaining rules are skipped with reason
   `budget`, and the report says the scan did not finish.

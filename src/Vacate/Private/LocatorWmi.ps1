@@ -1,5 +1,5 @@
 # LocatorWmi.ps1 - WMI/CIM locator executor and the production CIM runner.
-# Owner: Pi. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 #
 # Read-only by construction: the only CIM command in the module is Get-CimInstance with an
 # explicit namespace, class and property list. No method is invoked, nothing is created,
@@ -19,7 +19,7 @@ function New-VacateCimRunner {
 }
 
 function Invoke-VacateWmiLocator {
-    # CONTRACTS 9: one trace per returned instance, properties limited to the rule's named list.
+    # one trace per returned instance, properties limited to the rule's named list.
     [CmdletBinding()]
     [OutputType([pscustomobject])]
     param(

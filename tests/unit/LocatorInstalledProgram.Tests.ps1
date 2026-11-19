@@ -70,7 +70,7 @@ BeforeAll {
     }
 
     function Get-TestRegistryProvider {
-        # Read-only fake exposing the two provider methods from CONTRACTS section 4.
+        # Read-only fake exposing the two registry provider methods.
         param(
             [object]$Machine64 = @(),
             [object]$Machine32 = @(),

@@ -1,5 +1,5 @@
 # Providers.ps1 - read-only filesystem and registry providers, directory walker.
-# Owner: Gemini. PowerShell 5.1 compatible. ASCII only.
+# PowerShell 5.1 compatible. ASCII only.
 
 function New-VacateFileSystemProvider {
     # Returns a read-only filesystem provider object with GetItem and GetChildren.
@@ -456,7 +456,7 @@ function New-VacateRegistryProvider {
 }
 
 function Invoke-VacateWalk {
-    # Recursive depth-first tree walk adhering to CONTRACTS section 4.
+    # Recursive depth-first tree walk following the provider interface.
     [CmdletBinding()]
     [OutputType([pscustomobject])]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '', Justification = 'Used in nested scriptblock walkStep.')]

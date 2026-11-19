@@ -1,0 +1,22 @@
+{
+  "id": "cloud.icloud-drive",
+  "platforms": ["macos"],
+  "category": "cloud-sync",
+  "title": "iCloud Drive files",
+  "whyItMatters": "iCloud Drive holds the user's documents and app data, including Desktop and Documents when syncing is on. Signing out does not delete local copies.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Mobile Documents",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple support and macOS forensics: iCloud Drive content lives in ~/Library/Mobile Documents - https://www.macforensics.app/en/artifacts/cloud-storage-clients",
+  "notes": "Online-only files appear as 0-byte placeholders; vacate counts metadata and never hydrates or downloads anything. App-specific iCloud folders are included."
+}

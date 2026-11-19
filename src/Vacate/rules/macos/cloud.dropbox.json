@@ -1,0 +1,22 @@
+{
+  "id": "cloud.dropbox",
+  "platforms": ["macos"],
+  "category": "cloud-sync",
+  "title": "Dropbox synced folder",
+  "whyItMatters": "Dropbox keeps a local copy of synced files. Those copies can contain private documents even after the account is signed out.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "CloudStorage/Dropbox*",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Dropbox on File Provider moves the folder to ~/Library/CloudStorage/Dropbox - https://www.macforensics.app/en/artifacts/cloud-storage-clients",
+  "notes": "Newer File Provider installs only. Legacy ~/Dropbox may be a symlink to this folder; the path jail never follows links. Online-only placeholders are not hydrated."
+}

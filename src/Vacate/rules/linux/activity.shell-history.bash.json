@@ -1,0 +1,21 @@
+{
+  "id": "activity.shell-history.bash",
+  "platforms": ["linux"],
+  "category": "activity",
+  "title": "Bash command history",
+  "whyItMatters": "Every command typed in a bash shell is saved here, including server names, paths, passwords typed by mistake and what the person was working on.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".bash_history",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "GNU Bash manual, HISTFILE: the default history file is ~/.bash_history: https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html",
+  "notes": "bash writes the file when the shell exits, so the newest commands may be missing while a terminal is open. HISTFILE, HISTSIZE and HISTIGNORE in .bashrc can change what is kept or where."
+}

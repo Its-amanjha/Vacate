@@ -1,0 +1,22 @@
+{
+  "id": "msg.discord",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Discord desktop data",
+  "whyItMatters": "Discord stores the signed-in account, server list, message cache and voice settings. Anyone with the folder can see which servers and conversations the person took part in.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "discord",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Arch Wiki, Discord: configuration and cache are kept in ~/.config/discord and ~/.cache/discord: https://wiki.archlinux.org/title/Discord",
+  "notes": "The directory is lowercase discord. Canary and PTB builds use discordcanary and discordptb, which this rule does not match. The Flatpak uses ~/.var/app/com.discordapp.Discord/config/discord."
+}

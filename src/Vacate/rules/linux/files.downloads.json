@@ -1,0 +1,22 @@
+{
+  "id": "files.downloads",
+  "platforms": ["linux"],
+  "category": "personal-files",
+  "title": "Downloads folder",
+  "whyItMatters": "Browsers and chat apps save installers, invoices, tickets and photos here. It is often the biggest pile of personal files on the machine.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Downloads",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "XDG user directories defaults (xdg-user-dirs creates Downloads under the home directory): https://www.freedesktop.org/wiki/Software/xdg-user-dirs/",
+  "notes": "The folder name comes from ~/.config/user-dirs.dirs and can be localised or renamed, which this rule does not detect. Telegram and some browsers use their own subfolder inside it."
+}

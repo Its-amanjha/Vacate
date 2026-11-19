@@ -1,0 +1,22 @@
+{
+  "id": "msg.element",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Element desktop data",
+  "whyItMatters": "Element keeps the Matrix session, room list, message cache and encryption keys on disk. With the unencrypted store it is a readable history of the person's chats.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "Element",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Element Desktop docs, user-specified config.json: on Linux the app directory is $XDG_CONFIG_HOME/Element: https://web-docs.element.dev/readme-element-desktop.html",
+  "notes": "The folder is named Element; start it with --profile Work and it becomes Element-Work, and pre-1.7 installs used Riot and Riot-<profile>. The homeserver address is also recorded in config.json. The Flatpak uses ~/.var/app/im.riot.Riot/config/Element."
+}

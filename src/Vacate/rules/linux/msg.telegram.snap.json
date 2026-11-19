@@ -1,0 +1,22 @@
+{
+  "id": "msg.telegram.snap",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Telegram Desktop session and cache (Snap)",
+  "whyItMatters": "The Snap build keeps the live Telegram session and media cache under the user's snap folder, where a native-only check will not find it.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "snap/telegram-desktop/common/.local/share/TelegramDesktop/tdata",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Snap keeps per-app data under ~/snap/<name>/common; Telegram Desktop's snap is telegram-desktop: https://snapcraft.io/telegram-desktop",
+  "notes": "common is a real folder shared across revisions, so the path stays stable after updates. Settings saved outside the sandbox may live in ~/snap/telegram-desktop/current/.config instead."
+}

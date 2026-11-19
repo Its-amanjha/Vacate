@@ -1,0 +1,22 @@
+{
+  "id": "cloud.dropbox",
+  "platforms": ["linux"],
+  "category": "cloud-sync",
+  "title": "Dropbox sync folder",
+  "whyItMatters": "Everything the person keeps in Dropbox is also on this disk, readable without any password. The folder names alone show their work and private life.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Dropbox",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Arch Wiki, Dropbox: the desktop client syncs to ~/Dropbox by default and keeps its state in ~/.dropbox: https://wiki.archlinux.org/title/Dropbox",
+  "notes": "Dropbox asks for the sync location during setup and it can be changed later, so this is the default only. Business accounts may use a named folder instead. The account and folder list live in ~/.dropbox, which this rule does not count."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "games.steam.flatpak",
+  "platforms": ["linux"],
+  "category": "games-licenses",
+  "title": "Steam account data and game saves (Flatpak)",
+  "whyItMatters": "The Flatpak build keeps its own copy of Steam account data, saves and screenshots inside the sandbox, so a native-only check will miss it.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".var/app/com.valvesoftware.Steam/.local/share/Steam/userdata",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Flatpak sandbox permissions: per-app data lives in ~/.var/app/<app-id>/data; Steam's Flathub id is com.valvesoftware.Steam: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
+  "notes": "Same numeric per-account layout as the native install. Some Flatpak setups also place a Steam tree in ~/.var/app/com.valvesoftware.Steam/.steam."
+}

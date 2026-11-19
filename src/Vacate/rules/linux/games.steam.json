@@ -1,0 +1,22 @@
+{
+  "id": "games.steam",
+  "platforms": ["linux"],
+  "category": "games-licenses",
+  "title": "Steam account data and game saves",
+  "whyItMatters": "Steam keeps one folder per account that has signed in, with save games, screenshots, chat history and the cached credentials that keep the account logged in.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_DATA",
+    "path": "Steam/userdata",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Arch Wiki, Steam: the default install is ~/.local/share/Steam and userdata holds per-account saves: https://wiki.archlinux.org/title/Steam",
+  "notes": "Each numeric folder is a Steam account id with per-game saves and screenshots inside. Account names and SteamIDs are in config/loginusers.vdf, which this rule does not count. ~/.steam/steam is normally a symlink to this tree. The Flatpak uses ~/.var/app/com.valvesoftware.Steam/.local/share/Steam/userdata."
+}

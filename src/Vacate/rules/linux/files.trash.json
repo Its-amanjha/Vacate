@@ -1,0 +1,22 @@
+{
+  "id": "files.trash",
+  "platforms": ["linux"],
+  "category": "personal-files",
+  "title": "Trash folder",
+  "whyItMatters": "Deleted files are not gone: the Trash keeps the full contents plus a metadata file with the original path and deletion time. Emptying the Trash is a separate step people often skip before selling a computer.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_DATA",
+    "path": "Trash",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "freedesktop.org Trash spec: trashed files live in $XDG_DATA_HOME/Trash with files/ and info/ subfolders: https://specifications.freedesktop.org/trash-spec/latest/",
+  "notes": "files/ holds the trashed content and info/ one .trashinfo per item with its original path. Deletions on other mounts go to a .Trash-<uid> folder at that mount's top, which this rule does not cover."
+}

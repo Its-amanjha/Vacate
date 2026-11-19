@@ -1,0 +1,22 @@
+{
+  "id": "msg.discord.flatpak",
+  "platforms": ["linux"],
+  "category": "messaging",
+  "title": "Discord desktop data (Flatpak)",
+  "whyItMatters": "The Flatpak build keeps the signed-in account, server list and message cache inside its sandbox folder, so a native-only check will miss it.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".var/app/com.discordapp.Discord/config/discord",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Flatpak sandbox permissions: per-app config lives in ~/.var/app/<app-id>/config; Discord's Flathub id is com.discordapp.Discord: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
+  "notes": "Same lowercase discord profile as the native install, relocated into the sandbox."
+}

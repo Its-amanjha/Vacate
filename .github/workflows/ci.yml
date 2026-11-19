@@ -27,38 +27,50 @@ jobs:
           - name: macos-pwsh
             os: macos-latest
             shell: pwsh
+    # A step's own `shell:` cannot use the matrix context; the job default can.
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Show runtime
+        run: $PSVersionTable | Format-Table -AutoSize | Out-String -Width 200
+
       - name: Install Pester 5 and PSScriptAnalyzer
-        shell: ${{ matrix.shell }}
         run: |
+          [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+          if ($PSVersionTable.PSEdition -eq 'Desktop') { Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Scope CurrentUser | Out-Null }
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
           Install-Module -Name Pester -MinimumVersion 5.5 -MaximumVersion 5.99 -Repository PSGallery -Force -Scope CurrentUser -SkipPublisherCheck
           Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -SkipPublisherCheck
 
       - name: Run tests
-        shell: ${{ matrix.shell }}
         run: ./tests/Run-Tests.ps1
 
-      - name: Run performance tests
-        if: matrix.shell == 'pwsh'
-        shell: pwsh
-        run: ./tests/Run-Tests.ps1 -Path tests/perf
+      - name: Validate rule catalog
+        run: ./vacate.ps1 rules validate
 
-      - name: Run lint
-        if: matrix.name == 'ubuntu-pwsh'
-        shell: ${{ matrix.shell }}
-        run: ./tests/Invoke-Lint.ps1
-
-      - name: Validate rule files
+      - name: Validate rule files against the schema
         if: matrix.shell == 'pwsh'
-        shell: pwsh
         run: |
           foreach ($platform in @('windows', 'macos', 'linux')) {
             ./tests/Test-RuleFiles.ps1 -Platform $platform
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
+
+      - name: Run performance tests
+        if: matrix.shell == 'pwsh'
+        run: ./tests/Run-Tests.ps1 -Path tests/perf
+
+      - name: Run lint
+        if: matrix.name == 'ubuntu-pwsh'
+        run: ./tests/Invoke-Lint.ps1
+
+      # Real read-only scan of the runner. -Redact because CI logs and artifacts are public.
+      - name: Sample scan (redacted)
+        run: ./vacate.ps1 scan -Redact
 
       - name: Upload sample report
         if: always()

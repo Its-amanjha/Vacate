@@ -12,8 +12,8 @@ never deletes, moves or changes anything, never opens file contents, and never u
 |---|---|---|---|
 | `scan` end to end | yes, PowerShell 5.1 and 7 (real PC: 22 s) | yes, PowerShell 7 (WSL: 14 s) | yes, PowerShell 7 (GitHub Actions runner, macOS 26.7.2 arm64) |
 | Rules | 87 | 74 | 62 |
-| Verified on a real machine | **39** (owner's PC, Windows 11 Pro 26300) | **20** (owner's WSL Ubuntu 24.04) | **24** ci-verified (CI runner only) |
-| Not yet verified | 48 | 54 | 38 |
+| Verified on a real machine | **43** (owner's PC, Windows 11 Pro 26300) | **20** (owner's WSL Ubuntu 24.04) | **24** ci-verified (CI runner only) |
+| Not yet verified | 44 | 54 | 38 |
 | Root / admin | runs unelevated; admin-only rules skipped with a reason | refuses root unless `-AllowRoot` | refuses root unless `-AllowRoot` |
 | System queries | read-only CIM (BitLocker, TPM, OS, volumes) | `lsblk`, `findmnt` | `fdesetup status` |
 
@@ -24,12 +24,13 @@ prints), `summary.md`, `checklist.md` and `scan.log` into `runs/<timestamp>/`.
 
 ## 2. What is unverified or CI-only
 
-- **140 of 223 rules are unverified.** They still run; every report lists them by id.
+- **136 of 223 rules are unverified.** They still run; every report lists them by id.
   A rule becomes verified only when a real scan on that platform found its data (D32).
 - **macOS is ci-verified only.** The 24 verified macOS rules were confirmed on a clean GitHub
   Actions runner with Full Disk Access. Privacy prompts (TCC) on a personal Mac are untested.
-- **Admin-only Windows rules have never run elevated:** encryption.bitlocker.status, encryption.tpm.presence, network.wifi.profiles, network.wireguard.configs, system.prefetch.
-  An elevated scan (`.\vacate.ps1 scan -Elevated` from an Administrator shell) has not been done.
+- **Admin-only Windows rules:** an elevated scan (`.\vacate.ps1 scan -Elevated` from an
+  Administrator shell) on 2026-11-20 verified encryption.bitlocker.status, encryption.tpm.presence, network.wifi.profiles, system.prefetch.
+  `network.wireguard.configs` stays unverified because WireGuard is not installed on that PC.
 - **Linux was verified in WSL**, not on a desktop install. Two rules stayed unverified because the
   tools never wrote the file without an interactive session (zsh and fish history).
 - **No personal Mac and no real desktop Linux** have been scanned.

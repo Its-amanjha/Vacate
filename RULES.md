@@ -4,7 +4,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 
 `verified` means the location was confirmed on a real machine of that platform. Unverified rules still run; the report lists them.
 
-## Windows (87 rules, 39 verified)
+## Windows (87 rules, 43 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -58,8 +58,8 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `email.outlook.data` | email | high | `LOCALAPPDATA/Microsoft/Outlook` | no | no |
 | `email.outlook.new` | email | high | `LOCALAPPDATA/Packages/Microsoft.OutlookForWindows_8wekyb3d8bbwe` | no | yes (Windows 11 Pro 26300) |
 | `email.thunderbird.profiles` | email | high | `APPDATA/Thunderbird/Profiles/*` | no | no |
-| `encryption.bitlocker.status` | disk-encryption | low | `root/CIMV2/Security/MicrosoftVolumeEncryption:Win32_EncryptableVolume` | yes | no |
-| `encryption.tpm.presence` | disk-encryption | low | `root/CIMV2/Security/MicrosoftTpm:Win32_Tpm` | yes | no |
+| `encryption.bitlocker.status` | disk-encryption | low | `root/CIMV2/Security/MicrosoftVolumeEncryption:Win32_EncryptableVolume` | yes | yes (Windows 11 Pro 26300) |
+| `encryption.tpm.presence` | disk-encryption | low | `root/CIMV2/Security/MicrosoftTpm:Win32_Tpm` | yes | yes (Windows 11 Pro 26300) |
 | `files.desktop` | personal-files | medium | `HOME/Desktop` | no | yes (Windows 11 Pro 26300) |
 | `files.documents` | personal-files | medium | `HOME/Documents` | no | yes (Windows 11 Pro 26300) |
 | `files.downloads` | personal-files | medium | `HOME/Downloads` | no | yes (Windows 11 Pro 26300) |
@@ -80,13 +80,13 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `network.openvpn.configs` | network | high | `HOME/OpenVPN/config` | no | no |
 | `network.printers.user` | network | low | `HKCU\Printers\Connections` | no | yes (Windows 11 Pro 26300) |
 | `network.rdp.mru` | network | high | `HKCU\Software\Microsoft\Terminal Server Client\Default` | no | no |
-| `network.wifi.profiles` | network | critical | `PROGRAMDATA/Microsoft/Wlansvc/Profiles/Interfaces` | yes | no |
+| `network.wifi.profiles` | network | critical | `PROGRAMDATA/Microsoft/Wlansvc/Profiles/Interfaces` | yes | yes (Windows 11 Pro 26300) |
 | `network.wireguard.configs` | network | high | `SYSTEMDRIVE/Program Files/WireGuard/Data/Configurations` | yes | no |
 | `profiles.other-users` | user-profiles | low | `USERS/*` | no | no |
 | `programs.installed.all` | installed-programs | low | uninstall keys (all) | no | yes (Windows 11 Pro 26300) |
 | `system.crashdumps` | system-traces | high | `LOCALAPPDATA/CrashDumps` | no | no |
 | `system.eventlogs` | system-traces | low | `SYSTEMDRIVE/Windows/System32/winevt/Logs` | no | yes (Windows 11 Pro 26300) |
-| `system.prefetch` | system-traces | medium | `SYSTEMDRIVE/Windows/Prefetch` | yes | no |
+| `system.prefetch` | system-traces | medium | `SYSTEMDRIVE/Windows/Prefetch` | yes | yes (Windows 11 Pro 26300) |
 | `system.temp.user` | system-traces | medium | `LOCALAPPDATA/Temp` | no | yes (Windows 11 Pro 26300) |
 | `system.windows-old` | system-traces | medium | `SYSTEMDRIVE/Windows.old` | no | no |
 | `wallet.electrum` | wallets | critical | `APPDATA/Electrum/wallets` | no | no |

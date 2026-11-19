@@ -16,8 +16,8 @@
   "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
   "maxEntries": 5000,
   "requiresElevation": true,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": ["Windows 11 Pro 26300"],
+  "verified": true,
   "source": "SANS Windows forensic poster: %SystemDrive%/Windows/Prefetch (*.pf execution files)",
   "notes": "Machine-wide folder, so elevation is required. Only .pf files are counted; their embedded path and run-count data is never parsed."
 }

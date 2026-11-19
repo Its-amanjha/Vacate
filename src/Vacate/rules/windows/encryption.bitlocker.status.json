@@ -14,8 +14,8 @@
   "measure": ["exists", "properties"],
   "maxEntries": 5000,
   "requiresElevation": true,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": ["Windows 11 Pro 26300"],
+  "verified": true,
   "source": "Microsoft Learn Win32_EncryptableVolume class: https://learn.microsoft.com/en-us/windows/win32/secprov/win32-encryptablevolume",
   "notes": "Read-only CIM query. ProtectionStatus 1 means protected, 0 means off. Recovery keys are not retrieved; only the two named properties are requested."
 }

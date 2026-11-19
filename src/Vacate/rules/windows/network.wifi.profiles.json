@@ -15,8 +15,8 @@
   "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
   "maxEntries": 5000,
   "requiresElevation": true,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": ["Windows 11 Pro 26300"],
+  "verified": true,
   "source": "WLAN profile XMLs live under %PROGRAMDATA%/Microsoft/Wlansvc/Profiles/Interfaces; see https://passcape.com/windows_password_recovery_dpapi_decoder",
   "notes": "Keys inside the XML are DPAPI-protected. Needs elevation because the store is machine-wide. Counts profile files only; none are parsed."
 }

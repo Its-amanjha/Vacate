@@ -1,0 +1,22 @@
+{
+  "id": "msg.discord",
+  "platforms": ["macos"],
+  "category": "messaging",
+  "title": "Discord Desktop data",
+  "whyItMatters": "Discord stores cached chats, tokens and downloads in its profile folder. It shows which servers the user took part in.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/discord",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "DC3 technical advisory: Discord on macOS stores files under ~/Library/Application Support/discord (lowercase)",
+  "notes": "Folder name is lowercase on macOS. macOS 27 may block this path with com.apple.macl even with Full Disk Access; treat that as a permission skip."
+}

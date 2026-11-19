@@ -1,0 +1,22 @@
+{
+  "id": "msg.slack",
+  "platforms": ["macos"],
+  "category": "messaging",
+  "title": "Slack Desktop data",
+  "whyItMatters": "Slack caches workspace messages, tokens and uploads. It reveals which teams the user belonged to and what was shared there.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Slack",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Slack Desktop artifacts: ~/Library/Application Support/Slack - https://docs.macfor.io/plugins/communication-slack",
+  "notes": "Sandboxed installs use ~/Library/Containers/com.tinyspeck.slackmacgap/Data/Library/Application Support/Slack instead. Cookies and IndexedDB are not read."
+}

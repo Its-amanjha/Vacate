@@ -1,0 +1,22 @@
+{
+  "id": "msg.discord",
+  "platforms": ["windows"],
+  "category": "messaging",
+  "title": "Discord client data",
+  "whyItMatters": "Discord caches servers, direct messages and attachments and keeps a login token locally. The token is enough to take over the account until the password is changed.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "discord",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Discord desktop is an Electron app that stores its user data in the app-data folder (leveldb caches, logs): https://github.com/discord/discord-api-docs",
+  "notes": "Stable client. Discord Canary, PTB and Development builds use discordcanary, discordptb and discorddevelopment folders next to it. Versioned folders under discord hold the app itself."
+}

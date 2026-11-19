@@ -1,0 +1,22 @@
+{
+  "id": "msg.signal",
+  "platforms": ["windows"],
+  "category": "messaging",
+  "title": "Signal Desktop conversations",
+  "whyItMatters": "Signal keeps a local copy of every conversation, attachment and draft on the computer. The database is encrypted, but the folder shows the account existed and how much was kept.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Signal",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Signal Desktop forensics, data folder under Roaming (sql/db.sqlite, attachments, config): https://www.alexbilz.com/post/2021-06-07-forensic-artifacts-signal-desktop",
+  "notes": "Contains sql/db.sqlite (SQLCipher), attachments, drafts and logs. The database key lives in the Windows Credential Manager on current builds and in config.json on older ones. Signed out does not mean deleted."
+}

@@ -1,0 +1,22 @@
+{
+  "id": "msg.teams",
+  "platforms": ["windows"],
+  "category": "messaging",
+  "title": "Microsoft Teams chats and files",
+  "whyItMatters": "Teams keeps cached chats, channel posts, meeting details and downloaded files. It shows the employer, colleagues and projects the person worked with.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Packages/MSTeams_8wekyb3d8bbwe/LocalCache/Microsoft/MSTeams",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Microsoft Learn, Clear the Teams client cache (new Teams path under Packages/MSTeams_LocalCache): https://learn.microsoft.com/en-us/troubleshoot/microsoftteams/teams-administration/clear-teams-cache",
+  "notes": "New Teams (MSIX). Classic Teams kept data in the roaming folder under Microsoft Teams. Signing out of Teams does not remove the cache; the app has to be reset."
+}

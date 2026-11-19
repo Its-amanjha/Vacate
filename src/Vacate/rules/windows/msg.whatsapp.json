@@ -1,0 +1,22 @@
+{
+  "id": "msg.whatsapp",
+  "platforms": ["windows"],
+  "category": "messaging",
+  "title": "WhatsApp Desktop message store",
+  "whyItMatters": "WhatsApp keeps a local copy of chats, contacts, sent photos and files. Anyone who takes the disk can see who the person talked to, even without the phone.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Packages/5319275A.WhatsAppDesktop_*/LocalState",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "MSIX packaged apps keep user data in Packages/<PackageFamilyName>/LocalState: https://learn.microsoft.com/en-us/uwp/api/windows.storage.applicationdata.localfolder",
+  "notes": "Microsoft Store build; the wildcard covers the publisher hash of the package family name (commonly 5319275A.WhatsAppDesktop_cv1g1gvanyjgm, but it can differ between builds). The older Electron WhatsApp Desktop kept data under %APPDATA% WhatsApp instead. Message database and media are encrypted by the app."
+}

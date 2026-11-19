@@ -1,0 +1,22 @@
+{
+  "id": "browser.firefox.cache",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Firefox cache folders",
+  "whyItMatters": "The Firefox cache keeps copies of pages, images and scripts from every site visited. Clearing history does not remove it, so it shows browsing activity on its own.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".cache/mozilla/firefox",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "XDG Base Directory spec (cache under $XDG_CACHE_HOME, default ~/.cache) and the Mozilla profile cache2 layout: https://specifications.freedesktop.org/basedir-spec/latest/",
+  "notes": "One folder per profile with cache2 inside. The Firefox snap keeps its cache under ~/snap/firefox/common/.cache/mozilla/firefox."
+}

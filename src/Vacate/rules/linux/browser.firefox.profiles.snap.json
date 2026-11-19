@@ -1,0 +1,21 @@
+{
+  "id": "browser.firefox.profiles.snap",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Firefox profiles (Snap install)",
+  "whyItMatters": "Ubuntu ships Firefox as a Snap. The profile inside the Snap tree holds the same history, bookmarks, cookies and saved logins, and is easy to miss because the normal Firefox folder is empty.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "snap/firefox/common/.mozilla/firefox/*/prefs.js",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Ubuntu has shipped Firefox as a Snap since 22.04; the confined profile lives under ~/snap/firefox/common/.mozilla/firefox: https://askubuntu.com/questions/1414757/where-does-firefox-snap-store-the-profiles",
+  "notes": "Snap keeps per-app data under ~/snap/<name>/<revision|common>; Firefox uses the common slot so profiles survive revisions. On Ubuntu 22.04+ the native ~/.mozilla/firefox folder usually does not exist."
+}

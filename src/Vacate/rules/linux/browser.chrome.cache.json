@@ -1,0 +1,22 @@
+{
+  "id": "browser.chrome.cache",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Chrome cache folders",
+  "whyItMatters": "Cached pages, images and scripts show which sites were visited and often still hold the page content itself, even after history was cleared.",
+  "sensitivity": "low",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".cache/google-chrome",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "XDG Base Directory spec (caches go to $XDG_CACHE_HOME, default ~/.cache) plus the Chromium cache layout under the user data directory: https://specifications.freedesktop.org/basedir-spec/latest/",
+  "notes": "One cache tree per profile (Default, Profile 1, ...) with Cache, Code Cache and GPUCache inside. If XDG_CACHE_HOME is set the cache lives there instead. Chromium itself uses ~/.cache/chromium."
+}

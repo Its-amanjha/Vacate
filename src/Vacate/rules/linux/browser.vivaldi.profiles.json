@@ -1,0 +1,21 @@
+{
+  "id": "browser.vivaldi.profiles",
+  "platforms": ["linux"],
+  "category": "browsers",
+  "title": "Vivaldi browser profiles",
+  "whyItMatters": "Each Vivaldi profile holds history, sessions, mail accounts and saved logins. The profiles show who used the browser and what they were doing.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "vivaldi/*/Preferences",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "BrowserForensics, Brave/Opera/Vivaldi profile locations: Vivaldi on Linux keeps profiles under ~/.config/vivaldi/<profile>: https://www.browserforensics.app/en/blog/brave-opera-vivaldi-profile-locations",
+  "notes": "Vivaldi is Chromium-based; the directory is lowercase vivaldi and profiles are Default, Profile 1, ... Matches the Preferences marker file. Vivaldi Snapshot uses a separate vivaldi-snapshot tree and is not matched."
+}

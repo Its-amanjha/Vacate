@@ -62,8 +62,9 @@ read, so vacate cannot tell a full folder from an empty one. Other operating sys
 encrypted containers, swap, snapshots, TCC-protected folders, root-only files and admin-only
 locations are outside the scan, as listed in [LIMITS.md](LIMITS.md). Budget exhaustion and
 per-rule timeouts will cut a scan short; the report says so, but the missing part stays missing.
-Today the catalog has the Windows pack only; the Linux and macOS packs are (planned). The engine
-that records skips and incomplete scans is (planned).
+The catalog is still being filled in: the Linux pack is (planned), and no rule is presented as
+verified until someone has seen its path on a real machine. The engine that records skips and
+incomplete scans is (planned).
 
 ## Report leakage
 

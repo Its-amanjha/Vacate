@@ -1,0 +1,47 @@
+{
+  "id": "msg.zoom.desktop",
+  "platforms": [
+    "windows"
+  ],
+  "category": "messaging",
+  "title": "Zoom desktop client data",
+  "whyItMatters": "Zoom keeps local databases and logs for meetings, chat, contacts and settings. The folder shows which accounts and meetings were used on this PC.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Zoom",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Zoom Support, Clearing Zoom cache and cookies: Windows data folder %APPDATA%/Zoom - https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0058835",
+  "notes": "Desktop client data. Local recordings are saved under Documents/Zoom by default and are outside this locator. No database or log is opened.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Save any local recording, chat file or note you need; recordings usually live in Documents/Zoom.",
+    "signOut": "Sign out of Zoom on this PC and remove this device from the signed-in devices list in the Zoom web portal.",
+    "steps": [
+      "Save the recordings and files you need.",
+      "Sign out of Zoom on this PC.",
+      "Uninstall Zoom from Settings > Apps > Installed apps.",
+      "Delete the Zoom folder named in the plan if it is still there."
+    ],
+    "risk": "Removes local Zoom meeting, chat and settings data from this PC. Cloud recordings and account data stay in the Zoom account.",
+    "closeApps": [
+      "Zoom"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Zoom Support, Uninstalling and reinstalling the Zoom application: https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065146"
+  }
+}

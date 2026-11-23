@@ -26,7 +26,7 @@
     "macOS 26.7.2 (GitHub Actions CI)"
   ],
   "verified": true,
-  "source": "Apple macOS User Guide, delete files (items move to the Trash); per-user Trash is the ~/.Trash folder (Unconfirmed: no Apple page names the path)",
+  "source": "macforensics.app artifact cheat sheet (Trash): per-user Trash is ~/.Trash/ - https://www.macforensics.app/en/artifacts/trash; Apple macOS User Guide describes emptying the Trash",
   "notes": "TCC-protected: without Full Disk Access a live scan gets a permission skip. Items are counted by metadata; per-volume .Trashes folders are out of scope.",
   "cleanup": {
     "action": "remove",

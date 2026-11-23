@@ -4,7 +4,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 
 `verified` means the location was confirmed on a real machine of that platform. Unverified rules still run; the report lists them.
 
-## Windows (87 rules, 43 verified)
+## Windows (98 rules, 45 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -17,6 +17,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `activity.typedpaths` | activity | medium | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\TypedPaths` | no | yes (Windows 11 Pro 26300) |
 | `activity.userassist` | activity | medium | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist` | no | yes (Windows 11 Pro 26300) |
 | `activity.wordwheelquery` | activity | medium | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\WordWheelQuery` | no | no |
+| `ai.claude.desktop` | ai-assistants | high | `APPDATA/Claude` | no | no |
 | `ai.copilot.history` | ai-assistants | high | `LOCALAPPDATA/Packages/Microsoft.Copilot_*` | no | no |
 | `ai.recall.data` | ai-assistants | high | `LOCALAPPDATA/CoreAIPlatform.00/UKP` | no | no |
 | `autostart.run-key-machine` | autostart | low | `HKLM\Software\Microsoft\Windows\CurrentVersion\Run` | no | yes (Windows 11 Pro 26300) |
@@ -37,13 +38,19 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `browser.firefox.logins` | browsers | critical | `APPDATA/Mozilla/Firefox/Profiles/*/logins.json` | no | no |
 | `browser.firefox.places` | browsers | high | `APPDATA/Mozilla/Firefox/Profiles/*/places.sqlite` | no | no |
 | `browser.firefox.profiles` | browsers | medium | `APPDATA/Mozilla/Firefox/Profiles/*` | no | no |
+| `browser.opera.gx` | browsers | medium | `APPDATA/Opera Software/Opera GX Stable/Default/Preferences` | no | yes (Windows 11 Pro 26300) |
 | `browser.opera.profiles` | browsers | medium | `APPDATA/Opera Software/Opera Stable/Default/Preferences` | no | no |
 | `browser.vivaldi.profiles` | browsers | medium | `LOCALAPPDATA/Vivaldi/User Data/*/Preferences` | no | no |
+| `browser.zen.profiles` | browsers | medium | `APPDATA/zen/Profiles/*/prefs.js` | no | no |
 | `cloud.onedrive` | cloud-sync | medium | `HOME/OneDrive*` | no | yes (Windows 11 Pro 26300) |
 | `containers.docker-desktop` | containers-vms | medium | `LOCALAPPDATA/Docker` | no | yes (Windows 11 Pro 26300) |
 | `containers.virtualbox` | containers-vms | medium | `HOME/VirtualBox VMs` | no | no |
 | `containers.wsl-distros` | containers-vms | medium | `HKCU\Software\Microsoft\Windows\CurrentVersion\Lxss` | no | yes (Windows 11 Pro 26300) |
+| `credentials.1password.desktop` | credentials | critical | `LOCALAPPDATA/1Password` | no | no |
+| `credentials.bitwarden.desktop` | credentials | critical | `APPDATA/Bitwarden` | no | no |
+| `credentials.bitwarden.store` | credentials | critical | `LOCALAPPDATA/Packages/8bitSolutionsLLC.bitwardendesktop_h4e712dmw3xyy/LocalCache/Roaming/Bitwarden` | no | no |
 | `credentials.keepass.config` | credentials | medium | `APPDATA/KeePass/KeePass.config.xml` | no | no |
+| `credentials.keepassxc.config` | credentials | medium | `APPDATA/KeePassXC` | no | no |
 | `credentials.windows.credentials-local` | credentials | critical | `LOCALAPPDATA/Microsoft/Credentials` | no | yes (Windows 11 Pro 26300) |
 | `credentials.windows.credentials-roaming` | credentials | critical | `APPDATA/Microsoft/Credentials` | no | yes (Windows 11 Pro 26300) |
 | `credentials.windows.dpapi-masterkeys` | credentials | critical | `APPDATA/Microsoft/Protect` | no | yes (Windows 11 Pro 26300) |
@@ -69,11 +76,13 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `games.epic` | games-licenses | medium | `LOCALAPPDATA/EpicGamesLauncher/Saved` | no | no |
 | `games.steam` | games-licenses | medium | `LOCALAPPDATA/Steam` | no | no |
 | `msg.discord` | messaging | high | `APPDATA/discord` | no | no |
+| `msg.phone-link` | messaging | high | `LOCALAPPDATA/Packages/Microsoft.YourPhone_8wekyb3d8bbwe` | no | yes (Windows 11 Pro 26300) |
 | `msg.signal` | messaging | high | `APPDATA/Signal` | no | no |
 | `msg.slack` | messaging | high | `APPDATA/Slack` | no | no |
 | `msg.teams` | messaging | high | `LOCALAPPDATA/Packages/MSTeams_8wekyb3d8bbwe/LocalCache/Microsoft/MSTeams` | no | yes (Windows 11 Pro 26300) |
 | `msg.telegram` | messaging | high | `APPDATA/Telegram Desktop/tdata` | no | no |
 | `msg.whatsapp` | messaging | high | `LOCALAPPDATA/Packages/5319275A.WhatsAppDesktop_*/LocalState` | no | no |
+| `msg.zoom.desktop` | messaging | high | `APPDATA/Zoom` | no | no |
 | `network.bluetooth.devices` | network | medium | `HKLM\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Devices` | no | yes (Windows 11 Pro 26300) |
 | `network.mapped-drives` | network | high | `HKCU\Network` | no | yes (Windows 11 Pro 26300) |
 | `network.networklist.profiles` | network | medium | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles` | no | no |
@@ -82,6 +91,8 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `network.rdp.mru` | network | high | `HKCU\Software\Microsoft\Terminal Server Client\Default` | no | no |
 | `network.wifi.profiles` | network | critical | `PROGRAMDATA/Microsoft/Wlansvc/Profiles/Interfaces` | yes | yes (Windows 11 Pro 26300) |
 | `network.wireguard.configs` | network | high | `SYSTEMDRIVE/Program Files/WireGuard/Data/Configurations` | yes | no |
+| `personal.notion.desktop` | personal-files | medium | `APPDATA/Notion` | no | no |
+| `personal.obsidian.config` | personal-files | medium | `APPDATA/Obsidian` | no | no |
 | `profiles.other-users` | user-profiles | low | `USERS/*` | no | no |
 | `programs.installed.all` | installed-programs | low | uninstall keys (all) | no | yes (Windows 11 Pro 26300) |
 | `system.crashdumps` | system-traces | high | `LOCALAPPDATA/CrashDumps` | no | no |

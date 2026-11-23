@@ -24,8 +24,8 @@
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "macforensics.app artifact cheat sheet (Calendar/Contacts/Reminders)",
-  "notes": "TCC-protected; needs Full Disk Access.",
+  "source": "macforensics.app artifact cheat sheet (Calendar/Contacts/Reminders): ~/Library/Calendars/ or group.com.apple.calendar - https://www.macforensics.app/en/artifacts/calendar-contacts-reminders",
+  "notes": "TCC-protected; needs Full Disk Access. Newer macOS can keep calendar data in ~/Library/Group Containers/group.com.apple.calendar, which this rule does not cover; only ~/Library/Calendars is checked.",
   "cleanup": {
     "action": "export-then-remove",
     "exportFirst": "In Calendar choose File > Export > Calendar Archive to save every calendar, then copy the archive off this Mac.",

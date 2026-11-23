@@ -1,0 +1,46 @@
+{
+  "id": "personal.notion.desktop",
+  "platforms": [
+    "windows"
+  ],
+  "category": "personal-files",
+  "title": "Notion desktop cache",
+  "whyItMatters": "Notion keeps a local cache of pages, files and workspace state so it can open faster. The folder shows the workspace was used on this PC and may hold offline copies of page content.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Notion",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Notion Help, Reset the Notion app: Windows data folder %APPDATA%/Notion - https://www.notion.com/help/reset-notion",
+  "notes": "Desktop cache and local workspace state. The MSIX build reads the existing profile from the same location. Nothing is opened; page content stays in the workspace.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "If Notion shows any page or file that has not finished syncing, wait for it or export it from the workspace first, because only the local cache is removed here.",
+    "signOut": "Sign out of Notion on this PC so the workspace no longer keeps a signed-in session here.",
+    "steps": [
+      "In Notion, open Help > Troubleshooting > Reset & Erase All Local Data.",
+      "Uninstall Notion from Settings > Apps > Installed apps.",
+      "Delete the Notion folder named in the plan if it is still there."
+    ],
+    "risk": "Removes the local Notion cache and sign-in state from this PC. Pages stored in the workspace are not deleted.",
+    "closeApps": [
+      "Notion"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Notion Help, Reset the Notion app: https://www.notion.com/help/reset-notion"
+  }
+}

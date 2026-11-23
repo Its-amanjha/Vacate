@@ -26,8 +26,8 @@
     "macOS 26.7.2 (GitHub Actions CI)"
   ],
   "verified": true,
-  "source": "Apple Support: Photos Library is stored by default in the Pictures folder - https://support.apple.com/guide/photos/photo-library-overview-pht211de786/mac",
-  "notes": "Recurses for size and count by metadata only (a folder's own size is near zero); large libraries hit the 20000 cap and are marked truncated. Files are never opened. Libraries moved off ~/Pictures are not matched.",
+  "source": "Apple Support: Photos Library is stored by default in the Pictures folder - https://support.apple.com/guide/photos/photo-library-overview-pht211de786/mac; TCC access: macforensics.app Photos.sqlite artifact - https://www.macforensics.app/en/artifacts/photos-metadata",
+  "notes": "TCC-protected (Photos library): a live scan needs Full Disk Access even to list metadata; without it the folder returns 'Operation not permitted'. Recurses for size and count by metadata only (a folder's own size is near zero); large libraries hit the 20000 cap and are marked truncated. Files are never opened. Libraries moved off ~/Pictures are not matched.",
   "cleanup": {
     "action": "export-then-remove",
     "exportFirst": "In Photos choose File > Export > Export Unmodified Originals for the items you keep, then copy them off this Mac.",

@@ -1,0 +1,47 @@
+{
+  "id": "browser.opera.gx",
+  "platforms": [
+    "windows"
+  ],
+  "category": "browsers",
+  "title": "Opera GX profile",
+  "whyItMatters": "The Opera GX profile holds history, cookies, saved logins, bookmarks and GX settings. It shows the browser was used and which sites kept the person signed in.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Opera Software/Opera GX Stable/Default/Preferences",
+    "match": "files"
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "Opera Help, Crashes and issues: Get the profile and data folder paths from About Opera or opera:about/ (Roaming path confirmed on Windows 11) - https://help.opera.com/en/latest/crashes-and-issues/",
+  "notes": "Verified on this PC at %APPDATA%/Opera Software/Opera GX Stable/Default/Preferences. Opera GX keeps data in Roaming, unlike most Chromium browsers. Opera Stable and side profiles use sibling folders.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Opera GX, export saved passwords from the password manager and bookmarks as HTML before removing anything.",
+    "signOut": "Sign out of your Opera account in the browser settings so synced data stays with the account.",
+    "steps": [
+      "Close every Opera GX window.",
+      "Uninstall Opera GX from Settings > Apps > Installed apps.",
+      "Delete the Opera GX profile folder named in the plan if it is still there."
+    ],
+    "risk": "Removes the Opera GX profile on this PC: history, bookmarks, saved logins, cookies and GX settings.",
+    "closeApps": [
+      "Opera GX"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Opera, Features (Sync): https://help.opera.com/en/latest/features/"
+  }
+}

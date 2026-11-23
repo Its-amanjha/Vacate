@@ -22,7 +22,7 @@ result.
 
 Phase 1 works end to end on Windows 11 (PowerShell 5.1 and 7) and on Ubuntu 24.04 (tested in
 WSL, PowerShell 7): `scan`, `rules`, `report`, `checklist` and `version` all run. The catalog has
-223 rules across Windows, Linux and macOS. Rules confirmed on a real machine are marked
+234 rules across Windows, Linux and macOS. Rules confirmed on a real machine are marked
 `verified` in [RULES.md](RULES.md); the rest still run and are listed as unverified in every
 report. macOS is **ci-verified**: 24 macOS rules were confirmed by a scan on the GitHub Actions
 macOS 26.7.2 runner, not yet on a personal Mac.
@@ -30,7 +30,7 @@ macOS 26.7.2 runner, not yet on a personal Mac.
 Phase 2 adds `plan -Run <dir>`: a step-by-step cleanup plan for every trace in a report (what to
 save, where to sign out, what to remove, the risk), ending with the operating system's own reset.
 It is advice only; vacate still changes nothing. New here? Read the plain-language
-[guide](docs/GUIDE.md).
+[guide](docs/GUIDE.md). Common questions are answered in the [FAQ](docs/FAQ.md).
 
 Phase 3 adds `clean` and `undo`: for a small, safe set of plan steps (`remove` steps for files
 inside your own profile), vacate can move the items to the Recycle Bin or Trash for you. It is a

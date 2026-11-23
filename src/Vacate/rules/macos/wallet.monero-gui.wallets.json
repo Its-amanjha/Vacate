@@ -24,7 +24,7 @@
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "Monero documentation, monero-wallet-gui reference (defaults): wallets are created under $HOME/Monero/wallets",
+  "source": "monero-gui official repo, src/main/main.cpp sets moneroAccountsDir to QStandardPaths::HomeLocation + /Monero/wallets on macOS - https://github.com/monero-project/monero-gui/blob/master/src/main/main.cpp",
   "notes": "The wizard can place wallets elsewhere; only the default is checked.",
   "cleanup": {
     "action": "export-then-remove",

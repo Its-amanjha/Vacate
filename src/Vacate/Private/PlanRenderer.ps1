@@ -121,7 +121,7 @@ function ConvertTo-VacatePlanHtml {
 
     $s = $Plan.summary
     [void]$sb.Append('<section><h2>Summary</h2><p>' + (& $h ('{0} steps cover all {1} traces from the report. {2} have guidance, {3} have none yet. {4} would also go away with a full reset.' -f $s.steps, $s.traces, $s.withGuidance, ($s.noGuidance + $s.ruleMissing), $s.resetCovers)) + '</p>' + $nl)
-    [void]$sb.Append('<table><thead><tr><th>Stage</th><th class="num">Steps</th></tr></thead><tbody>')
+    [void]$sb.Append('<table><thead><tr><th scope="col">Stage</th><th scope="col" class="num">Steps</th></tr></thead><tbody>')
     foreach ($b in @($s.byStage)) { [void]$sb.Append('<tr><td>' + (& $h $b.title) + '</td><td class="num">' + (& $h $b.steps) + '</td></tr>') }
     [void]$sb.Append('</tbody></table></section>' + $nl)
 

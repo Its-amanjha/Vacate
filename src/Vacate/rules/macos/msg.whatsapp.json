@@ -24,7 +24,7 @@
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "macfor knowledge base, WhatsApp Desktop on macOS: the Catalyst app keeps ChatStorage.sqlite in ~/Library/Group Containers/group.net.whatsapp.WhatsApp.shared",
+  "source": "macfor docs, WhatsApp Desktop plugin: ChatStorage.sqlite is in ~/Library/Group Containers/group.net.whatsapp.WhatsApp.shared - https://docs.macfor.io/plugins/messaging.whatsapp",
   "notes": "Current Catalyst app. The deprecated Electron build used ~/Library/Application Support/WhatsApp (not covered). Group Containers may need Full Disk Access.",
   "cleanup": {
     "action": "sign-out-then-remove",

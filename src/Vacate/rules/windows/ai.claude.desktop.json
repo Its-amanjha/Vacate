@@ -1,0 +1,46 @@
+{
+  "id": "ai.claude.desktop",
+  "platforms": [
+    "windows"
+  ],
+  "category": "ai-assistants",
+  "title": "Claude Desktop app data",
+  "whyItMatters": "Claude Desktop keeps a local configuration, logs and cached app state here. It shows the desktop app was used on this PC and which local tools it was allowed to start.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Claude",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Model Context Protocol docs for Claude Desktop: config and logs under %APPDATA%/Claude - https://modelcontextprotocol.io/quickstart/user",
+  "notes": "Config and logs used by Claude Desktop, including claude_desktop_config.json. The Microsoft Store/MSIX build may keep a copy under %LOCALAPPDATA%/Packages. Conversations are account-based; nothing is opened.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Sign out of Claude Desktop on this PC so the account no longer keeps a signed-in session here.",
+    "steps": [
+      "Sign out of Claude Desktop.",
+      "Uninstall Claude from Settings > Apps > Installed apps.",
+      "Delete the Claude folder named in the plan if it is still there."
+    ],
+    "risk": "Removes the local Claude configuration and logs from this PC. Conversations stored with the account stay there.",
+    "closeApps": [
+      "Claude"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Claude Help Center, Install Claude Desktop: https://support.claude.com/en/articles/10065433-install-claude-desktop"
+  }
+}

@@ -26,7 +26,7 @@
   ],
   "verified": true,
   "source": "macforensics.app artifact cheat sheet (QuarantineEventsV2)",
-  "notes": "SQLite file; size and date only, never opened.",
+  "notes": "SQLite file; size and date only, never opened. Full Disk Access is recommended for the collector on a live system (macforensics.app QuarantineEventsV2 artifact page).",
   "cleanup": {
     "action": "remove",
     "exportFirst": null,

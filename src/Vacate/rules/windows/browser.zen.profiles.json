@@ -1,0 +1,45 @@
+{
+  "id": "browser.zen.profiles",
+  "platforms": [
+    "windows"
+  ],
+  "category": "browsers",
+  "title": "Zen Browser profiles",
+  "whyItMatters": "Each Zen profile holds history, cookies, saved logins, extensions and workspaces. A profile on this PC shows the browser was used and how many separate identities were kept.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "zen/Profiles/*/prefs.js",
+    "match": "files"
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Zen Browser documentation, FAQ: Windows profiles at %APPDATA%/zen/Profiles - https://docs.zen-browser.app/faq",
+  "notes": "Matches the prefs.js marker so only real profiles are counted. Profile names are random per install. Firefox and other forks use different profile roots.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Zen, export bookmarks to an HTML file and save any passwords you need from the browser's password settings.",
+    "signOut": "Sign out of Mozilla Sync in Zen settings, or disconnect this profile from the account, so the account no longer trusts this browser.",
+    "steps": [
+      "Close every Zen window.",
+      "Uninstall Zen Browser from Settings > Apps > Installed apps.",
+      "Delete the Zen profile folder named in the plan if it is still there."
+    ],
+    "risk": "Removes every Zen profile on this PC: history, bookmarks, cookies, saved logins and workspaces.",
+    "closeApps": [
+      "Zen"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Zen Browser documentation, FAQ: https://docs.zen-browser.app/faq"
+  }
+}

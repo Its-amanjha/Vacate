@@ -1,0 +1,48 @@
+{
+  "id": "msg.phone-link",
+  "platforms": [
+    "windows"
+  ],
+  "category": "messaging",
+  "title": "Phone Link cached phone data",
+  "whyItMatters": "Phone Link keeps copies of messages, notifications, photos, call history and contacts from the linked phone. Anyone with the disk can see who the person talked to without the phone.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Packages/Microsoft.YourPhone_8wekyb3d8bbwe",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
+  "source": "Microsoft Learn, packaged apps keep user data under %LOCALAPPDATA%/Packages/<PackageFamilyName> - https://learn.microsoft.com/en-us/uwp/api/windows.storage.applicationdata.localfolder",
+  "notes": "source uncertain: Microsoft publishes no help page naming this folder; the package family name Microsoft.YourPhone_8wekyb3d8bbwe was confirmed on this PC (Windows 11). Phone Link cannot be uninstalled, but its app data can be reset in Settings. Local cache only; nothing is opened.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Save any photo or file you need from your phone; Phone Link keeps only a local cache of what was synced.",
+    "signOut": "In Phone Link, open Settings > Mobile devices and remove this phone, or unlink the Microsoft account on the phone.",
+    "steps": [
+      "In Phone Link, remove the linked phone.",
+      "Open Settings > Apps > Installed apps, choose Phone Link, then Advanced options > Reset.",
+      "Delete the Phone Link package folder named in the plan if it is still there."
+    ],
+    "risk": "Removes the local Phone Link cache on this PC. Messages and photos stay on the phone and in the Microsoft account.",
+    "closeApps": [
+      "Phone Link"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Microsoft Support, Remove your mobile device from Phone Link: https://support.microsoft.com/en-us/windows/apps/phonelink/remove-your-mobile-device-from-phone-link-link-to-windows-and-windows-settings"
+  }
+}

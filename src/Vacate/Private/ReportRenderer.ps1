@@ -55,6 +55,8 @@ table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 14px; 
 th, td { text-align: left; vertical-align: top; padding: 6px 8px; border-bottom: 1px solid var(--line); }
 th { font-weight: 600; }
 td.num, th.num { text-align: right; white-space: nowrap; }
+/* Long paths, rule ids and names must wrap instead of pushing the page past the screen. */
+td, li, dd, p, strong, .trace, .step { overflow-wrap: anywhere; }
 .trace { background: var(--card); border-radius: 6px; padding: 10px 14px; margin: 8px 0; break-inside: avoid; }
 .trace dl { display: grid; grid-template-columns: 9em 1fr; gap: 2px 12px; margin: 6px 0 0; font-size: 14px; }
 .trace dt { color: var(--muted); } .trace dd { margin: 0; overflow-wrap: anywhere; }
@@ -63,6 +65,8 @@ code { font-family: ui-monospace, Consolas, "DejaVu Sans Mono", monospace; font-
 .sev-medium { color: var(--med); } .sev-low { color: var(--low); }
 ol.checklist li { margin: 0 0 10px; } ol.checklist ul { margin: 4px 0 0; font-size: 14px; }
 footer { margin-top: 40px; font-size: 13px; color: var(--muted); }
+/* Phone width: stack the label/value pairs and tighten the tables so every column fits. */
+@media (max-width: 480px) { main { padding: 16px 12px 40px; } th, td { padding: 6px 4px; font-size: 13px; } .trace dl { grid-template-columns: 1fr; gap: 0; } .trace dt { margin-top: 8px; } }
 @media print { body { background:#fff; color:#000; font-size: 11pt; } main { max-width: none; padding: 0; } .trace { border: 1px solid #ccc; background: #fff; } h2 { break-after: avoid; } }
 '@
 
@@ -102,7 +106,7 @@ function ConvertTo-VacateReportHtml {
     [void]$sb.Append('<section><h2>Summary</h2><p>' + (& $h (Get-VacateSummarySentence -Report $Report)) + '</p></section>' + $nl)
 
     # 3. By category
-    [void]$sb.Append('<section><h2>By category</h2><table><thead><tr><th>Category</th><th class="num">Traces</th><th class="num">Size</th><th>Highest sensitivity</th><th>What it means</th></tr></thead><tbody>' + $nl)
+    [void]$sb.Append('<section><h2>By category</h2><table><thead><tr><th scope="col">Category</th><th scope="col" class="num">Traces</th><th scope="col" class="num">Size</th><th scope="col">Highest sensitivity</th><th scope="col">What it means</th></tr></thead><tbody>' + $nl)
     foreach ($c in @($Report.summary.byCategory)) {
         [void]$sb.Append(('<tr><td>{0}</td><td class="num">{1}</td><td class="num">{2}</td><td class="sev-{3}">{3}</td><td>{4}</td></tr>' -f (& $h $c.category), (& $h $c.traces), (& $h (Format-VacateByteSize $c.sizeBytes)), (& $h $c.highestSensitivity), (& $h (Get-VacateCategoryMeaning $c.category))) + $nl)
     }
@@ -159,7 +163,7 @@ function ConvertTo-VacateReportHtml {
     $progs = @($Report.installedPrograms)
     if ($progs.Count -eq 0) { [void]$sb.Append('<p class="muted">No installed-program list for this platform or scan.</p>' + $nl) }
     else {
-        [void]$sb.Append('<table><thead><tr><th>Name</th><th>Publisher</th><th>Version</th><th>Installed</th><th>Scope</th></tr></thead><tbody>' + $nl)
+        [void]$sb.Append('<table><thead><tr><th scope="col">Name</th><th scope="col">Publisher</th><th scope="col">Version</th><th scope="col">Installed</th><th scope="col">Scope</th></tr></thead><tbody>' + $nl)
         foreach ($p in $progs) {
             [void]$sb.Append(('<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td></tr>' -f (& $h $p.name), (& $h $p.publisher), (& $h $p.version), (& $h $p.installDate), (& $h $p.scope)) + $nl)
         }
@@ -172,7 +176,7 @@ function ConvertTo-VacateReportHtml {
     $sk = @($Report.skipped); $er = @($Report.errors)
     if ($sk.Count + $er.Count -eq 0) { [void]$sb.Append('<p>Every applicable rule ran.</p>' + $nl) }
     else {
-        [void]$sb.Append('<table><thead><tr><th>Rule</th><th>Reason</th><th>Detail</th></tr></thead><tbody>' + $nl)
+        [void]$sb.Append('<table><thead><tr><th scope="col">Rule</th><th scope="col">Reason</th><th scope="col">Detail</th></tr></thead><tbody>' + $nl)
         foreach ($x in $sk) { [void]$sb.Append(('<tr><td><code>{0}</code></td><td>{1}</td><td>{2}</td></tr>' -f (& $h $x.ruleId), (& $h $x.reason), (& $h $x.detail)) + $nl) }
         foreach ($x in $er) { [void]$sb.Append(('<tr><td><code>{0}</code></td><td>error</td><td>{1}: {2}</td></tr>' -f (& $h $x.ruleId), (& $h $x.type), (& $h $x.message)) + $nl) }
         [void]$sb.Append('</tbody></table>' + $nl)

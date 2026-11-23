@@ -15,6 +15,8 @@ Describe 'Vacate Clean and Undo Integration' -Skip:(-not $script:HasClean) {
         Import-Module (Join-Path $PSScriptRoot '../../src/Vacate/Vacate.psm1') -Force
         . (Join-Path $PSScriptRoot '../helpers/WriteSpy.ps1')
         $script:onWindows = ($PSVersionTable.PSEdition -eq 'Desktop') -or ((Get-Variable IsWindows -ValueOnly -ErrorAction SilentlyContinue) -eq $true)
+        # clean refuses administrator/root sessions; GitHub's Windows runners are administrators.
+        $script:elevated = InModuleScope Vacate { Test-VacateElevated -Platform (Get-VacatePlatform) }
         # ConvertFrom-VacateJson is module-private; call it inside the module.
         function script:Read-TestJson { param([string]$Path) InModuleScope Vacate -Parameters @{ P = $Path } { param($P) ConvertFrom-VacateJson -Json ([IO.File]::ReadAllText($P)) } }
         $script:tempRoot = Join-Path ([IO.Path]::GetTempPath()) ('vacate-clean-' + [guid]::NewGuid().ToString('N'))
@@ -195,6 +197,15 @@ Describe 'Vacate Clean and Undo Integration' -Skip:(-not $script:HasClean) {
             Test-Path $script:eligibleFilePath | Should -BeTrue
         }
 
+        It 'refuses -Execute in an administrator or root session' {
+            if (-not $script:elevated) { Set-ItResult -Skipped -Because 'only meaningful in an elevated session'; return }
+            $runDir = script:New-TestCleanRun
+            $planObj = (Read-TestJson -Path ((Join-Path $runDir 'plan.json')))
+            $fileStep = ($planObj.steps | Where-Object { $_.ruleId -eq 'clean.test.file' }).step
+            { Invoke-VacateClean -Run $runDir -Steps @($fileStep) -Execute -Confirm ([Environment]::MachineName) -TrashRoot $script:trashRoot -PlatformProfile $script:ctx.Platform } | Should -Throw '*not as administrator or root*'
+            Test-Path $script:eligibleFilePath | Should -BeTrue
+        }
+
         It 'refuses execution without -Steps (D52)' {
             $runDir = script:New-TestCleanRun
             $machine = [Environment]::MachineName
@@ -227,6 +238,7 @@ Describe 'Vacate Clean and Undo Integration' -Skip:(-not $script:HasClean) {
 
     Context 'Step eligibility and selective execution (D51)' {
         It 'refuses ineligible wallet step while an eligible step in the same call proceeds (D51)' {
+            if ($script:elevated) { Set-ItResult -Skipped -Because 'clean refuses elevated sessions (this one is elevated)'; return }
             # Ensure fresh files
             [IO.File]::WriteAllText($script:eligibleFilePath, 'test eligible file content')
             [IO.File]::WriteAllText($script:walletFilePath, 'crypto wallet private key material')
@@ -252,6 +264,7 @@ Describe 'Vacate Clean and Undo Integration' -Skip:(-not $script:HasClean) {
 
     Context 'Reparse point swap detection at execute time (D50)' {
         It 'refuses to clean a target swapped for a junction or symlink after planning (D50)' {
+            if ($script:elevated) { Set-ItResult -Skipped -Because 'clean refuses elevated sessions (this one is elevated)'; return }
             if (-not [IO.Directory]::Exists($script:swappedDirPath)) {
                 [void][IO.Directory]::CreateDirectory($script:swappedDirPath)
                 [IO.File]::WriteAllText($script:swappedFile, 'original content')
@@ -287,6 +300,7 @@ Describe 'Vacate Clean and Undo Integration' -Skip:(-not $script:HasClean) {
 
     Context 'Undo log and complete restoration (D53)' {
         It 'writes undo.json after each move and restores all moved files and directories (D53)' {
+            if ($script:elevated) { Set-ItResult -Skipped -Because 'clean refuses elevated sessions (this one is elevated)'; return }
             [IO.File]::WriteAllText($script:eligibleFilePath, 'test eligible file content')
             if (-not [IO.Directory]::Exists($script:eligibleSubDirPath)) {
                 [void][IO.Directory]::CreateDirectory($script:eligibleSubDirPath)

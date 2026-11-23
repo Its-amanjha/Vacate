@@ -8,6 +8,8 @@ if ($PSVersionTable.PSEdition -ne 'Desktop') {
     $topLinux = Get-Variable -Name IsLinux -ValueOnly -ErrorAction SilentlyContinue
     if ($topLinux -eq $true) { $script:onLinux = $true }
 }
+# The Linux mover never runs on macOS (it needs findmnt), so its move/restore tests skip there.
+$script:onMac = ((Get-Variable IsMacOS -ValueOnly -ErrorAction SilentlyContinue) -eq $true)
 
 BeforeAll {
     Import-Module (Join-Path $PSScriptRoot '../../src/Vacate/Vacate.psm1') -Force
@@ -208,7 +210,7 @@ Describe 'Get-VacateTrashInfo' {
     }
 }
 
-Describe 'trash mount points' {
+Describe 'trash mount points' -Skip:$script:onMac {
     BeforeAll {
         $script:mountSandbox = Get-TestTrashSandbox
     }
@@ -313,7 +315,7 @@ Describe 'trash mount points' {
     }
 }
 
-Describe 'Move-VacateItemToTrashLinux' {
+Describe 'Move-VacateItemToTrashLinux' -Skip:$script:onMac {
     BeforeAll {
         # Windows has no findmnt: give the logic tests one mount, the temp drive root.
         # On Linux the real mount list from the system query is used.
@@ -691,7 +693,7 @@ Describe 'Move-VacateItemToTrashLinux' {
     }
 }
 
-Describe 'Restore-VacateItemFromTrashLinux' {
+Describe 'Restore-VacateItemFromTrashLinux' -Skip:$script:onMac {
     BeforeEach {
         $script:sandbox = Get-TestTrashSandbox
         $script:trashRoot = Join-Path $script:sandbox 'Trash'

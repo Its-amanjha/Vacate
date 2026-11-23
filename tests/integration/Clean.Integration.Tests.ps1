@@ -59,6 +59,10 @@ Describe 'Vacate Clean and Undo Integration' -Skip:(-not $script:HasClean) {
         if ($script:onWindows) {
             $script:platformName = 'windows'; $sep = '\'; $cs = $false; $cmp = [StringComparison]::OrdinalIgnoreCase
         }
+        # clean refuses a run from another platform, so a Mac needs a macOS run (case-insensitive like macOS).
+        if ((Get-Variable IsMacOS -ValueOnly -ErrorAction SilentlyContinue) -eq $true) {
+            $script:platformName = 'macos'; $sep = '/'; $cs = $false; $cmp = [StringComparison]::OrdinalIgnoreCase
+        }
         $prof = [pscustomobject][ordered]@{
             Name          = $script:platformName
             CaseSensitive = $cs

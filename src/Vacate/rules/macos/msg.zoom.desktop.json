@@ -1,0 +1,47 @@
+{
+  "id": "msg.zoom.desktop",
+  "platforms": [
+    "macos"
+  ],
+  "category": "messaging",
+  "title": "Zoom desktop client data",
+  "whyItMatters": "Zoom keeps local databases and logs for meetings, chat, contacts and settings here. The folder shows which accounts and meetings were used on this Mac.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/zoom.us",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Zoom Support, Clearing Zoom cache and cookies: macOS data folder ~/Library/Application Support/zoom.us - https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0058835",
+  "notes": "Desktop client data. Local recordings are saved under ~/Documents/Zoom by default and are outside this locator. No database or log is opened.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "Save any local recording, chat file or note you need; recordings usually live in ~/Documents/Zoom.",
+    "signOut": "Sign out of Zoom on this Mac and remove this device from the signed-in devices list in the Zoom web portal.",
+    "steps": [
+      "Save the recordings and files you need.",
+      "Sign out of Zoom on this Mac.",
+      "Quit Zoom and move it to the Trash from Applications.",
+      "Delete the Zoom folder named in the plan if it is still there."
+    ],
+    "risk": "Removes local Zoom meeting, chat and settings data from this Mac. Cloud recordings and account data stay in the Zoom account.",
+    "closeApps": [
+      "Zoom"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Zoom Support, Uninstalling and reinstalling the Zoom application: https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065146"
+  }
+}

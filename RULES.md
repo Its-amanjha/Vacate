@@ -107,7 +107,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `wallet.metamask.edge` | wallets | critical | `LOCALAPPDATA/Microsoft/Edge/User Data/*/Local Extension Settings/ejbalbakoplchlghecdalmeeeajnimhm` | no | no |
 | `wallet.monero-gui` | wallets | critical | `HOME/Documents/Monero/wallets` | no | no |
 
-## macOS (62 rules, 24 verified)
+## macOS (70 rules, 24 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -122,6 +122,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `activity.saved-app-state` | activity | medium | `LIBRARY/Saved Application State` | no | no |
 | `activity.shell-history.bash` | activity | medium | `HOME/.bash_history` | no | no |
 | `activity.shell-history.zsh` | activity | medium | `HOME/.zsh_history` | no | no |
+| `ai.claude.desktop` | ai-assistants | high | `LIBRARY/Application Support/Claude` | no | no |
 | `autostart.launch-agents` | autostart | low | `LIBRARY/LaunchAgents/*.plist` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `browser.brave.profiles` | browsers | medium | `LIBRARY/Application Support/BraveSoftware/Brave-Browser/*/Preferences` | no | no |
 | `browser.chrome.history` | browsers | high | `LIBRARY/Application Support/Google/Chrome/*/History` | no | no |
@@ -133,11 +134,15 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `browser.safari.container` | browsers | high | `LIBRARY/Containers/com.apple.Safari` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `browser.safari.data` | browsers | high | `LIBRARY/Safari` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `browser.vivaldi.profiles` | browsers | medium | `LIBRARY/Application Support/Vivaldi/*/Preferences` | no | no |
+| `browser.zen.profiles` | browsers | medium | `LIBRARY/Application Support/zen` | no | no |
 | `cloud.dropbox` | cloud-sync | medium | `LIBRARY/CloudStorage/Dropbox*` | no | no |
 | `cloud.google-drive` | cloud-sync | medium | `LIBRARY/CloudStorage/GoogleDrive-*` | no | no |
 | `cloud.icloud-clouddocs` | cloud-sync | medium | `LIBRARY/Application Support/CloudDocs` | no | no |
 | `cloud.icloud-drive` | cloud-sync | medium | `LIBRARY/Mobile Documents` | no | no |
 | `cloud.onedrive` | cloud-sync | medium | `LIBRARY/CloudStorage/OneDrive-*` | no | no |
+| `credentials.1password.desktop` | credentials | critical | `LIBRARY/Group Containers/2BUA8C4S2C.com.1password` | no | no |
+| `credentials.bitwarden.desktop` | credentials | critical | `LIBRARY/Application Support/Bitwarden` | no | no |
+| `credentials.keepassxc.config` | credentials | medium | `LIBRARY/Application Support/KeePassXC` | no | no |
 | `credentials.keychains` | credentials | critical | `LIBRARY/Keychains` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `dev.aws.config` | developer-secrets | critical | `HOME/.aws` | no | no |
 | `dev.azure.config` | developer-secrets | critical | `HOME/.azure` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
@@ -162,8 +167,11 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `msg.slack` | messaging | high | `LIBRARY/Application Support/Slack` | no | no |
 | `msg.telegram` | messaging | high | `LIBRARY/Application Support/Telegram Desktop` | no | no |
 | `msg.whatsapp` | messaging | high | `LIBRARY/Group Containers/group.net.whatsapp.WhatsApp.shared` | no | no |
+| `msg.zoom.desktop` | messaging | high | `LIBRARY/Application Support/zoom.us` | no | no |
 | `network.bluetooth.devices` | network | medium | `SYSTEM/Library/Bluetooth/Library/Preferences/com.apple.MobileBluetooth.devices.plist` | yes | no |
 | `network.wifi.known-networks` | network | high | `SYSTEM/Library/Preferences/com.apple.wifi.known-networks.plist` | yes | no |
+| `personal.notion.desktop` | personal-files | high | `LIBRARY/Application Support/Notion` | no | no |
+| `personal.obsidian.config` | personal-files | medium | `LIBRARY/Application Support/obsidian` | no | no |
 | `profiles.other-users` | user-profiles | low | `USERS/*` | no | no |
 | `programs.applications` | installed-programs | low | `APPLICATIONS/*.app` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `system.caches` | system-traces | low | `LIBRARY/Caches` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
@@ -174,7 +182,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `wallet.monero-gui` | wallets | critical | `LIBRARY/Application Support/monero-wallet-gui` | no | no |
 | `wallet.monero-gui.wallets` | wallets | critical | `HOME/Monero/wallets` | no | no |
 
-## Linux (74 rules, 20 verified)
+## Linux (81 rules, 20 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -183,6 +191,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `activity.shell-history.fish` | activity | high | `XDG_DATA/fish/fish_history` | no | no |
 | `activity.shell-history.zsh` | activity | high | `HOME/.zsh_history` | no | no |
 | `activity.thumbnails` | activity | low | `HOME/.cache/thumbnails` | no | no |
+| `ai.claude.desktop` | ai-assistants | high | `XDG_CONFIG/Claude` | no | no |
 | `autostart.desktop-entries` | autostart | low | `XDG_CONFIG/autostart/*.desktop` | no | no |
 | `autostart.systemd-user` | autostart | low | `XDG_CONFIG/systemd/user/*` | no | no |
 | `browser.brave.profiles` | browsers | medium | `XDG_CONFIG/BraveSoftware/Brave-Browser/*/Preferences` | no | no |
@@ -198,12 +207,16 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `browser.firefox.profiles.xdg` | browsers | medium | `XDG_CONFIG/mozilla/firefox/*/prefs.js` | no | no |
 | `browser.opera.profiles` | browsers | medium | `XDG_CONFIG/opera/*/Preferences` | no | no |
 | `browser.vivaldi.profiles` | browsers | medium | `XDG_CONFIG/vivaldi/*/Preferences` | no | no |
+| `browser.zen.profiles` | browsers | medium | `XDG_CONFIG/zen` | no | no |
 | `cloud.dropbox` | cloud-sync | medium | `HOME/Dropbox` | no | no |
 | `cloud.nextcloud` | cloud-sync | medium | `XDG_CONFIG/Nextcloud` | no | no |
 | `containers.libvirt` | containers-vms | medium | `VAR/lib/libvirt/images` | yes | no |
 | `containers.podman` | containers-vms | medium | `XDG_DATA/containers/storage` | no | yes (Ubuntu 24.04 (WSL)) |
 | `containers.virtualbox` | containers-vms | medium | `HOME/VirtualBox VMs` | no | no |
+| `credentials.1password.desktop` | credentials | critical | `XDG_CONFIG/1Password` | no | no |
+| `credentials.bitwarden.desktop` | credentials | critical | `XDG_CONFIG/Bitwarden` | no | no |
 | `credentials.gnupg` | credentials | critical | `HOME/.gnupg` | no | yes (Ubuntu 24.04 (WSL)) |
+| `credentials.keepassxc.config` | credentials | medium | `XDG_CONFIG/keepassxc` | no | no |
 | `credentials.keyrings` | credentials | critical | `XDG_DATA/keyrings` | no | no |
 | `credentials.password-store` | credentials | critical | `HOME/.password-store` | no | no |
 | `dev.aws.config` | developer-secrets | critical | `HOME/.aws` | no | yes (Ubuntu 24.04 (WSL)) |
@@ -239,10 +252,12 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `msg.telegram` | messaging | high | `XDG_DATA/TelegramDesktop/tdata` | no | no |
 | `msg.telegram.flatpak` | messaging | high | `HOME/.var/app/org.telegram.desktop/data/TelegramDesktop/tdata` | no | no |
 | `msg.telegram.snap` | messaging | high | `HOME/snap/telegram-desktop/common/.local/share/TelegramDesktop/tdata` | no | no |
+| `msg.zoom.desktop` | messaging | high | `HOME/.zoom` | no | no |
 | `network.bluetooth.devices` | network | medium | `VAR/lib/bluetooth` | yes | no |
 | `network.cups.printers` | network | medium | `ETC/cups/printers.conf` | yes | no |
 | `network.networkmanager.connections` | network | critical | `ETC/NetworkManager/system-connections` | yes | no |
 | `network.wireguard.configs` | network | critical | `ETC/wireguard` | yes | no |
+| `personal.obsidian.config` | personal-files | medium | `XDG_CONFIG/obsidian` | no | no |
 | `profiles.other-users` | user-profiles | low | `USERS/*` | no | no |
 | `programs.desktop-entries` | installed-programs | low | `APPLICATIONS/*.desktop` | no | yes (Ubuntu 24.04 (WSL)) |
 | `programs.desktop-entries.user` | installed-programs | low | `XDG_DATA/applications/*.desktop` | no | no |

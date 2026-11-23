@@ -1,0 +1,46 @@
+{
+  "id": "browser.zen.profiles",
+  "platforms": [
+    "macos"
+  ],
+  "category": "browsers",
+  "title": "Zen Browser profiles",
+  "whyItMatters": "Zen keeps its browser profiles, history, cookies, saved logins and workspaces here. A profile on this Mac shows the browser was used and how many separate identities were kept.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/zen",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Zen Browser GitHub, profile location discussion: macOS ~/Library/Application Support/zen - https://github.com/zen-browser/desktop/discussions/5978",
+  "notes": "Each profile is a subfolder with prefs.js, history, cookies, logins and Zen workspace state. Profile names are random per install. The Linux beta uses ~/.config/zen.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Zen, export bookmarks to an HTML file and save any passwords you need from the browser's password settings.",
+    "signOut": "Sign out of Mozilla Sync in Zen settings, or disconnect this profile from the account, so the account no longer trusts this browser.",
+    "steps": [
+      "Close every Zen window.",
+      "Move Zen Browser to the Trash from Applications.",
+      "Delete the Zen folder named in the plan if it is still there."
+    ],
+    "risk": "Removes every Zen profile on this Mac: history, bookmarks, cookies, saved logins and workspaces.",
+    "closeApps": [
+      "Zen"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Zen Browser documentation, FAQ: https://docs.zen-browser.app/faq"
+  }
+}

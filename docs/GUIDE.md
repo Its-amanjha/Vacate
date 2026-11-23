@@ -204,7 +204,7 @@ from a redacted report is redacted too.
 - It cannot check that you followed a step or that an export worked.
 - On macOS, privacy protection can hide some folders unless your terminal has Full Disk Access.
 
-The full list is in [LIMITS.md](../LIMITS.md).
+The full list is in [LIMITS.md](../LIMITS.md). If a command fails or is refused, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
 
 ## 11. Legal
 

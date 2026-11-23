@@ -1,0 +1,46 @@
+{
+  "id": "personal.notion.desktop",
+  "platforms": [
+    "macos"
+  ],
+  "category": "personal-files",
+  "title": "Notion desktop cache",
+  "whyItMatters": "Notion keeps a local cache of pages, files and workspace state so it can open faster. The folder shows the workspace was used on this Mac and may hold offline copies of page content.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Notion",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Notion Help, Reset the Notion app: macOS data folder ~/Library/Application Support/Notion - https://www.notion.com/help/reset-notion",
+  "notes": "Desktop cache and local workspace state. Notion has no Linux desktop app. Nothing is opened; page content stays in the workspace.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": "Check that every page and file you need is synced and visible in the browser or on another device before removing local data.",
+    "signOut": "Sign out of Notion on this Mac so the workspace no longer keeps a signed-in session here.",
+    "steps": [
+      "Check that recent edits have finished syncing.",
+      "Sign out of Notion and, if you are removing the app, move it to the Trash.",
+      "Delete the Notion folder named in the plan only after the sync check."
+    ],
+    "risk": "Removes the local Notion cache and sign-in state from this Mac. Pages stored in the workspace are not deleted.",
+    "closeApps": [
+      "Notion"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Notion Help, Reset the Notion app: https://www.notion.com/help/reset-notion"
+  }
+}

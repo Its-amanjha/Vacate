@@ -16,6 +16,7 @@
     vacate.ps1 undo -Run <dir> [-Execute -Confirm <MACHINENAME>]
     vacate.ps1 erase -Run <dir> [-WalletsBackedUp] [-Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <dir>]
     vacate.ps1 version
+    vacate.ps1 help
 .NOTES
     For devices you own or are authorised to hand over. Not for destroying evidence, defeating a
     legal hold, or falsifying records.
@@ -59,6 +60,7 @@ function Write-VacateUsage {
     Write-Output '  vacate.ps1 undo -Run <dir> [-Execute -Confirm <MACHINENAME>]'
     Write-Output '  vacate.ps1 erase -Run <dir> [-WalletsBackedUp] [-Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <dir>]'
     Write-Output '  vacate.ps1 version'
+    Write-Output '  vacate.ps1 help'
     Write-Output 'scan, rules, report, checklist and plan only read. clean and undo are dry runs unless'
     Write-Output '-Execute -Confirm <MACHINENAME> is given, and clean only moves items to the Recycle Bin/Trash.'
 }

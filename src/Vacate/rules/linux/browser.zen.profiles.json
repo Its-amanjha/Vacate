@@ -1,0 +1,46 @@
+{
+  "id": "browser.zen.profiles",
+  "platforms": [
+    "linux"
+  ],
+  "category": "browsers",
+  "title": "Zen Browser profiles",
+  "whyItMatters": "Zen keeps its browser profiles, history, cookies, saved logins and workspaces here. A profile on this computer shows the browser was used and how many separate identities were kept.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "zen",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Zen Browser release notes: Linux configuration under ~/.config/zen since 1.18.6b - https://zen-browser.app/release-notes",
+  "notes": "Each profile is a subfolder with prefs.js, history, cookies, logins and Zen workspace state. Older tarball installs may still use ~/.zen; Flatpak uses ~/.var/app/app.zen_browser.zen. Profile names are random per install.",
+  "cleanup": {
+    "action": "export-then-remove",
+    "exportFirst": "In Zen, export bookmarks to an HTML file and save any passwords you need from the browser's password settings.",
+    "signOut": "Sign out of Mozilla Sync in Zen settings, or disconnect this profile from the account, so the account no longer trusts this browser.",
+    "steps": [
+      "Close every Zen window.",
+      "Uninstall Zen from your software manager, or from Flatpak if you installed it that way.",
+      "Delete the Zen folder named in the plan if it is still there."
+    ],
+    "risk": "Removes every Zen profile on this computer: history, bookmarks, cookies, saved logins and workspaces.",
+    "closeApps": [
+      "Zen"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Zen Browser documentation, FAQ: https://docs.zen-browser.app/faq"
+  }
+}

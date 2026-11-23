@@ -1,0 +1,47 @@
+{
+  "id": "personal.obsidian.config",
+  "platforms": [
+    "macos"
+  ],
+  "category": "personal-files",
+  "title": "Obsidian global settings",
+  "whyItMatters": "Obsidian keeps global settings, window state and the list of vaults here. It shows the app was used and which vault folders were opened.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/obsidian",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Obsidian Help, How Obsidian stores data: macOS global settings at ~/Library/Application Support/obsidian - https://obsidian.md/help/data-storage",
+  "notes": "Global settings only. Vault notes and each vault's .obsidian folder live wherever the user chose and are not searched. The JSON files are never opened.",
+  "cleanup": {
+    "action": "review",
+    "exportFirst": "Confirm every Obsidian vault you need is backed up or synced, because this cleanup does not touch the vault folders.",
+    "signOut": null,
+    "steps": [
+      "Close Obsidian.",
+      "Confirm every vault is backed up or synced.",
+      "If you decide to remove the app, move Obsidian to the Trash from Applications.",
+      "Delete the Obsidian settings folder named in the plan if it is still there."
+    ],
+    "risk": "Removes global Obsidian settings and the recent-vault list. Notes and vault configuration folders are not touched.",
+    "closeApps": [
+      "Obsidian"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Obsidian Help, How Obsidian stores data: https://obsidian.md/help/data-storage"
+  }
+}

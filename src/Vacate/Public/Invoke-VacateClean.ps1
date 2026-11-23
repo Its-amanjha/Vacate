@@ -29,7 +29,12 @@ function Assert-VacateCleanRun {
         throw ("This run was made on {0}; this machine is {1}. Clean only runs on the machine it scanned." -f $Report.scan.platform, $Platform)
     }
     if ([bool]$Report.scan.redacted) { throw 'This run is redacted (paths are hashes). Scan again without -Redact to clean.' }
-    if ($Execute) {
+    # The report must come from this machine, not only this platform (Phase 3/4 doc review).
+    $reportHost = ''
+    if ($null -ne $Report.scan.PSObject.Properties['host'] -and $null -ne $Report.scan.host -and $null -ne $Report.scan.host.PSObject.Properties['name']) { $reportHost = [string]$Report.scan.host.name }
+    if ([string]::IsNullOrEmpty($reportHost) -or -not [string]::Equals($reportHost, [Environment]::MachineName, [StringComparison]::OrdinalIgnoreCase)) {
+        throw ("This run was made on machine '{0}', not on this machine ({1}). Clean only runs on the machine it scanned." -f $reportHost, [Environment]::MachineName)
+    }    if ($Execute) {
         $machine = [Environment]::MachineName
         if ([string]::IsNullOrEmpty($ConfirmMachine) -or -not [string]::Equals($ConfirmMachine, $machine, [StringComparison]::OrdinalIgnoreCase)) {
             throw ("-Execute needs -Confirm with this machine's name ({0}). Nothing was moved." -f $machine)

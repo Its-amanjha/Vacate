@@ -14,6 +14,7 @@
     vacate.ps1 plan -Run <dir>
     vacate.ps1 clean -Run <dir> [-Steps n,n] [-ExportDone n,n] [-Execute -Confirm <MACHINENAME>]
     vacate.ps1 undo -Run <dir> [-Execute -Confirm <MACHINENAME>]
+    vacate.ps1 erase -Run <dir> [-WalletsBackedUp] [-Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <dir>]
     vacate.ps1 version
 .NOTES
     For devices you own or are authorised to hand over. Not for destroying evidence, defeating a
@@ -33,7 +34,10 @@ param(
     [int[]]$Steps = @(),
     [int[]]$ExportDone = @(),
     [switch]$Execute,
-    [string]$Confirm
+    [string]$Confirm,
+    [string]$DiskSerial,
+    [string]$RecordTo,
+    [switch]$WalletsBackedUp
 )
 
 Set-StrictMode -Version Latest
@@ -53,6 +57,7 @@ function Write-VacateUsage {
     Write-Output '  vacate.ps1 plan -Run <dir>      (cleanup plan; advice only, changes nothing)'
     Write-Output '  vacate.ps1 clean -Run <dir> [-Steps n,n] [-ExportDone n,n] [-Execute -Confirm <MACHINENAME>]'
     Write-Output '  vacate.ps1 undo -Run <dir> [-Execute -Confirm <MACHINENAME>]'
+    Write-Output '  vacate.ps1 erase -Run <dir> [-WalletsBackedUp] [-Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <dir>]'
     Write-Output '  vacate.ps1 version'
     Write-Output 'scan, rules, report, checklist and plan only read. clean and undo are dry runs unless'
     Write-Output '-Execute -Confirm <MACHINENAME> is given, and clean only moves items to the Recycle Bin/Trash.'
@@ -136,6 +141,33 @@ try {
             $r = & $m { param($D, $E, $C) Invoke-VacateUndo -Run $D -Execute:$E -ConfirmMachine $C } ([IO.Path]::GetFullPath($Run)) $Execute.IsPresent $Confirm
             $s = $r.summary
             Write-Output ('Undo ({0}): {1} restored, {2} would restore, {3} failed.' -f $r.mode, $s.restored, $s.wouldRestore, $s.failed)
+            exit 0
+        }
+        'erase' {
+            if (-not $Run) { Write-Output 'erase needs -Run <dir>.'; exit 2 }
+            $full = [IO.Path]::GetFullPath($Run)
+            $typed = ''
+            if ($Execute) {
+                # Readiness first, so the person sees what they are confirming.
+                $pre = & $m { param($D, $W) Invoke-VacateErase -Run $D -WalletsBackedUp:$W } $full $WalletsBackedUp.IsPresent
+                if (-not $pre.ready) { Write-Output 'Not ready to erase. See erase-readiness.md in the run folder.'; exit 1 }
+                # A person must answer at a real console (Phase 4 threat model): no piped or scripted YES.
+                if ([Console]::IsInputRedirected -or [Console]::IsOutputRedirected -or -not [Environment]::UserInteractive) {
+                    Write-Output 'erase -Execute needs a person at an interactive console; input or output is redirected. Nothing was erased.'
+                    exit 1
+                }
+                Write-Output 'This starts the operating system erase of THIS computer. Everything on the system disk will be'
+                Write-Output 'destroyed and cannot be recovered. An erase record is written first, to the run folder and -RecordTo.'
+                $typed = Read-Host 'Type YES to continue'
+            }
+            $r = & $m { param($D, $E, $C, $S, $R, $W, $Y) Invoke-VacateErase -Run $D -Execute:$E -ConfirmMachine $C -DiskSerial $S -RecordTo $R -WalletsBackedUp:$W -TypedConfirmation $Y } $full $Execute.IsPresent $Confirm $DiskSerial $RecordTo $WalletsBackedUp.IsPresent $typed
+            if ($r.mode -ceq 'dry-run') {
+                $state = 'NOT READY'; if ($r.ready) { $state = 'READY' }
+                Write-Output ('Erase readiness: {0}. Details: erase-readiness.md in the run folder. Nothing was erased.' -f $state)
+                exit 0
+            }
+            foreach ($f in $r.recordFiles) { Write-Output ('Erase record: ' + $f) }
+            Write-Output ('Started: {0} - {1}' -f $r.launch.method, $r.launch.detail)
             exit 0
         }
         'help' { Write-VacateUsage; exit 0 }

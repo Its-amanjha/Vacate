@@ -47,7 +47,9 @@ BeforeAll {
                 param($F, $T)
                 switch ($F) {
                     'lsblk' { return (ConvertFrom-VacateLsblkJson -Text $T) }
+                    'block-devices-detail' { return (ConvertFrom-VacateLsblkJson -Text $T) }
                     'findmnt' { return (ConvertFrom-VacateFindmntJson -Text $T) }
+                    'disk-info' { return (ConvertFrom-VacateDiskInfoPlist -Text $T) }
                     default { return (ConvertFrom-VacateFdesetupStatus -Text $T) }
                 }
             })
@@ -55,21 +57,32 @@ BeforeAll {
 }
 
 Describe 'Get-VacateSystemQueryTable' {
-    It 'has exactly the three allow-listed queries in order' {
+    It 'has exactly the five allow-listed queries in order' {
         $table = Get-TestQueryTable
-        $table.Count | Should -Be 3
-        (($table | ForEach-Object { $_.Name }) -join ',') | Should -Be 'filevault-status,block-devices,mounts'
+        $table.Count | Should -Be 5
+        (($table | ForEach-Object { $_.Name }) -join ',') | Should -Be 'filevault-status,block-devices,mounts,block-devices-detail,disk-info'
     }
 
-    It 'matches the constants in Models.ps1' {
+    It 'contains the rule-visible constants plus the two P4 disk queries' {
         $table = Get-TestQueryTable
         $names = @(InModuleScope Vacate { $script:VacateSystemQueryNames })
-        (($table | ForEach-Object { $_.Name } | Sort-Object) -join ',') | Should -Be (($names | Sort-Object) -join ',')
+        $expected = @($names) + @('block-devices-detail', 'disk-info')
+        ((@($table | ForEach-Object { $_.Name }) | Sort-Object) -join ',') | Should -Be ((@($expected) | Sort-Object) -join ',')
+    }
 
+    It 'matches the platform map for the rule-visible queries' {
+        $table = Get-TestQueryTable
         $platforms = InModuleScope Vacate { $script:VacateSystemQueryPlatforms }
         foreach ($entry in $table) {
-            $entry.Platform | Should -Be $platforms[$entry.Name]
+            if ($platforms.ContainsKey($entry.Name)) {
+                $entry.Platform | Should -Be $platforms[$entry.Name]
+            }
         }
+
+        $byName = @{}
+        foreach ($entry in $table) { $byName[$entry.Name] = $entry }
+        $byName['block-devices-detail'].Platform | Should -Be 'linux'
+        $byName['disk-info'].Platform | Should -Be 'macos'
     }
 
     It 'names an absolute binary for every query' {
@@ -96,6 +109,12 @@ Describe 'Get-VacateSystemQueryTable' {
 
         $byName['mounts'].Binary | Should -Be '/usr/bin/findmnt'
         (@($byName['mounts'].Arguments) -join ' ') | Should -Be '--json -o TARGET,SOURCE,FSTYPE'
+
+        $byName['block-devices-detail'].Binary | Should -Be '/usr/bin/lsblk'
+        (@($byName['block-devices-detail'].Arguments) -join ' ') | Should -Be '--json -b -o NAME,TYPE,FSTYPE,MOUNTPOINT,MODEL,SERIAL,SIZE,PKNAME,TRAN'
+
+        $byName['disk-info'].Binary | Should -Be '/usr/sbin/diskutil'
+        (@($byName['disk-info'].Arguments) -join ' ') | Should -Be 'info -plist /'
     }
 
     It 'uses the contract property order' {
@@ -215,7 +234,7 @@ Describe 'ConvertFrom-VacateLsblkJson' {
     It 'parses the captured WSL output' {
         $entries = @(Get-TestParserOutput -Function 'lsblk' -Text $script:lsblkText)
         $entries.Count | Should -Be 4
-        (@($entries[0].PSObject.Properties.Name) -join ',') | Should -Be 'name,type,fstype,mountpoint,parent'
+        (@($entries[0].PSObject.Properties.Name) -join ',') | Should -Be 'name,type,fstype,mountpoint,parent,model,serial,size,pkname,tran'
         $entries[0].name | Should -Be 'sda'
         $entries[0].type | Should -Be 'disk'
         $entries[0].fstype | Should -Be 'ext4'
@@ -294,6 +313,87 @@ Describe 'ConvertFrom-VacateFdesetupStatus' {
     }
 }
 
+Describe 'P4 disk query parsers' {
+    It 'keeps identity columns from block-devices-detail output' {
+        $text = '{"blockdevices":[{"name":"nvme0n1","type":"disk","fstype":null,"mountpoint":null,"model":"Test SSD","serial":"S123","size":"1000204886016","pkname":null,"tran":"nvme"}]}'
+        $entries = @(Get-TestParserOutput -Function 'block-devices-detail' -Text $text)
+        $entries.Count | Should -Be 1
+        (@($entries[0].PSObject.Properties.Name) -join ',') | Should -Be 'name,type,fstype,mountpoint,parent,model,serial,size,pkname,tran'
+        $entries[0].model | Should -Be 'Test SSD'
+        $entries[0].serial | Should -Be 'S123'
+        $entries[0].size | Should -Be '1000204886016'
+        $entries[0].tran | Should -Be 'nvme'
+        $entries[0].pkname | Should -BeNullOrEmpty
+    }
+
+    It 'leaves absent disk columns null rather than guessing' {
+        $entries = @(Get-TestParserOutput -Function 'block-devices-detail' -Text '{"blockdevices":[{"name":"sda1","type":"part"}]}')
+        $entries[0].model | Should -BeNullOrEmpty
+        $entries[0].serial | Should -BeNullOrEmpty
+        $entries[0].size | Should -BeNullOrEmpty
+        $entries[0].tran | Should -BeNullOrEmpty
+    }
+
+    It 'parses only the scalar keys needed from a diskutil plist' {
+        $text = @'
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0"><dict>
+  <key>DeviceIdentifier</key><string>disk0s1</string>
+  <key>DeviceModel</key><string>APPLE SSD AP1024R</string>
+  <key>SerialNumber</key><string>C02ABCDEFGH</string>
+  <key>TotalSize</key><integer>1000204886016</integer>
+  <key>BusType</key><string>PCI-Express</string>
+  <key>MountPoint</key><string>/</string>
+  <key>APFSPhysicalStores</key><array><dict><key>DeviceIdentifier</key><string>disk0s2</string></dict></array>
+</dict></plist>
+'@
+        $value = Get-TestParserOutput -Function 'disk-info' -Text $text
+        (@($value.PSObject.Properties.Name) -join ',') | Should -Be 'name,model,serial,sizeBytes,busType,mountPoint'
+        $value.name | Should -Be 'disk0s1'
+        $value.model | Should -Be 'APPLE SSD AP1024R'
+        $value.serial | Should -Be 'C02ABCDEFGH'
+        $value.sizeBytes | Should -BeOfType [int64]
+        $value.sizeBytes | Should -Be 1000204886016
+        $value.busType | Should -Be 'PCI-Express'
+        $value.mountPoint | Should -Be '/'
+    }
+
+    It 'accepts spaced plist keys and reports a missing serial as null' {
+        $text = '<plist><dict><key>Serial Number</key><string>SPACED123</string><key>Disk Size</key><integer>42</integer></dict></plist>'
+        $value = Get-TestParserOutput -Function 'disk-info' -Text $text
+        $value.serial | Should -Be 'SPACED123'
+        $value.sizeBytes | Should -Be 42
+        $value.model | Should -BeNullOrEmpty
+    }
+
+    It 'throws on empty plist output' {
+        { Get-TestParserOutput -Function 'disk-info' -Text '' } | Should -Throw '*empty output*'
+    }
+
+    It 'dispatches the disk-info query through the fixed runner' {
+        $text = '<plist><dict><key>SerialNumber</key><string>DISPATCH1</string></dict></plist>'
+        $result = InModuleScope Vacate -Parameters @{ T = $text } {
+            param($T)
+            $fixed = { @{ ExitCode = 0; StdOut = $T; TimedOut = $false } }
+            Invoke-VacateSystemQuery -Name 'disk-info' -Platform 'macos' -Runner $fixed
+        }
+        $result.Status | Should -Be 'ok'
+        $result.Value.serial | Should -Be 'DISPATCH1'
+    }
+
+    It 'dispatches the block-devices-detail query through the fixed runner' {
+        $text = '{"blockdevices":[{"name":"sda","type":"disk","serial":"DISPATCH2"}]}'
+        $result = InModuleScope Vacate -Parameters @{ T = $text } {
+            param($T)
+            $fixed = { @{ ExitCode = 0; StdOut = $T; TimedOut = $false } }
+            Invoke-VacateSystemQuery -Name 'block-devices-detail' -Platform 'linux' -Runner $fixed
+        }
+        $result.Status | Should -Be 'ok'
+        @($result.Value).Count | Should -Be 1
+        $result.Value[0].serial | Should -Be 'DISPATCH2'
+    }
+}
+
 Describe 'SystemQueries.ps1 static checks' {
     It 'contains no shell, no dynamic code and no elevation' {
         $path = Join-Path $script:projectRoot 'src/Vacate/Private/SystemQueries.ps1'
@@ -313,11 +413,11 @@ Describe 'SystemQueries.ps1 static checks' {
         }
     }
 
-    It 'allows only the three hard-coded binaries' {
+    It 'allows only the four hard-coded binaries' {
         $path = Join-Path $script:projectRoot 'src/Vacate/Private/SystemQueries.ps1'
         $text = [IO.File]::ReadAllText($path)
-        $binaries = @([regex]::Matches($text, "/usr/bin/[A-Za-z0-9_.\-]+") | ForEach-Object { $_.Value } | Sort-Object -Unique)
-        ($binaries -join ',') | Should -Be '/usr/bin/fdesetup,/usr/bin/findmnt,/usr/bin/lsblk'
+        $binaries = @([regex]::Matches($text, "/usr/(?:bin|sbin)/[A-Za-z0-9_.\-]+") | ForEach-Object { $_.Value } | Sort-Object -Unique)
+        ($binaries -join ',') | Should -Be '/usr/bin/fdesetup,/usr/bin/findmnt,/usr/bin/lsblk,/usr/sbin/diskutil'
     }
 }
 

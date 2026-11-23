@@ -137,6 +137,22 @@ $mutations = @(
         Anchor  = '            return (& $result ''reparse-in-chain'' "''$c'' is a link, junction or other reparse point" $false)'
         Replace = '            $null = $c'
         Expect  = 'a link anywhere on the path must stop the move (D50)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'erase ignores the disk serial'
+        File    = 'src/Vacate/Public/Invoke-VacateErase.ps1'
+        Kind    = 'replace'
+        Anchor  = '        throw (''-DiskSerial does not match the system disk serial ({0}). Nothing was erased.'' -f $serial.Trim())'
+        Replace = '        $null = $serial'
+        Expect  = 'erase must refuse a -DiskSerial that is not the system disk (D55)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'erase ignores failed readiness'
+        File    = 'src/Vacate/Public/Invoke-VacateErase.ps1'
+        Kind    = 'replace'
+        Anchor  = '        throw (''Not ready to erase. Blocking checks: {0}. See erase-readiness.md.'' -f ($failed -join '', ''))'
+        Replace = '        $null = $failed'
+        Expect  = 'erase must refuse while any blocking readiness check fails (D55)'
     }
 )
 

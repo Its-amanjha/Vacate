@@ -31,6 +31,21 @@ function Get-VacateSystemQueryTable {
             Platform  = 'linux'
             Binary    = '/usr/bin/findmnt'
             Arguments = @('--json', '-o', 'TARGET,SOURCE,FSTYPE')
+        },
+        # P4 system-disk identification (D54-D57): same read-only binary, more columns.
+        # -b gives exact byte counts instead of rounded human-readable sizes.
+        [pscustomobject][ordered]@{
+            Name      = 'block-devices-detail'
+            Platform  = 'linux'
+            Binary    = '/usr/bin/lsblk'
+            Arguments = @('--json', '-b', '-o', 'NAME,TYPE,FSTYPE,MOUNTPOINT,MODEL,SERIAL,SIZE,PKNAME,TRAN')
+        },
+        # diskutil is read-only with 'info -plist /'; it never performs an erase (D57).
+        [pscustomobject][ordered]@{
+            Name      = 'disk-info'
+            Platform  = 'macos'
+            Binary    = '/usr/sbin/diskutil'
+            Arguments = @('info', '-plist', '/')
         }
     )
 }
@@ -127,8 +142,10 @@ function Invoke-VacateSystemQuery {
     try {
         switch ($query.Name) {
             'block-devices' { $value = ConvertFrom-VacateLsblkJson -Text $stdout }
+            'block-devices-detail' { $value = ConvertFrom-VacateLsblkJson -Text $stdout }
             'mounts' { $value = ConvertFrom-VacateFindmntJson -Text $stdout }
             'filevault-status' { $value = ConvertFrom-VacateFdesetupStatus -Text $stdout }
+            'disk-info' { $value = ConvertFrom-VacateDiskInfoPlist -Text $stdout }
             default { throw ("no parser for '{0}'" -f $query.Name) }
         }
     }
@@ -256,6 +273,13 @@ function Add-VacateBlockDevice {
             fstype     = (Get-VacateJsonField -InputObject $Device -Name 'fstype')
             mountpoint = (Get-VacateJsonField -InputObject $Device -Name 'mountpoint')
             parent     = $Parent
+            # Extra columns used by the P4 system-disk query (D54-D57). Missing fields
+            # stay null; the disk reader reports a problem instead of guessing.
+            model      = (Get-VacateJsonField -InputObject $Device -Name 'model')
+            serial     = (Get-VacateJsonField -InputObject $Device -Name 'serial')
+            size       = (Get-VacateJsonField -InputObject $Device -Name 'size')
+            pkname     = (Get-VacateJsonField -InputObject $Device -Name 'pkname')
+            tran       = (Get-VacateJsonField -InputObject $Device -Name 'tran')
         })
 
     if ($null -eq $Device.PSObject.Properties['children']) { return }
@@ -332,6 +356,65 @@ function ConvertFrom-VacateFdesetupStatus {
         enabled = $enabled
         state   = $state
     }
+}
+
+function ConvertFrom-VacateDiskInfoPlist {
+    # Parses only the flat scalar keys vacate needs from 'diskutil info -plist /'.
+    # Nested dicts and arrays are ignored and raw output is never returned (D57).
+    [CmdletBinding()]
+    [OutputType([pscustomobject])]
+    param([Parameter(Mandatory)][AllowEmptyString()][string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) { throw 'system-query: empty output' }
+
+    return [pscustomobject][ordered]@{
+        name       = (Get-VacatePlistScalar -Text $Text -Key @('DeviceIdentifier', 'Device Identifier'))
+        model      = (Get-VacatePlistScalar -Text $Text -Key @('DeviceModel', 'Device Model'))
+        serial     = (Get-VacatePlistScalar -Text $Text -Key @('SerialNumber', 'Serial Number'))
+        sizeBytes  = (Get-VacatePlistInteger -Text $Text -Key @('TotalSize', 'Total Size', 'DiskSize', 'Disk Size'))
+        busType    = (Get-VacatePlistScalar -Text $Text -Key @('BusType', 'Bus Type'))
+        mountPoint = (Get-VacatePlistScalar -Text $Text -Key @('MountPoint', 'Mount Point'))
+    }
+}
+
+function Get-VacatePlistScalar {
+    # First non-empty <string> value for any of the given keys, or $null.
+    [CmdletBinding()]
+    [OutputType([string])]
+    param(
+        [Parameter(Mandatory)][string]$Text,
+        [Parameter(Mandatory)][string[]]$Key
+    )
+
+    foreach ($keyName in $Key) {
+        $pattern = '<key>\s*' + [regex]::Escape($keyName) + '\s*</key>\s*<string>(?<v>[\s\S]*?)</string>'
+        $match = [regex]::Match($Text, $pattern, [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        if ($match.Success) {
+            $value = ([string]$match.Groups['v'].Value).Trim()
+            if ($value.Length -gt 0) { return $value }
+        }
+    }
+    return $null
+}
+
+function Get-VacatePlistInteger {
+    # First integer value for any of the given keys, or $null when none parses.
+    [CmdletBinding()]
+    [OutputType([Nullable[long]])]
+    param(
+        [Parameter(Mandatory)][string]$Text,
+        [Parameter(Mandatory)][string[]]$Key
+    )
+
+    foreach ($keyName in $Key) {
+        $pattern = '<key>\s*' + [regex]::Escape($keyName) + '\s*</key>\s*<integer>\s*(?<v>-?\d+)\s*</integer>'
+        $match = [regex]::Match($Text, $pattern, [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        if ($match.Success) {
+            $parsed = [int64]0
+            if ([int64]::TryParse($match.Groups['v'].Value, [ref]$parsed)) { return $parsed }
+        }
+    }
+    return $null
 }
 
 function Get-VacateJsonField {

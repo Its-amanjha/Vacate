@@ -4,7 +4,7 @@ vacate is a read-only audit tool for a computer you are about to sell, return, r
 away. It looks in the known places where Windows, macOS and Linux keep personal data - browser
 profile folders, saved Wi-Fi networks, chat and mail apps, cloud-sync folders, crypto wallets,
 SSH keys and cloud tokens, and lists of recently used files - then writes a report and an ordered
-checklist of what to sign out of and remove. It never deletes, moves, or changes anything.
+checklist of what to sign out of and remove. Scanning, reporting and planning never delete, move or change anything; only the optional `clean` and `erase` commands act, and only when you name them and type the machine name.
 
 > **Warning: the report is as sensitive as the data it describes.**
 >
@@ -35,11 +35,16 @@ It is advice only; vacate still changes nothing. New here? Read the plain-langua
 Phase 3 adds `clean` and `undo`: for a small, safe set of plan steps (`remove` steps for files
 inside your own profile), vacate can move the items to the Recycle Bin or Trash for you. It is a
 dry run unless you name the steps and type the machine name, it never deletes permanently, and
-`undo` puts everything back.
+`undo` puts back everything it can and lists anything it could not (for example when something new now exists at the old path).
+
+Phase 4 adds `erase`: when you are giving the whole computer away, vacate checks the machine is
+ready (disk encrypted, recent clean scan, wallets backed up, not a virtual machine), writes an erase
+record to a USB drive, and then opens the operating system's own erase. It never sends raw commands
+to the disk, and you still confirm the erase in Windows, macOS or Linux.
 
 ## Quickstart
 
-Run it as your normal user. Do not open an administrator or root shell: vacate will not ask for
+Run it as your normal user (only `erase -Execute` needs an administrator shell). Do not open an administrator or root shell for scanning: vacate will not ask for
 admin rights, and it never elevates itself.
 
 **Windows, PowerShell 5.1**
@@ -144,6 +149,8 @@ On Windows use `.\vacate.ps1 <command>`. On macOS and Linux use `pwsh ./vacate.p
 | `clean -Run <dir>` | Phase 3: dry run. Lists which plan items vacate could move to the Recycle Bin/Trash and why the others are refused. Moves nothing. |
 | `clean -Run <dir> -Steps 3,5 -Execute -Confirm <MACHINENAME>` | Moves those steps' items to the Recycle Bin/Trash, records each move in `undo.json`, then re-scans. Only `remove` steps for files in your own profile qualify; never wallets, personal folders or registry entries. |
 | `undo -Run <dir> [-Execute -Confirm <MACHINENAME>]` | Puts back everything `clean` moved from that run. Dry run without `-Execute`. |
+| `erase -Run <dir>` | Phase 4: readiness report only. Lists all 16 readiness checks (12 can block, for example admin, a scan under a day old, an encrypted and fully identified disk, not a VM or WSL, and wallets backed up when wallets were found) and the warnings. Erases nothing. |
+| `erase -Run <dir> -Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <usb folder>` | Asks you to type YES, writes an erase record to the run folder and the USB drive, then opens the operating system's own erase (Reset this PC, Erase All Content and Settings, or LUKS key erase). |
 | `version` | Prints the version. |
 
 ## Output files

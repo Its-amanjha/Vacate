@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/vacate/vacate/schemas/erase-record.schema.json",
+  "title": "vacate erase record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "signed",
+    "tool",
+    "createdAt",
+    "machine",
+    "operator",
+    "platform",
+    "os",
+    "disk",
+    "encryption",
+    "method",
+    "standard",
+    "readiness",
+    "sourceRun",
+    "notes",
+    "sha256"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "kind": { "const": "vacate-erase-record" },
+    "signed": { "type": "boolean", "const": false },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "vacate" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+      }
+    },
+    "createdAt": { "$ref": "#/definitions/isoTime" },
+    "machine": { "type": "string", "minLength": 1 },
+    "operator": { "type": "string", "minLength": 1 },
+    "platform": { "$ref": "#/definitions/platform" },
+    "os": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "disk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "serial", "sizeBytes", "busType"],
+      "properties": {
+        "model": { "type": ["string", "null"] },
+        "serial": { "type": ["string", "null"] },
+        "sizeBytes": { "type": ["integer", "null"], "minimum": 0 },
+        "busType": { "type": ["string", "null"] }
+      }
+    },
+    "encryption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "protectionOn"],
+      "properties": {
+        "kind": { "enum": ["bitlocker", "filevault", "luks", "none", "unknown"] },
+        "protectionOn": { "type": ["boolean", "null"] }
+      }
+    },
+    "method": {
+      "enum": [
+        "windows-reset-this-pc",
+        "macos-erase-all-content-and-settings",
+        "linux-luks-key-erase"
+      ]
+    },
+    "standard": {
+      "const": "NIST SP 800-88 Rev. 2 cryptographic erase via the operating system (not independently verified)"
+    },
+    "readiness": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/readinessCheck" }
+    },
+    "sourceRun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["finishedAt", "traces"],
+      "properties": {
+        "finishedAt": { "$ref": "#/definitions/isoTime" },
+        "traces": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "definitions": {
+    "isoTime": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$" },
+    "platform": { "enum": ["windows", "macos", "linux"] },
+    "readinessCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "ok", "severity", "message"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "ok": { "type": "boolean" },
+        "severity": { "enum": ["block", "warn"] },
+        "message": { "type": "string" }
+      }
+    }
+  }
+}

@@ -12,6 +12,13 @@ BeforeAll {
         # The only code allowed to start a process: three fixed binaries, no shell.
         'src/Vacate/Private/SystemQueries.ps1:System.Diagnostics.Process',
         'src/Vacate/Private/SystemQueries.ps1:ProcessStartInfo',
+        # Phase 4 (D54): the only code allowed to start the OS erase tools (three fixed programs).
+        'src/Vacate/Private/EraseLauncher.ps1:System.Diagnostics.Process',
+        'src/Vacate/Private/EraseLauncher.ps1:ProcessStartInfo',
+        'src/Vacate/Private/EraseLauncher.ps1:systemreset',
+        'src/Vacate/Private/EraseLauncher.ps1:luksErase',
+        'src/Vacate/Private/EraseLauncher.ps1:Transfer-Reset',
+        'src/Vacate/Private/EraseLauncher.ps1:ms-settings:recovery',
         # The one future output writer. Nothing else may write outside runs/<timestamp>/.
         'src/Vacate/Private/Output.ps1:WriteAllText',
         'src/Vacate/Private/Output.ps1:CreateDirectory',
@@ -39,7 +46,9 @@ BeforeAll {
     )
 
     # The only absolute binaries the tool may read. Paths are compared case-sensitively.
-    $script:allowedBinaryPaths = @('/usr/bin/fdesetup', '/usr/bin/lsblk', '/usr/bin/findmnt')
+    $script:allowedBinaryPaths = @('/usr/bin/fdesetup', '/usr/bin/lsblk', '/usr/bin/findmnt', '/usr/sbin/diskutil',
+        # Phase 4 erase launchers (EraseLauncher.ps1 only; process starts are restricted above).
+        'C:\Windows\System32\systemreset.exe', 'C:\Windows\explorer.exe', '/usr/bin/open', '/usr/sbin/cryptsetup')
 
     # Not binaries: the Linux APPLICATIONS root token is a directory of .desktop files.
     $script:allowedNonBinaryPaths = @('/usr/share/applications')
@@ -112,7 +121,12 @@ BeforeAll {
         [pscustomobject]@{ Kind = 'write'; Name = 'DeleteFile'; Regex = '\bDeleteFile\b' },
         [pscustomobject]@{ Kind = 'write'; Name = 'DeleteDirectory'; Regex = '\bDeleteDirectory\b' },
         [pscustomobject]@{ Kind = 'write'; Name = 'DeletePermanently'; Regex = 'DeletePermanently' },
-        [pscustomobject]@{ Kind = 'dynamic'; Name = '-ComObject'; Regex = '-ComObject' }
+        [pscustomobject]@{ Kind = 'dynamic'; Name = '-ComObject'; Regex = '-ComObject' },
+        # Phase 4: the OS erase tools may be named only by the erase launcher.
+        [pscustomobject]@{ Kind = 'process'; Name = 'systemreset'; Regex = '(?i)systemreset' },
+        [pscustomobject]@{ Kind = 'process'; Name = 'luksErase'; Regex = '(?i)luksErase' },
+        [pscustomobject]@{ Kind = 'process'; Name = 'Transfer-Reset'; Regex = '(?i)Transfer-Reset' },
+        [pscustomobject]@{ Kind = 'process'; Name = 'ms-settings:recovery'; Regex = '(?i)ms-settings:recovery' }
     )
 
     function ConvertTo-StaticSafetyCode {

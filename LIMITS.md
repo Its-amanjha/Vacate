@@ -158,8 +158,7 @@ Status: Phase 1 works end to end on Windows 11 and Ubuntu 24.04 (WSL). See [READ
 - **Few steps qualify.** Only plan steps whose action is `remove`, for a single file or folder
   inside your own profile, can be moved. Wallets, personal folders (Desktop, Documents and so on),
   registry and system locations, rules that search inside a folder, and steps that need you to
-  sign out or decide are always left to you. On the current catalog that is 4 Windows, 4 macOS
-  and 5 Linux rules.
+  sign out or decide are always left to you. On the current catalog that is 4 Windows rules (9 with -ExportDone for steps that ask to save first), 4 macOS and 5 Linux rules.
 - **The Recycle Bin or Trash is not erasure.** Moved items still take space and anyone using your
   account can restore them until it is emptied. Empty it, or use the full reset, before handover.
 - **Apps can recreate data.** If an app is still running it may write its folder again; the
@@ -170,7 +169,26 @@ Status: Phase 1 works end to end on Windows 11 and Ubuntu 24.04 (WSL). See [READ
 - **Undo needs the original place to be free.** If something new exists at the old path, undo
   leaves the item in the Recycle Bin/Trash and reports it instead of overwriting.
 - **Run it on the machine that was scanned, as your normal user.** Clean refuses a report from
-  another machine or platform, a redacted report, and administrator or root sessions.
+  another machine or platform, a redacted report, and administrator or root sessions when moving.
+
+## Erase (Phase 4)
+
+- **vacate does not erase the disk itself.** It checks readiness and opens the operating system's
+  own erase: Windows Reset this PC (Settings > System > Recovery on Windows 11 24H2 and later),
+  macOS Erase All Content and Settings, or `cryptsetup luksErase` on Linux. You confirm the erase
+  there. vacate cannot tell afterwards whether it finished.
+- **Only encrypted system disks.** The method is a cryptographic erase (NIST SP 800-88 Rev. 2):
+  destroying the key makes the data unreadable. An unencrypted disk is refused (an internal Apple SSD counts as encrypted, because Apple silicon and T2 Macs encrypt it in hardware). Microsoft states
+  that Reset this PC's data erasure does not meet industry erasure standards; treat the result as
+  a strong consumer erase, not a certified one.
+- **The erase record is not proof.** It is written before the erase and is unsigned. It records
+  what vacate checked and started, not that the erase completed. Signing is Phase 5.
+- **Not in a VM, WSL or container.** Erasing there would erase a virtual disk only, so it is
+  refused. Other disks in the computer (second drives, external drives) are not erased.
+- **Linux layouts.** Only a system disk whose root sits on one LUKS device is supported. LUKS
+  header backups, detached headers and other keyslot copies would still unlock the data.
+- **Accounts and locks are manual.** Sign out of your Microsoft account or Apple Account, turn off
+  Find My, and remove the device from your accounts online first; the erase does not do this.
 
 ## What a clean report means
 

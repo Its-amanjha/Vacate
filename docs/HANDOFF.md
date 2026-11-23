@@ -1,9 +1,9 @@
-# vacate - hand-off report (Phases 1-3)
+# vacate - hand-off report (Phases 1-4)
 
-Phase 1: 2026-11-19 · Phase 2: 2026-11-20 · Phase 3: 2026-11-23 · Repository: https://github.com/Its-amanjha/Vacate ·
+Phase 1: 2026-11-19 · Phase 2: 2026-11-20 · Phase 3: 2026-11-23 · Phase 4: 2026-11-24 · Repository: https://github.com/Its-amanjha/Vacate ·
 Spec: [docs/SPEC.md](SPEC.md) · User guide: [docs/GUIDE.md](GUIDE.md)
 
-Sections 1-7 are the Phase 1 report the spec asks for. Section 8 is Phase 2, section 9 Phase 3.
+Sections 1-7 are the Phase 1 report the spec asks for. Section 8 is Phase 2, section 9 Phase 3, section 10 Phase 4.
 
 Phase 1 is a **read-only audit**. vacate scans a Windows, Linux or macOS computer for the personal
 data and traces a person leaves behind, and writes a report plus an ordered de-link checklist. It
@@ -40,22 +40,23 @@ prints), `summary.md`, `checklist.md` and `scan.log` into `runs/<timestamp>/`.
 
 ## 3. Test summary lines
 
-Run on 2026-11-23 against the code published in this report (Phases 1-3):
+Run on 2026-11-24 against the code published in this report (Phases 1-4):
 
 ```
-SUMMARY [Desktop 5.1.26100.9818] passed=610 failed=0 skipped=31
-SUMMARY [Core 7.7.0] passed=624 failed=0 skipped=17 (Windows, sabotage baseline)
-SUMMARY [Core 7.7.0] passed=602 failed=0 skipped=39 (Ubuntu 24.04, WSL)
+SUMMARY [Desktop 5.1.26100.9818] passed=731 failed=0 skipped=38
+SUMMARY [Core 7.7.0] passed=749 failed=0 skipped=20 (Windows)
+SUMMARY [Core 7.7.0] passed=727 failed=0 skipped=42 (Ubuntu 24.04, WSL)
 LINT issues=0
 ```
 
 - Last CI run checked by hand: GitHub Actions run `44559222971` on `292ee21` (Phase 1
   code): **completed/success** - test (ubuntu-pwsh)=success, test (windows-pwsh)=success, test (macos-pwsh)=success, test (windows-powershell)=success. Each job also runs a redacted sample scan and,
   since Phase 2, builds a plan from it, and uploads both as an artifact.
-- Sabotage self-test (`tools/Invoke-SabotageTest.ps1`): **all 11 mutations caught** (force
+- Sabotage self-test (`tools/Invoke-SabotageTest.ps1`): **all 13 mutations caught** (force
   exists, drop a rule, skip the link guard, ignore the budget, disable redaction, let a
   wrong-platform rule run; Phase 2: the plan drops a trace, the cleanup check allows delete
-  commands; Phase 3: clean ignores the machine-name confirm, lets wallets through, follows a link). Details in [SABOTAGE.md](SABOTAGE.md).
+  commands; Phase 3: clean ignores the machine-name confirm, lets wallets through, follows a link;
+  Phase 4: erase ignores the disk serial, erase ignores failed readiness). Details in [SABOTAGE.md](SABOTAGE.md).
 - Performance (`tests/perf`, opt-in): a 50,000-file synthetic profile scans in 26.7 s on
   PowerShell 5.1, 13.6 s on PowerShell 7 (Windows) and 13.4 s on Ubuntu, well inside the 120 s budget.
 - Static safety test: no network calls, no dynamic code, no shell, no writes outside the single
@@ -140,6 +141,12 @@ Full text and reasons in [DECISIONS.md](../DECISIONS.md).
 - **D51** Only plan steps whose action is `remove` are eligible.
 - **D52** `vacate clean -Run <dir>` is a dry run by default and lists what it would move.
 - **D53** Every move is recorded in an undo log in the run folder (original path, Trash location, time, size).
+- **D54** Phase 4 erase uses each operating system's own erase on an encrypted system disk (cryptographic erase, NIST SP 800-88): Windows Reset this PC, macOS Erase All Content and Settings, Linux ...
+- **D55** `vacate erase -Run <dir>` is a readiness report (dry run) by default.
+- **D56** Before starting the erase vacate writes an erase record (erase-record.json and .md: machine, OS, disk model and serial, encryption state, method, every readiness check, times, SHA-256) to...
+- **D57** Phase 4 covers Windows, macOS and Linux.
+- **D58** Erase readiness also blocks inside a virtual machine, WSL or container (and when that cannot be told), and whenever the system disk was not fully identified.
+- **D59** On Windows without `systemreset.exe` (Windows 11 24H2 and later) vacate opens Settings > System > Recovery instead.
 
 ## 6. Known false-positive risks
 
@@ -223,7 +230,7 @@ vacate.ps1 undo  -Run <dir> -Execute -Confirm <MACHINENAME>
 What it will move: only plan steps whose action is `remove`, for one exact file or folder
 inside the user's own profile. Wallets, personal folders, rules that search inside a folder,
 registry and system locations, steps that need a sign-out or a decision, and 8 manual-only rules
-are never moved. On the current catalog: 4 Windows, 4 macOS and 5 Linux rules qualify.
+are never moved. On the current catalog: 4 Windows (9 with -ExportDone), 4 macOS and 5 Linux rules qualify.
 
 Safety layers, in the order they run:
 1. Refuses a redacted report, a report from another platform or machine, and admin/root sessions.
@@ -257,6 +264,49 @@ Not verified or known limits:
 - Linux: the `.trashinfo` write and the folder restore have a tiny race window; the device check
   uses mount data, not device ids, and refuses symlinked setups.
 - The Recycle Bin and Trash are not erasure: empty them, or use the full reset, before handover.
+
+## 10. Phase 4: erase via the operating system
+
+Phase 4 adds `vacate erase` (D54-D59). vacate never sends raw commands to a disk: it checks
+readiness, writes an erase record, and opens the operating system's own erase, which the person
+completes there.
+
+```powershell
+vacate.ps1 erase -Run <dir>                                    # readiness report, erases nothing
+vacate.ps1 erase -Run <dir> -Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <usb>
+```
+
+| Platform | What vacate opens |
+|---|---|
+| Windows | Reset this PC (`systemreset.exe`), or Settings > System > Recovery on Windows 11 24H2+ |
+| macOS | Settings > General > Transfer or Reset (Erase All Content and Settings) |
+| Linux | `cryptsetup luksErase` on the LUKS device backing `/` |
+
+Gate, in order: 16 readiness checks (blocking: elevated, same platform and machine, unredacted,
+complete scan under 24 h old, plan present, disk identified and fully read, not a VM/WSL/container,
+encrypted, protection on, wallets backed up; warnings: cloud-only files, account sign-out, power),
+then `-Confirm` = machine name, `-DiskSerial` = system disk serial, `-RecordTo` on another
+volume, and a YES typed at an interactive console. The erase record (JSON + Markdown, SHA-256, marked
+unsigned) is written to the run folder and `-RecordTo` and verified before the OS tool opens.
+
+Verified:
+- Unit and integration tests: readiness (16 checks), launcher (stubbed; no real tool started),
+  record (deterministic hash, tamper detection, schema), VM/WSL detection, 15 end-to-end erase tests
+  (12 refusals never launch and never write a record).
+- **Real cryptographic erase:** `cryptsetup luksErase` through vacate's launcher on a throwaway
+  LUKS container in a loop file in WSL: 1 key slot before, 0 after, the key no longer opens it.
+- On this Windows PC, read-only: system disk identified, not a VM, WSL detected as WSL, and a dry
+  run that correctly refuses (not elevated, scan too old, BitLocker state unreadable without admin).
+- Sabotage: "erase ignores the disk serial" and "erase ignores failed readiness" are caught.
+
+Not verified or known limits:
+- No real Windows or macOS erase was run (by design, D57). Whether the person completes the erase
+  cannot be observed; the record is written before it and is not proof.
+- Microsoft states Reset this PC's erasure does not meet industry standards; NIST SP 800-88 Rev. 2
+  cryptographic erase holds only if no other key copy exists (recovery keys, LUKS header backups).
+- Linux: only a root on a single LUKS device; LVM-on-LUKS, detached headers and multi-device roots
+  are not handled. Other disks in the computer are not erased.
+- Account sign-out, Find My and Activation Lock stay manual.
 
 ## Legal and ethical scope
 

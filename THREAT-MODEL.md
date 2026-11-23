@@ -1,7 +1,7 @@
 # Threat model
 
 This page describes what can go wrong with vacate, what the tool does about it, and what is left
-for you to handle. It covers Phase 1: a read-only audit that writes a report and a checklist.
+for you to handle. It covers Phases 1-4: the read-only audit and plan, `clean` (moves a few items to the Recycle Bin or Trash) and `erase` (opens the operating system's own erase).
 
 The people and things this model considers:
 
@@ -301,6 +301,27 @@ restores newest first and never overwrites.
 is stricter than needed. A Linux `.trashinfo` write and a folder restore keep a very small race
 window. A file in use may make Windows show an error dialog (the move then fails, nothing is
 deleted). The Recycle Bin and Trash are not erasure. The macOS mover has not run on a real Mac.
+
+## Erase (Phase 4)
+
+**Threat.** An erase destroys everything and cannot be undone. It can hit the wrong machine or the
+wrong disk, run inside a VM or WSL and erase only a virtual disk while claiming success, destroy
+data that was never exported, lose its own record with the disk, or be started by a script.
+
+**Control.** vacate never sends raw commands to a disk; it opens the operating system's own erase
+(D54), and the person confirms it there. Readiness blocks unless the session is elevated, the run
+is a recent, complete, unredacted scan of this machine with a plan, the system disk is fully
+identified and encrypted with protection on, the machine is not a VM, WSL or container, and wallets
+are confirmed backed up (D55, D58). Starting needs `-Confirm` with the machine name, `-DiskSerial`
+matching the system disk, `-RecordTo` on another volume, and a YES typed at an interactive console.
+The erase record is written to both places and verified before the OS tool opens (D56). Only
+EraseLauncher.ps1 may start the three tools, with fixed paths and no shell; tests replace the
+launcher, and the only real erase in development is a LUKS key erase on a throwaway loop file (D57).
+
+**What remains.** vacate cannot see whether the person completed the erase, and the record is
+unsigned and written before it. Microsoft says Reset this PC's erasure does not meet industry
+standards. LUKS header backups or extra keyslot copies would still unlock a key-erased disk. Other
+disks in the computer are not erased. Activation Lock, Find My and account sign-out stay manual.
 
 ## Outside this model
 

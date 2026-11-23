@@ -7,9 +7,11 @@ to be a developer.
 
 vacate looks through your computer for the personal data and accounts you leave behind: browser
 logins, chat sessions, saved Wi-Fi passwords, crypto wallets, cloud folders and more. It writes a
-report of what it found and a step-by-step plan for cleaning it up. vacate only reads. It never
-deletes, moves or changes anything, never opens the contents of your files, and never uses the
-internet.
+report of what it found and a step-by-step plan for cleaning it up. Scanning and planning only read:
+they never change anything, never open the contents of your files, and never use the internet.
+Two optional steps do act, and only when you name them and type your computer's name: `clean`
+moves a few leftover items to the Recycle Bin or Trash (with undo), and `erase` opens the operating
+system's own full erase after checking the computer is ready.
 
 ## 2. Before you start
 
@@ -97,7 +99,7 @@ How to read the plan:
 
 ## 6. Step 3: follow the plan, top to bottom
 
-vacate does not do any of the steps for you. Work through them in order:
+vacate does not do these steps for you (except the few simple items the optional `clean` below can move). Work through them in order:
 
 1. Save and export first: passwords, bookmarks, photos, mail, wallet backups.
 2. Then sign out. Removing an app first can remove the session you need to sign out of, and the
@@ -125,8 +127,11 @@ the step numbers and your computer's name:
 powershell -ExecutionPolicy Bypass -File .\vacate.ps1 clean -Run .\runs\20261120-101500 -Steps 12,14 -Execute -Confirm MY-PC
 ```
 
+If a step says "Save first", vacate moves it only after you confirm the export with
+`-ExportDone` and the step number, for example `-ExportDone 12`.
+
 vacate checks every item again right before moving it, never deletes anything permanently, and
-records each move. To put everything back:
+records each move. To put back what it moved (it lists anything it cannot restore, for example when something new now exists at the old path):
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\vacate.ps1 undo -Run .\runs\20261120-101500 -Execute -Confirm MY-PC
@@ -150,10 +155,35 @@ operating system's own reset. The last section of your plan shows the steps:
   turned on.
 - **macOS:** turn off Find My Mac, then System Settings > General > Transfer or Reset > Erase All
   Content and Settings.
-- **Linux:** reinstall the system and choose to erase the whole disk.
+- **Linux:** if the system disk uses LUKS, `vacate erase` runs `cryptsetup luksErase`, which makes the data unreadable; then reinstall the system from a USB stick. Without LUKS, reinstall and erase the whole disk.
 
-vacate never does this itself. Erasing a disk cannot be undone, so it stays with the tool the
-operating system provides.
+vacate never erases the disk itself. Erasing cannot be undone, so it stays with the tool the
+operating system provides. vacate can check that the computer is ready and open that tool for you.
+
+First see whether the computer is ready (this erases nothing):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\vacate.ps1 erase -Run .\runs\20261120-101500
+```
+
+Open `erase-readiness.md` in the run folder. Every line marked BLOCKS must be fixed first: run
+vacate as administrator, scan again if the scan is older than a day, turn on BitLocker, FileVault
+or LUKS and let it finish, and back up any crypto wallet. Read the warnings too: sign out of your
+Microsoft account or Apple Account and turn off Find My by hand.
+
+When everything passes, plug in a USB drive for the erase record and run, as administrator:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\vacate.ps1 erase -Run .\runs\20261120-101500 -Execute -Confirm MY-PC -DiskSerial <serial from erase-readiness.md> -RecordTo E:\
+```
+
+If the scan found crypto wallets, add `-WalletsBackedUp` once you have checked every recovery
+phrase or backup.
+
+vacate asks you to type YES, writes the erase record to the run folder and the USB drive, and then
+opens the operating system's erase. Finish it there: on Windows choose Remove everything and turn
+on Clean data; on a Mac choose Erase All Content and Settings. Keep the USB drive: the record is the
+only trace left once the disk is erased. It is not signed and does not prove the erase finished.
 
 ## 9. Sharing a report safely
 

@@ -210,6 +210,17 @@ Describe 'Vacate Clean and Undo Integration' -Skip:(-not $script:HasClean) {
             Test-Path $script:eligibleFilePath | Should -BeTrue
         }
 
+        It 'refuses a run scanned on another machine' {
+            $runDir = script:New-TestCleanRun
+            $repPath = Join-Path $runDir 'report.json'
+            $json = [IO.File]::ReadAllText($repPath)
+            # Pattern, not text: Windows PowerShell 5.1 writes two spaces after the colon.
+            $json = [regex]::Replace($json, ('"name":\s*"' + [regex]::Escape([Environment]::MachineName) + '"'), '"name": "SOME-OTHER-PC"')
+            $json | Should -Match 'SOME-OTHER-PC'
+            [IO.File]::WriteAllText($repPath, $json)
+            { Invoke-VacateClean -Run $runDir -TrashRoot $script:trashRoot -PlatformProfile $script:ctx.Platform } | Should -Throw '*not on this machine*'
+        }
+
         It 'refuses execution without -Steps (D52)' {
             $runDir = script:New-TestCleanRun
             $machine = [Environment]::MachineName

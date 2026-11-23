@@ -32,6 +32,11 @@ save, where to sign out, what to remove, the risk), ending with the operating sy
 It is advice only; vacate still changes nothing. New here? Read the plain-language
 [guide](docs/GUIDE.md).
 
+Phase 3 adds `clean` and `undo`: for a small, safe set of plan steps (`remove` steps for files
+inside your own profile), vacate can move the items to the Recycle Bin or Trash for you. It is a
+dry run unless you name the steps and type the machine name, it never deletes permanently, and
+`undo` puts everything back.
+
 ## Quickstart
 
 Run it as your normal user. Do not open an administrator or root shell: vacate will not ask for
@@ -136,6 +141,9 @@ On Windows use `.\vacate.ps1 <command>`. On macOS and Linux use `pwsh ./vacate.p
 | `report -Run <dir>` | Rebuilds `report.html`, `summary.md` and `checklist.md` from an existing `report.json`. |
 | `checklist -Run <dir>` | Rebuilds `checklist.md` from an existing `report.json`. |
 | `plan -Run <dir>` | Phase 2: writes `plan.json`, `plan.md` and `plan.html`, a step-by-step cleanup plan for every trace in the report. Advice only; vacate still changes nothing. |
+| `clean -Run <dir>` | Phase 3: dry run. Lists which plan items vacate could move to the Recycle Bin/Trash and why the others are refused. Moves nothing. |
+| `clean -Run <dir> -Steps 3,5 -Execute -Confirm <MACHINENAME>` | Moves those steps' items to the Recycle Bin/Trash, records each move in `undo.json`, then re-scans. Only `remove` steps for files in your own profile qualify; never wallets, personal folders or registry entries. |
+| `undo -Run <dir> [-Execute -Confirm <MACHINENAME>]` | Puts back everything `clean` moved from that run. Dry run without `-Execute`. |
 | `version` | Prints the version. |
 
 ## Output files

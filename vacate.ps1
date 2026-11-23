@@ -12,6 +12,8 @@
     vacate.ps1 report -Run <dir>
     vacate.ps1 checklist -Run <dir>
     vacate.ps1 plan -Run <dir>
+    vacate.ps1 clean -Run <dir> [-Steps n,n] [-ExportDone n,n] [-Execute -Confirm <MACHINENAME>]
+    vacate.ps1 undo -Run <dir> [-Execute -Confirm <MACHINENAME>]
     vacate.ps1 version
 .NOTES
     For devices you own or are authorised to hand over. Not for destroying evidence, defeating a
@@ -27,7 +29,11 @@ param(
     [ValidateRange(1, 3600)][int]$BudgetSeconds = 120,
     [switch]$Redact,
     [switch]$Elevated,
-    [switch]$AllowRoot
+    [switch]$AllowRoot,
+    [int[]]$Steps = @(),
+    [int[]]$ExportDone = @(),
+    [switch]$Execute,
+    [string]$Confirm
 )
 
 Set-StrictMode -Version Latest
@@ -45,8 +51,11 @@ function Write-VacateUsage {
     Write-Output '  vacate.ps1 report -Run <dir>'
     Write-Output '  vacate.ps1 checklist -Run <dir>'
     Write-Output '  vacate.ps1 plan -Run <dir>      (cleanup plan; advice only, changes nothing)'
+    Write-Output '  vacate.ps1 clean -Run <dir> [-Steps n,n] [-ExportDone n,n] [-Execute -Confirm <MACHINENAME>]'
+    Write-Output '  vacate.ps1 undo -Run <dir> [-Execute -Confirm <MACHINENAME>]'
     Write-Output '  vacate.ps1 version'
-    Write-Output 'vacate only reads. It never deletes, moves or changes anything.'
+    Write-Output 'scan, rules, report, checklist and plan only read. clean and undo are dry runs unless'
+    Write-Output '-Execute -Confirm <MACHINENAME> is given, and clean only moves items to the Recycle Bin/Trash.'
 }
 
 try {
@@ -107,6 +116,26 @@ try {
             Write-Output ('Plan: {0} steps cover {1} traces; {2} with guidance, {3} without.' -f $ps.steps, $ps.tracesCovered, $ps.withGuidance, ($ps.noGuidance + $ps.ruleMissing))
             foreach ($w in $written) { Write-Output ('Wrote ' + $w) }
             Write-Output 'vacate changed nothing. The plan is advice; you do each step yourself.'
+            exit 0
+        }
+        'clean' {
+            if (-not $Run) { Write-Output 'clean needs -Run <dir>.'; exit 2 }
+            $r = & $m { param($D, $S, $X, $E, $C, $T) Invoke-VacateClean -Run $D -Steps $S -ExportDone $X -Execute:$E -ConfirmMachine $C -ToolRoot $T } ([IO.Path]::GetFullPath($Run)) $Steps $ExportDone $Execute.IsPresent $Confirm $here
+            $s = $r.summary
+            if ($r.mode -ceq 'execute') {
+                Write-Output ('Moved {0} items to the Recycle Bin/Trash; {1} refused, {2} failed, {3} not eligible; {4} still present after a re-scan.' -f $s.moved, $s.refused, $s.failed, $s.notEligible, $s.stillPresent)
+                Write-Output 'Undo with: vacate.ps1 undo -Run <dir> -Execute -Confirm <MACHINENAME>'
+            }
+            else {
+                Write-Output ('Dry run, nothing moved: {0} would move, {1} refused, {2} not eligible. See clean-preview.md in the run folder.' -f $s.wouldMove, $s.refused, $s.notEligible)
+            }
+            exit 0
+        }
+        'undo' {
+            if (-not $Run) { Write-Output 'undo needs -Run <dir>.'; exit 2 }
+            $r = & $m { param($D, $E, $C) Invoke-VacateUndo -Run $D -Execute:$E -ConfirmMachine $C } ([IO.Path]::GetFullPath($Run)) $Execute.IsPresent $Confirm
+            $s = $r.summary
+            Write-Output ('Undo ({0}): {1} restored, {2} would restore, {3} failed.' -f $r.mode, $s.restored, $s.wouldRestore, $s.failed)
             exit 0
         }
         'help' { Write-VacateUsage; exit 0 }

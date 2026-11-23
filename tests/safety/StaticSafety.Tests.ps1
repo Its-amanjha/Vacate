@@ -14,7 +14,28 @@ BeforeAll {
         'src/Vacate/Private/SystemQueries.ps1:ProcessStartInfo',
         # The one future output writer. Nothing else may write outside runs/<timestamp>/.
         'src/Vacate/Private/Output.ps1:WriteAllText',
-        'src/Vacate/Private/Output.ps1:CreateDirectory'
+        'src/Vacate/Private/Output.ps1:CreateDirectory',
+        # Phase 3 (D50): the three Trash movers are the only code allowed to move user files,
+        # and only into the Recycle Bin or Trash. A mover never deletes permanently.
+        'src/Vacate/Private/TrashWindows.ps1:File/Directory mutation',
+        # Loads the framework's Microsoft.VisualBasic assembly by name for its Recycle Bin call;
+        # -TypeDefinition (compiling code) stays forbidden and is checked by review.
+        'src/Vacate/Private/TrashWindows.ps1:Add-Type',
+        # Microsoft.VisualBasic FileSystem.DeleteFile/DeleteDirectory, ONLY with
+        # RecycleOption.SendToRecycleBin (review checks this; DeletePermanently stays forbidden).
+        'src/Vacate/Private/TrashWindows.ps1:DeleteFile',
+        'src/Vacate/Private/TrashWindows.ps1:DeleteDirectory',
+        'src/Vacate/Private/TrashWindows.ps1:.MoveTo(',
+        'src/Vacate/Private/TrashLinux.ps1:.MoveTo(',
+        'src/Vacate/Private/TrashMacOS.ps1:.MoveTo(',
+        'src/Vacate/Private/TrashLinux.ps1:File/Directory mutation',
+        # The freedesktop Trash spec needs files/ and info/ folders and a .trashinfo file per item;
+        # .Delete( only removes vacate's own .trashinfo when a move fails or after a restore.
+        'src/Vacate/Private/TrashLinux.ps1:CreateDirectory',
+        'src/Vacate/Private/TrashLinux.ps1:WriteAllText',
+        'src/Vacate/Private/TrashLinux.ps1:.Delete(',
+        'src/Vacate/Private/TrashMacOS.ps1:File/Directory mutation',
+        'src/Vacate/Private/TrashMacOS.ps1:CreateDirectory'
     )
 
     # The only absolute binaries the tool may read. Paths are compared case-sensitively.
@@ -85,7 +106,13 @@ BeforeAll {
         [pscustomobject]@{ Kind = 'write'; Name = 'StreamWriter'; Regex = 'StreamWriter' },
         [pscustomobject]@{ Kind = 'write'; Name = 'FileStream'; Regex = 'FileStream' },
         [pscustomobject]@{ Kind = 'write'; Name = 'OpenWrite'; Regex = 'OpenWrite' },
-        [pscustomobject]@{ Kind = 'write'; Name = 'Set-Acl'; Regex = 'Set-Acl' }
+        [pscustomobject]@{ Kind = 'write'; Name = 'Set-Acl'; Regex = 'Set-Acl' },
+        # Added for Phase 3 (threat model): other ways to move or delete files, and COM objects.
+        [pscustomobject]@{ Kind = 'write'; Name = '.MoveTo('; Regex = '\.MoveTo\s*\(' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'DeleteFile'; Regex = '\bDeleteFile\b' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'DeleteDirectory'; Regex = '\bDeleteDirectory\b' },
+        [pscustomobject]@{ Kind = 'write'; Name = 'DeletePermanently'; Regex = 'DeletePermanently' },
+        [pscustomobject]@{ Kind = 'dynamic'; Name = '-ComObject'; Regex = '-ComObject' }
     )
 
     function ConvertTo-StaticSafetyCode {

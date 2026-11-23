@@ -1,0 +1,35 @@
+{
+  "id": "clean.test.tree",
+  "platforms": ["linux"],
+  "category": "activity",
+  "title": "Eligible clean test directory tree",
+  "whyItMatters": "Tests Phase 3 removal of a directory tree in the user home directory.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "clean_tree",
+    "match": "directories",
+    "recurse": false
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 100,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Phase 3 integration test fixture rule: https://example.com",
+  "notes": null,
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Delete the folder named in the plan using your file manager."
+    ],
+    "risk": "Removes test directory data and its subfolders.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Vacate test fixture, cleanup: https://example.com"
+  }
+}

@@ -278,6 +278,30 @@ folder; it does not scan or change anything else.
 written from vendor documentation, not tested step by step on each platform. A person can still
 follow a step on the wrong item. The plan cannot see whether an export actually worked.
 
+## Clean and undo (Phase 3)
+
+**Threat.** Phase 3 moves files. A wrong move can lose data that was never exported, reach files
+the rule never meant (through an edited plan, a link swapped in at the last second, or an
+environment variable pointing at the whole disk), turn into a permanent delete, or run on the
+wrong machine.
+
+**Control.** Dry run by default; moving needs the step numbers, `-Execute` and `-Confirm` with the
+machine name (D52). Only `remove` steps for one exact file or folder in the user's own profile are
+eligible (D51); wallets, personal folders, folder-searching rules and manual-only rules never are.
+Every path must be one the rule resolves now, under that rule's root, inside the real home folder,
+outside vacate's own folders. Right before each move the path is checked again: canonical,
+absolute, no link or junction anywhere on the way. Movers only move into the Recycle Bin or Trash
+and never overwrite (D50); the Windows mover refuses drives, settings, sizes and path lengths where
+Windows would delete permanently and confirms the bin entry afterwards; the Linux mover refuses
+moves across filesystems. Redacted reports, reports from another machine, and administrator or root
+sessions are refused. Each move is written to `undo.json` before the next starts (D53); undo
+restores newest first and never overwrites.
+
+**What remains.** Windows bin settings cannot be mapped to a single drive without COM, so the check
+is stricter than needed. A Linux `.trashinfo` write and a folder restore keep a very small race
+window. A file in use may make Windows show an error dialog (the move then fails, nothing is
+deleted). The Recycle Bin and Trash are not erasure. The macOS mover has not run on a real Mac.
+
 ## Outside this model
 
 - A compromised operating system, kernel, PowerShell or .NET runtime can hide files, fake

@@ -1,0 +1,35 @@
+{
+  "id": "clean.test.swapped",
+  "platforms": ["macos"],
+  "category": "activity",
+  "title": "Clean test reparse swap target",
+  "whyItMatters": "Tests Phase 3 refusal when a target is swapped for a junction or symlink.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "swapped_target",
+    "match": "directories",
+    "recurse": false
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 100,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Phase 3 integration test fixture rule: https://example.com",
+  "notes": null,
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Delete the folder named in the plan using your file manager."
+    ],
+    "risk": "Removes test directory swapped for a junction.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Vacate test fixture, cleanup: https://example.com"
+  }
+}

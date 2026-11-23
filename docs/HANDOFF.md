@@ -1,9 +1,9 @@
-# vacate - hand-off report (Phase 1 and Phase 2)
+# vacate - hand-off report (Phases 1-3)
 
-Phase 1: 2026-11-19 · Phase 2: 2026-11-20 · Repository: https://github.com/Its-amanjha/Vacate ·
+Phase 1: 2026-11-19 · Phase 2: 2026-11-20 · Phase 3: 2026-11-23 · Repository: https://github.com/Its-amanjha/Vacate ·
 Spec: [docs/SPEC.md](SPEC.md) · User guide: [docs/GUIDE.md](GUIDE.md)
 
-Sections 1-7 are the Phase 1 report the spec asks for. Section 8 is Phase 2.
+Sections 1-7 are the Phase 1 report the spec asks for. Section 8 is Phase 2, section 9 Phase 3.
 
 Phase 1 is a **read-only audit**. vacate scans a Windows, Linux or macOS computer for the personal
 data and traces a person leaves behind, and writes a report plus an ordered de-link checklist. It
@@ -40,22 +40,22 @@ prints), `summary.md`, `checklist.md` and `scan.log` into `runs/<timestamp>/`.
 
 ## 3. Test summary lines
 
-Run on 2026-11-20 against the code published in this report (Phase 2 included):
+Run on 2026-11-23 against the code published in this report (Phases 1-3):
 
 ```
-SUMMARY [Desktop 5.1.26100.9818] passed=341 failed=0 skipped=14
-SUMMARY [Core 7.7.0] passed=351 failed=0 skipped=4 (Windows)
-SUMMARY [Core 7.7.0] passed=350 failed=0 skipped=5 (Ubuntu 24.04, WSL)
+SUMMARY [Desktop 5.1.26100.9818] passed=610 failed=0 skipped=31
+SUMMARY [Core 7.7.0] passed=624 failed=0 skipped=17 (Windows, sabotage baseline)
+SUMMARY [Core 7.7.0] passed=602 failed=0 skipped=39 (Ubuntu 24.04, WSL)
 LINT issues=0
 ```
 
 - Last CI run checked by hand: GitHub Actions run `44559222971` on `292ee21` (Phase 1
   code): **completed/success** - test (ubuntu-pwsh)=success, test (windows-pwsh)=success, test (macos-pwsh)=success, test (windows-powershell)=success. Each job also runs a redacted sample scan and,
   since Phase 2, builds a plan from it, and uploads both as an artifact.
-- Sabotage self-test (`tools/Invoke-SabotageTest.ps1`): **all 8 mutations caught** (force
+- Sabotage self-test (`tools/Invoke-SabotageTest.ps1`): **all 11 mutations caught** (force
   exists, drop a rule, skip the link guard, ignore the budget, disable redaction, let a
-  wrong-platform rule run, and for Phase 2: the plan drops a trace, the cleanup check allows
-  delete commands). Details in [SABOTAGE.md](SABOTAGE.md).
+  wrong-platform rule run; Phase 2: the plan drops a trace, the cleanup check allows delete
+  commands; Phase 3: clean ignores the machine-name confirm, lets wallets through, follows a link). Details in [SABOTAGE.md](SABOTAGE.md).
 - Performance (`tests/perf`, opt-in): a 50,000-file synthetic profile scans in 26.7 s on
   PowerShell 5.1, 13.6 s on PowerShell 7 (Windows) and 13.4 s on Ubuntu, well inside the 120 s budget.
 - Static safety test: no network calls, no dynamic code, no shell, no writes outside the single
@@ -136,6 +136,10 @@ Full text and reasons in [DECISIONS.md](../DECISIONS.md).
 - **D47** Cleanup text is instructions in words: menu paths and plain descriptions.
 - **D48** `vacate plan -Run <dir>` reads `report.json` from an existing run folder and writes `plan.json`, `plan.md` and `plan.html` into that folder through the single output writer.
 - **D49** Plan steps are one per rule (all of that rule's locations listed), ordered by stage (export, sign out, uninstall, remove, review, manual, no action), then sensitivity (critical first), th...
+- **D50** Phase 3 removes only files and folders under the user's own profile roots (HOME, APPDATA, LOCALAPPDATA, XDG_*, LIBRARY under the user's home), and only by moving them to the platform Recy...
+- **D51** Only plan steps whose action is `remove` are eligible.
+- **D52** `vacate clean -Run <dir>` is a dry run by default and lists what it would move.
+- **D53** Every move is recorded in an undo log in the run folder (original path, Trash location, time, size).
 
 ## 6. Known false-positive risks
 
@@ -205,6 +209,54 @@ What Phase 3 (safe deletion) would require, from the spec roadmap: allow-listed 
 resolution, Recycle Bin or Trash by default, an exact-path registry and plist allow-list,
 `-Execute -Confirm <MACHINENAME>`, a verification re-scan and an undo log. The Phase 2 plan
 (`plan.json`) is the natural input: each step already names its rule, action and locations.
+
+## 9. Phase 3: safe deletion (Recycle Bin and Trash only)
+
+Phase 3 adds `vacate clean` and `vacate undo` (D50-D53). Both are dry runs by default.
+
+```powershell
+vacate.ps1 clean -Run <dir>                                          # preview, moves nothing
+vacate.ps1 clean -Run <dir> -Steps 3,5 -Execute -Confirm <MACHINENAME>
+vacate.ps1 undo  -Run <dir> -Execute -Confirm <MACHINENAME>
+```
+
+What it will move: only plan steps whose action is `remove`, for one exact file or folder
+inside the user's own profile. Wallets, personal folders, rules that search inside a folder,
+registry and system locations, steps that need a sign-out or a decision, and 8 manual-only rules
+are never moved. On the current catalog: 4 Windows, 4 macOS and 5 Linux rules qualify.
+
+Safety layers, in the order they run:
+1. Refuses a redacted report, a report from another platform or machine, and admin/root sessions.
+2. Without `-Steps`, `-Execute` and `-Confirm` equal to the machine name, nothing moves.
+3. Eligibility per step (D51), with a coded reason for every refusal.
+4. Each path must be one the rule finds **now**, under the rule's own root, inside the real home
+   folder; vacate's own folder and `runs` are excluded. An edited or stale `plan.json` cannot
+   reach other files.
+5. A last check right before each move: canonical absolute path, no link or junction anywhere on
+   the way, not a root, not redacted.
+6. The movers only ever move into the Recycle Bin or Trash and never overwrite. Windows checks the
+   drive, bin settings, size and path length first and confirms the ``/`` entry
+   afterwards; Linux follows the freedesktop Trash spec and refuses moves across filesystems;
+   macOS renames into `~/.Trash`.
+7. `undo.json` is written after every move; `undo` restores newest first and never overwrites.
+
+Verified:
+- 9 end-to-end tests on a fake profile (dry run unchanged, confirm gate, wallet refused, link swap
+  refused, full undo), plus unit tests for eligibility, target check, undo log and each mover.
+- **Live on this Windows PC:** a throwaway file and folder went into the real Recycle Bin
+  (`C:\$Recycle.Bin\<SID>\$R...`), a pretend wallet was refused, and `undo` restored both
+  with contents intact.
+- Linux mover: 70 unit tests in WSL Ubuntu 24.04. Sabotage: 11 of 11 deliberate breakages caught,
+  including "ignore the machine-name confirm", "let wallets through", "follow a link".
+
+Not verified or known limits:
+- macOS mover tested only with an injected Trash folder; no real Mac.
+- Windows: bin settings cannot be tied to a drive without COM, so one "delete immediately" drive
+  makes vacate refuse on all drives. A locked file can still make Windows show an error dialog;
+  the move then fails safely. Restore leaves the small `` record behind.
+- Linux: the `.trashinfo` write and the folder restore have a tiny race window; the device check
+  uses mount data, not device ids, and refuses symlinked setups.
+- The Recycle Bin and Trash are not erasure: empty them, or use the full reset, before handover.
 
 ## Legal and ethical scope
 

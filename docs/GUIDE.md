@@ -107,6 +107,34 @@ vacate does not do any of the steps for you. Work through them in order:
 If a menu in a step has moved in a newer version of an app, follow the goal of the step and the
 help page in **Source**.
 
+### Optional: let vacate move the simple items
+
+For a few "Remove leftover data" steps (caches, history files and similar, inside your own user
+folder), vacate can move the items to the Recycle Bin or Trash for you. First see what it would do;
+this moves nothing:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\vacate.ps1 clean -Run .\runs\20261120-101500
+```
+
+Open `clean-preview.md` in the run folder. It lists what could be moved and why everything else is
+left to you. To move the items of, say, steps 12 and 14, close the apps the plan names, then type
+the step numbers and your computer's name:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\vacate.ps1 clean -Run .\runs\20261120-101500 -Steps 12,14 -Execute -Confirm MY-PC
+```
+
+vacate checks every item again right before moving it, never deletes anything permanently, and
+records each move. To put everything back:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\vacate.ps1 undo -Run .\runs\20261120-101500 -Execute -Confirm MY-PC
+```
+
+Items in the Recycle Bin or Trash can still be restored by anyone using your account, so empty it
+(or use the full reset in Step 5) before you hand the computer over.
+
 ## 7. Step 4: scan again
 
 Run the scan from Step 1 again. The new report shows what is still left. Repeat Steps 2 and 3

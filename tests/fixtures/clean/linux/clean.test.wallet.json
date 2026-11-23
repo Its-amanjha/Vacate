@@ -1,0 +1,36 @@
+{
+  "id": "clean.test.wallet",
+  "platforms": ["linux"],
+  "category": "wallets",
+  "title": "Crypto wallet test file",
+  "whyItMatters": "Ineligible wallet trace that must be refused by clean eligibility checks.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "wallet.dat",
+    "match": "files",
+    "recurse": false
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 100,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Phase 3 integration test fixture rule: https://example.com",
+  "notes": null,
+  "cleanup": {
+    "action": "remove",
+    "exportFirst": null,
+    "signOut": null,
+    "steps": [
+      "Confirm you have the recovery phrase or backup.",
+      "Delete the file named in the plan using your file manager."
+    ],
+    "risk": "Deletes cryptocurrency wallet keys and seed information.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Vacate test fixture, cleanup: https://example.com"
+  }
+}

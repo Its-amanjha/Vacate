@@ -153,6 +153,25 @@ Status: Phase 1 works end to end on Windows 11 and Ubuntu 24.04 (WSL). See [READ
 - **A redacted report gives a redacted plan.** Locations show as hashes; run `plan` on the
   unredacted report on the machine itself to see real paths.
 
+## Clean and undo (Phase 3)
+
+- **Few steps qualify.** Only plan steps whose action is `remove`, for a single file or folder
+  inside your own profile, can be moved. Wallets, personal folders (Desktop, Documents and so on),
+  registry and system locations, rules that search inside a folder, and steps that need you to
+  sign out or decide are always left to you. On the current catalog that is 4 Windows, 4 macOS
+  and 5 Linux rules.
+- **The Recycle Bin or Trash is not erasure.** Moved items still take space and anyone using your
+  account can restore them until it is emptied. Empty it, or use the full reset, before handover.
+- **Apps can recreate data.** If an app is still running it may write its folder again; the
+  re-scan after `clean` shows what came back. Close the apps the plan names first.
+- **A moved item can fail to move.** A file in use, a permission problem or a drive without a
+  Recycle Bin makes vacate leave the item where it is and say so. It never falls back to a
+  permanent delete.
+- **Undo needs the original place to be free.** If something new exists at the old path, undo
+  leaves the item in the Recycle Bin/Trash and reports it instead of overwriting.
+- **Run it on the machine that was scanned, as your normal user.** Clean refuses a report from
+  another machine or platform, a redacted report, and administrator or root sessions.
+
 ## What a clean report means
 
 Nothing was found in the locations vacate knows about, on the paths it was allowed to read. It

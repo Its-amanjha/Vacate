@@ -113,6 +113,30 @@ $mutations = @(
         Anchor  = '    elseif ($Value -match $script:VacateCleanupForbiddenPattern) {'
         Replace = '    elseif ($Value -match ''zzz-never-matches-zzz'') {'
         Expect  = 'Test-VacateCleanup must reject shell commands and backticks'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'clean ignores the machine-name confirm'
+        File    = 'src/Vacate/Public/Invoke-VacateClean.ps1'
+        Kind    = 'replace'
+        Anchor  = '            throw ("-Execute needs -Confirm with this machine''s name ({0}). Nothing was moved." -f $machine)'
+        Replace = '            $null = $machine'
+        Expect  = 'clean -Execute must refuse a missing or wrong machine name (D52)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'clean lets wallets through'
+        File    = 'src/Vacate/Private/CleanEligibility.ps1'
+        Kind    = 'replace'
+        Anchor  = '        return (New-VacateCleanVerdict ''wallet'' ''Crypto wallet data is never moved by vacate. Handle it yourself after checking your recovery phrase or backup.'')'
+        Replace = '        $null = 0'
+        Expect  = 'wallets are never eligible for clean (D51)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'clean follows a link in the path'
+        File    = 'src/Vacate/Private/CleanTarget.ps1'
+        Kind    = 'replace'
+        Anchor  = '            return (& $result ''reparse-in-chain'' "''$c'' is a link, junction or other reparse point" $false)'
+        Replace = '            $null = $c'
+        Expect  = 'a link anywhere on the path must stop the move (D50)'
     }
 )
 

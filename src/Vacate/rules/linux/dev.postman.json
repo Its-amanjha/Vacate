@@ -1,0 +1,38 @@
+{
+  "id": "dev.postman",
+  "platforms": ["linux"],
+  "category": "developer-secrets",
+  "title": "Postman local data",
+  "whyItMatters": "Postman keeps local collections, environments and request history here. Environment variables often contain API keys and access tokens, and the history shows every endpoint the person called.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "Postman",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Postman Support, How to remove local data: on Linux the Postman folder is under .config - https://support.postman.com/hc/en-us/articles/4410785125271-How-to-remove-local-data",
+  "notes": "Uses $XDG_CONFIG_HOME when set. Holds collections, environments, request history and the sign-in state. Contents are not read.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Export the collections and environments you need from Postman, and keep any API keys from environment variables somewhere safe.",
+    "signOut": "Sign out of Postman in the app, then remove this device from the account's sessions on the Postman website.",
+    "steps": [
+      "Export the collections and environments you want to keep.",
+      "Sign out of Postman and quit the app.",
+      "Uninstall Postman from the software centre or its own folder.",
+      "Delete the folder named in the plan using the file manager."
+    ],
+    "risk": "Removes local collections, environments, request history and the sign-in state from this machine. Anything already synced stays in the Postman account.",
+    "closeApps": ["Postman"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Postman Support, How to remove local data: https://support.postman.com/hc/en-us/articles/4410785125271-How-to-remove-local-data"
+  }
+}

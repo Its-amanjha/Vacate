@@ -1,0 +1,37 @@
+{
+  "id": "dev.gcloud",
+  "platforms": ["macos"],
+  "category": "developer-secrets",
+  "title": "Google Cloud CLI configuration",
+  "whyItMatters": "The gcloud folder holds OAuth tokens, cached credentials and the active account for Google Cloud. A stranger could use them to act as the account owner in the cloud.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".config/gcloud",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Google Cloud docs, Managing gcloud CLI configurations: configurations live in ~/.config/gcloud on macOS - https://cloud.google.com/sdk/docs/configurations",
+  "notes": "Covers credentials.db, access_tokens.db and the configurations folder. CLOUDSDK_CONFIG can move the folder; file contents are not read. Revoking the account access is what actually stops the tokens working.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Remove the Google Cloud SDK from Third-party apps and services in the Google Account settings, so the tokens stored on this Mac stop working.",
+    "steps": [
+      "Remove access for the Google Cloud SDK in the Google Account security settings.",
+      "Quit any Terminal window where gcloud was used.",
+      "Delete the folder named in the plan using Finder."
+    ],
+    "risk": "Removes the saved Google Cloud logins and settings from this Mac. Tokens that are not revoked in the Google Account keep working from anywhere.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Google Cloud docs, Authenticate for the gcloud CLI: https://cloud.google.com/sdk/docs/authenticate"
+  }
+}

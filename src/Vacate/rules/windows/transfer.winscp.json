@@ -1,0 +1,37 @@
+{
+  "id": "transfer.winscp",
+  "platforms": ["windows"],
+  "category": "network",
+  "title": "WinSCP saved sessions file",
+  "whyItMatters": "When WinSCP is set to store its configuration in an INI file, saved sessions and stored passwords sit in it. A stranger could reconnect to the same servers.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "WinSCP.ini",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "WinSCP documentation, Configuration: storage can be an INI file, by default WinSCP.ini next to the executable or in the user profile - https://winscp.net/eng/docs/config",
+  "notes": "Only exists when INI storage was chosen. By default WinSCP keeps sessions in the HKCU registry, which cannot be expressed as a path rule, so registry-stored sessions are not covered here. Stored passwords may be obfuscated, not encrypted.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Open WinSCP and note the host names you still need, since the saved sessions are removed with the file.",
+    "signOut": "Change the passwords of the server accounts this PC connected to, because stored copies keep working after the file is gone.",
+    "steps": [
+      "Change the server account passwords at the hosting provider.",
+      "Close WinSCP.",
+      "Uninstall WinSCP from Settings > Apps > Installed apps.",
+      "Delete the file named in the plan if it is still there."
+    ],
+    "risk": "Removes saved WinSCP sessions and passwords from this PC. Server accounts stay usable until their passwords are changed.",
+    "closeApps": ["WinSCP"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "WinSCP documentation, Configuration: https://winscp.net/eng/docs/config"
+  }
+}

@@ -26,7 +26,7 @@
     "Ubuntu 24.04 (WSL)"
   ],
   "verified": true,
-  "source": "freedesktop.org Trash spec: trashed files live in $XDG_DATA_HOME/Trash with files/ and info/ subfolders: https://specifications.freedesktop.org/trash-spec/latest/",
+  "source": "freedesktop.org Trash spec: trashed files live in $XDG_DATA_HOME/Trash with files/ and info/ subfolders: https://specifications.freedesktop.org/trash/latest/",
   "notes": "files/ holds the trashed content and info/ one .trashinfo per item with its original path. Deletions on other mounts go to a .Trash-<uid> folder at that mount's top, which this rule does not cover.",
   "cleanup": {
     "action": "remove",
@@ -40,6 +40,6 @@
     "closeApps": [],
     "resetCovers": true,
     "reason": null,
-    "source": "GNOME Help, Empty your trash: https://help.gnome.org/users/gnome-help/stable/files-trash.html"
+    "source": "GNOME Help, Recover a file from the Trash: https://help.gnome.org/gnome-help/files-recover.html"
   }
 }

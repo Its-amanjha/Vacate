@@ -158,7 +158,7 @@ Status: Phase 1 works end to end on Windows 11 and Ubuntu 24.04 (WSL). See [READ
 - **Few steps qualify.** Only plan steps whose action is `remove`, for a single file or folder
   inside your own profile, can be moved. Wallets, personal folders (Desktop, Documents and so on),
   registry and system locations, rules that search inside a folder, and steps that need you to
-  sign out or decide are always left to you. On the current catalog that is 4 Windows rules (9 with -ExportDone for steps that ask to save first), 4 macOS and 5 Linux rules.
+  sign out or decide are always left to you. On the current catalog that is 9 Windows rules (14 with -ExportDone for steps that ask to save first), 4 macOS and 5 Linux rules.
 - **The Recycle Bin or Trash is not erasure.** Moved items still take space and anyone using your
   account can restore them until it is emptied. Empty it, or use the full reset, before handover.
 - **Apps can recreate data.** If an app is still running it may write its folder again; the

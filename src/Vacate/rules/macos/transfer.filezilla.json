@@ -1,0 +1,38 @@
+{
+  "id": "transfer.filezilla",
+  "platforms": ["macos"],
+  "category": "network",
+  "title": "FileZilla saved sites and passwords",
+  "whyItMatters": "FileZilla can save FTP and SFTP logins, including passwords, in sitemanager.xml and recentservers.xml in this folder. A stranger could use them to reach the same servers.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".config/filezilla",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "FileZilla wiki, FileZilla Client data directory: ~/.config/filezilla on macOS holds sitemanager.xml and recentservers.xml - https://wiki.filezilla-project.org/FileZilla_Client_Data_Directory",
+  "notes": "Saved passwords may be obfuscated rather than encrypted, so they are readable. The folder also holds queue and layout state.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Use File > Export in FileZilla to save the site list without passwords if you need the host names.",
+    "signOut": "Change the passwords of the FTP and SFTP accounts this Mac connected to, because the saved copies keep working after the file is gone.",
+    "steps": [
+      "Change the server account passwords at the hosting provider.",
+      "Quit FileZilla.",
+      "Uninstall FileZilla by moving it to the Trash.",
+      "Delete the folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Removes the saved site list and passwords from this Mac. Server accounts keep working until their passwords are changed.",
+    "closeApps": ["FileZilla"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "FileZilla wiki, FileZilla Client data directory: https://wiki.filezilla-project.org/FileZilla_Client_Data_Directory"
+  }
+}

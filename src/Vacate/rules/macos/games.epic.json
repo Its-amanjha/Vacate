@@ -1,0 +1,38 @@
+{
+  "id": "games.epic",
+  "platforms": ["macos"],
+  "category": "games-licenses",
+  "title": "Epic Games Launcher data",
+  "whyItMatters": "The Epic Games Launcher keeps account sign-in data, installed-game records and cached web content in this folder. It shows which Epic account was used on this Mac.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Epic",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 10000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Epic Games Support, Epic Games Launcher cache and data folder on macOS under Library/Application Support/Epic - https://www.epicgames.com/help/",
+  "notes": "Holds the launcher data folder and game-specific data. Installed games may be in /Applications or a custom folder and are covered by the installed programs rules. Contents are not read.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Copy any game saves kept only on this Mac, since not every title syncs saves to the Epic account.",
+    "signOut": "Sign out of the Epic Games Launcher, then remove this device from the account's authorized devices on the Epic Games website.",
+    "steps": [
+      "Sign out of the Epic Games Launcher.",
+      "Quit the launcher.",
+      "Uninstall the launcher by moving it to the Trash.",
+      "Delete the folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Removes the launcher sign-in state and local records from this Mac. Games and licences stay with the Epic account.",
+    "closeApps": ["Epic Games Launcher"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Epic Games Support: https://www.epicgames.com/help/"
+  }
+}

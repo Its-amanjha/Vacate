@@ -1,0 +1,38 @@
+{
+  "id": "games.battlenet",
+  "platforms": ["macos"],
+  "category": "games-licenses",
+  "title": "Battle.net app data",
+  "whyItMatters": "The Battle.net desktop app keeps account sign-in state and cached game data in this folder. It shows which Blizzard account was used on this Mac.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Battle.net",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 10000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Blizzard Support, Deleting the Battle.net cache folder: the macOS folder is ~/Library/Application Support/Battle.net - https://us.battle.net/support/en/article/34721",
+  "notes": "Installed Blizzard games live in /Applications and are covered by the installed programs rules. Cache contents are not read.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Sign out of the Battle.net app, then remove this device from the account's authorized devices on the Blizzard website.",
+    "steps": [
+      "Sign out of the Battle.net app.",
+      "Quit the app.",
+      "Uninstall the app by moving it to the Trash.",
+      "Delete the folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Removes the app sign-in state and cached data from this Mac. Games and licences stay with the Blizzard account.",
+    "closeApps": ["Battle.net"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Blizzard Support, Deleting the Battle.net Cache Folder: https://us.battle.net/support/en/article/34721"
+  }
+}

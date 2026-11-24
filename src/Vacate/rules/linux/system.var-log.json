@@ -37,6 +37,6 @@
     "closeApps": [],
     "resetCovers": true,
     "reason": "System logs are written and rotated by system daemons, so they are not yours to clear by hand; a reinstall removes them.",
-    "source": "Ubuntu Documentation, System Logs: https://help.ubuntu.com/community/LinuxLogFiles"
+    "source": "Ubuntu Community Help Wiki, LinuxLogFiles: https://web.archive.org/web/20240712010308/https://help.ubuntu.com/community/LinuxLogFiles"
   }
 }

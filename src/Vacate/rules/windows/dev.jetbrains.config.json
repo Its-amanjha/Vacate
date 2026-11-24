@@ -1,0 +1,38 @@
+{
+  "id": "dev.jetbrains.config",
+  "platforms": ["windows"],
+  "category": "developer-secrets",
+  "title": "JetBrains IDE settings",
+  "whyItMatters": "JetBrains IDEs keep per-project settings, recent project names and plugin state here. Saved passwords are not in this folder, but the project history still shows what the person worked on.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "JetBrains",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "JetBrains, Directories used by the IDE: configuration is stored in %APPDATA%/JetBrains/<product><version> - https://www.jetbrains.com/help/idea/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html",
+  "notes": "Database and VCS passwords are kept in Windows Credential Manager, not in this folder; the credentials.windows.credentials rules cover that store. One subfolder per product and version.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Use File > Export Settings in each JetBrains IDE to save the settings you want to keep.",
+    "signOut": "Sign out of JetBrains Account in the IDE, and remove this machine from the account's authorized devices on the JetBrains website.",
+    "steps": [
+      "Sign out of the JetBrains Account in each IDE.",
+      "Close every JetBrains IDE.",
+      "Uninstall the IDEs from Settings > Apps > Installed apps.",
+      "Delete the folder named in the plan if it is still there."
+    ],
+    "risk": "Removes per-project settings, recent project names and plugin state for every JetBrains IDE on this PC. Project files themselves are not touched.",
+    "closeApps": ["IntelliJ IDEA", "PyCharm", "WebStorm"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "JetBrains, Directories used by the IDE to store settings, caches, plugins and logs: https://www.jetbrains.com/help/idea/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html"
+  }
+}

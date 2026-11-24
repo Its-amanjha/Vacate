@@ -1,0 +1,36 @@
+{
+  "id": "dev.gh-cli",
+  "platforms": ["macos"],
+  "category": "developer-secrets",
+  "title": "GitHub CLI logins",
+  "whyItMatters": "The GitHub CLI keeps an OAuth token for every signed-in GitHub account in this folder. With that token a stranger can act as the person on GitHub, including reading private repositories.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".config/gh/hosts.yml",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "GitHub CLI manual, environment: config defaults to ~/.config/gh, or $XDG_CONFIG_HOME/gh when set - https://cli.github.com/manual/gh_help_environment",
+  "notes": "hosts.yml holds the per-host user and oauth_token; config.yml in the same folder holds preferences only. GH_CONFIG_DIR can move it. Newer versions may keep the token in the macOS Keychain instead.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Revoke the GitHub CLI authorization in the GitHub account Settings under Applications, so the token stored on this Mac stops working.",
+    "steps": [
+      "Revoke the GitHub CLI token in the GitHub account Settings under Applications.",
+      "Delete the file named in the plan using Finder.",
+      "Check the account's authorized applications again for anything you do not recognise."
+    ],
+    "risk": "Removes the saved GitHub CLI login from this Mac. A token that is not revoked at GitHub keeps working until it expires.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GitHub CLI manual, gh auth logout: https://cli.github.com/manual/gh_auth_logout"
+  }
+}

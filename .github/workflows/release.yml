@@ -1,0 +1,57 @@
+name: Release
+
+# Runs only when a version tag such as v0.5.0 is pushed (D61). Tests, builds the reproducible
+# ZIP, attests where it was built, and publishes a GitHub Release with the ZIP and SHA256SUMS.
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # create the release
+      id-token: write       # sign the attestation
+      attestations: write   # store the attestation
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install Pester 5 and PSScriptAnalyzer
+        run: |
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Pester -MinimumVersion 5.5 -MaximumVersion 5.99 -Repository PSGallery -Force -Scope CurrentUser -SkipPublisherCheck
+          Install-Module -Name PSScriptAnalyzer -Repository PSGallery -Force -Scope CurrentUser -SkipPublisherCheck
+
+      - name: Run tests
+        run: ./tests/Run-Tests.ps1
+
+      - name: Validate rule catalog
+        run: ./vacate.ps1 rules validate
+
+      - name: Build release ZIP
+        run: ./tools/Build-Release.ps1 -Version $env:GITHUB_REF_NAME.TrimStart('v')
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: dist/*.zip
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $notes = @"
+          Download vacate-$($env:GITHUB_REF_NAME.TrimStart('v')).zip, check it (docs/VERIFY.md), unzip it and run:
+          - Windows: vacate scan   (from the unzipped folder; vacate.cmd starts PowerShell for you)
+          - macOS / Linux: pwsh ./vacate.ps1 scan
+
+          Read docs/GUIDE.md first. LIMITS.md lists what vacate cannot do.
+          "@
+          gh release create $env:GITHUB_REF_NAME dist/*.zip dist/SHA256SUMS --title "vacate $env:GITHUB_REF_NAME" --notes $notes --verify-tag

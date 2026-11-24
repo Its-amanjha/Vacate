@@ -1,0 +1,37 @@
+{
+  "id": "dev.gcloud",
+  "platforms": ["linux"],
+  "category": "developer-secrets",
+  "title": "Google Cloud CLI configuration",
+  "whyItMatters": "The gcloud folder holds OAuth tokens, cached credentials and the active account for Google Cloud. A stranger could use them to act as the account owner in the cloud.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "gcloud",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Google Cloud docs, Managing gcloud CLI configurations: configurations live in ~/.config/gcloud on Linux - https://cloud.google.com/sdk/docs/configurations",
+  "notes": "Uses $XDG_CONFIG_HOME when set. Covers credentials.db, access_tokens.db and the configurations folder. CLOUDSDK_CONFIG can move the folder; file contents are not read.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Remove the Google Cloud SDK from Third-party apps and services in the Google Account settings, so the tokens stored on this machine stop working.",
+    "steps": [
+      "Remove access for the Google Cloud SDK in the Google Account security settings.",
+      "Close any terminal where gcloud was used.",
+      "Delete the folder named in the plan using the file manager."
+    ],
+    "risk": "Removes the saved Google Cloud logins and settings from this machine. Tokens that are not revoked in the Google Account keep working from anywhere.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Google Cloud docs, Authenticate for the gcloud CLI: https://cloud.google.com/sdk/docs/authenticate"
+  }
+}

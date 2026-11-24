@@ -1,0 +1,38 @@
+{
+  "id": "cloud.dropbox",
+  "platforms": ["windows"],
+  "category": "cloud-sync",
+  "title": "Dropbox synced folder",
+  "whyItMatters": "Dropbox keeps a local copy of synced files in the user profile. Those copies can contain private documents even after the account is signed out.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Dropbox*",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Dropbox Help, change the Dropbox folder location: the default on Windows is %HOMEPATH%/Dropbox - https://help.dropbox.com/installs/dropbox-folder-location",
+  "notes": "The glob also matches Dropbox (Personal) and Dropbox (Team) folders. Online-only placeholders are counted, not hydrated. A custom folder location is not matched.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Copy any file you need that exists only in the local Dropbox folder to a drive you keep.",
+    "signOut": "Sign out of Dropbox in the app, then remove this computer from the account's connected devices on the Dropbox website.",
+    "steps": [
+      "Confirm the files you need are copied somewhere safe.",
+      "Quit Dropbox from the notification area.",
+      "Unlink this computer in the Dropbox settings.",
+      "Delete the folder named in the plan, then empty the Recycle Bin."
+    ],
+    "risk": "Local copies leave this PC. Files still in the Dropbox account are untouched, and online-only files were never here.",
+    "closeApps": ["Dropbox"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Dropbox Help, Sign in and sign out of Dropbox: https://help.dropbox.com/account-access/sign-in-out"
+  }
+}

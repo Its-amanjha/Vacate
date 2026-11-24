@@ -1,0 +1,39 @@
+{
+  "id": "cloud.icloud",
+  "platforms": ["windows"],
+  "category": "cloud-sync",
+  "title": "iCloud Drive folder",
+  "whyItMatters": "iCloud for Windows keeps a local copy of iCloud Drive files in the user profile. Those copies can contain photos and documents even after the account is signed out.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "iCloudDrive",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Apple Support, iCloud for Windows user guide: iCloud Drive files are available in the iCloud Drive folder in File Explorer - https://support.apple.com/guide/icloud-windows/welcome/1.0/icw",
+  "notes": "Only exists while iCloud for Windows is installed and signed in. Photos, bookmarks and mail caches live in separate app folders and are not covered here. Online-only files may not be present locally.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Copy any file that exists only in the local iCloud Drive folder to a drive you keep.",
+    "signOut": "Sign out of iCloud in the iCloud for Windows app, so the account stops syncing this PC.",
+    "steps": [
+      "Confirm the files you need are copied somewhere safe.",
+      "Quit iCloud for Windows from the notification area.",
+      "Sign out in the iCloud for Windows app.",
+      "Uninstall iCloud from Settings > Apps > Installed apps.",
+      "Delete the folder named in the plan if it is still there."
+    ],
+    "risk": "Local copies leave this PC. Files still in iCloud are untouched, and files that were never downloaded are not affected.",
+    "closeApps": ["iCloud"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Apple Support, iCloud for Windows user guide: https://support.apple.com/guide/icloud-windows/welcome/1.0/icw"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "transfer.mremoteng",
+  "platforms": ["windows"],
+  "category": "network",
+  "title": "mRemoteNG connection file",
+  "whyItMatters": "mRemoteNG keeps saved RDP, SSH and VNC connections in confCons.xml, including stored credentials. A stranger could reconnect to the same servers.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "mRemoteNG",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "mRemoteNG documentation, settings and connections file location under %APPDATA%/mRemoteNG - https://mremoteng.readthedocs.io/en/latest/",
+  "notes": "confCons.xml is encrypted with a master password; installations that kept the default master password are readable by anyone. Portable installs keep the file next to the executable.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Export the connection list from mRemoteNG without passwords if you need the host names.",
+    "signOut": "Change the passwords of the server accounts this PC connected to, because the saved copies keep working after the file is gone.",
+    "steps": [
+      "Change the server account passwords at the hosting provider.",
+      "Close mRemoteNG.",
+      "Uninstall mRemoteNG from Settings > Apps > Installed apps.",
+      "Delete the folder named in the plan if it is still there."
+    ],
+    "risk": "Removes saved connections and stored credentials from this PC. Server accounts stay usable until their passwords are changed.",
+    "closeApps": ["mRemoteNG"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "mRemoteNG documentation: https://mremoteng.readthedocs.io/en/latest/"
+  }
+}

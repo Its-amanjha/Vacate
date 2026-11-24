@@ -299,7 +299,7 @@ Describe 'vacate.ps1 CLI' {
 
     It 'returns real exit codes from both pwsh and powershell when available' {
         $engines = @($script:exe)
-        if ($PSVersionTable.PSEdition -eq 'Core') {
+        if ($PSVersionTable.PSEdition -eq 'Core' -and $env:SystemRoot) {
             $winPs = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
             if ([IO.File]::Exists($winPs)) { $engines += $winPs }
         } else {

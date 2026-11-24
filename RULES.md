@@ -4,7 +4,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 
 `verified` means the location was confirmed on a real machine of that platform. Unverified rules still run; the report lists them.
 
-## Windows (98 rules, 45 verified)
+## Windows (113 rules, 46 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -42,6 +42,9 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `browser.opera.profiles` | browsers | medium | `APPDATA/Opera Software/Opera Stable/Default/Preferences` | no | no |
 | `browser.vivaldi.profiles` | browsers | medium | `LOCALAPPDATA/Vivaldi/User Data/*/Preferences` | no | no |
 | `browser.zen.profiles` | browsers | medium | `APPDATA/zen/Profiles/*/prefs.js` | no | no |
+| `cloud.dropbox` | cloud-sync | medium | `HOME/Dropbox*` | no | no |
+| `cloud.google-drive` | cloud-sync | medium | `LOCALAPPDATA/Google/DriveFS` | no | no |
+| `cloud.icloud` | cloud-sync | medium | `HOME/iCloudDrive` | no | no |
 | `cloud.onedrive` | cloud-sync | medium | `HOME/OneDrive*` | no | yes (Windows 11 Pro 26300) |
 | `containers.docker-desktop` | containers-vms | medium | `LOCALAPPDATA/Docker` | no | yes (Windows 11 Pro 26300) |
 | `containers.virtualbox` | containers-vms | medium | `HOME/VirtualBox VMs` | no | no |
@@ -57,11 +60,19 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `credentials.windows.vault` | credentials | critical | `LOCALAPPDATA/Microsoft/Vault` | no | yes (Windows 11 Pro 26300) |
 | `dev.aws.config` | developer-secrets | critical | `HOME/.aws` | no | no |
 | `dev.azure.config` | developer-secrets | critical | `HOME/.azure` | no | no |
+| `dev.cargo.credentials` | developer-secrets | critical | `HOME/.cargo/credentials.toml` | no | no |
 | `dev.docker.config` | developer-secrets | critical | `HOME/.docker/config.json` | no | yes (Windows 11 Pro 26300) |
+| `dev.gcloud` | developer-secrets | critical | `APPDATA/gcloud` | no | no |
+| `dev.gh-cli` | developer-secrets | critical | `APPDATA/GitHub CLI` | no | no |
 | `dev.git-credentials` | developer-secrets | critical | `HOME/.git-credentials` | no | no |
+| `dev.jetbrains.config` | developer-secrets | medium | `APPDATA/JetBrains` | no | no |
 | `dev.kube.config` | developer-secrets | critical | `HOME/.kube` | no | no |
 | `dev.npmrc` | developer-secrets | critical | `HOME/.npmrc` | no | no |
+| `dev.postman` | developer-secrets | high | `APPDATA/Postman` | no | no |
+| `dev.pypirc` | developer-secrets | critical | `HOME/.pypirc` | no | no |
 | `dev.ssh.keys` | developer-secrets | critical | `HOME/.ssh` | no | no |
+| `dev.terraform.credentials` | developer-secrets | critical | `APPDATA/terraform.d/credentials.tfrc.json` | no | no |
+| `dev.vscode.settings` | developer-secrets | high | `APPDATA/Code/User` | no | yes (Windows 11 Pro 26300) |
 | `email.outlook.data` | email | high | `LOCALAPPDATA/Microsoft/Outlook` | no | no |
 | `email.outlook.new` | email | high | `LOCALAPPDATA/Packages/Microsoft.OutlookForWindows_8wekyb3d8bbwe` | no | yes (Windows 11 Pro 26300) |
 | `email.thunderbird.profiles` | email | high | `APPDATA/Thunderbird/Profiles/*` | no | no |
@@ -100,6 +111,10 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `system.prefetch` | system-traces | medium | `SYSTEMDRIVE/Windows/Prefetch` | yes | yes (Windows 11 Pro 26300) |
 | `system.temp.user` | system-traces | medium | `LOCALAPPDATA/Temp` | no | yes (Windows 11 Pro 26300) |
 | `system.windows-old` | system-traces | medium | `SYSTEMDRIVE/Windows.old` | no | no |
+| `transfer.filezilla` | network | critical | `APPDATA/FileZilla` | no | no |
+| `transfer.mobaxterm` | network | critical | `APPDATA/MobaXterm` | no | no |
+| `transfer.mremoteng` | network | critical | `APPDATA/mRemoteNG` | no | no |
+| `transfer.winscp` | network | critical | `APPDATA/WinSCP.ini` | no | no |
 | `wallet.electrum` | wallets | critical | `APPDATA/Electrum/wallets` | no | no |
 | `wallet.exodus` | wallets | critical | `APPDATA/Exodus/exodus.wallet` | no | no |
 | `wallet.ledger-live` | wallets | critical | `APPDATA/Ledger Wallet` | no | no |
@@ -107,7 +122,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `wallet.metamask.edge` | wallets | critical | `LOCALAPPDATA/Microsoft/Edge/User Data/*/Local Extension Settings/ejbalbakoplchlghecdalmeeeajnimhm` | no | no |
 | `wallet.monero-gui` | wallets | critical | `HOME/Documents/Monero/wallets` | no | no |
 
-## macOS (70 rules, 24 verified)
+## macOS (82 rules, 24 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -146,11 +161,19 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `credentials.keychains` | credentials | critical | `LIBRARY/Keychains` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `dev.aws.config` | developer-secrets | critical | `HOME/.aws` | no | no |
 | `dev.azure.config` | developer-secrets | critical | `HOME/.azure` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `dev.cargo.credentials` | developer-secrets | critical | `HOME/.cargo/credentials.toml` | no | no |
 | `dev.docker.config` | developer-secrets | critical | `HOME/.docker/config.json` | no | no |
+| `dev.gcloud` | developer-secrets | critical | `HOME/.config/gcloud` | no | no |
+| `dev.gh-cli` | developer-secrets | critical | `HOME/.config/gh/hosts.yml` | no | no |
 | `dev.git-credentials` | developer-secrets | critical | `HOME/.git-credentials` | no | no |
+| `dev.jetbrains.config` | developer-secrets | medium | `LIBRARY/Application Support/JetBrains` | no | no |
 | `dev.kube.config` | developer-secrets | critical | `HOME/.kube` | no | no |
 | `dev.npmrc` | developer-secrets | critical | `HOME/.npmrc` | no | no |
+| `dev.postman` | developer-secrets | high | `LIBRARY/Application Support/Postman` | no | no |
+| `dev.pypirc` | developer-secrets | critical | `HOME/.pypirc` | no | no |
 | `dev.ssh.keys` | developer-secrets | critical | `HOME/.ssh` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `dev.terraform.credentials` | developer-secrets | critical | `HOME/.terraform.d/credentials.tfrc.json` | no | no |
+| `dev.vscode.settings` | developer-secrets | high | `LIBRARY/Application Support/Code/User` | no | no |
 | `email.apple-mail` | email | high | `LIBRARY/Mail` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `email.apple-notes` | email | high | `LIBRARY/Group Containers/group.com.apple.notes` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `encryption.filevault.status` | disk-encryption | low | system query `filevault-status` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
@@ -161,6 +184,9 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `files.music` | personal-files | medium | `HOME/Music` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `files.photos-library` | personal-files | medium | `HOME/Pictures/*.photoslibrary` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `files.trash` | personal-files | medium | `HOME/.Trash` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `games.battlenet` | games-licenses | medium | `LIBRARY/Application Support/Battle.net` | no | no |
+| `games.epic` | games-licenses | medium | `LIBRARY/Application Support/Epic` | no | no |
+| `games.steam` | games-licenses | medium | `LIBRARY/Application Support/Steam` | no | no |
 | `msg.discord` | messaging | high | `LIBRARY/Application Support/discord` | no | no |
 | `msg.imessage` | messaging | high | `LIBRARY/Messages` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `msg.signal` | messaging | high | `LIBRARY/Application Support/Signal` | no | no |
@@ -176,13 +202,14 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `programs.applications` | installed-programs | low | `APPLICATIONS/*.app` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `system.caches` | system-traces | low | `LIBRARY/Caches` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `system.time-machine.prefs` | system-traces | low | `SYSTEM/Library/Preferences/com.apple.TimeMachine.plist` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
+| `transfer.filezilla` | network | critical | `HOME/.config/filezilla` | no | no |
 | `wallet.electrum` | wallets | critical | `HOME/.electrum` | no | no |
 | `wallet.exodus` | wallets | critical | `LIBRARY/Application Support/Exodus` | no | no |
 | `wallet.ledger-live` | wallets | critical | `LIBRARY/Application Support/Ledger*` | no | no |
 | `wallet.monero-gui` | wallets | critical | `LIBRARY/Application Support/monero-wallet-gui` | no | no |
 | `wallet.monero-gui.wallets` | wallets | critical | `HOME/Monero/wallets` | no | no |
 
-## Linux (81 rules, 20 verified)
+## Linux (89 rules, 20 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -221,14 +248,21 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `credentials.password-store` | credentials | critical | `HOME/.password-store` | no | no |
 | `dev.aws.config` | developer-secrets | critical | `HOME/.aws` | no | yes (Ubuntu 24.04 (WSL)) |
 | `dev.azure.config` | developer-secrets | critical | `HOME/.azure` | no | no |
+| `dev.cargo.credentials` | developer-secrets | critical | `HOME/.cargo/credentials.toml` | no | no |
 | `dev.docker.config` | developer-secrets | critical | `HOME/.docker` | no | no |
+| `dev.gcloud` | developer-secrets | critical | `XDG_CONFIG/gcloud` | no | no |
 | `dev.gh-cli` | developer-secrets | critical | `XDG_CONFIG/gh/hosts.yml` | no | no |
 | `dev.git-credentials` | developer-secrets | critical | `HOME/.git-credentials` | no | yes (Ubuntu 24.04 (WSL)) |
+| `dev.jetbrains.config` | developer-secrets | medium | `XDG_CONFIG/JetBrains` | no | no |
 | `dev.kube.config` | developer-secrets | critical | `HOME/.kube` | no | yes (Ubuntu 24.04 (WSL)) |
 | `dev.netrc` | developer-secrets | critical | `HOME/.netrc` | no | no |
 | `dev.npmrc` | developer-secrets | critical | `HOME/.npmrc` | no | yes (Ubuntu 24.04 (WSL)) |
 | `dev.pgpass` | developer-secrets | critical | `HOME/.pgpass` | no | no |
+| `dev.postman` | developer-secrets | high | `XDG_CONFIG/Postman` | no | no |
+| `dev.pypirc` | developer-secrets | critical | `HOME/.pypirc` | no | no |
 | `dev.ssh.keys` | developer-secrets | critical | `HOME/.ssh` | no | yes (Ubuntu 24.04 (WSL)) |
+| `dev.terraform.credentials` | developer-secrets | critical | `HOME/.terraform.d/credentials.tfrc.json` | no | no |
+| `dev.vscode.settings` | developer-secrets | high | `XDG_CONFIG/Code/User` | no | no |
 | `email.thunderbird.profiles` | email | high | `HOME/.thunderbird/*` | no | no |
 | `email.thunderbird.profiles.snap` | email | high | `HOME/snap/thunderbird/common/.thunderbird/*` | no | no |
 | `encryption.block-devices` | disk-encryption | medium | system query `block-devices` | no | yes (Ubuntu 24.04 (WSL)) |
@@ -263,6 +297,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `programs.desktop-entries.user` | installed-programs | low | `XDG_DATA/applications/*.desktop` | no | no |
 | `system.journal.user` | system-traces | low | `VAR/log/journal` | no | yes (Ubuntu 24.04 (WSL)) |
 | `system.var-log` | system-traces | low | `VAR/log` | no | yes (Ubuntu 24.04 (WSL)) |
+| `transfer.filezilla` | network | critical | `XDG_CONFIG/filezilla` | no | no |
 | `wallet.electrum` | wallets | critical | `HOME/.electrum/wallets` | no | no |
 | `wallet.exodus` | wallets | critical | `XDG_CONFIG/Exodus` | no | no |
 | `wallet.ledger-live` | wallets | critical | `XDG_CONFIG/Ledger Live` | no | no |

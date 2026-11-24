@@ -1,0 +1,38 @@
+{
+  "id": "transfer.filezilla",
+  "platforms": ["linux"],
+  "category": "network",
+  "title": "FileZilla saved sites and passwords",
+  "whyItMatters": "FileZilla can save FTP and SFTP logins, including passwords, in sitemanager.xml and recentservers.xml in this folder. A stranger could use them to reach the same servers.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "XDG_CONFIG",
+    "path": "filezilla",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "FileZilla wiki, FileZilla Client data directory: ~/.config/filezilla on Linux holds sitemanager.xml and recentservers.xml - https://wiki.filezilla-project.org/FileZilla_Client_Data_Directory",
+  "notes": "Uses $XDG_CONFIG_HOME when set. Saved passwords may be obfuscated rather than encrypted, so they are readable. The Flatpak build uses a sandboxed config folder and is not matched.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Use File > Export in FileZilla to save the site list without passwords if you need the host names.",
+    "signOut": "Change the passwords of the FTP and SFTP accounts this machine connected to, because the saved copies keep working after the file is gone.",
+    "steps": [
+      "Change the server account passwords at the hosting provider.",
+      "Quit FileZilla.",
+      "Uninstall FileZilla with your package manager.",
+      "Delete the folder named in the plan using the file manager."
+    ],
+    "risk": "Removes the saved site list and passwords from this machine. Server accounts keep working until their passwords are changed.",
+    "closeApps": ["FileZilla"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "FileZilla wiki, FileZilla Client data directory: https://wiki.filezilla-project.org/FileZilla_Client_Data_Directory"
+  }
+}

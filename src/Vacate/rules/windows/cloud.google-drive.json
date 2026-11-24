@@ -1,0 +1,39 @@
+{
+  "id": "cloud.google-drive",
+  "platforms": ["windows"],
+  "category": "cloud-sync",
+  "title": "Google Drive for desktop data",
+  "whyItMatters": "Drive for desktop keeps account data and a local cache of streamed files under LocalAppData. A handover should account for the cached copies and the account sign-in.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LOCALAPPDATA",
+    "path": "Google/DriveFS",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Google Drive Help, Use Google Drive for desktop: Drive for desktop stores its local data under %LOCALAPPDATA%/Google/DriveFS - https://support.google.com/drive/answer/10838124",
+  "notes": "The synced Drive files appear as a separate drive letter, which cannot be expressed as a path rule, so only the profile and cache are covered. Streamed placeholders are counted, not hydrated.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Open any file that exists only in the streamed Drive folder and save a copy to a drive you keep.",
+    "signOut": "In Drive for desktop settings disconnect the account, so it stops syncing this PC.",
+    "steps": [
+      "Confirm the files you need are saved somewhere else.",
+      "Quit Google Drive from the notification area.",
+      "Disconnect the account in the Drive settings.",
+      "Uninstall Google Drive from Settings > Apps > Installed apps.",
+      "Delete the folder named in the plan if it is still there."
+    ],
+    "risk": "Cached and streamed copies leave this PC. Files stay in the Google account, and online-only files were never downloaded.",
+    "closeApps": ["Google Drive"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Google Drive Help, Customize Drive for desktop settings: https://support.google.com/drive/answer/13470231"
+  }
+}

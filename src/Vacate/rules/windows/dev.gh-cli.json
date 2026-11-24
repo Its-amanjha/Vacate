@@ -1,0 +1,37 @@
+{
+  "id": "dev.gh-cli",
+  "platforms": ["windows"],
+  "category": "developer-secrets",
+  "title": "GitHub CLI logins",
+  "whyItMatters": "The GitHub CLI keeps an OAuth token for every signed-in GitHub account in this folder. With that token a stranger can act as the person on GitHub, including reading private repositories.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "GitHub CLI",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "GitHub CLI manual, environment: config defaults to %AppData%/GitHub CLI on Windows - https://cli.github.com/manual/gh_help_environment",
+  "notes": "hosts.yml holds the per-host user and oauth_token; config.yml holds preferences. GH_CONFIG_DIR can move the folder. On newer versions the token can be in the Windows credential store instead, so check both.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Revoke the GitHub CLI authorization in the GitHub account Settings under Applications, so the token stored on this PC stops working.",
+    "steps": [
+      "Revoke the GitHub CLI token in the GitHub account Settings under Applications.",
+      "Delete the folder named in the plan if it is still there.",
+      "Check the account's authorized applications again for anything you do not recognise."
+    ],
+    "risk": "Removes the saved GitHub CLI logins on this PC. A token that is not revoked at GitHub keeps working until it expires.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "GitHub CLI manual, gh auth logout: https://cli.github.com/manual/gh_auth_logout"
+  }
+}

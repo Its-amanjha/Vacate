@@ -1,0 +1,36 @@
+{
+  "id": "dev.pypirc",
+  "platforms": ["linux"],
+  "category": "developer-secrets",
+  "title": "PyPI upload credentials",
+  "whyItMatters": "The .pypirc file stores usernames and API tokens for Python package indexes in plain text. Anyone with the file can publish packages as the person.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": ".pypirc",
+    "match": "files"
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Python Packaging Authority, pypirc file format: the default file is in the user home directory - https://packaging.python.org/en/latest/specifications/pypirc/",
+  "notes": "Only exists when the person configured index credentials. Tokens can be scoped and revoked in the PyPI account settings.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": null,
+    "signOut": "Revoke the API tokens listed in the file in the PyPI account settings, so the copied tokens stop working.",
+    "steps": [
+      "Revoke the upload tokens in the PyPI account settings.",
+      "Delete the file named in the plan using the file manager.",
+      "Check the account's publishing history for anything unexpected."
+    ],
+    "risk": "Removes the saved package index logins from this machine. Tokens that are not revoked keep working from any machine.",
+    "closeApps": [],
+    "resetCovers": true,
+    "reason": null,
+    "source": "PyPI Help, API tokens: https://pypi.org/help/#apitoken"
+  }
+}

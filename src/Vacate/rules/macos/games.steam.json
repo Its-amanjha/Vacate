@@ -1,0 +1,38 @@
+{
+  "id": "games.steam",
+  "platforms": ["macos"],
+  "category": "games-licenses",
+  "title": "Steam local client data",
+  "whyItMatters": "Steam keeps the local account list, cloud-save data and client state in this folder. It shows which Steam accounts were signed in and what was played on this Mac.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "Application Support/Steam",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Steam Support, Removing and Reinstalling Steam on a Mac: Steam data is in Library/Application Support/Steam - https://help.steampowered.com/en/faqs/view/30EB-87BF-531F-512D",
+  "notes": "Includes userdata, which holds one folder per Steam account that signed in, plus local save data. Installed games may sit in this folder or on another drive; custom library folders are not matched.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Copy any game saves kept only on this Mac, since some titles do not use Steam Cloud.",
+    "signOut": "Sign out of Steam and remove this Mac from the authorized devices in Steam Guard settings.",
+    "steps": [
+      "Sign out of Steam.",
+      "On the Steam website, open Account Details, then Authorized Devices, and choose Sign out everywhere.",
+      "Uninstall Steam by moving it to the Trash.",
+      "Delete the folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Removes the local client state and cached sign-in from this Mac. Games, licences and cloud saves stay with the Steam account.",
+    "closeApps": ["Steam"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Valve, Account Security Recommendations: https://help.steampowered.com/en/faqs/view/6639-EB3C-EC79-FF60"
+  }
+}

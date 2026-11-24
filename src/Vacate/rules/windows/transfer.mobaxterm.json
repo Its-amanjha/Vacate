@@ -1,0 +1,38 @@
+{
+  "id": "transfer.mobaxterm",
+  "platforms": ["windows"],
+  "category": "network",
+  "title": "MobaXterm saved sessions and passwords",
+  "whyItMatters": "MobaXterm stores saved SSH, RDP and VNC sessions, and can store their passwords, in MobaXterm.ini in this folder. A stranger could reconnect to the same servers.",
+  "sensitivity": "critical",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "MobaXterm",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "MobaXterm documentation, settings: the main configuration is MobaXterm.ini in the user profile - https://mobaxterm.mobatek.net/documentation.html",
+  "notes": "A portable edition keeps MobaXterm.ini next to the executable instead. Saved passwords may be obfuscated, not encrypted. The folder also holds macros and layout state.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Note the host names you still need from the session list, since the sessions are removed with the folder.",
+    "signOut": "Change the passwords of the server accounts this PC connected to, because stored copies keep working after the folder is gone.",
+    "steps": [
+      "Change the server account passwords at the hosting provider.",
+      "Close MobaXterm.",
+      "Uninstall MobaXterm, or delete the portable folder.",
+      "Delete the folder named in the plan if it is still there."
+    ],
+    "risk": "Removes saved sessions, macros and passwords from this PC. Server accounts stay usable until their passwords are changed.",
+    "closeApps": ["MobaXterm"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "MobaXterm documentation: https://mobaxterm.mobatek.net/documentation.html"
+  }
+}

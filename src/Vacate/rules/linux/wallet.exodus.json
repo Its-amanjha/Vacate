@@ -24,7 +24,7 @@
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "Exodus Knowledge Base: on Linux the data folder is ~/.config/Exodus (Developer > Data Folder opens it): https://www.exodus.com/support/en/articles/8598644-how-do-i-delete-my-wallet-and-start-over",
+  "source": "Exodus Knowledge Base: on Linux the data folder is ~/.config/Exodus (Developer > Data Folder opens it): https://www.exodus.com/support/",
   "notes": "exodus.wallet holds the encrypted storage.seco files; the Backups folder keeps timestamped copies of earlier vaults, so the parent folder matters too. The vault is encrypted with the wallet password and the 12-word phrase.",
   "cleanup": {
     "action": "export-then-remove",
@@ -41,6 +41,6 @@
     ],
     "resetCovers": true,
     "reason": null,
-    "source": "Exodus Support, How do I delete my wallet and start over: https://www.exodus.com/support/en/articles/8598644-how-do-i-delete-my-wallet-and-start-over"
+    "source": "Exodus Knowledge Base, Backup and restore: https://www.exodus.com/support/"
   }
 }

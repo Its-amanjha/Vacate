@@ -21,7 +21,7 @@
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "Windows Network List service registry: https://learn.microsoft.com/en-us/windows/win32/api/netlistapi (NetworkList\\Profiles subkeys, well-known forensic artifact)",
+  "source": "Windows Network List service registry: https://learn.microsoft.com/en-us/windows/win32/api/netlistmgr/nn-netlistmgr-inetworklistmanager (NetworkList\\Profiles subkeys, well-known forensic artifact)",
   "notes": "HKLM machine-wide key; individual per-network GUID subkeys are counted but their values are not read. Registry last-write time is unavailable.",
   "cleanup": {
     "action": "review",

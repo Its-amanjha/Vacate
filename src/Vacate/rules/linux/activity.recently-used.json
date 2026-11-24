@@ -22,7 +22,7 @@
   "requiresElevation": false,
   "verifiedOn": [],
   "verified": false,
-  "source": "freedesktop.org Recent files spec: recent documents are listed in recently-used.xbel in the user data directory: https://specifications.freedesktop.org/recent-file-spec/latest/",
+  "source": "freedesktop.org Recent files spec: recent documents are listed in recently-used.xbel in the user data directory: https://specifications.freedesktop.org/recent-files/latest/",
   "notes": "Written by GTK applications; each entry holds a file:// URI, a display name, timestamps and often the application that opened it. GNOME's privacy settings can keep the list from being written at all.",
   "cleanup": {
     "action": "remove",

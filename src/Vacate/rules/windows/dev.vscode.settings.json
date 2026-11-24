@@ -1,0 +1,38 @@
+{
+  "id": "dev.vscode.settings",
+  "platforms": ["windows"],
+  "category": "developer-secrets",
+  "title": "VS Code user settings and sync state",
+  "whyItMatters": "The VS Code user folder holds personal settings, recent workspace names and the sign-in state for Settings Sync. Tokens pasted into settings and extension state can be reused by anyone with the disk.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Code/User",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": ["Windows 11 Pro 26300"],
+  "verified": true,
+  "source": "VS Code docs, Settings file locations: user settings live in %APPDATA%/Code/User on Windows - https://code.visualstudio.com/docs/configure/settings",
+  "notes": "settings.json, keybindings.json, snippets and globalStorage/state.vscdb (Settings Sync state and extension storage) live here. Workspace history names recent projects. Contents are not read.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Copy settings.json and any snippet files you want to keep to a drive you are taking with you.",
+    "signOut": "Turn off Settings Sync in VS Code with the Settings Sync: Turn Off command, so the account stops trusting this machine.",
+    "steps": [
+      "Open VS Code and turn Settings Sync off from the Accounts menu.",
+      "Close every VS Code window.",
+      "Uninstall Visual Studio Code from Settings > Apps > Installed apps.",
+      "Delete the folder named in the plan if it is still there."
+    ],
+    "risk": "Removes personal VS Code settings, keybindings, snippets and sign-in state from this PC. Settings already synced stay in the account.",
+    "closeApps": ["Visual Studio Code"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "VS Code docs, Settings Sync: https://code.visualstudio.com/docs/configure/settings-sync"
+  }
+}

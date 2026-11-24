@@ -22,7 +22,7 @@ result.
 
 Phase 1 works end to end on Windows 11 (PowerShell 5.1 and 7) and on Ubuntu 24.04 (tested in
 WSL, PowerShell 7): `scan`, `rules`, `report`, `checklist` and `version` all run. The catalog has
-249 rules across Windows, Linux and macOS. Rules confirmed on a real machine are marked
+284 rules across Windows, Linux and macOS. Rules confirmed on a real machine are marked
 `verified` in [RULES.md](RULES.md); the rest still run and are listed as unverified in every
 report. macOS is **ci-verified**: 24 macOS rules were confirmed by a scan on the GitHub Actions
 macOS 26.7.2 runner, not yet on a personal Mac.
@@ -152,6 +152,7 @@ On Windows use `.\vacate.ps1 <command>`. On macOS and Linux use `pwsh ./vacate.p
 | `erase -Run <dir>` | Phase 4: readiness report only. Lists all 16 readiness checks (12 can block, for example admin, a scan under a day old, an encrypted and fully identified disk, not a VM or WSL, and wallets backed up when wallets were found) and the warnings. Erases nothing. |
 | `erase -Run <dir> -Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <usb folder>` | Asks you to type YES, writes an erase record to the run folder and the USB drive, then opens the operating system's own erase (Reset this PC, Erase All Content and Settings, or LUKS key erase). |
 | `version` | Prints the version. |
+| `help` | Lists the commands and their options. |
 
 ## Output files
 

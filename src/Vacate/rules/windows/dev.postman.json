@@ -1,0 +1,38 @@
+{
+  "id": "dev.postman",
+  "platforms": ["windows"],
+  "category": "developer-secrets",
+  "title": "Postman local data",
+  "whyItMatters": "Postman keeps local collections, environments and request history here. Environment variables often contain API keys and access tokens, and the history shows every endpoint the person called.",
+  "sensitivity": "high",
+  "locator": {
+    "kind": "path",
+    "root": "APPDATA",
+    "path": "Postman",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 5000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Postman Support, How to remove local data: the Postman folders are under AppData/Roaming and AppData/Local on Windows - https://support.postman.com/hc/en-us/articles/4410785125271-How-to-remove-local-data",
+  "notes": "Roaming holds collections, environments and history; Local holds the app install and cache and is covered by uninstalling. Postman Enterprise uses a separate PostmanEnterprise folder. Contents are not read.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Export the collections and environments you need from Postman, and keep any API keys from environment variables somewhere safe.",
+    "signOut": "Sign out of Postman in the app, then remove this device from the account's sessions on the Postman website.",
+    "steps": [
+      "Export the collections and environments you want to keep.",
+      "Sign out of Postman and close the app.",
+      "Uninstall Postman from Settings > Apps > Installed apps.",
+      "Delete the folder named in the plan if it is still there."
+    ],
+    "risk": "Removes local collections, environments, request history and the sign-in state from this PC. Anything already synced stays in the Postman account.",
+    "closeApps": ["Postman"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Postman Support, How to remove local data: https://support.postman.com/hc/en-us/articles/4410785125271-How-to-remove-local-data"
+  }
+}

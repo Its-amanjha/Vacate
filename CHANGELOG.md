@@ -4,7 +4,7 @@ All notable changes to vacate are recorded here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.5.0] - unreleased
+## [0.5.0] - 2026-11-24
 
 First public release. vacate runs on Windows (Windows PowerShell 5.1 or PowerShell 7), and on
 macOS and Linux (PowerShell 7).

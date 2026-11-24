@@ -31,10 +31,10 @@
     "exportFirst": null,
     "signOut": "Retire this machine's public keys on the WireGuard peers or gateways, so the tunnels no longer accept it.",
     "steps": [
-      "Remove the VPN connection in Settings > Network.",
-      "Leave the root-owned key files named in the plan to the full reset at the end of this plan."
+      "If the tunnel was added in Settings > Network, remove that VPN connection there.",
+      "Leave the root-owned tunnel configs in the folder named in the plan to the full reset at the end of this plan."
     ],
-    "risk": "The connection leaves Settings; the root-owned key files stay in the system folder until the full reset at the end of the plan.",
+    "risk": "Any VPN connection added in Settings is removed; the root-owned tunnel configs stay in the system folder until the full reset at the end of the plan.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

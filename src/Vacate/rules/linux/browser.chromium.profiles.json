@@ -25,7 +25,7 @@
     "steps": [
       "Close every Chromium window.",
       "Uninstall Chromium from the App Center if you are removing the browser itself.",
-      "Move the folder named in the plan to the Trash and empty the Trash."
+      "Move the profile folder that holds the file named in the plan to the Trash, then empty the Trash."
     ],
     "risk": "Removes every Chromium profile on this computer: history, bookmarks, saved passwords, cookies and extensions. Chromium keeps no online copy.",
     "closeApps": ["Chromium"],

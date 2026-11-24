@@ -14,9 +14,9 @@ never deletes, moves or changes anything, never opens file contents, and never u
 | | Windows 11 | Linux (Ubuntu 24.04) | macOS |
 |---|---|---|---|
 | `scan` end to end | yes, PowerShell 5.1 and 7 (real PC: 22 s) | yes, PowerShell 7 (WSL: 14 s) | yes, PowerShell 7 (GitHub Actions runner, macOS 26.7.2 arm64) |
-| Rules | 113 | 89 | 82 |
+| Rules | 114 | 89 | 84 |
 | Verified on a real machine | **49** (owner's PC, Windows 11 Pro 26300) | **20** (owner's WSL Ubuntu 24.04) | **24** ci-verified (CI runner only) |
-| Not yet verified | 64 | 69 | 58 |
+| Not yet verified | 65 | 69 | 60 |
 | Root / admin | runs unelevated; admin-only rules skipped with a reason | refuses root unless `-AllowRoot` | refuses root unless `-AllowRoot` |
 | System queries | read-only CIM (BitLocker, TPM, OS, volumes) | `lsblk`, `findmnt` | `fdesetup status` |
 
@@ -27,7 +27,7 @@ prints), `summary.md`, `checklist.md` and `scan.log` into `runs/<timestamp>/`.
 
 ## 2. What is unverified or CI-only
 
-- **191 of 284 rules are unverified.** They still run; every report lists them by id.
+- **194 of 287 rules are unverified.** They still run; every report lists them by id.
   A rule becomes verified only when a real scan on that platform found its data (D32).
 - **macOS is ci-verified only.** The 24 verified macOS rules were confirmed on a clean GitHub
   Actions runner with Full Disk Access. Privacy prompts (TCC) on a personal Mac are untested.
@@ -183,7 +183,7 @@ Phase 2 is done. `vacate plan -Run <dir>` reads a saved `report.json` and writes
 
 | | |
 |---|---|
-| Rules with cleanup guidance | **284 of 284** (a test fails if any rule has none) |
+| Rules with cleanup guidance | **287 of 287** (a test fails if any rule has none) |
 | Real Windows scan (elevated) | 44 plan steps cover all 49 traces, 44 with guidance |
 | Real Linux scan (WSL) | 20 plan steps cover all 26 traces, 20 with guidance |
 | Plan schema | `schemas/plan.schema.json`, checked by tests on PowerShell 7 |

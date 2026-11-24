@@ -17,7 +17,7 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Flatpak sandbox permissions: an app's home directory is ~/.var/app/<app-id>, so Firefox writes ~/.mozilla below it: https://docs.flatpak.org/en/latest/sandbox-permissions.html",
-  "notes": "org.mozilla.firefox is the Flathub app id. The same tree exists for other Flatpak browsers under their own app-id folder.",
+  "notes": "org.mozilla.firefox is the Flathub app id. The same tree exists for other Flatpak browsers under their own app-id folder. Firefox 147 and later put new Flatpak profiles under config/mozilla/firefox in the app folder, which this rule does not match.",
   "cleanup": {
     "action": "export-then-remove",
     "exportFirst": "In Firefox, export your bookmarks from the Library and your passwords from the logins settings, and keep both files off this computer.",
@@ -25,7 +25,7 @@
     "steps": [
       "Close every Firefox window.",
       "Uninstall the Firefox Flatpak from the App Center or from your Flatpak tool.",
-      "Move the folder named in the plan to the Trash and empty the Trash."
+      "Move the profile folder that holds the file named in the plan to the Trash, then empty the Trash."
     ],
     "risk": "Removes every Firefox profile on this computer: history, bookmarks, saved logins, cookies and the files you downloaded through the browser.",
     "closeApps": ["Firefox"],

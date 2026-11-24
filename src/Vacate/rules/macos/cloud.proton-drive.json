@@ -1,0 +1,46 @@
+{
+  "id": "cloud.proton-drive",
+  "platforms": [
+    "macos"
+  ],
+  "category": "cloud-sync",
+  "title": "Proton Drive synced folder",
+  "whyItMatters": "Proton Drive keeps a local File Provider folder on the Mac. Files that never uploaded stay in a dated folder after sign-out, so they can contain private documents.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "LIBRARY",
+    "path": "CloudStorage/ProtonDrive-*",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": [
+    "exists",
+    "sizeBytes",
+    "lastWriteTime",
+    "itemCount"
+  ],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Proton Support, How to use Proton Drive on macOS: signed-out files stay in ~/Library/Cloud Storage/ProtonDrive-<account> (<timestamp>) - https://proton.me/support/drive-macos-guide",
+  "notes": "Covers the live folder and the dated ProtonDrive-<account> (<timestamp>) folders Proton Drive leaves after sign-out. Online-only placeholders are counted, not hydrated.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Copy any file that has not uploaded to Proton Drive to a drive you keep; signing out leaves it in a dated ProtonDrive folder.",
+    "signOut": "In the Proton Drive menu bar icon, sign out of the app so it stops syncing this Mac.",
+    "steps": [
+      "Wait for uploads to finish and copy any file that fails to upload.",
+      "In the Proton Drive menu bar icon, sign out of the app.",
+      "Delete the ProtonDrive folder named in the plan, then empty the Trash."
+    ],
+    "risk": "Local copies on this Mac are removed. Files already in the Proton Drive account are untouched; files that never uploaded are deleted if they are not copied first.",
+    "closeApps": [
+      "Proton Drive"
+    ],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Proton Support, How to use Proton Drive on macOS: https://proton.me/support/drive-macos-guide"
+  }
+}

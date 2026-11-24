@@ -157,13 +157,16 @@ try {
                 $pre = & $m { param($D, $W) Invoke-VacateErase -Run $D -WalletsBackedUp:$W } $full $WalletsBackedUp.IsPresent
                 if (-not $pre.ready) { Write-Output 'Not ready to erase. See erase-readiness.md in the run folder.'; exit 1 }
                 # A person must answer at a real console (Phase 4 threat model): no piped or scripted YES.
-                if ([Console]::IsInputRedirected -or [Console]::IsOutputRedirected -or -not [Environment]::UserInteractive) {
+                # The decision lives in the module (Test-VacateInteractiveConsole) so tests can drive it.
+                $console = & $m { Test-VacateInteractiveConsole }
+                if (-not $console.ok) {
                     Write-Output 'erase -Execute needs a person at an interactive console; input or output is redirected. Nothing was erased.'
                     exit 1
                 }
                 Write-Output 'This starts the operating system erase of THIS computer. Everything on the system disk will be'
                 Write-Output 'destroyed and cannot be recovered. An erase record is written first, to the run folder and -RecordTo.'
-                $typed = Read-Host 'Type YES to continue'
+                # Read-VacateTypedConfirm applies the same '-cne YES' test as Invoke-VacateErase (D55).
+                if (& $m { Read-VacateTypedConfirm -Prompt 'Type YES to continue' }) { $typed = 'YES' }
             }
             $r = & $m { param($D, $E, $C, $S, $R, $W, $Y) Invoke-VacateErase -Run $D -Execute:$E -ConfirmMachine $C -DiskSerial $S -RecordTo $R -WalletsBackedUp:$W -TypedConfirmation $Y } $full $Execute.IsPresent $Confirm $DiskSerial $RecordTo $WalletsBackedUp.IsPresent $typed
             if ($r.mode -ceq 'dry-run') {

@@ -25,7 +25,7 @@
     "steps": [
       "Close every Vivaldi window.",
       "Uninstall Vivaldi from the App Center if you are removing the browser itself.",
-      "Move the folder named in the plan to the Trash and empty the Trash."
+      "Move the profile folder that holds the file named in the plan to the Trash, then empty the Trash."
     ],
     "risk": "Removes every Vivaldi profile on this computer: history, bookmarks, saved passwords, cookies, notes and open sessions.",
     "closeApps": ["Vivaldi"],

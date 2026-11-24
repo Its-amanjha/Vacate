@@ -23,7 +23,7 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Opera on Linux keeps its user data root in ~/.config/opera (opera://about shows the exact profile and cache paths): https://filepathgeek.com/posts/opera-browser-profile-location",
-  "notes": "Opera One builds put the profile in a Default subfolder; older builds wrote Preferences directly into ~/.config/opera, which this glob does not match. Opera GX uses ~/.config/opera-gx; Beta and Developer builds have their own folders.",
+  "notes": "Current Opera builds put the profile in a Default subfolder; older builds wrote Preferences directly into ~/.config/opera, which this glob does not match. Snap and Flatpak installs keep the same layout under their sandbox config folders. Opera GX uses ~/.config/opera-gx; Beta and Developer builds have their own folders.",
   "cleanup": {
     "action": "export-then-remove",
     "exportFirst": "In Opera, export your saved passwords from the password manager in Settings and save bookmarks as HTML, then keep both files off this computer.",
@@ -31,7 +31,7 @@
     "steps": [
       "Close every Opera window.",
       "Uninstall Opera from the App Center, or from the Snap or Flatpak tool if you installed it that way.",
-      "Move the folder named in the plan to the Trash and empty the Trash."
+      "Move the profile folder that holds the file named in the plan to the Trash, then empty the Trash."
     ],
     "risk": "Removes every Opera profile on this computer: history, bookmarks, saved passwords, cookies, extensions and open tabs.",
     "closeApps": [

@@ -5,13 +5,15 @@
     confirms the Pester suite fails (SPEC "Harness self-test").
 
 .DESCRIPTION
-    Copies src/, tests/, schemas/, vacate.ps1 and PSScriptAnalyzerSettings.psd1 into a fresh
-    folder under [IO.Path]::GetTempPath(). For each mutation it restores the copy's target file
-    from the real worktree, applies one exact string replacement (or deletes one rule file),
-    runs the copy's tests/Run-Tests.ps1 in a child process of the current host (pwsh or
-    powershell), records pass/fail, then restores the copy again. The real worktree is never
-    written: file hashes of src/, tests/, schemas/ and the two root files are compared before
-    and after, and a difference fails the run.
+    Copies the shipped tree (src/, tests/, schemas/, tools/, docs/, .github/, the launchers,
+    the root Markdown notes and the settings file) into a fresh folder under
+    [IO.Path]::GetTempPath(), made into a throwaway git repository with one commit so the tests
+    that read the tracked file list behave as they do in a real checkout. For each mutation it
+    restores the copy's target file from the real worktree, applies one exact string replacement
+    (or deletes one rule file), runs the copy's tests/Run-Tests.ps1 in a child process of the
+    current host (pwsh or powershell), records pass/fail, then restores the copy again. The real
+    worktree is never written: file hashes of all of those names are compared before and after,
+    and a difference fails the run.
 
     Writes docs/SABOTAGE.md and exits 0 only when every mutation made the suite fail.
 
@@ -33,8 +35,12 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
 $repoRoot = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
-$copyNames = @('src', 'tests', 'schemas', 'vacate.ps1', 'PSScriptAnalyzerSettings.psd1')
-$hashNames = @('src', 'tests', 'schemas', 'vacate.ps1', 'PSScriptAnalyzerSettings.psd1')
+# Everything the suite reads: the module, the tests, the rules, the docs the drift tests compare
+# against, the release builder the build test runs, and the root notes.
+$copyNames = @('src', 'tests', 'schemas', 'tools', 'docs', '.github', '.gitattributes', '.gitignore',
+    'vacate.ps1', 'vacate.cmd', 'PSScriptAnalyzerSettings.psd1', 'README.md', 'LIMITS.md',
+    'THREAT-MODEL.md', 'RULES.md', 'DECISIONS.md')
+$hashNames = $copyNames
 # The suite is started with the host that is running this script, so pwsh tests pwsh and
 # PowerShell 5.1 tests 5.1 (same trick as tests/integration/Cli.Tests.ps1).
 $hostExe = (Get-Process -Id $PID).Path
@@ -213,6 +219,14 @@ $mutations = @(
         Anchor  = '    if (-not $SkipTypedConfirm -and $TypedConfirmation -cne ''YES'') {'
         Replace = '    if ($false) {'
         Expect  = 'erase -Execute must need the typed YES from the console (D55)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'vacate.ps1 skips the console check'
+        File    = 'vacate.ps1'
+        Kind    = 'replace'
+        Anchor  = '                if (-not $console.ok) {'
+        Replace = '                if ($false) {'
+        Expect  = 'erase -Execute must refuse a redirected or non-interactive console (Phase 4 threat model)'
     }
 )
 
@@ -261,6 +275,24 @@ function Copy-VacateTree {
         $source = Join-Path $Root $name
         if (-not (Test-Path -LiteralPath $source)) { throw "copy: missing $source" }
         Copy-Item -LiteralPath $source -Destination $Destination -Recurse -Force
+    }
+}
+
+function Initialize-VacateCopyRepo {
+    # A real checkout is a git repository, and the release-build tests read the tracked file list
+    # (tools/Build-Release.ps1 runs 'git ls-files'). One throwaway commit gives the copy the same
+    # shape without copying any history.
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][string]$Copy)
+
+    $steps = @(
+        @('init', '-q'),
+        @('add', '-A'),
+        @('-c', 'user.name=vacate sabotage', '-c', 'user.email=sabotage@example.invalid', 'commit', '-q', '-m', 'sabotage baseline')
+    )
+    foreach ($step in $steps) {
+        & git -C $Copy @step 2>&1 | Out-Null
+        if ($LASTEXITCODE -ne 0) { throw ('sabotage: git {0} failed in the copy' -f ($step -join ' ')) }
     }
 }
 
@@ -439,6 +471,7 @@ $exitCode = 1
 try {
     Write-Output ('sabotage: copying the repo to {0}' -f $copyRoot)
     Copy-VacateTree -Root $repoRoot -Destination $copyRoot -Names $copyNames
+    Initialize-VacateCopyRepo -Copy $copyRoot
 
     Write-Output 'sabotage: baseline run on the unmutated copy'
     $baseline = Invoke-VacateSuite -Exe $hostExe -Copy $copyRoot

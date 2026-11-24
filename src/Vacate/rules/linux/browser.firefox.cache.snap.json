@@ -6,7 +6,7 @@
   "category": "browsers",
   "title": "Firefox cache (Snap)",
   "whyItMatters": "Cached copies of pages and images you viewed in the Snap build of Firefox, the default on Ubuntu. Sizes and dates alone show when the browser was used.",
-  "sensitivity": "medium",
+  "sensitivity": "low",
   "locator": {
     "kind": "path",
     "root": "HOME",

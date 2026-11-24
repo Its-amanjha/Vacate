@@ -175,14 +175,12 @@ Describe 'release ZIP smoke test' -Tag Release -Skip:(-not $script:runnable) {
     }
 
     It 'starts through vacate.cmd and rejects an unknown command with exit 2' -Skip:(-not $script:onWindows) {
-        Push-Location -LiteralPath $script:folder
-        try {
-            $versionOut = & cmd.exe /c 'vacate.cmd version' 2>&1
-            $versionCode = $LASTEXITCODE
-            $explodeOut = & cmd.exe /c 'vacate.cmd explode' 2>&1
-            $explodeCode = $LASTEXITCODE
-        }
-        finally { Pop-Location }
+        # Run from the unzipped folder as a user would. /d skips any cmd AutoRun; cd /d sets the folder
+        # inside cmd; .\ works even when NoDefaultCurrentDirectoryInExePath stops cmd searching it.
+        $versionOut = & cmd.exe /d /c ('cd /d "{0}" && .\vacate.cmd version' -f $script:folder) 2>&1
+        $versionCode = $LASTEXITCODE
+        $explodeOut = & cmd.exe /d /c ('cd /d "{0}" && .\vacate.cmd explode' -f $script:folder) 2>&1
+        $explodeCode = $LASTEXITCODE
         $versionCode | Should -Be 0 -Because (@($versionOut) -join "`n")
         (@($versionOut) -join "`n") | Should -Match ([regex]::Escape('vacate ' + $script:version))
         $explodeCode | Should -Be 2 -Because (@($explodeOut) -join "`n")

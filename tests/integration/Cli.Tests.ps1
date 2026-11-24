@@ -253,6 +253,106 @@ Describe 'vacate.ps1 CLI' {
         $r.Text | Should -Not -Match '(At line:|CategoryInfo|FullyQualifiedErrorId|ScriptStackTrace)'
     }
 
+    Context 'erase -Execute console gate' {
+        BeforeAll {
+            # Reaching the console gate with the real module needs an elevated session on an
+            # encrypted system disk, which a test machine cannot be (D57: no test touches the
+            # real disk, and vacate.ps1 gains no test-only parameter). So this test copies the
+            # real vacate.ps1 next to a stub module: readiness reports ready, the console gate
+            # and the typed YES are the real module code (dot-sourced from ConsoleGate.ps1), and
+            # the erase itself is a stub that writes nothing. Everything under test - the order
+            # of the checks and their messages - is the shipped vacate.ps1.
+            $script:gateRoot = Join-Path $TestDrive 'erase-gate-tool'
+            $script:gateModule = Join-Path $script:gateRoot 'src/Vacate'
+            [void][IO.Directory]::CreateDirectory($script:gateModule)
+            Copy-Item -LiteralPath $script:cli -Destination (Join-Path $script:gateRoot 'vacate.ps1')
+            $script:gateSource = (Join-Path $script:repo 'src/Vacate/Private/ConsoleGate.ps1').Replace('\', '/')
+            $stub = @'
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+# The real console gate from the repo (Test-VacateInteractiveConsole, Read-VacateTypedConfirm).
+. '<GATEFILE>'
+
+function Invoke-VacateErase {
+    # Stub module: every readiness gate passes, only -Execute with exactly YES goes on.
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Run,
+        [switch]$Execute,
+        [Alias('Confirm')][string]$ConfirmMachine,
+        [string]$DiskSerial,
+        [string]$RecordTo,
+        [switch]$WalletsBackedUp,
+        [string]$TypedConfirmation
+    )
+    $null = $Run, $ConfirmMachine, $DiskSerial, $RecordTo, $WalletsBackedUp
+    if (-not $Execute) {
+        return [pscustomobject]@{ mode = 'dry-run'; ready = $true; checks = @(); recordFiles = @(); launch = $null }
+    }
+    if ($TypedConfirmation -cne 'YES') { throw 'The final confirmation was not YES. Nothing was erased.' }
+    return [pscustomobject]@{ mode = 'execute'; ready = $true; checks = @(); recordFiles = @(); launch = [pscustomobject]@{ method = 'test-stub'; detail = 'started by the test stub' } }
+}
+
+Export-ModuleMember -Function 'Invoke-VacateErase', 'Test-VacateInteractiveConsole', 'Read-VacateTypedConfirm'
+'@
+            $stub = $stub.Replace('<GATEFILE>', $script:gateSource)
+            [IO.File]::WriteAllText((Join-Path $script:gateModule 'Vacate.psm1'), $stub, (New-Object Text.UTF8Encoding $false))
+
+            $script:gateRun = Join-Path $script:gateRoot 'runs/20261124-000000'
+            [void][IO.Directory]::CreateDirectory($script:gateRun)
+            $script:gateRecordTo = Join-Path $script:gateRoot 'record'
+            [void][IO.Directory]::CreateDirectory($script:gateRecordTo)
+
+            # A child process with stdin closed: [Console]::IsInputRedirected is true there, which
+            # & (the helper above) cannot guarantee, because it inherits the test host's console.
+            function Invoke-GateCli {
+                param([string[]]$CliArgs)
+                $psi = New-Object -TypeName 'System.Diagnostics.ProcessStartInfo'
+                $psi.FileName = $script:exe
+                $engine = @('-NoProfile')
+                if ([Environment]::OSVersion.Platform -eq 'Win32NT') { $engine += @('-ExecutionPolicy', 'Bypass') }
+                $parts = @($engine) + @('-File', (Join-Path $script:gateRoot 'vacate.ps1')) + @($CliArgs)
+                $psi.Arguments = (@($parts | ForEach-Object { '"' + $_ + '"' }) -join ' ')
+                $psi.UseShellExecute = $false
+                $psi.RedirectStandardInput = $true
+                $psi.RedirectStandardOutput = $true
+                $psi.RedirectStandardError = $true
+                $psi.CreateNoWindow = $true
+                $p = [System.Diagnostics.Process]::Start($psi)
+                $p.StandardInput.Close()
+                $out = $p.StandardOutput.ReadToEnd()
+                $err = $p.StandardError.ReadToEnd()
+                if (-not $p.WaitForExit(120000)) { $p.Kill(); throw 'the erase gate child did not exit within 120 s' }
+                return [pscustomobject]@{ Code = $p.ExitCode; Text = (@($out, $err) -join "`n") }
+            }
+        }
+
+        It 'refuses erase -Execute with a redirected console before writing or starting anything' {
+            $before = @(Get-ChildItem -LiteralPath $script:gateRoot -Recurse -File | ForEach-Object FullName | Sort-Object)
+            $r = Invoke-GateCli @('erase', '-Run', $script:gateRun, '-Execute', '-Confirm', 'test', '-RecordTo', $script:gateRecordTo)
+
+            $r.Code | Should -Be 1
+            $r.Text | Should -Not -Match 'Not ready to erase'
+            $r.Text | Should -Match 'erase -Execute needs a person at an interactive console; input or output is redirected\. Nothing was erased\.'
+            $r.Text | Should -Not -Match 'Type YES to continue'
+            $r.Text | Should -Not -Match 'The final confirmation was not YES'
+            $r.Text | Should -Not -Match 'Started:'
+            $r.Text | Should -Not -Match '(At line:|CategoryInfo|FullyQualifiedErrorId|ScriptStackTrace)'
+
+            $after = @(Get-ChildItem -LiteralPath $script:gateRoot -Recurse -File | ForEach-Object FullName | Sort-Object)
+            ($after -join '|') | Should -Be ($before -join '|')
+        }
+
+        It 'still reports the dry-run readiness through the same entry point' {
+            # Proves the stub tool root is wired correctly, so the refusal above came from the
+            # console gate and not from a broken copy of vacate.ps1.
+            $r = Invoke-GateCli @('erase', '-Run', $script:gateRun)
+            $r.Code | Should -Be 0
+            $r.Text | Should -Match 'Erase readiness: READY'
+        }
+    }
+
     Context 'runs from another platform' {
         It 'clean refuses a run from another platform' {
             $r = Invoke-TestCli @('clean', '-Run', $script:otherPlatRunDir)

@@ -25,7 +25,7 @@
   ],
   "verified": true,
   "source": "Ubuntu has shipped Firefox as a Snap since 22.04; the confined profile lives under ~/snap/firefox/common/.mozilla/firefox: https://askubuntu.com/questions/1414757/where-does-firefox-snap-store-the-profiles",
-  "notes": "Snap keeps per-app data under ~/snap/<name>/<revision|common>; Firefox uses the common slot so profiles survive revisions. On Ubuntu 22.04+ the native ~/.mozilla/firefox folder usually does not exist.",
+  "notes": "Snap keeps per-app data under ~/snap/<name>/<revision|common>; Firefox uses the common slot so profiles survive revisions. On Ubuntu 22.04+ the native ~/.mozilla/firefox folder usually does not exist. Firefox 147 and later may keep new snap profiles under the snap's .config folder, which this rule does not match.",
   "cleanup": {
     "action": "export-then-remove",
     "exportFirst": "In Firefox, export your bookmarks from the Library and your passwords from the logins settings, and keep both files off this computer.",
@@ -33,7 +33,7 @@
     "steps": [
       "Close every Firefox window.",
       "Uninstall the Firefox snap from the App Center or with the Snap Store app.",
-      "Move the folder named in the plan to the Trash and empty the Trash."
+      "Move the profile folder that holds the file named in the plan to the Trash, then empty the Trash."
     ],
     "risk": "Removes every Firefox profile in the snap folder: history, bookmarks, saved logins, cookies and downloaded files. Nothing stays on this disk.",
     "closeApps": ["Firefox"],

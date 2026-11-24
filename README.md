@@ -22,7 +22,7 @@ result.
 
 Phase 1 works end to end on Windows 11 (PowerShell 5.1 and 7) and on Ubuntu 24.04 (tested in
 WSL, PowerShell 7): `scan`, `rules`, `report`, `checklist` and `version` all run. The catalog has
-284 rules across Windows, Linux and macOS. Rules confirmed on a real machine are marked
+287 rules across Windows, Linux and macOS. Rules confirmed on a real machine are marked
 `verified` in [RULES.md](RULES.md); the rest still run and are listed as unverified in every
 report. macOS is **ci-verified**: 24 macOS rules were confirmed by a scan on the GitHub Actions
 macOS 26.7.2 runner, not yet on a personal Mac.

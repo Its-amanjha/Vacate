@@ -17,7 +17,7 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Ubuntu ships Thunderbird as a Snap since 24.04, and Mozilla Support places the profile at ~/snap/thunderbird/common/.thunderbird: https://support.mozilla.org/en-US/questions/1469510",
-  "notes": "Matches the profile folders only, not the mailbox files inside them. Ubuntu 24.04 switched the default Thunderbird to the Snap and did not always migrate an existing ~/.thunderbird, so both locations can hold data; the Flatpak uses ~/.var/app/org.mozilla.Thunderbird/.thunderbird.",
+  "notes": "Matches the profile folders only, not the mailbox files inside them. Ubuntu 24.04 switched the default Thunderbird to the Snap and did not always migrate an existing ~/.thunderbird, so both locations can hold data; Flatpak builds use ~/.var/app/org.mozilla.thunderbird/.thunderbird (standard release) or ~/.var/app/org.mozilla.thunderbird_esr/.thunderbird (ESR), and the older id org.mozilla.Thunderbird is still on Flathub.",
   "cleanup": {
     "action": "export-then-remove",
     "exportFirst": "Export the address book and calendars from Thunderbird, and copy the profile folder to a backup drive, before anything is removed.",

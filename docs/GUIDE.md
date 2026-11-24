@@ -134,16 +134,28 @@ For a few "Remove leftover data" steps (caches, history files and similar, insid
 folder), vacate can move the items to the Recycle Bin or Trash for you. First see what it would do;
 this moves nothing:
 
+**Windows (PowerShell)**
 ```powershell
 .\vacate.cmd clean -Run .\runs\20261120-101500
+```
+
+**macOS and Linux**
+```bash
+pwsh ./vacate.ps1 clean -Run ./runs/20261120-101500
 ```
 
 Open `clean-preview.md` in the run folder. It lists what could be moved and why everything else is
 left to you. To move the items of, say, steps 12 and 14, close the apps the plan names, then type
 the step numbers and your computer's name:
 
+**Windows (PowerShell)**
 ```powershell
 .\vacate.cmd clean -Run .\runs\20261120-101500 -Steps 12,14 -Execute -Confirm MY-PC
+```
+
+**macOS and Linux**
+```bash
+pwsh ./vacate.ps1 clean -Run ./runs/20261120-101500 -Steps 12,14 -Execute -Confirm MY-PC
 ```
 
 If a step says "Save first", vacate moves it only after you confirm the export with
@@ -152,8 +164,14 @@ If a step says "Save first", vacate moves it only after you confirm the export w
 vacate checks every item again right before moving it, never deletes anything permanently, and
 records each move. To put back what it moved (it lists anything it cannot restore, for example when something new now exists at the old path):
 
+**Windows (PowerShell)**
 ```powershell
 .\vacate.cmd undo -Run .\runs\20261120-101500 -Execute -Confirm MY-PC
+```
+
+**macOS and Linux**
+```bash
+pwsh ./vacate.ps1 undo -Run ./runs/20261120-101500 -Execute -Confirm MY-PC
 ```
 
 Items in the Recycle Bin or Trash can still be restored by anyone using your account, so empty it
@@ -165,8 +183,17 @@ Run the scan from Step 1 again. The new report shows what is still left. Repeat 
 for anything you missed.
 
 To see what was removed and what is still left, compare the new scan against the earlier one:
-- Windows (PowerShell): `.\vacate.cmd compare -Run <newer> -Against <older>`
-- macOS / Linux: `pwsh ./vacate.ps1 compare -Run <newer> -Against <older>`
+
+**Windows (PowerShell)**
+```powershell
+.\vacate.cmd compare -Run <newer> -Against <older>
+```
+
+**macOS and Linux**
+```bash
+pwsh ./vacate.ps1 compare -Run <newer> -Against <older>
+```
+
 This writes `compare.md` and `compare.json` in the newer run folder, grouping what was removed
 (gone), what is still there, what is new, and any unrun checks.
 
@@ -187,8 +214,14 @@ operating system provides. vacate can check that the computer is ready and open 
 
 First see whether the computer is ready (this erases nothing):
 
+**Windows (PowerShell)**
 ```powershell
 .\vacate.cmd erase -Run .\runs\20261120-101500
+```
+
+**macOS and Linux**
+```bash
+pwsh ./vacate.ps1 erase -Run ./runs/20261120-101500
 ```
 
 Open `erase-readiness.md` in the run folder. Every line marked BLOCKS must be fixed first: run
@@ -198,8 +231,15 @@ Microsoft account or Apple Account and turn off Find My by hand.
 
 When everything passes, plug in a USB drive for the erase record and run, as administrator:
 
+**Windows (PowerShell)**
 ```powershell
 .\vacate.cmd erase -Run .\runs\20261120-101500 -Execute -Confirm MY-PC -DiskSerial <serial from erase-readiness.md> -RecordTo E:\
+```
+
+**macOS and Linux**
+```bash
+pwsh ./vacate.ps1 erase -Run ./runs/20261120-101500 -Execute -Confirm MY-PC \
+  -DiskSerial <serial from erase-readiness.md> -RecordTo <usb mount path>
 ```
 
 If the scan found crypto wallets, add `-WalletsBackedUp` once you have checked every recovery
@@ -214,8 +254,14 @@ only trace left once the disk is erased. It is not signed and does not prove the
 
 If you want someone to help you read a report, scan with `-Redact`:
 
+**Windows (PowerShell)**
 ```powershell
 .\vacate.cmd scan -Redact
+```
+
+**macOS and Linux**
+```bash
+pwsh ./vacate.ps1 scan -Redact
 ```
 
 Names and folder names in that report are replaced with codes, so it can be shared. A plan made

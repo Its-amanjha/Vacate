@@ -31,6 +31,15 @@ happen, and how to fix them.
   3. Run vacate using PowerShell:
      `powershell -ExecutionPolicy Bypass -File .\vacate.ps1 <command>`
 
+### "'vacate' is not recognized as an internal or external command"
+- **Message:** `'vacate' is not recognized as an internal or external command, operable program
+  or batch file.`
+- **Why:** Command Prompt is not in the unzipped vacate folder, or Windows is set not to run
+  programs from the current folder (the NoDefaultCurrentDirectoryInExePath setting).
+- **Fix:**
+  1. Go to the unzipped folder: `cd /d C:\vacate\vacate-<version>` (your folder may differ).
+  2. Run `.\vacate.cmd scan` instead of `vacate scan`.
+
 ### "-Elevated was passed but this session is not elevated"
 - **Message:**
   `vacate: -Elevated was passed but this session is not elevated.`

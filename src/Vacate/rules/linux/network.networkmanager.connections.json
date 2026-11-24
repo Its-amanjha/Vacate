@@ -32,9 +32,10 @@
     "signOut": null,
     "steps": [
       "Open Settings > Wi-Fi and use the menu next to each saved network to forget it.",
-      "For VPN profiles use Settings > Network > VPN. An administrator password may be required."
+      "For VPN profiles use Settings > Network > VPN. An administrator password may be required.",
+      "Leave any system profiles that Settings does not list to the full reset at the end of this plan."
     ],
-    "risk": "Removes saved Wi-Fi network passphrases and VPN connection profiles. You will need to enter network passwords again. Connections saved for other users on this machine are removed too.",
+    "risk": "Removes the saved Wi-Fi passphrases and VPN profiles that Settings lists. You will need to enter those network passwords again. Profiles saved for other users stay until the full reset at the end of the plan.",
     "closeApps": [],
     "resetCovers": true,
     "reason": null,

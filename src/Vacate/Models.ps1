@@ -2,7 +2,7 @@
 # PowerShell 5.1 compatible. ASCII only.
 
 $script:VacateToolName = 'vacate'
-$script:VacateToolVersion = '0.1.0'
+$script:VacateToolVersion = '0.5.0'
 $script:VacateSchemaVersion = 1
 $script:VacateDefaultMaxEntries = 5000
 $script:VacateMaxMaxEntries = 50000

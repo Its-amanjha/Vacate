@@ -1,0 +1,38 @@
+{
+  "id": "cloud.box",
+  "platforms": ["windows"],
+  "category": "cloud-sync",
+  "title": "Box Drive synced folder",
+  "whyItMatters": "Box Drive keeps a local copy of synced files in the user profile. Those copies can contain private documents even after the account is signed out.",
+  "sensitivity": "medium",
+  "locator": {
+    "kind": "path",
+    "root": "HOME",
+    "path": "Box",
+    "match": "directories",
+    "recurse": true
+  },
+  "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
+  "maxEntries": 20000,
+  "requiresElevation": false,
+  "verifiedOn": [],
+  "verified": false,
+  "source": "Box Support, Box Drive frequently asked questions: the default Windows location is C:\\Users\\USERNAME\\Box - https://support.box.com/hc/en-us/articles/29475996910867-Box-Drive-Frequently-Asked-Questions",
+  "notes": "The default location only. A Box Drive folder moved to another disk is not matched. Online-only placeholders are counted, not hydrated.",
+  "cleanup": {
+    "action": "sign-out-then-remove",
+    "exportFirst": "Save and close open files, let uploads finish, and copy any Problem Item that cannot sync to Box to a drive you keep.",
+    "signOut": "In the Box menu on the taskbar, open the gear menu and choose Log Out, so Box Drive stops syncing this PC.",
+    "steps": [
+      "Save and close open files and wait for uploads to finish.",
+      "Copy any file Box could not upload to a drive you keep.",
+      "In the Box menu, open the gear menu and choose Log Out.",
+      "Delete the Box folder named in the plan, then empty the Recycle Bin."
+    ],
+    "risk": "Box Drive removes its local files and offline copies on log out. Files that never uploaded are deleted; files in the Box account are untouched.",
+    "closeApps": ["Box", "Box Drive"],
+    "resetCovers": true,
+    "reason": null,
+    "source": "Box Support, Using Box Drive Basics, Logging Out of Box Drive: https://support.box.com/hc/en-us/articles/360043697494-Using-Box-Drive-Basics"
+  }
+}

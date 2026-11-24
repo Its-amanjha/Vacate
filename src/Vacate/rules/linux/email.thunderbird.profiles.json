@@ -17,7 +17,7 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Mozilla Support, profiles: Thunderbird stores its profile folders in ~/.thunderbird on Linux: https://support.mozilla.org/en-US/kb/profiles-where-thunderbird-stores-user-data",
-  "notes": "Matches the profile folders themselves, so no mailbox contents are walked; profiles.ini in the same folder names them and is not counted. On Ubuntu 24.04 and later Thunderbird is usually the Snap, which uses ~/snap/thunderbird/common/.thunderbird instead, covered by a separate rule.",
+  "notes": "Matches the profile folders themselves, so no mailbox contents are walked; profiles.ini in the same folder names them and is not counted. On Ubuntu 24.04 and later Thunderbird is usually the Snap, which uses ~/snap/thunderbird/common/.thunderbird instead, covered by a separate rule. Flatpak builds keep .thunderbird under ~/.var/app/org.mozilla.thunderbird (standard release) or ~/.var/app/org.mozilla.thunderbird_esr (ESR); the older id org.mozilla.Thunderbird is still on Flathub. No rule matches those.",
   "cleanup": {
     "action": "export-then-remove",
     "exportFirst": "Export the address book and calendars from Thunderbird, and copy the profile folder to a backup drive, before anything is removed.",

@@ -4,7 +4,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 
 `verified` means the location was confirmed on a real machine of that platform. Unverified rules still run; the report lists them.
 
-## Windows (113 rules, 49 verified)
+## Windows (114 rules, 49 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -42,6 +42,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `browser.opera.profiles` | browsers | medium | `APPDATA/Opera Software/Opera Stable/Default/Preferences` | no | no |
 | `browser.vivaldi.profiles` | browsers | medium | `LOCALAPPDATA/Vivaldi/User Data/*/Preferences` | no | no |
 | `browser.zen.profiles` | browsers | medium | `APPDATA/zen/Profiles/*/prefs.js` | no | no |
+| `cloud.box` | cloud-sync | medium | `HOME/Box` | no | no |
 | `cloud.dropbox` | cloud-sync | medium | `HOME/Dropbox*` | no | no |
 | `cloud.google-drive` | cloud-sync | medium | `LOCALAPPDATA/Google/DriveFS` | no | no |
 | `cloud.icloud` | cloud-sync | medium | `HOME/iCloudDrive` | no | no |
@@ -122,7 +123,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `wallet.metamask.edge` | wallets | critical | `LOCALAPPDATA/Microsoft/Edge/User Data/*/Local Extension Settings/ejbalbakoplchlghecdalmeeeajnimhm` | no | no |
 | `wallet.monero-gui` | wallets | critical | `HOME/Documents/Monero/wallets` | no | no |
 
-## macOS (82 rules, 24 verified)
+## macOS (84 rules, 24 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -150,11 +151,13 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `browser.safari.data` | browsers | high | `LIBRARY/Safari` | no | yes (macOS 26.7.2 (GitHub Actions CI)) |
 | `browser.vivaldi.profiles` | browsers | medium | `LIBRARY/Application Support/Vivaldi/*/Preferences` | no | no |
 | `browser.zen.profiles` | browsers | medium | `LIBRARY/Application Support/zen` | no | no |
+| `cloud.box` | cloud-sync | medium | `LIBRARY/CloudStorage/Box-Box` | no | no |
 | `cloud.dropbox` | cloud-sync | medium | `LIBRARY/CloudStorage/Dropbox*` | no | no |
 | `cloud.google-drive` | cloud-sync | medium | `LIBRARY/CloudStorage/GoogleDrive-*` | no | no |
 | `cloud.icloud-clouddocs` | cloud-sync | medium | `LIBRARY/Application Support/CloudDocs` | no | no |
 | `cloud.icloud-drive` | cloud-sync | medium | `LIBRARY/Mobile Documents` | no | no |
 | `cloud.onedrive` | cloud-sync | medium | `LIBRARY/CloudStorage/OneDrive-*` | no | no |
+| `cloud.proton-drive` | cloud-sync | medium | `LIBRARY/CloudStorage/ProtonDrive-*` | no | no |
 | `credentials.1password.desktop` | credentials | critical | `LIBRARY/Group Containers/2BUA8C4S2C.com.1password` | no | no |
 | `credentials.bitwarden.desktop` | credentials | critical | `LIBRARY/Application Support/Bitwarden` | no | no |
 | `credentials.keepassxc.config` | credentials | medium | `LIBRARY/Application Support/KeePassXC` | no | no |
@@ -227,7 +230,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `browser.chromium.profiles` | browsers | medium | `XDG_CONFIG/chromium/*/Preferences` | no | no |
 | `browser.chromium.profiles.snap` | browsers | medium | `HOME/snap/chromium/common/chromium/*/Preferences` | no | no |
 | `browser.firefox.cache` | browsers | low | `HOME/.cache/mozilla/firefox` | no | no |
-| `browser.firefox.cache.snap` | browsers | medium | `HOME/snap/firefox/common/.cache/mozilla/firefox` | no | yes (Ubuntu 24.04 (WSL)) |
+| `browser.firefox.cache.snap` | browsers | low | `HOME/snap/firefox/common/.cache/mozilla/firefox` | no | yes (Ubuntu 24.04 (WSL)) |
 | `browser.firefox.profiles` | browsers | medium | `HOME/.mozilla/firefox/*/prefs.js` | no | no |
 | `browser.firefox.profiles.flatpak` | browsers | medium | `HOME/.var/app/org.mozilla.firefox/.mozilla/firefox/*/prefs.js` | no | no |
 | `browser.firefox.profiles.snap` | browsers | medium | `HOME/snap/firefox/common/.mozilla/firefox/*/prefs.js` | no | yes (Ubuntu 24.04 (WSL)) |

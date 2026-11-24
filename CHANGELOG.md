@@ -87,7 +87,7 @@ macOS and Linux (PowerShell 7).
 
 ### Rules
 
-- 284 rules: 113 for Windows, 82 for macOS and 89 for Linux.
+- 287 rules: 114 for Windows, 84 for macOS and 89 for Linux.
 - Categories include browsers, messaging, mail, cloud sync, developer secrets, file transfer,
   remote access, crypto wallets, system history and games.
 - Rules marked `verified: true` were confirmed by a scan on a real machine or on the GitHub

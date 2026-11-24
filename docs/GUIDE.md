@@ -24,31 +24,50 @@ system's own full erase after checking the computer is ready.
 
 ## 3. Get PowerShell and vacate
 
-vacate is a PowerShell script.
+vacate is a PowerShell script that runs from an unzipped folder. There is no installer.
 
-**Windows.** PowerShell is already installed. Download vacate from
-https://github.com/Its-amanjha/Vacate (green Code button > Download ZIP) and unzip it, for example
-to `C:\vacate`.
+**Download.** Open the [Releases page](https://github.com/Its-amanjha/Vacate/releases) and
+download the latest `vacate-<version>.zip`. Use that page, not the green Code button, which gives
+you the source code without the release checks. Before you run it, compare the ZIP's SHA-256 hash
+with the one in `SHA256SUMS`; [Checking a download](VERIFY.md) has the one-line command for each
+system. Then unzip it, for example to `C:\vacate` on Windows or `~/vacate` on macOS and Linux.
+The ZIP holds one folder, `vacate-<version>`, and you run vacate from inside it.
 
-**macOS.** Install PowerShell from Microsoft's page "Installing PowerShell on macOS", then
-download and unzip vacate, for example to your home folder as `~/vacate`.
+**Windows.** PowerShell is already installed. Open the `vacate-<version>` folder in File Explorer
+and choose Open in Terminal (or open PowerShell and `cd` to the folder), then run the scan with
+your terminal's form:
+
+- PowerShell: `.\vacate.cmd scan`
+- Command Prompt: `vacate scan`
+
+Keep the leading `\.\` and the `.cmd` part in PowerShell: `\.\vacate` alone picks `vacate.ps1`,
+which the default execution policy can block. `vacate.cmd` starts PowerShell with
+`-ExecutionPolicy Bypass` for that one run only and does not change your system policy. The long
+form `powershell -ExecutionPolicy Bypass -File .\vacate.ps1 scan` still works.
+
+**macOS.** Install PowerShell from Microsoft's page "Installing PowerShell on macOS", then unzip
+the release there, for example to `~/vacate`, and open the `vacate-<version>` folder it contains.
 
 **Linux.** Install PowerShell from Microsoft's page "Installing PowerShell on Linux" (on Ubuntu,
-`sudo snap install powershell --classic`), then download and unzip vacate to `~/vacate`.
+`sudo snap install powershell --classic`), then unzip the release to `~/vacate` and open the
+`vacate-<version>` folder it contains.
 
 ## 4. Step 1: scan
 
-Open a terminal (Windows: PowerShell; macOS and Linux: Terminal) and run:
+Open a terminal (Windows: PowerShell or Command Prompt; macOS and Linux: Terminal) and run:
 
-**Windows**
+**Windows (PowerShell)**
 ```powershell
-cd C:\vacate
-powershell -ExecutionPolicy Bypass -File .\vacate.ps1 scan
+cd C:\vacate\vacate-<version>
+.\vacate.cmd scan
 ```
+
+In Command Prompt, drop the `\.\` and `.cmd`: `cd /d C:\vacate\vacate-<version>`, then
+`vacate scan`. The other Windows examples below use PowerShell the same way.
 
 **macOS and Linux**
 ```bash
-cd ~/vacate
+cd ~/vacate/vacate-<version>
 pwsh ./vacate.ps1 scan
 ```
 
@@ -75,7 +94,7 @@ Run this with the folder the scan printed:
 
 **Windows**
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\vacate.ps1 plan -Run .\runs\20261120-101500
+.\vacate.cmd plan -Run .\runs\20261120-101500
 ```
 
 **macOS and Linux**
@@ -116,7 +135,7 @@ folder), vacate can move the items to the Recycle Bin or Trash for you. First se
 this moves nothing:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\vacate.ps1 clean -Run .\runs\20261120-101500
+.\vacate.cmd clean -Run .\runs\20261120-101500
 ```
 
 Open `clean-preview.md` in the run folder. It lists what could be moved and why everything else is
@@ -124,7 +143,7 @@ left to you. To move the items of, say, steps 12 and 14, close the apps the plan
 the step numbers and your computer's name:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\vacate.ps1 clean -Run .\runs\20261120-101500 -Steps 12,14 -Execute -Confirm MY-PC
+.\vacate.cmd clean -Run .\runs\20261120-101500 -Steps 12,14 -Execute -Confirm MY-PC
 ```
 
 If a step says "Save first", vacate moves it only after you confirm the export with
@@ -134,7 +153,7 @@ vacate checks every item again right before moving it, never deletes anything pe
 records each move. To put back what it moved (it lists anything it cannot restore, for example when something new now exists at the old path):
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\vacate.ps1 undo -Run .\runs\20261120-101500 -Execute -Confirm MY-PC
+.\vacate.cmd undo -Run .\runs\20261120-101500 -Execute -Confirm MY-PC
 ```
 
 Items in the Recycle Bin or Trash can still be restored by anyone using your account, so empty it
@@ -144,6 +163,12 @@ Items in the Recycle Bin or Trash can still be restored by anyone using your acc
 
 Run the scan from Step 1 again. The new report shows what is still left. Repeat Steps 2 and 3
 for anything you missed.
+
+To see what was removed and what is still left, compare the new scan against the earlier one:
+- Windows (PowerShell): `.\vacate.cmd compare -Run <newer> -Against <older>`
+- macOS / Linux: `pwsh ./vacate.ps1 compare -Run <newer> -Against <older>`
+This writes `compare.md` and `compare.json` in the newer run folder, grouping what was removed
+(gone), what is still there, what is new, and any unrun checks.
 
 ## 8. Step 5: the full reset
 
@@ -163,7 +188,7 @@ operating system provides. vacate can check that the computer is ready and open 
 First see whether the computer is ready (this erases nothing):
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\vacate.ps1 erase -Run .\runs\20261120-101500
+.\vacate.cmd erase -Run .\runs\20261120-101500
 ```
 
 Open `erase-readiness.md` in the run folder. Every line marked BLOCKS must be fixed first: run
@@ -174,7 +199,7 @@ Microsoft account or Apple Account and turn off Find My by hand.
 When everything passes, plug in a USB drive for the erase record and run, as administrator:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\vacate.ps1 erase -Run .\runs\20261120-101500 -Execute -Confirm MY-PC -DiskSerial <serial from erase-readiness.md> -RecordTo E:\
+.\vacate.cmd erase -Run .\runs\20261120-101500 -Execute -Confirm MY-PC -DiskSerial <serial from erase-readiness.md> -RecordTo E:\
 ```
 
 If the scan found crypto wallets, add `-WalletsBackedUp` once you have checked every recovery
@@ -190,7 +215,7 @@ only trace left once the disk is erased. It is not signed and does not prove the
 If you want someone to help you read a report, scan with `-Redact`:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\vacate.ps1 scan -Redact
+.\vacate.cmd scan -Redact
 ```
 
 Names and folder names in that report are replaced with codes, so it can be shared. A plan made

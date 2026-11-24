@@ -18,7 +18,7 @@
   "verifiedOn": [],
   "verified": false,
   "source": "Slack desktop is an Electron app with user data in the app-data folder (per-workspace cache and downloads): https://slack.com/help",
-  "notes": "Classic Slack desktop client. Slack's newer builds ship as a Microsoft Store package; check Packages under %LOCALAPPDATA% for a Slack package if this folder is absent. Cached messages are readable in the local store.",
+  "notes": "Classic desktop client. Slack also ships as an MSIX package: Slack documents its user data at %LOCALAPPDATA%/Packages/com.tinyspeck.slackdesktop_8yrtsj140pw4g/LocalCache/Roaming/Slack (https://slack.com/help/articles/212475728-Deploy-Slack-for-Windows); older package IDs end in 8she8kybcnzg4. This rule covers the classic folder only. Cached messages are readable in the local store.",
   "cleanup": {
     "action": "sign-out-then-remove",
     "exportFirst": "Download any file or message you need from Slack first, because only the local cache is removed here.",

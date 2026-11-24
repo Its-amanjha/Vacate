@@ -4,7 +4,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 
 `verified` means the location was confirmed on a real machine of that platform. Unverified rules still run; the report lists them.
 
-## Windows (113 rules, 46 verified)
+## Windows (113 rules, 49 verified)
 
 | id | category | sensitivity | locator | elevation | verified |
 |---|---|---|---|---|---|
@@ -22,7 +22,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `ai.recall.data` | ai-assistants | high | `LOCALAPPDATA/CoreAIPlatform.00/UKP` | no | no |
 | `autostart.run-key-machine` | autostart | low | `HKLM\Software\Microsoft\Windows\CurrentVersion\Run` | no | yes (Windows 11 Pro 26300) |
 | `autostart.run-key-user` | autostart | low | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` | no | yes (Windows 11 Pro 26300) |
-| `autostart.startup-folder` | autostart | low | `APPDATA/Microsoft/Windows/Start Menu/Programs/Startup` | no | no |
+| `autostart.startup-folder` | autostart | low | `APPDATA/Microsoft/Windows/Start Menu/Programs/Startup` | no | yes (Windows 11 Pro 26300) |
 | `browser.brave.profiles` | browsers | medium | `LOCALAPPDATA/BraveSoftware/Brave-Browser/User Data/*/Preferences` | no | no |
 | `browser.chrome.cookies` | browsers | high | `LOCALAPPDATA/Google/Chrome/User Data/*/Network/Cookies` | no | yes (Windows 11 Pro 26300) |
 | `browser.chrome.history` | browsers | high | `LOCALAPPDATA/Google/Chrome/User Data/*/History` | no | yes (Windows 11 Pro 26300) |
@@ -47,7 +47,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `cloud.icloud` | cloud-sync | medium | `HOME/iCloudDrive` | no | no |
 | `cloud.onedrive` | cloud-sync | medium | `HOME/OneDrive*` | no | yes (Windows 11 Pro 26300) |
 | `containers.docker-desktop` | containers-vms | medium | `LOCALAPPDATA/Docker` | no | yes (Windows 11 Pro 26300) |
-| `containers.virtualbox` | containers-vms | medium | `HOME/VirtualBox VMs` | no | no |
+| `containers.virtualbox` | containers-vms | medium | `HOME/VirtualBox VMs` | no | yes (Windows 11 Pro 26300) |
 | `containers.wsl-distros` | containers-vms | medium | `HKCU\Software\Microsoft\Windows\CurrentVersion\Lxss` | no | yes (Windows 11 Pro 26300) |
 | `credentials.1password.desktop` | credentials | critical | `LOCALAPPDATA/1Password` | no | no |
 | `credentials.bitwarden.desktop` | credentials | critical | `APPDATA/Bitwarden` | no | no |
@@ -96,7 +96,7 @@ Generated from `src/Vacate/rules/` by `tools/Update-RulesDoc.ps1`. Do not edit b
 | `msg.zoom.desktop` | messaging | high | `APPDATA/Zoom` | no | no |
 | `network.bluetooth.devices` | network | medium | `HKLM\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Devices` | no | yes (Windows 11 Pro 26300) |
 | `network.mapped-drives` | network | high | `HKCU\Network` | no | yes (Windows 11 Pro 26300) |
-| `network.networklist.profiles` | network | medium | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles` | no | no |
+| `network.networklist.profiles` | network | medium | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\NetworkList\Profiles` | no | yes (Windows 11 Pro 26300) |
 | `network.openvpn.configs` | network | high | `HOME/OpenVPN/config` | no | no |
 | `network.printers.user` | network | low | `HKCU\Printers\Connections` | no | yes (Windows 11 Pro 26300) |
 | `network.rdp.mru` | network | high | `HKCU\Software\Microsoft\Terminal Server Client\Default` | no | no |

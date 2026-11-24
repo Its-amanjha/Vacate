@@ -15,6 +15,7 @@
     vacate.ps1 clean -Run <dir> [-Steps n,n] [-ExportDone n,n] [-Execute -Confirm <MACHINENAME>]
     vacate.ps1 undo -Run <dir> [-Execute -Confirm <MACHINENAME>]
     vacate.ps1 erase -Run <dir> [-WalletsBackedUp] [-Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <dir>]
+    vacate.ps1 compare -Run <newer run> -Against <older run>
     vacate.ps1 version
     vacate.ps1 help
 .NOTES
@@ -27,6 +28,7 @@ param(
     [Parameter(Position = 1)][string]$SubCommand,
     [Parameter(Position = 2)][string]$Id,
     [string]$Run,
+    [string]$Against,
     [ValidateSet('windows', 'macos', 'linux')][string]$Platform,
     [ValidateRange(1, 3600)][int]$BudgetSeconds = 120,
     [switch]$Redact,
@@ -59,9 +61,10 @@ function Write-VacateUsage {
     Write-Output '  vacate.ps1 clean -Run <dir> [-Steps n,n] [-ExportDone n,n] [-Execute -Confirm <MACHINENAME>]'
     Write-Output '  vacate.ps1 undo -Run <dir> [-Execute -Confirm <MACHINENAME>]'
     Write-Output '  vacate.ps1 erase -Run <dir> [-WalletsBackedUp] [-Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <dir>]'
+    Write-Output '  vacate.ps1 compare -Run <newer run> -Against <older run>'
     Write-Output '  vacate.ps1 version'
     Write-Output '  vacate.ps1 help'
-    Write-Output 'scan, rules, report, checklist and plan only read. clean and undo are dry runs unless'
+    Write-Output 'scan, rules, report, checklist, plan and compare only read. clean and undo are dry runs unless'
     Write-Output '-Execute -Confirm <MACHINENAME> is given, and clean only moves items to the Recycle Bin/Trash.'
 }
 
@@ -171,6 +174,20 @@ try {
             foreach ($f in $r.recordFiles) { Write-Output ('Erase record: ' + $f) }
             Write-Output ('Started: {0} - {1}' -f $r.launch.method, $r.launch.detail)
             exit 0
+        }
+        'compare' {
+            if (-not $Run -or -not $Against) { Write-Output 'compare needs -Run <newer run> -Against <older run>.'; exit 2 }
+            try {
+                $res = & $m { param($R, $A) Invoke-VacateCompare -Run $R -Against $A } $Run $Against
+                $s = $res.summary
+                Write-Output ('Compare: {0} gone, {1} still there, {2} new, {3} not comparable.' -f $s.gone, $s.stillThere, $s.new, $s.notComparable)
+                foreach ($w in $res.written) { Write-Output ('Wrote ' + $w) }
+                exit 0
+            }
+            catch {
+                Write-Output ('vacate: ' + $_.Exception.Message)
+                exit 2
+            }
         }
         'help' { Write-VacateUsage; exit 0 }
         default { Write-VacateUsage; exit 2 }

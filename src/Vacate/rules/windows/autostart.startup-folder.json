@@ -19,8 +19,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
   "source": "Microsoft Learn: per-user Startup folder at %APPDATA%/Microsoft/Windows/Start Menu/Programs/Startup",
   "notes": "Names only: no recursion and no shortcut target is resolved. The machine-wide Startup folder under ProgramData is not covered.",
   "cleanup": {

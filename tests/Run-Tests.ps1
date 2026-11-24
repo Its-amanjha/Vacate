@@ -25,6 +25,10 @@ $config.Run.Path = $existing
 $config.Run.Exit = $false
 $config.Run.PassThru = $true
 $config.Output.Verbosity = $Output
+# tests/release/ smoke-tests a built ZIP and needs one (or pwsh 7 to build it). It is tagged
+# Release so a broad -Path (for example tests) cannot pull it into the normal suite. Run it
+# with tests/release/Invoke-ReleaseSmoke.ps1.
+$config.Filter.ExcludeTag = 'Release'
 
 $result = Invoke-Pester -Configuration $config
 $edition = $PSVersionTable.PSEdition

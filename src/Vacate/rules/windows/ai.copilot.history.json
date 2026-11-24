@@ -17,7 +17,7 @@
   "verifiedOn": [],
   "verified": false,
   "source": "AI forensics handbook (urock-ailab.github.io/forensics-handbook/ai/02-artifacts/chat-services/copilot/windows.html): Store app data under %LOCALAPPDATA%/Packages/Microsoft.Copilot_*",
-  "notes": "source uncertain: Microsoft documents Copilot chat history as account/cloud based and publishes no local history path, and the app data suffix varies by build. Windows 11 22H2+; newer app (2026-08-18) also uses LOCALAPPDATA/Microsoft/Copilot/User Data. Metadata only.",
+  "notes": "source uncertain: Microsoft documents Copilot chat history as account/cloud based and publishes no local history path. The Store app uses %LOCALAPPDATA%/Packages/Microsoft.Copilot_*; the older web experience used Microsoft.WindowsCopilot_*, which this glob does not match. Microsoft Q&A answers also name %LOCALAPPDATA%/Microsoft/Copilot as a cache folder; the suffix varies by build. Windows 11 22H2+. Metadata only.",
     "cleanup": {
         "action": "export-then-remove",
         "exportFirst": "Download or read your Copilot activity history in the Microsoft privacy dashboard first; most of it is stored with your account, not only on this PC.",

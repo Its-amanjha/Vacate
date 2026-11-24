@@ -15,8 +15,8 @@ never deletes, moves or changes anything, never opens file contents, and never u
 |---|---|---|---|
 | `scan` end to end | yes, PowerShell 5.1 and 7 (real PC: 22 s) | yes, PowerShell 7 (WSL: 14 s) | yes, PowerShell 7 (GitHub Actions runner, macOS 26.7.2 arm64) |
 | Rules | 113 | 89 | 82 |
-| Verified on a real machine | **46** (owner's PC, Windows 11 Pro 26300) | **20** (owner's WSL Ubuntu 24.04) | **24** ci-verified (CI runner only) |
-| Not yet verified | 67 | 69 | 58 |
+| Verified on a real machine | **49** (owner's PC, Windows 11 Pro 26300) | **20** (owner's WSL Ubuntu 24.04) | **24** ci-verified (CI runner only) |
+| Not yet verified | 64 | 69 | 58 |
 | Root / admin | runs unelevated; admin-only rules skipped with a reason | refuses root unless `-AllowRoot` | refuses root unless `-AllowRoot` |
 | System queries | read-only CIM (BitLocker, TPM, OS, volumes) | `lsblk`, `findmnt` | `fdesetup status` |
 
@@ -27,7 +27,7 @@ prints), `summary.md`, `checklist.md` and `scan.log` into `runs/<timestamp>/`.
 
 ## 2. What is unverified or CI-only
 
-- **194 of 284 rules are unverified.** They still run; every report lists them by id.
+- **191 of 284 rules are unverified.** They still run; every report lists them by id.
   A rule becomes verified only when a real scan on that platform found its data (D32).
 - **macOS is ci-verified only.** The 24 verified macOS rules were confirmed on a clean GitHub
   Actions runner with Full Disk Access. Privacy prompts (TCC) on a personal Mac are untested.

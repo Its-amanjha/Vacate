@@ -30,7 +30,7 @@ if (-not $OutDir) { $OutDir = Join-Path $SourceRoot 'dist' }
 # What a user needs to run vacate. Tests, tools and internal notes stay out.
 $include = @(
     'vacate.ps1', 'vacate.cmd', 'src/', 'schemas/',
-    'README.md', 'LIMITS.md', 'THREAT-MODEL.md', 'RULES.md', 'DECISIONS.md', 'LICENSE',
+    'README.md', 'CHANGELOG.md', 'LIMITS.md', 'THREAT-MODEL.md', 'RULES.md', 'DECISIONS.md', 'LICENSE',
     'docs/GUIDE.md', 'docs/FAQ.md', 'docs/TROUBLESHOOTING.md', 'docs/VERIFY.md'
 )
 

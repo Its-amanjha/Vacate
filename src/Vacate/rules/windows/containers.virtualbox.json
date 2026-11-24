@@ -15,8 +15,10 @@
   "measure": ["exists", "sizeBytes", "lastWriteTime", "itemCount"],
   "maxEntries": 20000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
   "source": "Oracle VirtualBox User Guide, default machine folder $HOME/VirtualBox VMs - https://www.virtualbox.org/manual/ch10.html",
   "notes": "Default machine folder only. Unconfirmed: a custom Default Machine Folder changed in VirtualBox preferences is not matched. Virtual disks are counted by size, never opened.",
     "cleanup": {

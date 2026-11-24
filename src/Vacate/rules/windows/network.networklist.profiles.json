@@ -19,8 +19,10 @@
   ],
   "maxEntries": 5000,
   "requiresElevation": false,
-  "verifiedOn": [],
-  "verified": false,
+  "verifiedOn": [
+    "Windows 11 Pro 26300"
+  ],
+  "verified": true,
   "source": "Windows Network List service registry: https://learn.microsoft.com/en-us/windows/win32/api/netlistmgr/nn-netlistmgr-inetworklistmanager (NetworkList\\Profiles subkeys, well-known forensic artifact)",
   "notes": "HKLM machine-wide key; individual per-network GUID subkeys are counted but their values are not read. Registry last-write time is unavailable.",
   "cleanup": {

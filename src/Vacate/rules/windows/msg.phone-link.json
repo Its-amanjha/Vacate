@@ -27,15 +27,15 @@
   ],
   "verified": true,
   "source": "Microsoft Learn, packaged apps keep user data under %LOCALAPPDATA%/Packages/<PackageFamilyName> - https://learn.microsoft.com/en-us/uwp/api/windows.storage.applicationdata.localfolder",
-  "notes": "source uncertain: Microsoft publishes no help page naming this folder; the package family name Microsoft.YourPhone_8wekyb3d8bbwe was confirmed on this PC (Windows 11). Phone Link cannot be uninstalled, but its app data can be reset in Settings. Local cache only; nothing is opened.",
+  "notes": "The package family name Microsoft.YourPhone_8wekyb3d8bbwe was confirmed on this PC (Windows 11 Pro build 26300); Microsoft publishes no help page naming the folder. Phone Link is a system app that cannot be uninstalled: unlink the phone, then use Settings > Apps > Installed apps > Phone Link > Advanced options > Reset. Windows Settings also has Settings > Bluetooth & devices > Mobile devices. Local cache only; nothing is opened.",
   "cleanup": {
     "action": "sign-out-then-remove",
     "exportFirst": "Save any photo or file you need from your phone; Phone Link keeps only a local cache of what was synced.",
-    "signOut": "In Phone Link, open Settings > Mobile devices and remove this phone, or unlink the Microsoft account on the phone.",
+    "signOut": "In Phone Link, open Settings > Mobile devices > Manage devices, choose Open, select the phone and then Remove; or unlink the phone in Link to Windows on the phone.",
     "steps": [
-      "In Phone Link, remove the linked phone.",
+      "In Phone Link, remove the linked phone as described above.",
       "Open Settings > Apps > Installed apps, choose Phone Link, then Advanced options > Reset.",
-      "Delete the Phone Link package folder named in the plan if it is still there."
+      "Leave the package folder named in the plan to the app reset and the final PC reset; do not delete it by hand."
     ],
     "risk": "Removes the local Phone Link cache on this PC. Messages and photos stay on the phone and in the Microsoft account.",
     "closeApps": [

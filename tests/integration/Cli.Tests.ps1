@@ -159,7 +159,7 @@ Describe 'vacate.ps1 CLI' {
         $r = Invoke-TestCli @('help')
         $r.Code | Should -Be 0
         $r.Text | Should -Match 'Usage:'
-        foreach ($cmd in @('scan', 'rules', 'report', 'checklist', 'plan', 'clean', 'undo', 'erase', 'version', 'help')) {
+        foreach ($cmd in @('scan', 'rules', 'report', 'checklist', 'plan', 'clean', 'undo', 'erase', 'compare', 'version', 'help')) {
             $r.Text | Should -Match ("\bvacate\.ps1\s+{0}\b" -f $cmd)
         }
         $r.Text | Should -Not -Match '(At line:|CategoryInfo|FullyQualifiedErrorId|ScriptStackTrace)'

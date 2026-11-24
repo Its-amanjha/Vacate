@@ -49,9 +49,14 @@ the code is free of bugs.
 
 The ZIP holds `MANIFEST.sha256`, the hash of every file inside it. From the unzipped folder:
 
-**macOS and Linux**
+**macOS**
 ```bash
 shasum -a 256 -c MANIFEST.sha256
+```
+
+**Linux**
+```bash
+sha256sum -c MANIFEST.sha256
 ```
 
 **Windows (PowerShell)**
@@ -75,5 +80,8 @@ pwsh -NoProfile -File tools/Build-Release.ps1 -Version 0.5.0
 cat dist/SHA256SUMS
 ```
 
-The hash should match the release's SHA256SUMS. A different PowerShell version can compress
-differently; use the version named in the release workflow if the hashes differ.
+The hash should match the release's SHA256SUMS. The compression behind the ZIP differs between
+PowerShell 7 versions and platforms (the builder refuses to run on Windows PowerShell 5.1), so
+compare a rebuild with the one GitHub made only when it runs the same pwsh: the release workflow
+builds on `ubuntu-latest` with that runner's PowerShell 7 (see `pwsh --version`). A different
+pwsh or operating system may give a different, equally valid ZIP.

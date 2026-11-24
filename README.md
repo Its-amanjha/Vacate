@@ -42,50 +42,61 @@ ready (disk encrypted, recent clean scan, wallets backed up, not a virtual machi
 record to a USB drive, and then opens the operating system's own erase. It never sends raw commands
 to the disk, and you still confirm the erase in Windows, macOS or Linux.
 
+## Install
+
+There is no installer: vacate runs from an unzipped folder.
+
+1. Open the [Releases page](https://github.com/Its-amanjha/Vacate/releases) and download the
+   latest `vacate-<version>.zip`. Use the Releases page, not the green Code button, which gives
+   you the source code without the release checks.
+2. Check the download before you run it: the ZIP's SHA-256 hash must match the one in
+   `SHA256SUMS`. [docs/VERIFY.md](docs/VERIFY.md) gives the one-line command for Windows, macOS
+   and Linux.
+3. Unzip it, for example to `C:\vacate` on Windows or `~/vacate` on macOS and Linux. The ZIP
+   holds one folder, `vacate-<version>`; you run the commands from inside that folder.
+
 ## Quickstart
 
-Run it as your normal user (only `erase -Execute` needs an administrator shell). Do not open an administrator or root shell for scanning: vacate will not ask for
-admin rights, and it never elevates itself.
+Run it as your normal user (only `erase -Execute` needs an administrator shell). Do not open an
+administrator or root shell for scanning: vacate will not ask for admin rights, and it never
+elevates itself.
 
-**Windows, PowerShell 5.1**
-
-```powershell
-cd C:\path\to\vacate
-.\vacate.ps1 scan
-```
-
-Open `runs/<timestamp>/report.html` in your browser.
-
-**Windows, PowerShell 7**
+**Windows (PowerShell)**
 
 ```powershell
-cd C:\path\to\vacate
-pwsh ./vacate.ps1 scan
+cd C:\vacate\vacate-<version>
+.\vacate.cmd scan
 ```
 
-Open `runs/<timestamp>/report.html` in your browser.
+**Windows (Command Prompt)**
+
+```bat
+cd /d C:\vacate\vacate-<version>
+vacate scan
+```
 
 **Linux**
 
 ```bash
-cd ~/vacate
+cd ~/vacate/vacate-<version>
 pwsh ./vacate.ps1 scan
 ```
-
-Open `runs/<timestamp>/report.html` in your browser.
 
 **macOS** - ci-verified on the GitHub Actions runner; not yet tested on a personal Mac
 
 ```bash
-cd ~/vacate
+cd ~/vacate/vacate-<version>
 pwsh ./vacate.ps1 scan
 ```
 
-Open `runs/<timestamp>/report.html` in your browser.
+Open `runs/<timestamp>/report.html` in your browser after any of these.
 
-`<timestamp>` is the name of the run folder, for example `runs/20261119-143000`. If Windows
-blocks the script with an execution-policy message, run
-`powershell -NoProfile -ExecutionPolicy Bypass -File .\vacate.ps1 scan` instead.
+In PowerShell, keep the `\.\` and the `.cmd`: `\.\vacate` alone picks `vacate.ps1`, which the
+default execution policy can block. `vacate.cmd` starts PowerShell with `-ExecutionPolicy Bypass`
+for that one process only and does not change the system policy. The long form
+`powershell -NoProfile -ExecutionPolicy Bypass -File .\vacate.ps1 scan` still works.
+
+`<timestamp>` is the name of the run folder, for example `runs/20261119-143000`.
 
 ## Example output
 
@@ -94,7 +105,7 @@ folder name depend on the machine, and angle brackets mark the values `scan` fil
 example is from Windows:
 
 ```
-> .\vacate.ps1 scan
+> .\vacate.cmd scan
 Scan finished: <traces> traces, <rules> rules ran, <skipped> skipped, <failed> failed, <not applicable> not applicable.
 Report: C:\path\to\vacate\runs\<timestamp>\report.html
 The report lists where your private data is. Treat it like a password; use -Redact to share.
@@ -131,7 +142,8 @@ WARNING: the scan did not finish (time budget). The report is incomplete.
 
 ## Commands
 
-On Windows use `.\vacate.ps1 <command>`. On macOS and Linux use `pwsh ./vacate.ps1 <command>`.
+On Windows use `.\vacate.cmd <command>` in PowerShell or `vacate <command>` in Command Prompt. On
+macOS and Linux use `pwsh ./vacate.ps1 <command>`.
 
 | Command | What it does |
 |---|---|
@@ -149,8 +161,9 @@ On Windows use `.\vacate.ps1 <command>`. On macOS and Linux use `pwsh ./vacate.p
 | `clean -Run <dir>` | Phase 3: dry run. Lists which plan items vacate could move to the Recycle Bin/Trash and why the others are refused. Moves nothing. |
 | `clean -Run <dir> -Steps 3,5 -Execute -Confirm <MACHINENAME>` | Moves those steps' items to the Recycle Bin/Trash, records each move in `undo.json`, then re-scans. Only `remove` steps for files in your own profile qualify; never wallets, personal folders or registry entries. |
 | `undo -Run <dir> [-Execute -Confirm <MACHINENAME>]` | Puts back everything `clean` moved from that run. Dry run without `-Execute`. |
-| `erase -Run <dir>` | Phase 4: readiness report only. Lists all 16 readiness checks (12 can block, for example admin, a scan under a day old, an encrypted and fully identified disk, not a VM or WSL, and wallets backed up when wallets were found) and the warnings. Erases nothing. |
+| `erase -Run <dir>` | Phase 4: readiness report only. Lists all 16 readiness checks (13 can block, for example admin, a scan under a day old, an encrypted and fully identified disk, not a VM or WSL, and wallets backed up when wallets were found) and the warnings. Erases nothing. |
 | `erase -Run <dir> -Execute -Confirm <MACHINENAME> -DiskSerial <serial> -RecordTo <usb folder>` | Asks you to type YES, writes an erase record to the run folder and the USB drive, then opens the operating system's own erase (Reset this PC, Erase All Content and Settings, or LUKS key erase). |
+| `compare -Run <dir> -Against <dir>` | Compares two scans on the same machine to show what is gone, still there, new, or not comparable. Writes `compare.md` and `compare.json` into the newer run folder. |
 | `version` | Prints the version. |
 | `help` | Lists the commands and their options. |
 

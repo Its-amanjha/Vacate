@@ -40,9 +40,10 @@ $hashNames = @('src', 'tests', 'schemas', 'vacate.ps1', 'PSScriptAnalyzerSetting
 $hostExe = (Get-Process -Id $PID).Path
 $docPath = Join-Path $repoRoot 'docs/SABOTAGE.md'
 
-# The six mutations from SPEC "Harness self-test", plus two Phase 2 mutations (the planner and
-# the cleanup text check). Every anchor must match exactly once, so a
-# refactor makes the harness throw instead of silently running a mutation that no longer applies.
+# The six mutations from SPEC "Harness self-test", plus the Phase 2 (planner, cleanup text),
+# Phase 3 (clean gates) and Phase 4 (erase gates) mutations. Every anchor must match exactly
+# once, so a refactor makes the harness throw instead of silently running a mutation that no
+# longer applies.
 $mutations = @(
     [pscustomobject][ordered]@{
         Name    = 'force exists = $true'
@@ -153,6 +154,65 @@ $mutations = @(
         Anchor  = '        throw (''Not ready to erase. Blocking checks: {0}. See erase-readiness.md.'' -f ($failed -join '', ''))'
         Replace = '        $null = $failed'
         Expect  = 'erase must refuse while any blocking readiness check fails (D55)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'erase ignores the machine-name confirm'
+        File    = 'src/Vacate/Public/Invoke-VacateErase.ps1'
+        Kind    = 'replace'
+        Anchor  = '    if ([string]::IsNullOrEmpty($ConfirmMachine) -or -not [string]::Equals($ConfirmMachine.Trim(), $machine, [StringComparison]::OrdinalIgnoreCase)) {'
+        Replace = '    if ($false) {'
+        Expect  = 'erase -Execute must refuse a missing or wrong machine name (D55)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'erase accepts -RecordTo on the system volume'
+        File    = 'src/Vacate/Public/Invoke-VacateErase.ps1'
+        Kind    = 'replace'
+        Anchor  = '    if (-not (Test-VacateOtherVolume -Path $RecordTo -Platform $platform -SystemVolume $sysVol)) {'
+        Replace = '    if ($false) {'
+        Expect  = 'erase must keep the record off the disk being erased (D55, D56)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'erase starts the launcher before the record'
+        File    = 'src/Vacate/Public/Invoke-VacateErase.ps1'
+        Kind    = 'replace'
+        Anchor  = '    # Record first (D56), in both places, and prove both copies are valid before starting.'
+        Replace = @'
+    $result.launch = Start-VacateOsErase -Platform $platform -SystemDisk $disk -Launcher $Launcher
+    # Record first (D56), in both places, and prove both copies are valid before starting.
+'@
+        Expect  = 'the erase record must exist in both places before the OS erase starts (D56)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'erase skips the not-virtualized check'
+        File    = 'src/Vacate/Private/EraseReadiness.ps1'
+        Kind    = 'replace'
+        Anchor  = '    $virtOk = ($null -ne $Virtualized -and -not [bool]$Virtualized)'
+        Replace = '    $virtOk = $true'
+        Expect  = 'a VM, WSL or container must never be erased (Phase 4 threat model)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'erase allows a redacted scan'
+        File    = 'src/Vacate/Private/EraseReadiness.ps1'
+        Kind    = 'replace'
+        Anchor  = '    $redacted = ((Get-VacateEraseReadinessProperty -InputObject $scan -Name ''redacted'').Value -eq $true)'
+        Replace = '    $redacted = $false'
+        Expect  = 'a redacted report cannot be checked against this disk (D25, D55)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'erase ignores wallets without -WalletsBackedUp'
+        File    = 'src/Vacate/Private/EraseReadiness.ps1'
+        Kind    = 'replace'
+        Anchor  = '    elseif ($WalletsBackedUp) {'
+        Replace = '    elseif ($true) {'
+        Expect  = 'wallets must be backed up before an erase (D51, D55)'
+    },
+    [pscustomobject][ordered]@{
+        Name    = 'erase ignores the typed YES'
+        File    = 'src/Vacate/Public/Invoke-VacateErase.ps1'
+        Kind    = 'replace'
+        Anchor  = '    if (-not $SkipTypedConfirm -and $TypedConfirmation -cne ''YES'') {'
+        Replace = '    if ($false) {'
+        Expect  = 'erase -Execute must need the typed YES from the console (D55)'
     }
 )
 

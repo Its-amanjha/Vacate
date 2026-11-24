@@ -43,6 +43,13 @@ BeforeAll {
 
     # The publish allow-list is the single source of truth for what becomes public.
     function Get-PublishedPath {
+        # The public snapshot (GitHub) has no Publish-Public.ps1 because everything in it is
+        # already published: the allow-list is the top-level entries plus the docs/ pages.
+        if (-not (Test-Path -LiteralPath (Join-Path $script:RepoRoot 'tools/Publish-Public.ps1'))) {
+            $top = @(Get-ChildItem -LiteralPath $script:RepoRoot -Force | Where-Object { $_.Name -ne '.git' } | ForEach-Object Name)
+            $docs = @(Get-ChildItem -LiteralPath (Join-Path $script:RepoRoot 'docs') -Filter '*.md' -File -ErrorAction SilentlyContinue | ForEach-Object { 'docs/' + $_.Name })
+            return @($top + $docs)
+        }
         $text = Get-DocText 'tools/Publish-Public.ps1'
         $block = [regex]::Match($text, '(?s)\$allow\s*=\s*@\((.*?)\)')
         if (-not $block.Success) { throw 'could not find the $allow list in tools/Publish-Public.ps1' }

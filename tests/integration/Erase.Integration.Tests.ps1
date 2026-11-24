@@ -295,6 +295,34 @@ Describe 'Vacate Erase Integration' -Skip:(-not $script:HasErase) {
             Test-EraseRecordAbsent -Run $runDir -RecordTo $recordTo
         }
 
+        It 'refuses when the typed confirmation is not YES' {
+            $runDir = New-TestEraseRun
+            $recordTo = Get-TestRecordDir
+            Reset-TestLauncher
+
+            # No -SkipTypedConfirm: this is the gate that sees the CLI answer. Empty and lower-case
+            # do not count, and neither does anything else that is not exactly YES (D55).
+            { Invoke-VacateErase -Run $runDir -Execute -Confirm $script:machine -DiskSerial $script:disk.serial -RecordTo $recordTo -Elevated:$true -SystemDisk $script:disk -Virtualized $false -Launcher (Get-TestLauncher) } | Should -Throw
+            { Invoke-VacateErase -Run $runDir -Execute -Confirm $script:machine -DiskSerial $script:disk.serial -RecordTo $recordTo -TypedConfirmation 'yes' -Elevated:$true -SystemDisk $script:disk -Virtualized $false -Launcher (Get-TestLauncher) } | Should -Throw
+            { Invoke-VacateErase -Run $runDir -Execute -Confirm $script:machine -DiskSerial $script:disk.serial -RecordTo $recordTo -TypedConfirmation 'YES!' -Elevated:$true -SystemDisk $script:disk -Virtualized $false -Launcher (Get-TestLauncher) } | Should -Throw
+
+            $script:launcherCalls.Count | Should -Be 0
+            Test-EraseRecordAbsent -Run $runDir -RecordTo $recordTo
+        }
+
+        It 'accepts exactly YES as the typed confirmation' {
+            $runDir = New-TestEraseRun
+            $recordTo = Get-TestRecordDir
+            Reset-TestLauncher
+            $script:launcherRunDir = $runDir
+            $script:launcherRecordTo = $recordTo
+
+            Invoke-VacateErase -Run $runDir -Execute -Confirm $script:machine -DiskSerial $script:disk.serial -RecordTo $recordTo -TypedConfirmation 'YES' -Elevated:$true -SystemDisk $script:disk -Virtualized $false -Launcher (Get-TestLauncher)
+
+            $script:launcherCalls.Count | Should -Be 1
+            $script:launcherSawRecord | Should -BeTrue
+        }
+
         It 'refuses when -DiskSerial is not the system disk serial' {
             $runDir = New-TestEraseRun
             $recordTo = Get-TestRecordDir
